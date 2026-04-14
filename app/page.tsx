@@ -10,6 +10,7 @@ import { Stats } from "@/components/sections/stats/Stats";
 import { RoadmapTeaser } from "@/components/sections/roadmap-teaser/RoadmapTeaser";
 import { FounderNote } from "@/components/sections/founder-note/FounderNote";
 import { WaitlistCta } from "@/components/sections/waitlist-cta/WaitlistCta";
+import { SoftwareApplicationJsonLd } from "@/components/seo/SoftwareApplicationJsonLd";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <SoftwareApplicationJsonLd />
       <Hero />
       <TrustStrip />
       <Pillars />
