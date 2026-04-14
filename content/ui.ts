@@ -87,7 +87,7 @@ const ui: Record<Locale, UiStrings> = {
       sub: "你正在尋找的頁面並不存在於本網站。",
       back: "返回首頁",
     },
-    footer: { rightsReserved: "版權所有,不得轉載。" },
+    footer: { rightsReserved: "版權所有，不得轉載。" },
   },
 };
 
