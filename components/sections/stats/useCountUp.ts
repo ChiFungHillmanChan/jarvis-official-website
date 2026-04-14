@@ -12,14 +12,12 @@ export function useCountUp({ target, active, durationMs = 1200 }: Options): numb
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!active) {
-      setValue(0);
-      return;
-    }
+    if (!active) return;
     const start = Date.now();
     let raf = 0;
     const tick = () => {
-      const progress = Math.min(1, (Date.now() - start) / durationMs);
+      const elapsed = Date.now() - start;
+      const progress = Math.min(1, elapsed / durationMs);
       setValue(Math.round(target * progress));
       if (progress < 1) raf = requestAnimationFrame(tick);
     };
