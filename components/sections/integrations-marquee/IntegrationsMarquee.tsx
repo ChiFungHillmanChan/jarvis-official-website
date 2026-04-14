@@ -1,7 +1,10 @@
-import { integrations } from "./integrations.data";
+import { getCopy } from "@/content/getCopy";
 import { IntegrationChip } from "./IntegrationChip";
 
-export function IntegrationsMarquee() {
+export async function IntegrationsMarquee() {
+  const copy = await getCopy();
+  const integrations = [...copy.integrations, ...copy.integrations];
+
   return (
     <section
       className="border-y border-[var(--grid-line)] py-8 overflow-hidden"

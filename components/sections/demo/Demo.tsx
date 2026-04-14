@@ -1,9 +1,11 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
-import { copy } from "@/content/copy.en";
+import { getCopy } from "@/content/getCopy";
 import { DemoVideo } from "./DemoVideo";
 
-export function Demo() {
+export async function Demo() {
+  const copy = await getCopy();
+
   return (
     <section id="demo" className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>

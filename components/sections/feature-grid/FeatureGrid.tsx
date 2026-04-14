@@ -1,10 +1,13 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
-import { copy } from "@/content/copy.en";
+import { getCopy } from "@/content/getCopy";
 import { FeatureTile } from "./FeatureTile";
-import { features } from "./features.data";
+import { buildFeatures } from "./features.data";
 
-export function FeatureGrid() {
+export async function FeatureGrid() {
+  const copy = await getCopy();
+  const features = buildFeatures(copy);
+
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>

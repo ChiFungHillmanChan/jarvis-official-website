@@ -1,22 +1,27 @@
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { routes } from "@/lib/constants/routes";
 import { section } from "@/lib/constants/spacing";
+import { getUiFor } from "@/content/ui";
+import { getLocale } from "next-intl/server";
+import { localePath } from "@/lib/i18n/localePath";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const locale = await getLocale();
+  const ui = getUiFor(locale);
+
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className="mx-auto max-w-2xl text-center">
         <SectionHeading
-          eyebrow="404"
-          title="Page not found"
-          sub="The page you were looking for does not exist on this site."
+          eyebrow={ui.notFound.eyebrow}
+          title={ui.notFound.title}
+          sub={ui.notFound.sub}
           align="center"
           as="h1"
         />
         <div className="mt-10">
-          <Button href={routes.home} variant="primary">
-            Back to home
+          <Button href={localePath(locale, "/")} variant="primary">
+            {ui.notFound.back}
           </Button>
         </div>
       </div>

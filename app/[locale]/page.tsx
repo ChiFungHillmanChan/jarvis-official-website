@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { routeMetadata } from "@/content/metadata";
+import { setRequestLocale } from "next-intl/server";
+import { buildAlternates, getRouteMetadata } from "@/content/metadata";
 import { Hero } from "@/components/sections/hero/Hero";
 import { Preview } from "@/components/sections/preview/Preview";
 import { TrustStrip } from "@/components/sections/trust-strip/TrustStrip";
@@ -13,13 +14,28 @@ import { FounderNote } from "@/components/sections/founder-note/FounderNote";
 import { WaitlistCta } from "@/components/sections/waitlist-cta/WaitlistCta";
 import { SoftwareApplicationJsonLd } from "@/components/seo/SoftwareApplicationJsonLd";
 
-export const metadata: Metadata = {
-  title: { absolute: routeMetadata.home.title },
-  description: routeMetadata.home.description,
-  alternates: { canonical: routeMetadata.home.canonical },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const rm = getRouteMetadata(locale);
+  return {
+    title: { absolute: rm.home.title },
+    description: rm.home.description,
+    alternates: buildAlternates(locale, "/"),
+  };
+}
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <>
       <SoftwareApplicationJsonLd />

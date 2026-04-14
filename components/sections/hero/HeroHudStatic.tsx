@@ -1,7 +1,7 @@
 import { HeroHudBackdrop } from "./HeroHudBackdrop";
-import { hud } from "./hud.data";
+import type { Telemetry } from "./HeroHudTelemetry";
 
-export function HeroHudStatic() {
+export function HeroHudStatic({ telemetry }: { telemetry: Telemetry }) {
   return (
     <>
       <HeroHudBackdrop />
@@ -21,13 +21,13 @@ export function HeroHudStatic() {
         className="pointer-events-none absolute left-6 top-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--accent-cyan-60)] md:left-10 md:top-10"
         aria-hidden="true"
       >
-        {hud.telemetry.tl[0]}
+        {telemetry.tl[0]}
       </div>
       <div
         className="pointer-events-none absolute right-6 top-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--accent-cyan-60)] md:right-10 md:top-10"
         aria-hidden="true"
       >
-        {hud.telemetry.tr[0]}
+        {telemetry.tr[0]}
       </div>
     </>
   );

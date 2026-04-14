@@ -1,9 +1,12 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
-import { preview } from "./preview.data";
+import { getCopy } from "@/content/getCopy";
 import { PreviewFrame } from "./PreviewFrame";
 
-export function Preview() {
+export async function Preview() {
+  const copy = await getCopy();
+  const preview = copy.sections.preview;
+
   return (
     <section className={`relative isolate overflow-hidden ${section.paddingY} ${section.paddingX}`}>
       <div
@@ -22,7 +25,7 @@ export function Preview() {
           align="center"
         />
         <div className="mt-12 md:mt-20">
-          <PreviewFrame />
+          <PreviewFrame labels={preview.labels} />
         </div>
       </div>
     </section>

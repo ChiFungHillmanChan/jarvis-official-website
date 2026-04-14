@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { company } from "@/content/company";
-import { routes } from "@/lib/constants/routes";
+import { localePath } from "@/lib/i18n/localePath";
 
-export function Wordmark() {
+export function Wordmark({ locale }: { locale: string }) {
   return (
     <Link
-      href={routes.home}
+      href={localePath(locale, "/")}
       className="inline-flex items-center gap-2 font-mono text-sm tracking-[0.25em] text-[color:var(--text-primary)]"
       aria-label={`${company.name} — home`}
     >

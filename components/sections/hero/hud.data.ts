@@ -1,5 +1,3 @@
-import { copy } from "@/content/copy.en";
-
 export interface OrbitNode {
   radius: number;
   size: number;
@@ -16,5 +14,3 @@ export const orbits: OrbitNode[] = [
   { radius: 320, size: 4, durationSec: 44, phaseDeg: 75, color: "var(--data-notion)" },
   { radius: 320, size: 3, durationSec: 44, phaseDeg: 260, color: "var(--data-cron)" },
 ];
-
-export const hud = copy.sections.hud;

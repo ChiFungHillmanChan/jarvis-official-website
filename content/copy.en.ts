@@ -205,7 +205,7 @@ export const copy = {
       },
       {
         title: "Contact",
-        body: "Questions about this policy: hillman@hillmanchan.com.",
+        body: "Questions about this policy: contact@jarvis-automation.com.",
       },
     ],
   },
@@ -240,4 +240,4 @@ export const copy = {
       },
     ],
   },
-} as const;
+};

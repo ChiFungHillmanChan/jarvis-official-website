@@ -3,10 +3,10 @@ import { HeroHudRings } from "./HeroHudRings";
 import { HeroHudScanner } from "./HeroHudScanner";
 import { HeroHudOrbits } from "./HeroHudOrbits";
 import { HeroHudReactor } from "./HeroHudReactor";
-import { HeroHudTelemetry } from "./HeroHudTelemetry";
+import { HeroHudTelemetry, type Telemetry } from "./HeroHudTelemetry";
 import { HeroHudStatusBar } from "./HeroHudStatusBar";
 
-export function HeroHud() {
+export function HeroHud({ telemetry, status }: { telemetry: Telemetry; status: string }) {
   return (
     <>
       <HeroHudBackdrop />
@@ -14,8 +14,8 @@ export function HeroHud() {
       <HeroHudRings />
       <HeroHudOrbits />
       <HeroHudReactor />
-      <HeroHudTelemetry />
-      <HeroHudStatusBar />
+      <HeroHudTelemetry telemetry={telemetry} />
+      <HeroHudStatusBar status={status} />
     </>
   );
 }

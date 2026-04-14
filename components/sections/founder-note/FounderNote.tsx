@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { section } from "@/lib/constants/spacing";
-import { routes } from "@/lib/constants/routes";
-import { copy } from "@/content/copy.en";
+import { getCopy } from "@/content/getCopy";
+import { localePath } from "@/lib/i18n/localePath";
 
-export function FounderNote() {
+export async function FounderNote() {
+  const copy = await getCopy();
+  const locale = await getLocale();
+
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className="mx-auto max-w-3xl">
@@ -16,7 +20,7 @@ export function FounderNote() {
             {copy.founder.body}
           </p>
           <Link
-            href={routes.company}
+            href={localePath(locale, "/company")}
             className="mt-6 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--accent-cyan)] hover:text-[color:var(--text-primary)]"
           >
             {copy.founder.cta} →

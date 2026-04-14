@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { hud } from "./hud.data";
 
-export function HeroHudStatusBar() {
+export function HeroHudStatusBar({ status }: { status: string }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,7 +15,7 @@ export function HeroHudStatusBar() {
         animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
       >
-        {hud.status}
+        {status}
       </motion.span>
     </motion.div>
   );

@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { hud } from "./hud.data";
+
+export type Telemetry = {
+  tl: readonly string[];
+  tr: readonly string[];
+  bl: readonly string[];
+  br: readonly string[];
+};
 
 interface ReadoutProps {
   lines: readonly string[];
@@ -37,13 +43,13 @@ function Readout({ lines, align, className, delay }: ReadoutProps) {
   );
 }
 
-export function HeroHudTelemetry() {
+export function HeroHudTelemetry({ telemetry }: { telemetry: Telemetry }) {
   return (
     <>
-      <Readout lines={hud.telemetry.tl} align="left" className="left-6 top-6 md:left-10 md:top-10" delay={0.3} />
-      <Readout lines={hud.telemetry.tr} align="right" className="right-6 top-6 md:right-10 md:top-10" delay={0.45} />
-      <Readout lines={hud.telemetry.bl} align="left" className="bottom-6 left-6 md:bottom-10 md:left-10" delay={0.6} />
-      <Readout lines={hud.telemetry.br} align="right" className="bottom-6 right-6 md:bottom-10 md:right-10" delay={0.75} />
+      <Readout lines={telemetry.tl} align="left" className="left-6 top-6 md:left-10 md:top-10" delay={0.3} />
+      <Readout lines={telemetry.tr} align="right" className="right-6 top-6 md:right-10 md:top-10" delay={0.45} />
+      <Readout lines={telemetry.bl} align="left" className="bottom-6 left-6 md:bottom-10 md:left-10" delay={0.6} />
+      <Readout lines={telemetry.br} align="right" className="bottom-6 right-6 md:bottom-10 md:right-10" delay={0.75} />
     </>
   );
 }

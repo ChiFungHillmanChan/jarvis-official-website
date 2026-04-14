@@ -3,16 +3,25 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks } from "./nav.data";
 import { Button } from "@/components/ui/Button";
+import type { NavLink } from "./nav.data";
+import { routing } from "@/i18n/routing";
 
-export function MobileMenu() {
+export function MobileMenu({
+  links,
+  joinWaitlistLabel,
+  openLabel,
+  closeLabel,
+  locale,
+}: {
+  links: readonly NavLink[];
+  joinWaitlistLabel: string;
+  openLabel: string;
+  closeLabel: string;
+  locale: string;
+}) {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  const pathname = usePathname() ?? "/";
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -21,12 +30,19 @@ export function MobileMenu() {
     };
   }, [open]);
 
+  const close = () => setOpen(false);
+
+  const other = locale === "zh-HK" ? "en" : "zh-HK";
+  const otherLabel = other === "zh-HK" ? "繁體中文" : "English";
+  const stripped = stripLocalePrefix(pathname);
+  const langHref = `/${other}${stripped === "/" ? "" : stripped}`;
+
   return (
     <div className="md:hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? closeLabel : openLabel}
         aria-expanded={open}
         className="relative z-50 flex h-10 w-10 items-center justify-center text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--text-primary)]"
       >
@@ -71,22 +87,39 @@ export function MobileMenu() {
         }`}
       >
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-5">
-          {navLinks.map((link) => (
+          {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
+              onClick={close}
               className="rounded-sm px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-20)] hover:text-[color:var(--text-primary)]"
             >
               {link.label}
             </Link>
           ))}
+          <Link
+            href={langHref}
+            prefetch={false}
+            onClick={close}
+            className="rounded-sm px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-20)] hover:text-[color:var(--accent-cyan)]"
+          >
+            {otherLabel}
+          </Link>
           <div className="mt-3 border-t border-[var(--grid-line)] pt-4">
             <Button href="#waitlist" variant="primary" className="w-full">
-              Join waitlist
+              {joinWaitlistLabel}
             </Button>
           </div>
         </nav>
       </div>
     </div>
   );
+}
+
+function stripLocalePrefix(pathname: string): string {
+  for (const loc of routing.locales) {
+    if (pathname === `/${loc}`) return "/";
+    if (pathname.startsWith(`/${loc}/`)) return pathname.slice(loc.length + 1);
+  }
+  return pathname;
 }

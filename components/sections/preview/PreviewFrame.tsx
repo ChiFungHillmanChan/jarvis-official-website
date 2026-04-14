@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { PreviewCorners } from "./PreviewCorners";
-import { PreviewLabels } from "./PreviewLabels";
+import { PreviewLabels, type PreviewLabelStrings } from "./PreviewLabels";
 import { PreviewScanlines } from "./PreviewScanlines";
 import { PreviewRecIndicator } from "./PreviewRecIndicator";
 
-export function PreviewFrame() {
+export function PreviewFrame({ labels }: { labels: PreviewLabelStrings }) {
   return (
     <div className="relative mx-auto aspect-[2422/1092] w-full max-w-5xl shadow-[0_0_40px_rgba(0,180,255,0.18)] md:shadow-[0_0_90px_rgba(0,180,255,0.22)]">
-      <PreviewLabels />
+      <PreviewLabels labels={labels} />
       <div
         className="absolute inset-0 rounded-[2px]"
         style={{

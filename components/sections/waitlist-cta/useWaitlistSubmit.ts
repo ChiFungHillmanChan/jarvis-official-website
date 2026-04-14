@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { copy } from "@/content/copy.en";
 import { isEmail } from "@/lib/utils/isEmail";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function useWaitlistSubmit() {
+export function useWaitlistSubmit({
+  errorInvalid,
+  errorGeneric,
+}: {
+  errorInvalid: string;
+  errorGeneric: string;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -14,7 +19,7 @@ export function useWaitlistSubmit() {
     setError(null);
     if (!isEmail(email)) {
       setStatus("error");
-      setError(copy.waitlistCta.errorInvalid);
+      setError(errorInvalid);
       return;
     }
     setStatus("submitting");
@@ -28,7 +33,7 @@ export function useWaitlistSubmit() {
       setStatus("success");
     } catch {
       setStatus("error");
-      setError(copy.waitlistCta.errorGeneric);
+      setError(errorGeneric);
     }
   }
 

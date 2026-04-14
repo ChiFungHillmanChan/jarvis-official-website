@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import type { Locale } from "@/i18n/routing";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jarvis-ai.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jarvis-automation.com";
 
 export const baseMetadata = {
   metadataBase: new URL(baseUrl),
@@ -12,7 +13,10 @@ export const baseMetadata = {
   twitter: { card: "summary_large_image" },
 } satisfies Metadata;
 
-export const routeMetadata = {
+type RouteMeta = { title: string; description: string; canonical: string };
+type RouteKey = "home" | "company" | "contact" | "privacy" | "terms";
+
+const en: Record<RouteKey, RouteMeta> = {
   home: {
     title: "JARVIS AI — Your desktop, operated at the speed of thought",
     description:
@@ -40,6 +44,55 @@ export const routeMetadata = {
     description: "Terms of service for the JARVIS beta.",
     canonical: "/terms",
   },
-} as const;
+};
 
-export type RouteKey = keyof typeof routeMetadata;
+const zhHk: Record<RouteKey, RouteMeta> = {
+  home: {
+    title: "JARVIS AI — 以思考的速度操控你的桌面",
+    description:
+      "JARVIS 是一款原生 macOS AI 助理,將 Gmail、日曆、Notion、GitHub 及 Obsidian 整合於一個語音操控的指揮中心。32 個 AI 工具。本地優先。",
+    canonical: "/",
+  },
+  company: {
+    title: "公司 · JARVIS AI",
+    description: "JARVIS AI 是一間總部位於香港的初創,專注為工程師及操作者打造原生桌面 AI 代理。",
+    canonical: "/company",
+  },
+  contact: {
+    title: "聯絡 · JARVIS AI",
+    description: "JARVIS AI 的商業聯絡、Beta 等候名單及傳媒查詢。",
+    canonical: "/contact",
+  },
+  privacy: {
+    title: "私隱 · JARVIS AI",
+    description: "JARVIS AI 如何處理資料。本地優先架構。我們的伺服器不儲存使用者資料。",
+    canonical: "/privacy",
+  },
+  terms: {
+    title: "條款 · JARVIS AI",
+    description: "JARVIS Beta 的服務條款。",
+    canonical: "/terms",
+  },
+};
+
+const byLocale: Record<Locale, Record<RouteKey, RouteMeta>> = {
+  en,
+  "zh-HK": zhHk,
+};
+
+export function getRouteMetadata(locale: string): Record<RouteKey, RouteMeta> {
+  return byLocale[locale as Locale] ?? en;
+}
+
+export function buildAlternates(locale: string, path: string) {
+  const languages: Record<string, string> = {
+    en: `/en${path === "/" ? "" : path}`,
+    "zh-HK": `/zh-HK${path === "/" ? "" : path}`,
+  };
+  return {
+    canonical: `/${locale}${path === "/" ? "" : path}`,
+    languages,
+  };
+}
+
+export type { RouteKey };

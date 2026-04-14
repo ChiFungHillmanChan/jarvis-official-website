@@ -1,10 +1,13 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
-import { copy } from "@/content/copy.en";
+import { getCopy } from "@/content/getCopy";
 import { PillarCard } from "./PillarCard";
-import { pillars } from "./pillars.data";
+import { buildPillars } from "./pillars.data";
 
-export function Pillars() {
+export async function Pillars() {
+  const copy = await getCopy();
+  const pillars = buildPillars(copy);
+
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>

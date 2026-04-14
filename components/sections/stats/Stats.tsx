@@ -1,10 +1,11 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
-import { copy } from "@/content/copy.en";
+import { getCopy } from "@/content/getCopy";
 import { StatCounter } from "./StatCounter";
-import { stats } from "./stats.data";
 
-export function Stats() {
+export async function Stats() {
+  const copy = await getCopy();
+
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>
@@ -14,8 +15,13 @@ export function Stats() {
           align="center"
         />
         <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
-          {stats.map((s) => (
-            <StatCounter key={s.label} value={s.value} label={s.label} suffix={"suffix" in s ? s.suffix : undefined} />
+          {copy.stats.map((s) => (
+            <StatCounter
+              key={s.label}
+              value={s.value}
+              label={s.label}
+              suffix={"suffix" in s ? (s as { suffix?: string }).suffix : undefined}
+            />
           ))}
         </div>
       </div>
