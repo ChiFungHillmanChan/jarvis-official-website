@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
 vi.mock("@/lib/resend/sendWaitlistNotification", () => ({
   sendWaitlistNotification: vi.fn().mockResolvedValue("notif-id"),
@@ -18,12 +18,6 @@ function makeRequest(body: unknown) {
 }
 
 describe("POST /api/waitlist", () => {
-  beforeEach(() => {
-    process.env.RESEND_API_KEY = "test";
-    process.env.CONTACT_EMAIL = "ops@example.com";
-    process.env.WAITLIST_FROM = "hello@example.com";
-  });
-
   it("returns 200 for a valid email", async () => {
     const res = await POST(makeRequest({ email: "good@example.com" }));
     expect(res.status).toBe(200);

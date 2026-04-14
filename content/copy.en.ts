@@ -1,4 +1,25 @@
 export const copy = {
+  sections: {
+    pillars: {
+      eyebrow: "Principles",
+      title: "Voice. Local. Agentic.",
+      sub: "Three commitments the product is built around — not marketing copy.",
+    },
+    features: {
+      eyebrow: "Product",
+      title: "What JARVIS ships with",
+      sub: "32 AI tool functions, five integrations, and a real-time holographic data sphere — all on a ~10 MB native binary.",
+    },
+    stats: {
+      eyebrow: "By the numbers",
+      title: "What's in the 0.1.0 binary",
+    },
+    demo: {
+      eyebrow: "Watch",
+      title: "See JARVIS in action",
+      sub: "90 seconds. Voice, tool calls, the 3D data sphere, and the morning briefing.",
+    },
+  },
   hero: {
     h1: "Your desktop, operated at the speed of thought.",
     sub:

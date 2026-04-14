@@ -13,7 +13,7 @@ import { WaitlistCta } from "@/components/sections/waitlist-cta/WaitlistCta";
 import { SoftwareApplicationJsonLd } from "@/components/seo/SoftwareApplicationJsonLd";
 
 export const metadata: Metadata = {
-  title: routeMetadata.home.title,
+  title: { absolute: routeMetadata.home.title },
   description: routeMetadata.home.description,
   alternates: { canonical: routeMetadata.home.canonical },
 };

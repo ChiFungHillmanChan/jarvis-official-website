@@ -9,7 +9,7 @@ import { WaitlistForm } from "@/components/sections/waitlist-cta/WaitlistForm";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export const metadata: Metadata = {
-  title: routeMetadata.contact.title,
+  title: { absolute: routeMetadata.contact.title },
   description: routeMetadata.contact.description,
   alternates: { canonical: routeMetadata.contact.canonical },
 };
@@ -18,7 +18,7 @@ export default function ContactPage() {
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>
-        <SectionHeading eyebrow="Contact" title={copy.contact.heading} sub={copy.contact.sub} />
+        <SectionHeading eyebrow="Contact" title={copy.contact.heading} sub={copy.contact.sub} as="h1" />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <GlassPanel>
             <h2 className="font-display text-xl">Business contact</h2>

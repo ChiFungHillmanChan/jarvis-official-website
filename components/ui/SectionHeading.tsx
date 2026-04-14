@@ -6,9 +6,17 @@ interface SectionHeadingProps {
   sub?: string;
   className?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 }
 
-export function SectionHeading({ eyebrow, title, sub, className, align = "left" }: SectionHeadingProps) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  sub,
+  className,
+  align = "left",
+  as: HeadingTag = "h2",
+}: SectionHeadingProps) {
   return (
     <div className={classNames(align === "center" && "text-center", className)}>
       {eyebrow ? (
@@ -16,7 +24,7 @@ export function SectionHeading({ eyebrow, title, sub, className, align = "left" 
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl leading-tight md:text-5xl">{title}</h2>
+      <HeadingTag className="font-display text-3xl leading-tight md:text-5xl">{title}</HeadingTag>
       {sub ? (
         <p className="mt-4 max-w-2xl text-base text-[color:var(--text-muted)] md:text-lg">{sub}</p>
       ) : null}

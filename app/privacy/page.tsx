@@ -5,7 +5,7 @@ import { section } from "@/lib/constants/spacing";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-  title: routeMetadata.privacy.title,
+  title: { absolute: routeMetadata.privacy.title },
   description: routeMetadata.privacy.description,
   alternates: { canonical: routeMetadata.privacy.canonical },
 };
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
   return (
     <article className={`${section.paddingY} ${section.paddingX}`}>
       <div className="mx-auto max-w-3xl">
-        <SectionHeading eyebrow="Legal" title={copy.privacy.heading} sub={copy.privacy.lastUpdated} />
+        <SectionHeading eyebrow="Legal" title={copy.privacy.heading} sub={copy.privacy.lastUpdated} as="h1" />
         <div className="mt-12 space-y-10">
           {copy.privacy.sections.map((s) => (
             <section key={s.title}>

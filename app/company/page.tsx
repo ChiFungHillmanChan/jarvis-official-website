@@ -8,7 +8,7 @@ import { GlassPanel } from "@/components/ui/GlassPanel";
 import { routes } from "@/lib/constants/routes";
 
 export const metadata: Metadata = {
-  title: routeMetadata.company.title,
+  title: { absolute: routeMetadata.company.title },
   description: routeMetadata.company.description,
   alternates: { canonical: routeMetadata.company.canonical },
 };
@@ -17,7 +17,7 @@ export default function CompanyPage() {
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>
-        <SectionHeading eyebrow="Company" title={copy.company.heading} sub={copy.company.sub} />
+        <SectionHeading eyebrow="Company" title={copy.company.heading} sub={copy.company.sub} as="h1" />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {copy.company.sections.map((s) => (
             <GlassPanel key={s.title}>

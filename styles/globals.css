@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./tokens.css";
-@import "./fonts.css";
 
 @theme inline {
   --color-bg-void: var(--bg-void);

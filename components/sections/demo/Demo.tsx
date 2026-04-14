@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { section } from "@/lib/constants/spacing";
+import { copy } from "@/content/copy.en";
 import { DemoVideo } from "./DemoVideo";
 
 export function Demo() {
@@ -7,9 +8,9 @@ export function Demo() {
     <section id="demo" className={`${section.paddingY} ${section.paddingX}`}>
       <div className={`mx-auto ${section.maxWidth}`}>
         <SectionHeading
-          eyebrow="Watch"
-          title="See JARVIS in action"
-          sub="90 seconds. Voice, tool calls, the 3D data sphere, and the morning briefing."
+          eyebrow={copy.sections.demo.eyebrow}
+          title={copy.sections.demo.title}
+          sub={copy.sections.demo.sub}
         />
         <div className="mt-10">
           <DemoVideo />
