@@ -8,6 +8,7 @@ import { FeatureGrid } from "@/components/sections/feature-grid/FeatureGrid";
 import { Demo } from "@/components/sections/demo/Demo";
 import { Stats } from "@/components/sections/stats/Stats";
 import { RoadmapTeaser } from "@/components/sections/roadmap-teaser/RoadmapTeaser";
+import { FounderNote } from "@/components/sections/founder-note/FounderNote";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -26,6 +27,7 @@ export default function HomePage() {
       <Demo />
       <Stats />
       <RoadmapTeaser />
+      <FounderNote />
     </>
   );
 }
