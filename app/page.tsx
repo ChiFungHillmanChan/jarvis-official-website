@@ -7,6 +7,7 @@ import { IntegrationsMarquee } from "@/components/sections/integrations-marquee/
 import { FeatureGrid } from "@/components/sections/feature-grid/FeatureGrid";
 import { Demo } from "@/components/sections/demo/Demo";
 import { Stats } from "@/components/sections/stats/Stats";
+import { RoadmapTeaser } from "@/components/sections/roadmap-teaser/RoadmapTeaser";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -24,6 +25,7 @@ export default function HomePage() {
       <FeatureGrid />
       <Demo />
       <Stats />
+      <RoadmapTeaser />
     </>
   );
 }
