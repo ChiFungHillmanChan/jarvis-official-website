@@ -1,0 +1,3 @@
+# Prevent AI from reading environment files containing secrets
+.env
+.env.*
