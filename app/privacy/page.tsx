@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { routeMetadata } from "@/content/metadata";
+import { copy } from "@/content/copy.en";
+import { section } from "@/lib/constants/spacing";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: routeMetadata.privacy.title,
@@ -9,8 +12,18 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-24 md:px-10">
-      <h1 className="font-display text-4xl">Privacy</h1>
-    </div>
+    <article className={`${section.paddingY} ${section.paddingX}`}>
+      <div className="mx-auto max-w-3xl">
+        <SectionHeading eyebrow="Legal" title={copy.privacy.heading} sub={copy.privacy.lastUpdated} />
+        <div className="mt-12 space-y-10">
+          {copy.privacy.sections.map((s) => (
+            <section key={s.title}>
+              <h2 className="font-display text-2xl">{s.title}</h2>
+              <p className="mt-3 text-[color:var(--text-muted)]">{s.body}</p>
+            </section>
+          ))}
+        </div>
+      </div>
+    </article>
   );
 }
