@@ -6,7 +6,7 @@ import { PreviewRecIndicator } from "./PreviewRecIndicator";
 
 export function PreviewFrame() {
   return (
-    <div className="relative mx-auto aspect-[16/10] w-full max-w-5xl">
+    <div className="relative mx-auto aspect-[2422/1092] w-full max-w-5xl">
       <PreviewLabels />
       <div
         className="absolute inset-0 rounded-[2px] shadow-[0_0_90px_rgba(0,180,255,0.22)]"
