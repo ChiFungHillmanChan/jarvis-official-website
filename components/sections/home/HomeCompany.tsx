@@ -22,7 +22,7 @@ export async function HomeCompany() {
             </GlassPanel>
           ))}
         </div>
-        <div className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-6">
+        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
           {copy.stats.map((stat) => (
             <div
               key={stat.label}

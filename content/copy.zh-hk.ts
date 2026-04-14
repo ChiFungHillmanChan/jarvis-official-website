@@ -24,7 +24,7 @@ export const copy: DeepWiden<typeof enCopy> = {
     },
     trust: {
       eyebrow: "快速了解",
-      title: "先把公司訊號講清楚。",
+      title: "我哋係邊個，喺度做緊乜。",
       items: [
         {
           title: "公司",
@@ -105,7 +105,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       eyebrow: "產品預覽",
       title: "看看目前的 macOS 版本。",
       sub:
-        "簡短產品示範用來支持公司的產品故事，而不喧賓奪主。",
+        "短片示範 JARVIS 如何把電郵、日曆、筆記與系統操作匯聚到一個專注的介面。",
     },
     access: {
       eyebrow: "申請",
@@ -124,8 +124,7 @@ export const copy: DeepWiden<typeof enCopy> = {
     { value: 5, label: "項核心整合" },
     { value: 7, label: "項自動化工作" },
     { value: 10, label: "MB 原生執行檔", suffix: "~" },
-    { value: 0, label: "項用戶資料存放在公司伺服器" },
-    { value: 1, label: "個專注的 macOS 產品" },
+    { value: 1, label: "個旗艦 macOS 產品" },
   ],
   waitlistCta: {
     placeholder: "you@company.com",
@@ -209,8 +208,44 @@ export const copy: DeepWiden<typeof enCopy> = {
           "當用戶在產品內連接 Gmail、Google Calendar、Notion、GitHub 或 Obsidian 等服務時，該等連接屬於本地 macOS 應用程式層面。除非日後用戶主動選擇啟用雲端功能，否則相關憑證與上下文預期會以加密形式保留在裝置內。",
       },
       {
+        title: "你的權利",
+        body:
+          "你可以要求查閱、更正或刪除 JARVIS AI 持有有關你的個人資料。請電郵至 contact@jarvis-automation.com 提出要求，我們會喺能夠核實你嘅身份之後盡快回覆。你亦可以隨時撤回對 Beta 相關通訊的同意。",
+      },
+      {
         title: "聯絡",
         body: "如對本政策有任何疑問，可電郵至 contact@jarvis-automation.com。",
+      },
+    ],
+  },
+  security: {
+    heading: "安全",
+    lastUpdated: "最後更新：2026-04-14",
+    sections: [
+      {
+        title: "預設本地優先",
+        body:
+          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文以及已連接服務的憑證，預設會留在用戶裝置內。JARVIS AI 目前並無營運集中式客戶資料平台去儲存產品數據。",
+      },
+      {
+        title: "傳輸加密",
+        body:
+          "本網站、產品與第三方服務之間的所有通訊均以 TLS 加密。未來路線圖上的任何 AWS 雲端功能，將依賴 AWS 的傳輸及靜態資料加密。",
+      },
+      {
+        title: "服務供應商",
+        body:
+          "網站表單提交會透過交易電郵服務傳送。該等供應商只會為了傳送所要求的通訊而處理相關資料，並受其自身已公開發布的安全承諾所規範。",
+      },
+      {
+        title: "存取控制",
+        body:
+          "生產系統只限創辦團隊存取。任何與用戶相關的資料，均以處理查詢或營運私人 Beta 所需的最低權限原則存取。",
+      },
+      {
+        title: "通報安全問題",
+        body:
+          "如你發現網站或產品有安全問題，請以 [Security] 作為主題前綴，電郵至 contact@jarvis-automation.com。我們目標於 48 小時內確認，並會持續更新進度直至問題解決。",
       },
     ],
   },

@@ -17,6 +17,8 @@ const routes = [
   { path: "/zh-HK/privacy", expect: [200] },
   { path: "/en/terms", expect: [200] },
   { path: "/zh-HK/terms", expect: [200] },
+  { path: "/en/security", expect: [200] },
+  { path: "/zh-HK/security", expect: [200] },
   { path: "/sitemap.xml", expect: [200] },
   { path: "/robots.txt", expect: [200] },
   { path: "/en/does-not-exist", expect: [404] },

@@ -21,7 +21,7 @@ export const copy = {
     },
     trust: {
       eyebrow: "At a glance",
-      title: "Clear company signals, upfront.",
+      title: "Who we are and what we're building.",
       items: [
         {
           title: "Company",
@@ -102,7 +102,7 @@ export const copy = {
       eyebrow: "Product preview",
       title: "See the current macOS build.",
       sub:
-        "A short product walkthrough supports the company story without overwhelming the page.",
+        "A short walkthrough of how JARVIS brings email, calendar, notes, and system actions into one focused interface.",
     },
     access: {
       eyebrow: "Access",
@@ -121,8 +121,7 @@ export const copy = {
     { value: 5, label: "core integrations" },
     { value: 7, label: "automation jobs" },
     { value: 10, label: "MB native binary", suffix: "~" },
-    { value: 0, label: "user data stored on company servers" },
-    { value: 1, label: "focused macOS product" },
+    { value: 1, label: "flagship macOS product" },
   ],
   waitlistCta: {
     placeholder: "you@company.com",
@@ -207,8 +206,44 @@ export const copy = {
           "When a user connects third-party services such as Gmail, Google Calendar, Notion, GitHub, or Obsidian inside the product, those connections are made for the local macOS application. Tokens and related context are intended to remain encrypted on device unless a user later opts into cloud-backed features.",
       },
       {
+        title: "Your rights",
+        body:
+          "You can request access to, correction of, or deletion of any personal data JARVIS AI holds about you. Email contact@jarvis-automation.com with your request; we reply once we can verify you are the person the data relates to. You may also withdraw your consent to beta-related communications at any time.",
+      },
+      {
         title: "Contact",
         body: "Questions about this policy can be sent to contact@jarvis-automation.com.",
+      },
+    ],
+  },
+  security: {
+    heading: "Security",
+    lastUpdated: "Last updated: 2026-04-14",
+    sections: [
+      {
+        title: "Local-first by default",
+        body:
+          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and credentials for connected services stay on the user's device by default. JARVIS AI does not currently operate a central customer data platform for product data.",
+      },
+      {
+        title: "Data in transit",
+        body:
+          "All communication between this website, the product, and any third-party service uses TLS. Any AWS-backed cloud features on the roadmap will rely on AWS encryption in transit and at rest.",
+      },
+      {
+        title: "Service providers",
+        body:
+          "Website form submissions are delivered through transactional email services. Those providers process data only to deliver the requested communication and are bound by their own published security commitments.",
+      },
+      {
+        title: "Access controls",
+        body:
+          "Production systems are accessible only to the founding team. Access to any user-related data is scoped to the minimum needed to respond to a request or operate the private beta.",
+      },
+      {
+        title: "Reporting a security concern",
+        body:
+          "If you believe you have found a security issue with the website or the product, please email contact@jarvis-automation.com with [Security] in the subject line. We aim to acknowledge reports within 48 hours and keep reporters informed until the issue is resolved.",
       },
     ],
   },
