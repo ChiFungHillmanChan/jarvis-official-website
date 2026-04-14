@@ -18,25 +18,27 @@ export function WaitlistForm() {
         e.preventDefault();
         void submit(email);
       }}
-      className="flex flex-col gap-3 sm:flex-row"
+      className="flex flex-col gap-2"
       noValidate
     >
-      <label htmlFor="waitlist-email" className="sr-only">
-        Email address
-      </label>
-      <input
-        id="waitlist-email"
-        type="email"
-        required
-        autoComplete="email"
-        placeholder={copy.waitlistCta.placeholder}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 rounded-sm border border-[var(--accent-cyan-20)] bg-[var(--bg-panel)] px-4 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]"
-      />
-      <Button type="submit" variant="primary">
-        {status === "submitting" ? "…" : copy.waitlistCta.submit}
-      </Button>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <label htmlFor="waitlist-email" className="sr-only">
+          Email address
+        </label>
+        <input
+          id="waitlist-email"
+          type="email"
+          required
+          autoComplete="email"
+          placeholder={copy.waitlistCta.placeholder}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="flex-1 rounded-sm border border-[var(--accent-cyan-20)] bg-[var(--bg-panel)] px-4 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]"
+        />
+        <Button type="submit" variant="primary">
+          {status === "submitting" ? "…" : copy.waitlistCta.submit}
+        </Button>
+      </div>
       <p className="min-h-[1.25rem] font-mono text-xs text-[color:var(--accent-cyan)]" aria-live="polite">
         {error ?? ""}
       </p>
