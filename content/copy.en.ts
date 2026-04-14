@@ -41,7 +41,7 @@ export const copy = {
       eyebrow: "Product",
       title: "A focused command surface for work that normally spans five or six apps.",
       sub:
-        "JARVIS is designed to feel like one calm workspace rather than a collection of tools. The site should communicate that clearly before any visual flourish.",
+        "JARVIS is designed to feel like one calm workspace rather than a collection of tools.",
       imageCaption: "Product preview",
       items: [
         {
@@ -94,7 +94,7 @@ export const copy = {
         },
         {
           title: "Team",
-          body: "Operated by a core engineering team with prior AWS production experience and a track record of shipping multiple AI products, based in Hong Kong.",
+          body: "Founded and built by an engineer with prior AWS production experience and a track record of shipping multiple AI products, based in Hong Kong.",
         },
       ],
     },

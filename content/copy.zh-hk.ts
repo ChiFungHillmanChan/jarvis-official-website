@@ -44,7 +44,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       eyebrow: "產品",
       title: "把原本分散於五六個應用程式的工作，收斂到一個專注介面。",
       sub:
-        "JARVIS 的設計目標，是令使用者感受到一個安靜而有秩序的工作空間，而不是一堆功能堆疊。網站亦應先清楚傳達這一點。",
+        "JARVIS 的設計目標，是令使用者感受到一個安靜而有秩序的工作空間，而不是一堆功能堆疊。",
       imageCaption: "產品預覽",
       items: [
         {
@@ -97,7 +97,7 @@ export const copy: DeepWiden<typeof enCopy> = {
         },
         {
           title: "團隊",
-          body: "由具備 AWS 生產環境經驗、推出過多款 AI 產品的核心工程團隊營運，以香港為基地。",
+          body: "由一位具備 AWS 生產環境經驗、推出過多款 AI 產品的工程師創立及營運，以香港為基地。",
         },
       ],
     },

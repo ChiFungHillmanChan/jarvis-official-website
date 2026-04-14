@@ -83,7 +83,7 @@ const zhHk: Record<RouteKey, RouteMeta> = {
   home: {
     title: "JARVIS AI — 為營運者與工程師而設的桌面 AI",
     description:
-      "JARVIS AI 是一間香港初創,正在打造 JARVIS for macOS，一款為營運者與工程師而設、本地優先的桌面 AI 助理。",
+      "JARVIS AI 是一間香港初創，正在打造 JARVIS for macOS，一款為營運者與工程師而設、本地優先的桌面 AI 助理。",
     canonical: "/",
   },
   company: {
