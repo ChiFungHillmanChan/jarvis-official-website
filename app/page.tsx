@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/hero/Hero";
 import { TrustStrip } from "@/components/sections/trust-strip/TrustStrip";
 import { Pillars } from "@/components/sections/pillars/Pillars";
 import { IntegrationsMarquee } from "@/components/sections/integrations-marquee/IntegrationsMarquee";
+import { FeatureGrid } from "@/components/sections/feature-grid/FeatureGrid";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -18,6 +19,7 @@ export default function HomePage() {
       <TrustStrip />
       <Pillars />
       <IntegrationsMarquee />
+      <FeatureGrid />
     </>
   );
 }
