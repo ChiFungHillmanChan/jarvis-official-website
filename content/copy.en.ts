@@ -43,7 +43,7 @@ export const copy = {
   hero: {
     h1: "Your desktop, operated at the speed of thought.",
     sub:
-      "JARVIS is a native macOS AI assistant that unifies Gmail, Google Calendar, Notion, GitHub, and Obsidian into one voice-controlled command center. 32 AI tools. Local-first. Built for engineers and operators who run their day from the keyboard.",
+      "A native macOS AI assistant — 32 tools, five integrations, one voice-controlled command center. Local-first. Built for engineers.",
     primaryCta: "Join the beta waitlist",
     secondaryCta: "Watch the 90-second demo",
   },

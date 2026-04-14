@@ -18,10 +18,10 @@ function Ring({ radius, tickCount, majorEvery, majorLen, minorLen, majorOpacity,
     const angle = (i / tickCount) * Math.PI * 2 - Math.PI / 2;
     const outer = radius;
     const inner = radius - (major ? majorLen : minorLen);
-    const x1 = Math.cos(angle) * inner;
-    const y1 = Math.sin(angle) * inner;
-    const x2 = Math.cos(angle) * outer;
-    const y2 = Math.sin(angle) * outer;
+    const x1 = Math.round(Math.cos(angle) * inner * 1e4) / 1e4;
+    const y1 = Math.round(Math.sin(angle) * inner * 1e4) / 1e4;
+    const x2 = Math.round(Math.cos(angle) * outer * 1e4) / 1e4;
+    const y2 = Math.round(Math.sin(angle) * outer * 1e4) / 1e4;
     return { major, x1, y1, x2, y2 };
   });
   return (
