@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { routeMetadata } from "@/content/metadata";
+import { Hero } from "@/components/sections/hero/Hero";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-24 md:px-10">
-      <h1 className="font-display text-4xl">Home (sections land in Day 2)</h1>
-    </div>
+    <>
+      <Hero />
+    </>
   );
 }
