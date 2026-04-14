@@ -47,7 +47,7 @@ export function buildTwitter(route: RouteMeta): NonNullable<Metadata["twitter"]>
 }
 
 type RouteMeta = { title: string; description: string; canonical: string };
-type RouteKey = "home" | "company" | "contact" | "privacy" | "terms";
+type RouteKey = "home" | "company" | "contact" | "privacy" | "terms" | "security";
 
 const en: Record<RouteKey, RouteMeta> = {
   home: {
@@ -77,6 +77,12 @@ const en: Record<RouteKey, RouteMeta> = {
     description: "Terms governing access to the JARVIS website and private beta.",
     canonical: "/terms",
   },
+  security: {
+    title: "Security · JARVIS AI",
+    description:
+      "How JARVIS AI handles data, transport encryption, access controls, service providers, and security reports.",
+    canonical: "/security",
+  },
 };
 
 const zhHk: Record<RouteKey, RouteMeta> = {
@@ -105,6 +111,12 @@ const zhHk: Record<RouteKey, RouteMeta> = {
     title: "服務條款 · JARVIS AI",
     description: "規管 JARVIS 網站及私人 Beta 存取的條款。",
     canonical: "/terms",
+  },
+  security: {
+    title: "安全 · JARVIS AI",
+    description:
+      "JARVIS AI 如何處理資料、傳輸加密、存取控制、服務供應商及安全通報。",
+    canonical: "/security",
   },
 };
 

@@ -4,11 +4,13 @@ import { localePath } from "@/lib/i18n/localePath";
 const en = [
   { label: "Privacy", path: "/privacy" },
   { label: "Terms", path: "/terms" },
+  { label: "Security", path: "/security" },
 ];
 
 const zhHk = [
   { label: "私隱", path: "/privacy" },
   { label: "條款", path: "/terms" },
+  { label: "安全", path: "/security" },
 ];
 
 export function FooterLegal({ locale }: { locale: string }) {
