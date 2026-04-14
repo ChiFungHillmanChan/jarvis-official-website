@@ -28,7 +28,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       items: [
         {
           title: "公司",
-          body: "一家以香港為基地、由創辦人主導的桌面 AI 軟件初創。",
+          body: "以香港為基地的桌面 AI 軟件初創，專注為營運者與工程師打造產品。",
         },
         {
           title: "產品",
@@ -85,19 +85,19 @@ export const copy: DeepWiden<typeof enCopy> = {
       eyebrow: "公司",
       title: "產品網站背後，亦有清晰的公司定位。",
       sub:
-        "JARVIS AI 由 Hillman Chan 於 2026 年在香港創立，現階段專注於產品驗證、私人 Beta 用戶招募，以及首批以 AWS 為基礎的雲端能力。",
+        "JARVIS AI 是以香港為基地的 AI 軟件初創，2026 年啟動，現階段專注於產品驗證、私人 Beta 用戶招募，以及首批以 AWS 為基礎的雲端服務部署。",
       cards: [
         {
-          title: "公司概況",
-          body: "JARVIS AI 是一家由創辦人主導的軟件初創，專注為營運者與工程師打造桌面 AI 產品。",
+          title: "產品焦點",
+          body: "JARVIS for macOS 是公司的旗艦產品，為營運者與工程師打造的桌面 AI 助理，現正進行私人 Beta。",
         },
         {
-          title: "創辦人",
-          body: "Hillman Chan 同時負責產品與工程，具備 AWS 生產環境經驗，亦曾推出多款 AI 產品。",
+          title: "AWS 雲端藍圖",
+          body: "計劃採用 Bedrock、Transcribe、Polly、Lambda、DynamoDB、Cognito、S3 與 CloudWatch 建立選擇性同步、語音與可觀測性能力。",
         },
         {
-          title: "雲端藍圖",
-          body: "計劃使用 Bedrock、Transcribe、Polly、Lambda、DynamoDB、Cognito、S3 與 CloudWatch 建立選擇性的同步與語音能力。",
+          title: "團隊",
+          body: "由具備 AWS 生產環境經驗、推出過多款 AI 產品的核心工程團隊營運，以香港為基地。",
         },
       ],
     },
@@ -136,7 +136,7 @@ export const copy: DeepWiden<typeof enCopy> = {
   },
   companyPage: {
     heading: "關於 JARVIS AI",
-    sub: "JARVIS AI 是一家由創辦人主導、位於香港的初創，專注打造為營運者與工程師而設的桌面 AI 軟件。",
+    sub: "JARVIS AI 是一間位於香港的 AI 軟件初創，專注打造為營運者與工程師而設的桌面 AI 軟件。",
     intro:
       "公司的目標，是令桌面工作更直接。與其再疊加更多瀏覽器分頁，JARVIS AI 正在打造一個原生指令介面，幫助使用者以更低摩擦由上下文走到行動。",
     cards: [

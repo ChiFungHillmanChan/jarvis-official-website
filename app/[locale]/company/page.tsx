@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, getRouteMetadata } from "@/content/metadata";
+import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
 import { getCopy } from "@/content/getCopy";
 import { company, getCompanyL10n } from "@/content/company";
 import { section } from "@/lib/constants/spacing";
@@ -19,6 +19,8 @@ export async function generateMetadata({
     title: { absolute: rm.company.title },
     description: rm.company.description,
     alternates: buildAlternates(locale, "/company"),
+    openGraph: buildOpenGraph(locale, rm.company),
+    twitter: buildTwitter(rm.company),
   };
 }
 

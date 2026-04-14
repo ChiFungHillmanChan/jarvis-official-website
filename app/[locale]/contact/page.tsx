@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, getRouteMetadata } from "@/content/metadata";
+import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
 import { getCopy } from "@/content/getCopy";
 import { getUiFor } from "@/content/ui";
 import { company } from "@/content/company";
@@ -10,7 +10,6 @@ import { section } from "@/lib/constants/spacing";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { WaitlistForm } from "@/components/sections/waitlist-cta/WaitlistForm";
-import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export async function generateMetadata({
   params,
@@ -23,6 +22,8 @@ export async function generateMetadata({
     title: { absolute: rm.contact.title },
     description: rm.contact.description,
     alternates: buildAlternates(locale, "/contact"),
+    openGraph: buildOpenGraph(locale, rm.contact),
+    twitter: buildTwitter(rm.contact),
   };
 }
 
@@ -61,12 +62,6 @@ export default async function ContactPage({
                 >
                   {company.contactEmail}
                 </a>
-              </li>
-              <li>
-                <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.githubLabel}: </span>
-                <ExternalLink href={company.github}>
-                  {company.github.replace("https://", "")}
-                </ExternalLink>
               </li>
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.locationLabel}: </span>

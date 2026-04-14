@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { ExternalLink } from "@/components/ui/ExternalLink";
-import { social } from "@/lib/constants/social";
 import { company } from "@/content/company";
 import { localePath } from "@/lib/i18n/localePath";
 
@@ -29,11 +27,6 @@ export function FooterLinks({ locale }: { locale: string }) {
         <Link href={localePath(locale, "/contact")} className="hover:text-[color:var(--text-primary)]">
           {labels.contact}
         </Link>
-      </li>
-      <li>
-        <ExternalLink href={social.github} className="no-underline">
-          GitHub
-        </ExternalLink>
       </li>
       <li>
         <a
