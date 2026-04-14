@@ -6,6 +6,7 @@ import { Pillars } from "@/components/sections/pillars/Pillars";
 import { IntegrationsMarquee } from "@/components/sections/integrations-marquee/IntegrationsMarquee";
 import { FeatureGrid } from "@/components/sections/feature-grid/FeatureGrid";
 import { Demo } from "@/components/sections/demo/Demo";
+import { Stats } from "@/components/sections/stats/Stats";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -22,6 +23,7 @@ export default function HomePage() {
       <IntegrationsMarquee />
       <FeatureGrid />
       <Demo />
+      <Stats />
     </>
   );
 }
