@@ -6,10 +6,10 @@ import { PreviewRecIndicator } from "./PreviewRecIndicator";
 
 export function PreviewFrame() {
   return (
-    <div className="relative mx-auto aspect-[2422/1092] w-full max-w-5xl">
+    <div className="relative mx-auto aspect-[2422/1092] w-full max-w-5xl shadow-[0_0_40px_rgba(0,180,255,0.18)] md:shadow-[0_0_90px_rgba(0,180,255,0.22)]">
       <PreviewLabels />
       <div
-        className="absolute inset-0 rounded-[2px] shadow-[0_0_90px_rgba(0,180,255,0.22)]"
+        className="absolute inset-0 rounded-[2px]"
         style={{
           background:
             "linear-gradient(180deg, rgba(0,180,255,0.12) 0%, rgba(0,180,255,0.02) 50%, rgba(0,180,255,0.1) 100%)",
