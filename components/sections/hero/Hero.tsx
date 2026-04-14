@@ -1,19 +1,16 @@
 import { ReducedMotionGate } from "@/components/ui/ReducedMotionGate";
 import { HeroHeadline } from "./HeroHeadline";
 import { HeroCtas } from "./HeroCtas";
-import { HeroPoster } from "./HeroPoster";
-import { HeroVideo } from "./HeroVideo";
-import { HeroParallax } from "./HeroParallax";
+import { HeroHud } from "./HeroHud";
+import { HeroHudStatic } from "./HeroHudStatic";
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
-      <HeroPoster />
-      <ReducedMotionGate fallback={null}>
-        <HeroVideo />
-        <HeroParallax />
+    <section className="relative isolate overflow-hidden min-h-[760px] md:min-h-[900px]">
+      <ReducedMotionGate fallback={<HeroHudStatic />}>
+        <HeroHud />
       </ReducedMotionGate>
-      <div className="mx-auto max-w-6xl px-6 py-32 md:px-10 md:py-40">
+      <div className="relative z-10 mx-auto flex min-h-[760px] max-w-6xl flex-col justify-center px-6 py-32 md:min-h-[900px] md:px-10 md:py-40">
         <HeroHeadline />
         <HeroCtas />
       </div>

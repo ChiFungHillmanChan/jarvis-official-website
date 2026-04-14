@@ -19,6 +19,26 @@ export const copy = {
       title: "See JARVIS in action",
       sub: "90 seconds. Voice, tool calls, the 3D data sphere, and the morning briefing.",
     },
+    preview: {
+      eyebrow: "Interface",
+      title: "One glass. Every channel.",
+      sub: "Mail, calendar, Notion, GitHub, Obsidian, and the agent's own voice converge on a single local surface. No tab-chasing. No context loss.",
+      labels: {
+        tl: "MODULE · VIEW",
+        tr: "RENDER · NATIVE",
+        bl: "DATA · LOCAL",
+        br: "LATENCY · <60ms",
+      },
+    },
+    hud: {
+      telemetry: {
+        tl: ["J.A.R.V.I.S", "v0.1.0 · BETA"],
+        tr: ["SYS · ONLINE", "LAT · 42ms"],
+        bl: ["32 TOOLS LOADED", "5 SERVICES SYNCED"],
+        br: ["MEM · 11 TBL", "AGENT · READY"],
+      },
+      status: "INITIALIZING AGENT · CALIBRATING SENSES · AWAITING INPUT",
+    },
   },
   hero: {
     h1: "Your desktop, operated at the speed of thought.",

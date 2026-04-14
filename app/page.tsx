@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { routeMetadata } from "@/content/metadata";
 import { Hero } from "@/components/sections/hero/Hero";
+import { Preview } from "@/components/sections/preview/Preview";
 import { TrustStrip } from "@/components/sections/trust-strip/TrustStrip";
 import { Pillars } from "@/components/sections/pillars/Pillars";
 import { IntegrationsMarquee } from "@/components/sections/integrations-marquee/IntegrationsMarquee";
@@ -23,6 +24,7 @@ export default function HomePage() {
     <>
       <SoftwareApplicationJsonLd />
       <Hero />
+      <Preview />
       <TrustStrip />
       <Pillars />
       <IntegrationsMarquee />
