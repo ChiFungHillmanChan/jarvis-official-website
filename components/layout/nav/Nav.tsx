@@ -13,17 +13,17 @@ export async function Nav() {
   const links = buildNavLinks(locale, ui);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--grid-line)] bg-[color:rgba(6,10,20,0.6)] backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
+    <header className="sticky top-0 z-40 border-b border-[var(--grid-line)] bg-[color:rgba(9,17,27,0.78)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Wordmark locale={locale} />
         <NavLinks links={links} />
         <div className="hidden items-center gap-5 md:flex">
           <LanguageToggle locale={locale} />
-          <NavCta label={ui.nav.joinWaitlist} />
+          <NavCta locale={locale} label={ui.nav.requestAccess} />
         </div>
         <MobileMenu
           links={links}
-          joinWaitlistLabel={ui.nav.joinWaitlist}
+          requestAccessLabel={ui.nav.requestAccess}
           openLabel={ui.nav.openMenu}
           closeLabel={ui.nav.closeMenu}
           locale={locale}

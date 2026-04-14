@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { buildAlternates, getRouteMetadata } from "@/content/metadata";
-import { Hero } from "@/components/sections/hero/Hero";
-import { Preview } from "@/components/sections/preview/Preview";
-import { TrustStrip } from "@/components/sections/trust-strip/TrustStrip";
-import { Pillars } from "@/components/sections/pillars/Pillars";
-import { IntegrationsMarquee } from "@/components/sections/integrations-marquee/IntegrationsMarquee";
-import { FeatureGrid } from "@/components/sections/feature-grid/FeatureGrid";
-import { Demo } from "@/components/sections/demo/Demo";
-import { Stats } from "@/components/sections/stats/Stats";
-import { RoadmapTeaser } from "@/components/sections/roadmap-teaser/RoadmapTeaser";
-import { FounderNote } from "@/components/sections/founder-note/FounderNote";
-import { WaitlistCta } from "@/components/sections/waitlist-cta/WaitlistCta";
+import { HomeAccess } from "@/components/sections/home/HomeAccess";
+import { HomeAudience } from "@/components/sections/home/HomeAudience";
+import { HomeCompany } from "@/components/sections/home/HomeCompany";
+import { HomeDemo } from "@/components/sections/home/HomeDemo";
+import { HomeHero } from "@/components/sections/home/HomeHero";
+import { HomeProduct } from "@/components/sections/home/HomeProduct";
+import { HomeTrust } from "@/components/sections/home/HomeTrust";
 import { SoftwareApplicationJsonLd } from "@/components/seo/SoftwareApplicationJsonLd";
 
 export async function generateMetadata({
@@ -39,17 +35,13 @@ export default async function HomePage({
   return (
     <>
       <SoftwareApplicationJsonLd />
-      <Hero />
-      <Preview />
-      <TrustStrip />
-      <Pillars />
-      <IntegrationsMarquee />
-      <FeatureGrid />
-      <Demo />
-      <Stats />
-      <RoadmapTeaser />
-      <FounderNote />
-      <WaitlistCta />
+      <HomeHero />
+      <HomeTrust />
+      <HomeProduct />
+      <HomeAudience />
+      <HomeCompany />
+      <HomeDemo />
+      <HomeAccess />
     </>
   );
 }

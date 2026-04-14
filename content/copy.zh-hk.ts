@@ -1,213 +1,216 @@
 import type { copy as enCopy } from "./copy.en";
+import type { DeepWiden } from "./copy.types";
 
-export const copy: typeof enCopy = {
-  sections: {
-    pillars: {
-      eyebrow: "核心原則",
-      title: "語音．本地．代理。",
-      sub: "產品圍繞三項承諾打造——不是宣傳標語。",
+export const copy: DeepWiden<typeof enCopy> = {
+  home: {
+    hero: {
+      eyebrow: "JARVIS AI",
+      title: "為營運者與工程師而設的桌面 AI。",
+      sub:
+        "JARVIS 是一款原生 macOS 助理，把電郵、日曆、筆記、GitHub 以及系統操作整合成一個專注的工作介面。香港打造。本地優先。",
+      primaryCta: "申請 Beta 試用",
+      secondaryCta: "查看公司資料",
+      summaryLabel: "目前版本",
+      summaryTitle: "JARVIS for macOS",
+      summaryBadge: "私人 Beta",
+      summaryBody:
+        "面向專業人士的私人 Beta 軟件，為經常在桌面環境處理溝通、排程與執行工作的人提供單一指揮介面。",
+      bullets: [
+        "原生 macOS 產品，現正進行私人 Beta",
+        "32 個工具，覆蓋溝通、排程與系統控制",
+        "今天以本地優先為基礎，未來加入 AWS 雲端同步能力",
+      ],
+      imageAlt: "JARVIS for macOS 產品介面預覽",
     },
-    features: {
+    trust: {
+      eyebrow: "快速了解",
+      title: "先把公司訊號講清楚。",
+      items: [
+        {
+          title: "公司",
+          body: "一家以香港為基地、由創辦人主導的桌面 AI 軟件初創。",
+        },
+        {
+          title: "產品",
+          body: "JARVIS for macOS 是公司的旗艦產品，現正進行私人 Beta。",
+        },
+        {
+          title: "平台",
+          body: "今天以裝置本地運作為主，未來會以 AWS 提供選擇性同步與語音基礎設施。",
+        },
+      ],
+    },
+    product: {
       eyebrow: "產品",
-      title: "JARVIS 隨機附帶",
-      sub: "32 個 AI 工具函數、五項服務整合、實時 3D 全息數據球——全部裝在約 10 MB 的原生執行檔。",
+      title: "把原本分散於五六個應用程式的工作，收斂到一個專注介面。",
+      sub:
+        "JARVIS 的設計目標，是令使用者感受到一個安靜而有秩序的工作空間，而不是一堆功能堆疊。網站亦應先清楚傳達這一點。",
+      imageCaption: "產品預覽",
+      items: [
+        {
+          title: "統一日常上下文",
+          body: "把電郵、日曆、筆記、程式碼上下文與桌面操作集中在一起，減少來回切換分頁與視窗。",
+        },
+        {
+          title: "語音與鍵盤操作",
+          body: "以自然語言觸發工作流程、查詢上下文或執行操作，同時維持在原生 macOS 環境內工作。",
+        },
+        {
+          title: "本地優先架構",
+          body: "對話紀錄、任務與已連接的上下文預設留在裝置內，只有在真正帶來價值時才引入雲端服務。",
+        },
+      ],
     },
-    stats: {
-      eyebrow: "數據一覽",
-      title: "0.1.0 版本裡有甚麼",
+    audience: {
+      eyebrow: "適用對象",
+      title: "為習慣用鍵盤管理工作的人而設。",
+      sub:
+        "產品面向需要快速掌握上下文、低摩擦執行操作，以及比瀏覽器分頁更高控制力的技術與營運使用者。",
+      groups: [
+        {
+          title: "營運者",
+          body: "用 JARVIS 在同一層指令介面管理 inbox、日曆、跟進事項與重複性桌面工作。",
+        },
+        {
+          title: "工程師",
+          body: "把 GitHub、筆記、任務與系統操作留在同一桌面工作流程中，而不是分散在多個視窗。",
+        },
+        {
+          title: "創辦人與管理者",
+          body: "當工作同時涉及溝通、規劃與執行時，更快由上下文走到下一步行動。",
+        },
+      ],
+    },
+    company: {
+      eyebrow: "公司",
+      title: "產品網站背後，亦有清晰的公司定位。",
+      sub:
+        "JARVIS AI 由 Hillman Chan 於 2026 年在香港創立，現階段專注於產品驗證、私人 Beta 用戶招募，以及首批以 AWS 為基礎的雲端能力。",
+      cards: [
+        {
+          title: "公司概況",
+          body: "JARVIS AI 是一家由創辦人主導的軟件初創，專注為營運者與工程師打造桌面 AI 產品。",
+        },
+        {
+          title: "創辦人",
+          body: "Hillman Chan 同時負責產品與工程，具備 AWS 生產環境經驗，亦曾推出多款 AI 產品。",
+        },
+        {
+          title: "雲端藍圖",
+          body: "計劃使用 Bedrock、Transcribe、Polly、Lambda、DynamoDB、Cognito、S3 與 CloudWatch 建立選擇性的同步與語音能力。",
+        },
+      ],
     },
     demo: {
-      eyebrow: "觀看",
-      title: "看 JARVIS 實際運作",
-      sub: "90 秒。語音、工具呼叫、3D 數據球，以及晨間簡報。",
+      eyebrow: "產品預覽",
+      title: "看看目前的 macOS 版本。",
+      sub:
+        "簡短產品示範用來支持公司的產品故事，而不喧賓奪主。",
     },
-    preview: {
-      eyebrow: "介面",
-      title: "一塊玻璃．整合所有渠道。",
-      sub: "電郵、日曆、Notion、GitHub、Obsidian 以及代理自身的語音，全部匯聚於單一本地介面。無需切換分頁，無需重新建立上下文。",
-      labels: {
-        tl: "模組 · 檢視",
-        tr: "渲染 · 原生",
-        bl: "資料 · 本地",
-        br: "延遲 · <60ms",
-      },
-    },
-    hud: {
-      telemetry: {
-        tl: ["J.A.R.V.I.S", "v0.1.0 · BETA"],
-        tr: ["系統 · 上線", "延遲 · 42ms"],
-        bl: ["已載入 32 個工具", "已同步 5 項服務"],
-        br: ["記憶 · 11 表", "代理 · 就緒"],
-      },
-      status: "正在初始化代理 · 校準感知 · 等候輸入",
+    access: {
+      eyebrow: "申請",
+      title: "申請 Beta 試用，或直接開始商務對話。",
+      sub:
+        "如果你想加入產品試用，請使用等候名單。若屬合作、媒體或商務查詢，請直接聯絡公司。",
+      contactLead: "商業聯絡",
+      contactLinkLabel: "聯絡公司",
+      privacyNote:
+        "提交電郵即表示你同意 JARVIS AI 可使用你的資料回覆申請，並發送與 Beta 相關的更新。",
+      privacyLinkLabel: "私隱政策",
     },
   },
-  hero: {
-    h1: "以思考的速度操控你的桌面。",
-    sub: "原生 macOS AI 助理——32 個工具、五項整合、一個語音操控指揮中心。本地優先。為工程師而設。",
-    primaryCta: "加入 Beta 等候名單",
-    secondaryCta: "觀看 90 秒示範",
-  },
-  trust:
-    "入圍 AWS Idea Launcher 2026 · 採用 Claude + OpenAI · 運行於 AWS",
-  pillars: [
-    {
-      title: "語音優先",
-      body:
-        "按 Cmd+Shift+J 隨按隨講。Whisper STT、macOS TTS，配合喚醒詞偵測。你的咪高峰即時驅動 3D 數據球。",
-    },
-    {
-      title: "本地優先",
-      body:
-        "每一段對話、每一項任務、每一則快取訊息都儲存於你 Mac 上的本地 SQLite 資料庫。外部服務仍然是真相來源；沒有任何資料上傳到我們的伺服器。",
-    },
-    {
-      title: "代理式",
-      body:
-        "AI 不只回答——它會行動。32 個可呼叫工具能開啟應用程式、執行 shell 指令、封存電郵、建立 Notion 頁面、排程 cron 工作、以及搜尋你的知識庫。",
-    },
-  ],
-  features: [
-    {
-      title: "互動式 3D 數據球",
-      body:
-        "實時全息粒子場景。任務、電郵、日曆、GitHub、Notion 及 cron 工作各自以不同顏色的節點圍繞發光核心運行。語音振幅即時調整環形動效。",
-    },
-    {
-      title: "語音輸入輸出",
-      body:
-        "按 Cmd+Shift+J 隨按隨講。採用 Whisper API，可回落至本地 whisper.cpp。macOS `say` 負責 TTS，可調整聲線及語速。",
-    },
-    {
-      title: "32 個 AI 工具函數",
-      body:
-        "以 Claude 為主、OpenAI 作備援。原生工具呼叫支援多步驟解析。模型先行決策、執行、串連多步動作，然後才作回應。",
-    },
-    {
-      title: "智能簡報",
-      body:
-        "啟動時,JARVIS 會整合任務、日曆、電郵及開啟中的 PR,生成晨間簡報。它會學習你的封存習慣,並在三次確認後提出自動封存規則。",
-    },
-    {
-      title: "自動化引擎",
-      body:
-        "七項內置 cron 工作,再加上以自然語言生成的自訂工作。例如「每星期一朝九點檢查垃圾郵件」會編譯為真正的 cron 表達式,並保留執行紀錄。",
-    },
-    {
-      title: "系統操控",
-      body:
-        "開啟應用程式、執行 shell 指令（附安全封鎖清單）、管理視窗、調整音量及亮度、擷取畫面、讀寫剪貼簿,以及發送原生通知。",
-    },
-  ],
   stats: [
-    { value: 32, label: "個 AI 工具函數" },
-    { value: 5, label: "項整合服務" },
-    { value: 7, label: "項內置 cron 工作" },
+    { value: 32, label: "個 AI 工具" },
+    { value: 5, label: "項核心整合" },
+    { value: 7, label: "項自動化工作" },
     { value: 10, label: "MB 原生執行檔", suffix: "~" },
-    { value: 11, label: "個本地 SQLite 表" },
-    { value: 0, label: "項個人資料存放在我們的伺服器" },
+    { value: 0, label: "項用戶資料存放在公司伺服器" },
+    { value: 1, label: "個專注的 macOS 產品" },
   ],
-  roadmap: {
-    heading: "遷移至 AWS",
-    sub: "未來 12 個月——雲端部分將遷移至 AWS,支援多裝置同步、團隊功能,並為香港區提供更低延遲的語音體驗。",
-    services: [
-      { name: "Amazon Bedrock", body: "模型路由及微調的助理代理。" },
-      { name: "Amazon Transcribe", body: "串流 STT,兼顧延遲與資料落地。" },
-      { name: "Amazon Polly", body: "神經網絡 TTS,取代 macOS `say`。" },
-      { name: "AWS Lambda", body: "無伺服器後端,處理同步及 webhook。" },
-      { name: "Amazon DynamoDB", body: "加密的多裝置狀態同步（可選啟用）。" },
-      { name: "Amazon Cognito", body: "雲端同步層的使用者認證。" },
-      { name: "Amazon S3", body: "加密的產物儲存（已在使用）。" },
-      { name: "Amazon CloudWatch", body: "可觀測性、警報及 SLO。" },
-    ],
-  },
-  founder: {
-    heading: "在香港構建",
-    body:
-      "JARVIS AI 由 Hillman Chan 於 2026 年在香港創立。他是一位擁有兩年 AWS 生產環境經驗的 AI 工程師。我們為操作者、工程師及知識工作者打造代理式桌面軟件。入圍 AWS Idea Launcher 2026 計劃。",
-    cta: "了解公司",
-  },
   waitlistCta: {
-    heading: "加入 Beta 等候名單",
-    sub: "macOS 私人 Beta。無垃圾郵件,只有一封上線通知。",
     placeholder: "you@company.com",
-    submit: "申請使用",
-    success: "你已成功登記。我們會於上線前與你聯絡。",
+    submit: "申請試用",
+    success: "我們已收到你的申請，Beta 開放時會再與你聯絡。",
     errorInvalid: "請輸入有效的電郵地址。",
-    errorGeneric: "發生錯誤,請再試一次。",
+    errorGeneric: "發生錯誤，請稍後再試。",
   },
-  integrations: ["Gmail", "Google Calendar", "Notion", "GitHub", "Obsidian", "Claude", "OpenAI", "AWS"],
-  howItWorks: [
-    {
-      step: "擷取",
-      body:
-        "JARVIS 會在背景同步你已連接的服務——電郵每 5 分鐘、日曆每 5 分鐘、Notion 每 10 分鐘、GitHub 每 10 分鐘。",
-    },
-    {
-      step: "推理",
-      body:
-        "你的請求——無論是打字還是講話——都會附加一份結構化快照（待辦任務、未讀數、開啟中的 PR、今日行程）,再送到 Claude,並授權它使用 32 個工具。",
-    },
-    {
-      step: "行動",
-      body:
-        "模型會呼叫工具、串連步驟,在回覆之前解決多步任務。所有動作直接在你的 Mac 上執行。",
-    },
-  ],
-  company: {
-    heading: "公司",
-    sub: "一間總部位於香港的 AI 初創,專注打造原生桌面代理。",
-    sections: [
+  companyPage: {
+    heading: "關於 JARVIS AI",
+    sub: "JARVIS AI 是一家由創辦人主導、位於香港的初創，專注打造為營運者與工程師而設的桌面 AI 軟件。",
+    intro:
+      "公司的目標，是令桌面工作更直接。與其再疊加更多瀏覽器分頁，JARVIS AI 正在打造一個原生指令介面，幫助使用者以更低摩擦由上下文走到行動。",
+    cards: [
       {
-        title: "使命",
-        body:
-          "操作者與工程師應得一個真正能夠「操作」的 AI。JARVIS 是你意圖與日常使用數十款應用程式之間的介面層——把幾分鐘的點擊,變成幾秒鐘的對話。",
+        title: "我們在做甚麼",
+        body: "JARVIS for macOS 是公司的旗艦產品：一款把溝通、規劃、筆記與執行整合起來的桌面 AI 助理。",
       },
       {
-        title: "創辦人",
-        body:
-          "Hillman Chan——創辦人兼 AI 工程師。22 歲,香港人。現任 Evoke AI Lab 的 AI 工程師。擁有兩年 AWS 生產環境經驗。過往已推出三款 AI 產品,包括一個擁有每日活躍用戶的網站生成器。",
+        title: "我們在哪裡營運",
+        body: "公司以香港為基地，現階段專注於私人 Beta 用戶招募、產品迭代與公司基礎建設工作。",
       },
       {
-        title: "我們身在何處",
-        body:
-          "香港特別行政區。公司註冊進行中。入圍由 AWS 聯同香港科技園合辦的 AWS Idea Launcher 2026 計劃。",
+        title: "我們如何看待雲端",
+        body: "產品今天以本地優先為核心。AWS 服務將用於選擇性的同步、語音基礎設施、可觀測性與未來的多裝置工作流程。",
       },
     ],
+    principlesHeading: "營運原則",
+    principles: [
+      "先把產品做得有用，再追求更大的野心。",
+      "只有在真正改善產品時才使用雲端，而不是削弱本地控制權。",
+      "以清晰方式呈現公司：乾淨訊息、直接聯絡方式，以及清楚可見的法律頁面。",
+    ],
+    closing:
+      "JARVIS AI 現正與早期用戶、公司合作夥伴，以及 AWS 方向的基礎設施規劃同步推進，協助產品走向更成熟的私人 Beta 階段。",
   },
-  contact: {
-    heading: "聯絡我們",
-    sub: "商業查詢、傳媒及 Beta 試用申請。",
+  contactPage: {
+    heading: "聯絡 JARVIS AI",
+    sub: "商業查詢、Beta 試用申請，以及公司介紹。",
     intro:
-      "電郵是聯絡創辦人最直接的途徑。如欲接收產品更新,請於下方加入等候名單。",
+      "電郵是聯絡公司的最直接方式。如果你想獲得產品更新或加入私人 Beta 考慮名單，可使用下方申請表。",
+    directHeading: "直接聯絡",
+    directBody:
+      "如屬合作、投資者交流、媒體查詢或產品介紹，請直接聯絡公司。",
+    inquiryHeading: "適合聯絡我們的情況",
+    inquiryItems: [
+      "團隊或個人的私人 Beta 試用申請",
+      "合作與整合洽談",
+      "媒體或訪問邀請",
+      "公司介紹及投資者接洽",
+    ],
+    accessHeading: "申請 Beta 試用",
+    accessSub:
+      "我們會審視 macOS 私人 Beta 的申請，並按名額逐步回覆。",
+    privacyNote:
+      "提交電郵即表示你同意 JARVIS AI 可使用你的資料回覆申請，並發送與 Beta 相關的更新。",
+    privacyLinkLabel: "私隱政策",
   },
   privacy: {
     heading: "私隱政策",
     lastUpdated: "最後更新：2026-04-14",
     sections: [
       {
-        title: "本地優先的設計",
+        title: "本地優先的產品設計",
         body:
-          "JARVIS 以原生 macOS 應用程式運行。你的對話紀錄、任務、已快取的電郵及整合授權,全部儲存於你 Mac 上的本地 SQLite 資料庫。JARVIS AI（公司）並不營運任何儲存你個人資料的伺服器。",
+          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文及已連接服務的憑證，預設會留在用戶裝置內。JARVIS AI 目前並無營運集中式客戶資料平台去儲存這些產品數據。",
       },
       {
-        title: "本網站收集甚麼資料",
+        title: "本網站收集的資料",
         body:
-          "如你加入等候名單,我們會收集你提供的電郵地址及登記時間。這些資料僅用於向你發送 Beta 存取資訊。我們不會出售或分享等候名單上的電郵。",
+          "如你提交 Beta 試用申請或公司查詢，JARVIS AI 會收集你提供的電郵地址、查詢內容及提交時間。這些資料只會用於回覆查詢及管理 Beta 溝通。",
       },
       {
-        title: "你在應用程式內連接的第三方服務",
+        title: "第三方服務供應商",
         body:
-          "當你在 JARVIS 內連接 Gmail、Google Calendar、Notion、GitHub 或 Obsidian 時,即授權你 Mac 上的應用程式直接與該等服務通訊。API 憑證以加密方式儲存在你的裝置上,不會傳送至 JARVIS AI。",
+          "網站表單提交可能會透過交易電郵及內部通知服務供應商處理。該等服務供應商只會為了傳送你所要求的通訊而處理相關資料。",
       },
       {
-        title: "AI 服務供應商",
+        title: "產品整合",
         body:
-          "預設情況下,你的請求會送往 Anthropic（Claude）及 OpenAI 作 AI 處理。該等供應商的私隱政策適用於其處理的內容。當 AWS 雲端遷移完成後,用戶可選擇 Amazon Bedrock 作為主要供應商。",
+          "當用戶在產品內連接 Gmail、Google Calendar、Notion、GitHub 或 Obsidian 等服務時，該等連接屬於本地 macOS 應用程式層面。除非日後用戶主動選擇啟用雲端功能，否則相關憑證與上下文預期會以加密形式保留在裝置內。",
       },
       {
         title: "聯絡",
-        body: "有關本政策的查詢：contact@jarvis-automation.com。",
+        body: "如對本政策有任何疑問，可電郵至 contact@jarvis-automation.com。",
       },
     ],
   },
@@ -216,24 +219,24 @@ export const copy: typeof enCopy = {
     lastUpdated: "最後更新：2026-04-14",
     sections: [
       {
-        title: "Beta 軟件",
+        title: "網站用途",
         body:
-          "JARVIS 於 Activate 計劃期間以 Beta 軟件形式提供。功能可能會變更、失效或被撤下。我們不提供任何擔保。",
+          "本網站用於介紹 JARVIS AI 及其產品，並讓訪客申請 Beta 試用或與公司聯絡。你不得濫用本網站，亦不得干擾其正常運作。",
       },
       {
-        title: "可接受使用",
+        title: "私人 Beta 存取",
         body:
-          "你不得利用 JARVIS 違反任何法律、侵犯任何權利或危害任何系統。JARVIS 內的 shell 指令執行設有封鎖清單;繞過該清單的風險由你自行承擔。",
+          "JARVIS 私人 Beta 的提供方式由 JARVIS AI 自行決定。隨著產品發展，功能、可用性及定價均可能改變。",
+      },
+      {
+        title: "不作保證",
+        body:
+          "在法律容許的最大範圍內，本網站及任何 Beta 軟件均按現況提供。JARVIS AI 不保證持續可用，亦不保證適合某一特定用途。",
       },
       {
         title: "知識產權",
         body:
-          "JARVIS AI 保留 JARVIS 軟件及品牌的所有權利。透過 JARVIS 生成的內容歸你所有,惟須遵守相關 AI 供應商的條款。",
-      },
-      {
-        title: "責任限制",
-        body:
-          "在法律容許的最大範圍內,JARVIS AI 對因使用本軟件或本網站而引致的任何間接、附帶或衍生損失概不負責。",
+          "JARVIS AI 及 JARVIS 均屬公司產品與品牌資產。除非另有說明，本網站描述的內容、品牌及軟件均屬 JARVIS AI 所有。",
       },
       {
         title: "適用法律",

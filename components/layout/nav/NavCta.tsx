@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/Button";
+import { localePath } from "@/lib/i18n/localePath";
 
-export function NavCta({ label }: { label: string }) {
+export function NavCta({ locale, label }: { locale: string; label: string }) {
   return (
-    <Button href="#waitlist" variant="primary">
+    <Button href={`${localePath(locale, "/contact")}#request-access`} variant="primary">
       {label}
     </Button>
   );

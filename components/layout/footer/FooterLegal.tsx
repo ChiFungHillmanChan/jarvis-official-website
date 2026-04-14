@@ -14,7 +14,7 @@ const zhHk = [
 export function FooterLegal({ locale }: { locale: string }) {
   const links = locale === "zh-HK" ? zhHk : en;
   return (
-    <ul className="flex gap-6 font-mono text-xs uppercase tracking-[0.22em]">
+    <ul className="flex gap-6 text-sm text-[color:var(--text-muted)]">
       {links.map((link) => (
         <li key={link.path}>
           <Link

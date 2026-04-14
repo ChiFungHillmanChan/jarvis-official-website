@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { buildAlternates, getRouteMetadata } from "@/content/metadata";
 import { getCopy } from "@/content/getCopy";
-import { getUiFor } from "@/content/ui";
+import { company, getCompanyL10n } from "@/content/company";
 import { section } from "@/lib/constants/spacing";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassPanel } from "@/components/ui/GlassPanel";
-import { localePath } from "@/lib/i18n/localePath";
+import { Button } from "@/components/ui/Button";
 
 export async function generateMetadata({
   params,
@@ -31,31 +30,85 @@ export default async function CompanyPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const copy = await getCopy();
-  const ui = getUiFor(locale);
+  const companyL10n = getCompanyL10n(locale);
+  const labels =
+    locale === "zh-HK"
+      ? {
+          company: "公司",
+          product: "產品",
+          location: "地點",
+          status: "狀態",
+        }
+      : {
+          company: "Company",
+          product: "Product",
+          location: "Location",
+          status: "Status",
+        };
 
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
-      <div className={`mx-auto ${section.maxWidth}`}>
+      <div className={`mx-auto ${section.maxWidth} space-y-16`}>
         <SectionHeading
-          eyebrow={ui.company.eyebrow}
-          title={copy.company.heading}
-          sub={copy.company.sub}
+          eyebrow={company.name}
+          title={copy.companyPage.heading}
+          sub={copy.companyPage.sub}
           as="h1"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {copy.company.sections.map((s) => (
-            <GlassPanel key={s.title}>
-              <h2 className="font-display text-xl">{s.title}</h2>
-              <p className="mt-3 text-sm text-[color:var(--text-muted)]">{s.body}</p>
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <GlassPanel className="h-full">
+            <p className="text-base leading-8 text-[color:var(--text-secondary)]">
+              {copy.companyPage.intro}
+            </p>
+          </GlassPanel>
+          <GlassPanel className="h-full">
+            <ul className="space-y-4 text-sm leading-7 text-[color:var(--text-secondary)]">
+              <li>
+                <span className="font-medium text-[color:var(--text-primary)]">{labels.company}: </span>
+                {company.name}
+              </li>
+              <li>
+                <span className="font-medium text-[color:var(--text-primary)]">{labels.product}: </span>
+                {company.productName} for macOS
+              </li>
+              <li>
+                <span className="font-medium text-[color:var(--text-primary)]">{labels.location}: </span>
+                {companyL10n.locationLine}
+              </li>
+              <li>
+                <span className="font-medium text-[color:var(--text-primary)]">{labels.status}: </span>
+                {companyL10n.statusLine}
+              </li>
+            </ul>
+          </GlassPanel>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {copy.companyPage.cards.map((card) => (
+            <GlassPanel key={card.title} className="h-full">
+              <h2 className="font-display text-2xl">{card.title}</h2>
+              <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">{card.body}</p>
             </GlassPanel>
           ))}
         </div>
-        <p className="mt-12 font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]">
-          {ui.company.getInTouch} —{" "}
-          <Link href={localePath(locale, "/contact")} className="text-[color:var(--accent-cyan)]">
-            {ui.company.contactLinkLabel}
-          </Link>
-        </p>
+        <GlassPanel>
+          <h2 className="font-display text-3xl">{copy.companyPage.principlesHeading}</h2>
+          <ul className="mt-6 space-y-4">
+            {copy.companyPage.principles.map((principle) => (
+              <li key={principle} className="flex gap-3 text-sm leading-7 text-[color:var(--text-secondary)]">
+                <span className="mt-2 h-2 w-2 rounded-full bg-[color:var(--accent-cyan)]" />
+                <span>{principle}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 text-sm leading-7 text-[color:var(--text-secondary)]">
+            {copy.companyPage.closing}
+          </p>
+          <div className="mt-8">
+            <Button href={`/${locale}/contact`} variant="primary">
+              {copy.home.access.contactLinkLabel}
+            </Button>
+          </div>
+        </GlassPanel>
       </div>
     </section>
   );

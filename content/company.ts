@@ -2,10 +2,10 @@ import type { Locale } from "@/i18n/routing";
 
 export const company = {
   name: "JARVIS AI",
-  tagline: "Native macOS AI assistant.",
+  tagline: "Desktop AI for operators and engineers.",
   contactEmail: "contact@jarvis-automation.com",
   locationLine: "Hong Kong SAR",
-  registrationLine: "Registered entity pending.",
+  statusLine: "Founder-led startup",
   github: "https://github.com/ChiFungHillmanChan/jarvis-ai-assistant",
   productName: "JARVIS",
   productVersion: "0.1.0",
@@ -15,19 +15,19 @@ export const company = {
 type CompanyL10n = {
   tagline: string;
   locationLine: string;
-  registrationLine: string;
+  statusLine: string;
 };
 
 const byLocale: Record<Locale, CompanyL10n> = {
   en: {
     tagline: company.tagline,
     locationLine: company.locationLine,
-    registrationLine: company.registrationLine,
+    statusLine: company.statusLine,
   },
   "zh-HK": {
-    tagline: "原生 macOS AI 助理。",
+    tagline: "為營運者與工程師而設的桌面 AI。",
     locationLine: "香港特別行政區",
-    registrationLine: "公司註冊進行中。",
+    statusLine: "創辦人主導初創",
   },
 };
 

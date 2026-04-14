@@ -1,10 +1,13 @@
 export function DemoVideo() {
   return (
-    <div className="relative overflow-hidden rounded-sm border border-[var(--accent-cyan-20)]">
+    <div className="relative overflow-hidden rounded-[2rem] border border-[var(--grid-line)] bg-[var(--bg-panel)] shadow-[var(--shadow-soft)]">
       <video
         className="h-auto w-full"
+        autoPlay
         controls
-        preload="none"
+        loop
+        muted
+        preload="metadata"
         poster="/jarvis-demo-poster.jpg"
         playsInline
       >

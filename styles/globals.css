@@ -15,17 +15,31 @@
 
 html,
 body {
-  background-color: var(--bg-void);
+  background:
+    radial-gradient(circle at top, rgba(111, 211, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #0c1624 0%, var(--bg-void) 22%, #08111a 100%);
   color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+body {
+  min-height: 100vh;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+::selection {
+  background: rgba(111, 211, 255, 0.22);
+}
+
 *:focus-visible {
   outline: 2px solid var(--accent-cyan);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 999px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,18 +52,20 @@ body {
   }
 }
 
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.surface-grid {
+  position: relative;
 }
 
-.marquee {
-  animation: marquee-scroll 40s linear infinite;
-  width: max-content;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee { animation: none; }
+.surface-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(154, 188, 224, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(154, 188, 224, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 80%);
 }
 
 .scrollbar-hide {
