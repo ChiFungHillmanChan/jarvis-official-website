@@ -14,13 +14,13 @@ interface ButtonProps {
 }
 
 const base =
-  "inline-flex items-center justify-center rounded-sm px-5 py-3 font-mono text-sm uppercase tracking-[0.18em] transition-colors duration-150";
+  "inline-flex items-center justify-center rounded-full border px-5 py-3 text-sm font-medium transition-all duration-150";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-[var(--accent-cyan)] text-[color:var(--bg-void)] hover:bg-[var(--accent-cyan-60)] shadow-[var(--glow-cyan)]",
+    "border-[color:var(--accent-cyan)] bg-[color:var(--accent-cyan)] text-[color:var(--bg-void)] shadow-[var(--glow-cyan)] hover:-translate-y-0.5 hover:bg-[color:var(--text-primary)]",
   ghost:
-    "border border-[var(--accent-cyan-60)] text-[color:var(--accent-cyan)] hover:bg-[var(--accent-cyan-20)]",
+    "border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] text-[color:var(--text-primary)] hover:border-[var(--accent-cyan-60)] hover:bg-[var(--accent-cyan-soft)]",
 };
 
 export function Button({

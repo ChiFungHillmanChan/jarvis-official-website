@@ -1,211 +1,214 @@
 export const copy = {
-  sections: {
-    pillars: {
-      eyebrow: "Principles",
-      title: "Voice. Local. Agentic.",
-      sub: "Three commitments the product is built around — not marketing copy.",
+  home: {
+    hero: {
+      eyebrow: "JARVIS AI",
+      title: "Desktop AI for operators and engineers.",
+      sub:
+        "JARVIS is a native macOS assistant that brings email, calendar, notes, GitHub, and system actions into one focused workspace. Built in Hong Kong. Local-first from day one.",
+      primaryCta: "Request beta access",
+      secondaryCta: "View company",
+      summaryLabel: "Current release",
+      summaryTitle: "JARVIS for macOS",
+      summaryBadge: "Private beta",
+      summaryBody:
+        "Private beta software for professionals who manage their day from the desktop and want one command surface for communication, scheduling, and execution.",
+      bullets: [
+        "Native macOS product in private beta",
+        "32 tools across communication, scheduling, and system control",
+        "Local-first architecture with an AWS cloud roadmap for optional sync",
+      ],
+      imageAlt: "JARVIS for macOS product interface preview",
     },
-    features: {
+    trust: {
+      eyebrow: "At a glance",
+      title: "Clear company signals, upfront.",
+      items: [
+        {
+          title: "Company",
+          body: "Founder-led startup based in Hong Kong building desktop AI software.",
+        },
+        {
+          title: "Product",
+          body: "JARVIS for macOS is the flagship product, currently in private beta.",
+        },
+        {
+          title: "Platform",
+          body: "Local-first on device today, with AWS-backed cloud services planned for opt-in sync and voice infrastructure.",
+        },
+      ],
+    },
+    product: {
       eyebrow: "Product",
-      title: "What JARVIS ships with",
-      sub: "32 AI tool functions, five integrations, and a real-time holographic data sphere — all on a ~10 MB native binary.",
+      title: "A focused command surface for work that normally spans five or six apps.",
+      sub:
+        "JARVIS is designed to feel like one calm workspace rather than a collection of tools. The site should communicate that clearly before any visual flourish.",
+      imageCaption: "Product preview",
+      items: [
+        {
+          title: "Unified daily context",
+          body: "Bring email, calendar, notes, code context, and desktop actions into one place instead of switching across tabs and windows.",
+        },
+        {
+          title: "Voice and keyboard control",
+          body: "Use natural language to trigger workflows, check context, or perform actions while staying inside a native macOS environment.",
+        },
+        {
+          title: "Local-first architecture",
+          body: "Conversation history, tasks, and connected context stay on the device by default, with cloud services planned only where they add clear value.",
+        },
+      ],
     },
-    stats: {
-      eyebrow: "By the numbers",
-      title: "What's in the 0.1.0 binary",
+    audience: {
+      eyebrow: "Who it is for",
+      title: "Designed for people who manage work from the keyboard.",
+      sub:
+        "The product is aimed at technical and operational users who need fast context, low-friction actions, and more control than a browser tab can offer.",
+      groups: [
+        {
+          title: "Operators",
+          body: "Use JARVIS to manage inboxes, calendars, internal follow-ups, and repetitive desktop tasks from one command layer.",
+        },
+        {
+          title: "Engineers",
+          body: "Keep GitHub, notes, tasks, and system actions close together without leaving the desktop workflow.",
+        },
+        {
+          title: "Founders and managers",
+          body: "Move from incoming context to action faster when your day is split across communication, planning, and execution.",
+        },
+      ],
+    },
+    company: {
+      eyebrow: "Company",
+      title: "A product site backed by a clear company profile.",
+      sub:
+        "JARVIS AI is a Hong Kong startup founded in 2026 by Hillman Chan. The company is focused on product validation, private beta onboarding, and the first AWS-backed cloud services.",
+      cards: [
+        {
+          title: "Company profile",
+          body: "JARVIS AI is a founder-led software startup focused on desktop AI for operators and engineers.",
+        },
+        {
+          title: "Founder",
+          body: "Hillman Chan leads product and engineering, bringing prior AWS production experience and experience shipping multiple AI products.",
+        },
+        {
+          title: "Cloud roadmap",
+          body: "Planned AWS services include Bedrock, Transcribe, Polly, Lambda, DynamoDB, Cognito, S3, and CloudWatch for optional sync and voice infrastructure.",
+        },
+      ],
     },
     demo: {
-      eyebrow: "Watch",
-      title: "See JARVIS in action",
-      sub: "90 seconds. Voice, tool calls, the 3D data sphere, and the morning briefing.",
+      eyebrow: "Product preview",
+      title: "See the current macOS build.",
+      sub:
+        "A short product walkthrough supports the company story without overwhelming the page.",
     },
-    preview: {
-      eyebrow: "Interface",
-      title: "One glass. Every channel.",
-      sub: "Mail, calendar, Notion, GitHub, Obsidian, and the agent's own voice converge on a single local surface. No tab-chasing. No context loss.",
-      labels: {
-        tl: "MODULE · VIEW",
-        tr: "RENDER · NATIVE",
-        bl: "DATA · LOCAL",
-        br: "LATENCY · <60ms",
-      },
-    },
-    hud: {
-      telemetry: {
-        tl: ["J.A.R.V.I.S", "v0.1.0 · BETA"],
-        tr: ["SYS · ONLINE", "LAT · 42ms"],
-        bl: ["32 TOOLS LOADED", "5 SERVICES SYNCED"],
-        br: ["MEM · 11 TBL", "AGENT · READY"],
-      },
-      status: "INITIALIZING AGENT · CALIBRATING SENSES · AWAITING INPUT",
+    access: {
+      eyebrow: "Access",
+      title: "Request beta access or start a business conversation.",
+      sub:
+        "Use the waitlist for product access. For partnerships, media, or business inquiries, contact the company directly.",
+      contactLead: "Business contact",
+      contactLinkLabel: "Contact the company",
+      privacyNote:
+        "By submitting your email, you agree that JARVIS AI may use it to respond to your request and send beta-related updates.",
+      privacyLinkLabel: "Privacy Policy",
     },
   },
-  hero: {
-    h1: "Your desktop, operated at the speed of thought.",
-    sub:
-      "A native macOS AI assistant — 32 tools, five integrations, one voice-controlled command center. Local-first. Built for engineers.",
-    primaryCta: "Join the beta waitlist",
-    secondaryCta: "Watch the 90-second demo",
-  },
-  trust: "Shortlisted for AWS Idea Launcher 2026 · Built on Claude + OpenAI · Running on AWS",
-  pillars: [
-    {
-      title: "Voice-first",
-      body:
-        "Push-to-talk with Cmd+Shift+J. Whisper STT, macOS TTS. Wake-word detection. Your mic drives the 3D sphere in real time.",
-    },
-    {
-      title: "Local-first",
-      body:
-        "Every conversation, task, and cached message lives in a local SQLite database on your Mac. External services remain the source of truth; nothing is uploaded to our servers.",
-    },
-    {
-      title: "Agentic",
-      body:
-        "The AI doesn't just answer — it acts. 32 callable tools open apps, run shell commands, archive email, create Notion pages, schedule cron jobs, and search your vault.",
-    },
-  ],
-  features: [
-    {
-      title: "Interactive 3D Data Sphere",
-      body:
-        "A real-time holographic particle scene. Color-coded nodes for tasks, email, calendar, GitHub, Notion, and cron jobs orbit a glowing core. Voice amplitude modulates the ring in real time.",
-    },
-    {
-      title: "Voice I/O",
-      body:
-        "Push-to-talk with Cmd+Shift+J. Whisper API with offline fallback to local whisper.cpp. macOS `say` for TTS with configurable voice and rate.",
-    },
-    {
-      title: "32 AI Tool Functions",
-      body:
-        "Claude-primary, OpenAI fallback. Native tool calling with multi-step resolution. The model decides, executes, and chains actions before responding.",
-    },
-    {
-      title: "Smart Briefings",
-      body:
-        "On launch, JARVIS aggregates tasks, calendar, email, and open PRs into a morning briefing. It learns your archive patterns and proposes auto-archive rules after three confirmations.",
-    },
-    {
-      title: "Automation Engine",
-      body:
-        "Seven built-in cron jobs plus custom jobs generated from natural language. \"Every Monday at 9am check for spam emails\" compiles to a real cron expression with execution history.",
-    },
-    {
-      title: "System Control",
-      body:
-        "Open apps, run shell commands with a safety blocklist, manage windows, control volume and brightness, take screenshots, read-write clipboard, send native notifications.",
-    },
-  ],
   stats: [
-    { value: 32, label: "AI tool functions" },
-    { value: 5, label: "integrated services" },
-    { value: 7, label: "built-in cron jobs" },
+    { value: 32, label: "AI tools" },
+    { value: 5, label: "core integrations" },
+    { value: 7, label: "automation jobs" },
     { value: 10, label: "MB native binary", suffix: "~" },
-    { value: 11, label: "SQLite tables (local)" },
-    { value: 0, label: "personal data on our servers" },
+    { value: 0, label: "user data stored on company servers" },
+    { value: 1, label: "focused macOS product" },
   ],
-  roadmap: {
-    heading: "Migrating to AWS",
-    sub: "Next 12 months — cloud surface migrating to AWS for multi-device sync, team features, and lower-latency voice in Hong Kong.",
-    services: [
-      { name: "Amazon Bedrock", body: "Model routing and fine-tuned assistant agents." },
-      { name: "Amazon Transcribe", body: "Streaming STT for latency and data residency." },
-      { name: "Amazon Polly", body: "Neural TTS to replace macOS `say`." },
-      { name: "AWS Lambda", body: "Serverless backend for sync and webhooks." },
-      { name: "Amazon DynamoDB", body: "Encrypted multi-device state sync (opt-in)." },
-      { name: "Amazon Cognito", body: "User auth for the cloud sync tier." },
-      { name: "Amazon S3", body: "Encrypted artifact storage (already in use)." },
-      { name: "Amazon CloudWatch", body: "Observability, alerts, and SLOs." },
-    ],
-  },
-  founder: {
-    heading: "Built in Hong Kong",
-    body:
-      "JARVIS AI is founded in 2026 by Hillman Chan, an AI engineer with two years of AWS production experience. We ship agentic desktop software for operators, engineers, and knowledge workers. Shortlisted for the AWS Idea Launcher 2026 program.",
-    cta: "About the company",
-  },
   waitlistCta: {
-    heading: "Join the beta waitlist",
-    sub: "Private beta on macOS. No spam. One launch email.",
     placeholder: "you@company.com",
     submit: "Request access",
-    success: "You're on the list. We'll be in touch before launch.",
+    success: "Your request has been received. We will be in touch as the beta opens.",
     errorInvalid: "Please enter a valid email address.",
     errorGeneric: "Something went wrong. Please try again.",
   },
-  integrations: ["Gmail", "Google Calendar", "Notion", "GitHub", "Obsidian", "Claude", "OpenAI", "AWS"],
-  howItWorks: [
-    {
-      step: "Capture",
-      body:
-        "JARVIS syncs your connected services in the background — email every 5 minutes, calendar every 5 minutes, Notion every 10, GitHub every 10.",
-    },
-    {
-      step: "Reason",
-      body:
-        "Your request — typed or spoken — is enriched with a structured snapshot (pending tasks, unread count, open PRs, today's events) and sent to Claude with access to 32 tools.",
-    },
-    {
-      step: "Act",
-      body:
-        "The model calls tools, chains steps, and resolves multi-step work before replying. Actions execute directly on your Mac.",
-    },
-  ],
-  company: {
-    heading: "Company",
-    sub: "A Hong Kong-based AI startup building native desktop agents.",
-    sections: [
+  companyPage: {
+    heading: "About JARVIS AI",
+    sub:
+      "JARVIS AI is a founder-led Hong Kong startup building desktop AI software for operators and engineers.",
+    intro:
+      "The company exists to make desktop work more direct. Instead of layering more browser tabs, JARVIS AI is building a native command surface that helps people move from context to action with less friction.",
+    cards: [
       {
-        title: "Mission",
-        body:
-          "Operators and engineers deserve an AI that actually operates. JARVIS is the interface layer between your intent and the dozens of apps you already use — turning minutes of clicking into seconds of talking.",
+        title: "What we build",
+        body: "JARVIS for macOS is the company's flagship product: a desktop AI assistant that unifies communication, planning, notes, and execution.",
       },
       {
-        title: "Founder",
-        body:
-          "Hillman Chan — Founder & AI Engineer. 22, Hong Kong. Currently AI Engineer at Evoke AI Lab. Two years of AWS production experience. Previously shipped three AI products including a website generator with daily active users.",
+        title: "Where we operate",
+        body: "The company is based in Hong Kong and is currently focused on private beta onboarding, product iteration, and company foundation work.",
       },
       {
-        title: "Where we are",
-        body:
-          "Hong Kong SAR. Registered entity pending. Shortlisted for the AWS Idea Launcher 2026 program, co-organized by AWS and HKSTP.",
+        title: "How we think about cloud",
+        body: "The product is local-first today. AWS services are planned for optional sync, voice infrastructure, observability, and future multi-device workflows.",
       },
     ],
+    principlesHeading: "Operating principles",
+    principles: [
+      "Keep the product useful before it becomes ambitious.",
+      "Use cloud services where they improve the product, not where they dilute local control.",
+      "Present the company with clarity: clean messaging, direct contact, and visible legal pages.",
+    ],
+    closing:
+      "JARVIS AI is currently working with early users, company partners, and AWS-aligned infrastructure planning as the product moves through private beta.",
   },
-  contact: {
-    heading: "Get in touch",
-    sub: "Business inquiries, press, and beta access.",
+  contactPage: {
+    heading: "Contact JARVIS AI",
+    sub: "Business inquiries, beta access requests, and company introductions.",
     intro:
-      "Email is the fastest path to the founder. For product updates, join the waitlist below.",
+      "Email is the clearest way to reach the company. Use the beta access form if you want product updates or private beta consideration.",
+    directHeading: "Direct contact",
+    directBody:
+      "For partnerships, investor conversations, media requests, or product introductions, contact the company directly.",
+    inquiryHeading: "Good reasons to reach out",
+    inquiryItems: [
+      "Private beta access for teams or individual operators",
+      "Partnership and integration conversations",
+      "Press or interview requests",
+      "Company introductions and investor outreach",
+    ],
+    accessHeading: "Request beta access",
+    accessSub:
+      "We review requests for the private macOS beta and reply as capacity opens.",
+    privacyNote:
+      "By submitting your email, you agree that JARVIS AI may use it to reply to your request and send beta-related updates.",
+    privacyLinkLabel: "Privacy Policy",
   },
   privacy: {
-    heading: "Privacy",
+    heading: "Privacy Policy",
     lastUpdated: "Last updated: 2026-04-14",
     sections: [
       {
-        title: "Local-first by design",
+        title: "Local-first product design",
         body:
-          "JARVIS runs as a native macOS application. Your conversation history, tasks, cached email, and integration tokens are stored locally in a SQLite database on your Mac. JARVIS AI (the company) does not operate servers that store your personal data.",
+          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and connected service credentials are intended to remain on the user's device by default. JARVIS AI does not currently operate a customer data platform for storing this product data centrally.",
       },
       {
-        title: "What we collect on this website",
+        title: "Information collected on this website",
         body:
-          "If you join the waitlist, we collect the email address you provide and the timestamp of your signup. This is used solely to send you beta access information. We do not sell or share waitlist emails.",
+          "If you submit a beta access request or company inquiry, JARVIS AI collects the email address and request details you provide, together with the submission time. This information is used only to respond to your inquiry and manage beta access communication.",
       },
       {
-        title: "Third-party services you connect in the app",
+        title: "Third-party service providers",
         body:
-          "When you connect Gmail, Google Calendar, Notion, GitHub, or Obsidian inside JARVIS, you authorize the app on your Mac to talk to those services directly. API tokens are encrypted at rest on your machine. They are not transmitted to JARVIS AI.",
+          "Website form submissions may be processed through service providers used for transactional email and internal notification workflows. Those providers process data only for the purpose of delivering the requested communication.",
       },
       {
-        title: "AI providers",
+        title: "Product integrations",
         body:
-          "By default, your requests are sent to Anthropic (Claude) and OpenAI as the AI providers. Their privacy policies apply to the content of those requests. As the cloud migration to AWS progresses, users will be able to choose Amazon Bedrock as the primary provider.",
+          "When a user connects third-party services such as Gmail, Google Calendar, Notion, GitHub, or Obsidian inside the product, those connections are made for the local macOS application. Tokens and related context are intended to remain encrypted on device unless a user later opts into cloud-backed features.",
       },
       {
         title: "Contact",
-        body: "Questions about this policy: contact@jarvis-automation.com.",
+        body: "Questions about this policy can be sent to contact@jarvis-automation.com.",
       },
     ],
   },
@@ -214,24 +217,24 @@ export const copy = {
     lastUpdated: "Last updated: 2026-04-14",
     sections: [
       {
-        title: "Beta software",
+        title: "Website use",
         body:
-          "JARVIS is provided as beta software during the Activate period. Features may change, break, or be withdrawn. No warranty is provided.",
+          "This website is provided to describe JARVIS AI and its products, and to allow visitors to request beta access or contact the company. You may not misuse the site or interfere with its operation.",
       },
       {
-        title: "Acceptable use",
+        title: "Private beta access",
         body:
-          "You will not use JARVIS to violate any law, infringe any right, or harm any system. Shell command execution inside JARVIS carries a blocklist; bypassing that blocklist is at your own risk.",
+          "Access to the JARVIS private beta is offered at JARVIS AI's discretion. Features, availability, and pricing may change as the product develops.",
+      },
+      {
+        title: "No warranty",
+        body:
+          "The website and any beta software are provided on an as-is basis to the maximum extent permitted by law. JARVIS AI does not guarantee uninterrupted availability or fitness for a particular purpose.",
       },
       {
         title: "Intellectual property",
         body:
-          "JARVIS AI retains all rights to the JARVIS software and brand. Content generated via JARVIS belongs to you, subject to the underlying AI providers' terms.",
-      },
-      {
-        title: "Liability",
-        body:
-          "To the maximum extent permitted by law, JARVIS AI is not liable for any indirect, incidental, or consequential damages arising from your use of the software or this website.",
+          "JARVIS AI and JARVIS are company product and brand assets. Except where otherwise stated, the content, branding, and software described on this site remain the property of JARVIS AI.",
       },
       {
         title: "Governing law",
@@ -240,4 +243,4 @@ export const copy = {
       },
     ],
   },
-};
+} as const;

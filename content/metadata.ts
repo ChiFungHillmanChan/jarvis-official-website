@@ -18,59 +18,59 @@ type RouteKey = "home" | "company" | "contact" | "privacy" | "terms";
 
 const en: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS AI — Your desktop, operated at the speed of thought",
+    title: "JARVIS AI — Desktop AI for operators and engineers",
     description:
-      "JARVIS is a native macOS AI assistant that unifies Gmail, Calendar, Notion, GitHub, and Obsidian into one voice-controlled command center. 32 AI tools. Local-first.",
+      "JARVIS AI is a Hong Kong startup building JARVIS for macOS, a local-first desktop AI assistant for operators and engineers.",
     canonical: "/",
   },
   company: {
-    title: "Company · JARVIS AI",
+    title: "About JARVIS AI",
     description:
-      "JARVIS AI is a Hong Kong-based startup building native desktop AI agents for engineers and operators.",
+      "Learn about JARVIS AI, the Hong Kong startup behind JARVIS for macOS.",
     canonical: "/company",
   },
   contact: {
-    title: "Contact · JARVIS AI",
-    description: "Business contact, beta waitlist, and press inquiries for JARVIS AI.",
+    title: "Contact JARVIS AI",
+    description: "Business contact, beta access requests, and company inquiries for JARVIS AI.",
     canonical: "/contact",
   },
   privacy: {
-    title: "Privacy · JARVIS AI",
-    description: "How JARVIS AI handles data. Local-first architecture. No user data on our servers.",
+    title: "Privacy Policy · JARVIS AI",
+    description: "How JARVIS AI handles website submissions and local-first product data.",
     canonical: "/privacy",
   },
   terms: {
-    title: "Terms · JARVIS AI",
-    description: "Terms of service for the JARVIS beta.",
+    title: "Terms of Service · JARVIS AI",
+    description: "Terms governing access to the JARVIS website and private beta.",
     canonical: "/terms",
   },
 };
 
 const zhHk: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS AI — 以思考的速度操控你的桌面",
+    title: "JARVIS AI — 為營運者與工程師而設的桌面 AI",
     description:
-      "JARVIS 是一款原生 macOS AI 助理,將 Gmail、日曆、Notion、GitHub 及 Obsidian 整合於一個語音操控的指揮中心。32 個 AI 工具。本地優先。",
+      "JARVIS AI 是一間香港初創,正在打造 JARVIS for macOS，一款為營運者與工程師而設、本地優先的桌面 AI 助理。",
     canonical: "/",
   },
   company: {
-    title: "公司 · JARVIS AI",
-    description: "JARVIS AI 是一間總部位於香港的初創,專注為工程師及操作者打造原生桌面 AI 代理。",
+    title: "關於 JARVIS AI",
+    description: "了解 JARVIS AI 以及其為 macOS 打造的桌面 AI 產品。",
     canonical: "/company",
   },
   contact: {
-    title: "聯絡 · JARVIS AI",
-    description: "JARVIS AI 的商業聯絡、Beta 等候名單及傳媒查詢。",
+    title: "聯絡 JARVIS AI",
+    description: "JARVIS AI 的商業聯絡、Beta 試用申請及公司查詢。",
     canonical: "/contact",
   },
   privacy: {
-    title: "私隱 · JARVIS AI",
-    description: "JARVIS AI 如何處理資料。本地優先架構。我們的伺服器不儲存使用者資料。",
+    title: "私隱政策 · JARVIS AI",
+    description: "JARVIS AI 如何處理網站提交資料及本地優先產品數據。",
     canonical: "/privacy",
   },
   terms: {
-    title: "條款 · JARVIS AI",
-    description: "JARVIS Beta 的服務條款。",
+    title: "服務條款 · JARVIS AI",
+    description: "規管 JARVIS 網站及私人 Beta 存取的條款。",
     canonical: "/terms",
   },
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { buildAlternates, getRouteMetadata } from "@/content/metadata";
 import { getCopy } from "@/content/getCopy";
@@ -38,20 +39,22 @@ export default async function ContactPage({
 
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
-      <div className={`mx-auto ${section.maxWidth}`}>
+      <div className={`mx-auto ${section.maxWidth} space-y-16`}>
         <SectionHeading
           eyebrow={ui.contact.eyebrow}
-          title={copy.contact.heading}
-          sub={copy.contact.sub}
+          title={copy.contactPage.heading}
+          sub={copy.contactPage.sub}
           as="h1"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <GlassPanel>
-            <h2 className="font-display text-xl">{ui.contact.businessContactHeading}</h2>
-            <p className="mt-3 text-sm text-[color:var(--text-muted)]">{copy.contact.intro}</p>
-            <ul className="mt-5 space-y-2 font-mono text-sm">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <GlassPanel className="h-full">
+            <h2 className="font-display text-3xl">{copy.contactPage.directHeading}</h2>
+            <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">
+              {copy.contactPage.directBody}
+            </p>
+            <ul className="mt-6 space-y-4 text-sm leading-7 text-[color:var(--text-secondary)]">
               <li>
-                <span className="text-[color:var(--text-muted)]">{ui.contact.emailLabel} · </span>
+                <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.emailLabel}: </span>
                 <a
                   className="text-[color:var(--accent-cyan)]"
                   href={`mailto:${company.contactEmail}`}
@@ -60,21 +63,34 @@ export default async function ContactPage({
                 </a>
               </li>
               <li>
-                <span className="text-[color:var(--text-muted)]">{ui.contact.githubLabel} · </span>
+                <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.githubLabel}: </span>
                 <ExternalLink href={company.github}>
                   {company.github.replace("https://", "")}
                 </ExternalLink>
               </li>
               <li>
-                <span className="text-[color:var(--text-muted)]">{ui.contact.locationLabel} · </span>
-                <span>{companyL10n.locationLine}</span>
+                <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.locationLabel}: </span>
+                {companyL10n.locationLine}
               </li>
             </ul>
+            <div className="mt-10 border-t border-[var(--grid-line)] pt-6">
+              <h3 className="font-display text-2xl">{copy.contactPage.inquiryHeading}</h3>
+              <ul className="mt-4 space-y-3">
+                {copy.contactPage.inquiryItems.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-7 text-[color:var(--text-secondary)]">
+                    <span className="mt-2 h-2 w-2 rounded-full bg-[color:var(--accent-cyan)]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </GlassPanel>
-          <GlassPanel>
-            <h2 className="font-display text-xl">{ui.contact.joinWaitlistHeading}</h2>
-            <p className="mt-3 text-sm text-[color:var(--text-muted)]">{ui.contact.waitlistSub}</p>
-            <div className="mt-5">
+          <GlassPanel className="h-full" id="request-access">
+            <h2 className="font-display text-3xl">{copy.contactPage.accessHeading}</h2>
+            <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">
+              {copy.contactPage.accessSub}
+            </p>
+            <div className="mt-6">
               <WaitlistForm
                 placeholder={copy.waitlistCta.placeholder}
                 submitLabel={copy.waitlistCta.submit}
@@ -85,6 +101,13 @@ export default async function ContactPage({
                 emailLabel={ui.contact.emailInputLabel}
               />
             </div>
+            <p className="mt-4 text-sm leading-6 text-[color:var(--text-muted)]">
+              {copy.contactPage.privacyNote}{" "}
+              <Link href={`/${locale}/privacy`} className="text-[color:var(--text-primary)] underline">
+                {copy.contactPage.privacyLinkLabel}
+              </Link>
+              .
+            </p>
           </GlassPanel>
         </div>
       </div>

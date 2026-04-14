@@ -48,13 +48,13 @@ export function WaitlistForm({
           placeholder={placeholder}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded-sm border border-[var(--accent-cyan-20)] bg-[var(--bg-panel)] px-4 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]"
+          className="flex-1 rounded-full border border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] px-5 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]"
         />
         <Button type="submit" variant="primary">
           {status === "submitting" ? submittingLabel : submitLabel}
         </Button>
       </div>
-      <p className="min-h-[1.25rem] font-mono text-xs text-[color:var(--accent-cyan)]" aria-live="polite">
+      <p className="min-h-[1.25rem] text-sm text-[color:var(--accent-cyan)]" aria-live="polite">
         {error ?? ""}
       </p>
     </form>

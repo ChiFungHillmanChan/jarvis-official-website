@@ -41,9 +41,9 @@ export default async function PrivacyPage({
         />
         <div className="mt-12 space-y-10">
           {copy.privacy.sections.map((s) => (
-            <section key={s.title}>
+            <section key={s.title} className="rounded-[2rem] border border-[var(--grid-line)] bg-[var(--bg-panel)] p-8 shadow-[var(--shadow-soft)]">
               <h2 className="font-display text-2xl">{s.title}</h2>
-              <p className="mt-3 text-[color:var(--text-muted)]">{s.body}</p>
+              <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">{s.body}</p>
             </section>
           ))}
         </div>

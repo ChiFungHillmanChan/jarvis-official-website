@@ -17,7 +17,7 @@ export function LanguageToggle({ locale }: { locale: string }) {
       href={href}
       prefetch={false}
       aria-label={`Switch to ${other}`}
-      className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--accent-cyan)]"
+      className="rounded-full border border-[var(--grid-line)] px-3 py-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:border-[var(--accent-cyan-60)] hover:text-[color:var(--text-primary)]"
     >
       {otherLabel}
     </Link>

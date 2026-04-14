@@ -3,8 +3,9 @@ import { getLocale } from "next-intl/server";
 import { copy as en } from "./copy.en";
 import { copy as zhHk } from "./copy.zh-hk";
 import type { Locale } from "@/i18n/routing";
+import type { DeepWiden } from "./copy.types";
 
-export type Copy = typeof en;
+export type Copy = DeepWiden<typeof en>;
 
 const dict: Record<Locale, Copy> = {
   en,

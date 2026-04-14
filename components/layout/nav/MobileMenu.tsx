@@ -9,13 +9,13 @@ import { routing } from "@/i18n/routing";
 
 export function MobileMenu({
   links,
-  joinWaitlistLabel,
+  requestAccessLabel,
   openLabel,
   closeLabel,
   locale,
 }: {
   links: readonly NavLink[];
-  joinWaitlistLabel: string;
+  requestAccessLabel: string;
   openLabel: string;
   closeLabel: string;
   locale: string;
@@ -80,7 +80,7 @@ export function MobileMenu({
       )}
 
       <div
-        className={`fixed left-0 right-0 top-16 z-40 border-b border-[var(--grid-line)] bg-[color:rgba(6,10,20,0.95)] backdrop-blur-lg transition-all duration-200 ${
+        className={`fixed left-0 right-0 top-[72px] z-40 border-b border-[var(--grid-line)] bg-[color:rgba(9,17,27,0.97)] backdrop-blur-lg transition-all duration-200 ${
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0"
@@ -92,7 +92,7 @@ export function MobileMenu({
               key={link.href}
               href={link.href}
               onClick={close}
-              className="rounded-sm px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-20)] hover:text-[color:var(--text-primary)]"
+              className="rounded-2xl px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-soft)] hover:text-[color:var(--text-primary)]"
             >
               {link.label}
             </Link>
@@ -101,13 +101,13 @@ export function MobileMenu({
             href={langHref}
             prefetch={false}
             onClick={close}
-            className="rounded-sm px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-20)] hover:text-[color:var(--accent-cyan)]"
+            className="rounded-2xl px-3 py-3 font-mono text-sm uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:bg-[var(--accent-cyan-soft)] hover:text-[color:var(--accent-cyan)]"
           >
             {otherLabel}
           </Link>
           <div className="mt-3 border-t border-[var(--grid-line)] pt-4">
-            <Button href="#waitlist" variant="primary" className="w-full">
-              {joinWaitlistLabel}
+            <Button href={`/${locale}/contact#request-access`} variant="primary" className="w-full">
+              {requestAccessLabel}
             </Button>
           </div>
         </nav>

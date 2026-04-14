@@ -1,18 +1,22 @@
 :root {
-  --bg-void: #060a14;
-  --bg-panel: rgba(10, 16, 28, 0.6);
-  --bg-panel-hi: rgba(14, 22, 38, 0.8);
+  --bg-void: #09111b;
+  --bg-panel: rgba(15, 23, 35, 0.82);
+  --bg-panel-hi: rgba(20, 30, 45, 0.92);
+  --bg-elevated: rgba(28, 40, 58, 0.94);
 
-  --accent-cyan: rgba(0, 180, 255, 1);
-  --accent-cyan-20: rgba(0, 180, 255, 0.2);
-  --accent-cyan-60: rgba(0, 180, 255, 0.6);
+  --accent-cyan: #6fd3ff;
+  --accent-cyan-20: rgba(111, 211, 255, 0.16);
+  --accent-cyan-60: rgba(111, 211, 255, 0.55);
+  --accent-cyan-soft: rgba(111, 211, 255, 0.08);
 
-  --grid-line: rgba(0, 180, 255, 0.08);
+  --grid-line: rgba(154, 188, 224, 0.14);
 
-  --text-primary: rgba(220, 240, 255, 0.95);
-  --text-muted: rgba(160, 190, 220, 0.65);
+  --text-primary: rgba(236, 244, 255, 0.96);
+  --text-secondary: rgba(203, 221, 245, 0.82);
+  --text-muted: rgba(174, 194, 220, 0.7);
 
-  --glow-cyan: 0 0 24px rgba(0, 180, 255, 0.45);
+  --shadow-soft: 0 28px 60px rgba(0, 0, 0, 0.28);
+  --glow-cyan: 0 0 28px rgba(111, 211, 255, 0.18);
 
   --data-task: rgb(0, 180, 255);
   --data-email: rgb(100, 200, 255);
