@@ -9,6 +9,7 @@ import { Demo } from "@/components/sections/demo/Demo";
 import { Stats } from "@/components/sections/stats/Stats";
 import { RoadmapTeaser } from "@/components/sections/roadmap-teaser/RoadmapTeaser";
 import { FounderNote } from "@/components/sections/founder-note/FounderNote";
+import { WaitlistCta } from "@/components/sections/waitlist-cta/WaitlistCta";
 
 export const metadata: Metadata = {
   title: routeMetadata.home.title,
@@ -28,6 +29,7 @@ export default function HomePage() {
       <Stats />
       <RoadmapTeaser />
       <FounderNote />
+      <WaitlistCta />
     </>
   );
 }
