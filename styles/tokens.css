@@ -1,0 +1,23 @@
+:root {
+  --bg-void: #060a14;
+  --bg-panel: rgba(10, 16, 28, 0.6);
+  --bg-panel-hi: rgba(14, 22, 38, 0.8);
+
+  --accent-cyan: rgba(0, 180, 255, 1);
+  --accent-cyan-20: rgba(0, 180, 255, 0.2);
+  --accent-cyan-60: rgba(0, 180, 255, 0.6);
+
+  --grid-line: rgba(0, 180, 255, 0.08);
+
+  --text-primary: rgba(220, 240, 255, 0.95);
+  --text-muted: rgba(160, 190, 220, 0.65);
+
+  --glow-cyan: 0 0 24px rgba(0, 180, 255, 0.45);
+
+  --data-task: rgb(0, 180, 255);
+  --data-email: rgb(100, 200, 255);
+  --data-cal: rgb(255, 180, 60);
+  --data-github: rgb(80, 220, 140);
+  --data-notion: rgb(180, 140, 255);
+  --data-cron: rgb(80, 220, 200);
+}
