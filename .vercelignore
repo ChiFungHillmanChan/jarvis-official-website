@@ -1,0 +1,9 @@
+Jarvis-demo.mp4
+Jarvis-demo-screenshot.png
+docs/
+README.md
+AGENTS.md
+CLAUDE.md
+.env*
+!.env.example
+*.tsbuildinfo
