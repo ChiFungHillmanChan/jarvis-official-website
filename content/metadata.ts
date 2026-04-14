@@ -21,6 +21,31 @@ export const baseMetadata = {
   twitter: { card: "summary_large_image" },
 } satisfies Metadata;
 
+const OG_LOCALE: Record<Locale, string> = { en: "en_US", "zh-HK": "zh_HK" };
+
+export function buildOpenGraph(locale: string, route: RouteMeta): NonNullable<Metadata["openGraph"]> {
+  const normalized = (locale as Locale) in OG_LOCALE ? (locale as Locale) : "en";
+  const alternate = normalized === "zh-HK" ? ["en_US"] : ["zh_HK"];
+  const pathSuffix = route.canonical === "/" ? "" : route.canonical;
+  return {
+    ...baseMetadata.openGraph,
+    title: route.title,
+    description: route.description,
+    url: `${baseUrl}/${normalized}${pathSuffix}`,
+    locale: OG_LOCALE[normalized],
+    alternateLocale: alternate,
+  };
+}
+
+export function buildTwitter(route: RouteMeta): NonNullable<Metadata["twitter"]> {
+  return {
+    card: "summary_large_image",
+    title: route.title,
+    description: route.description,
+    images: ["/og-image.png"],
+  };
+}
+
 type RouteMeta = { title: string; description: string; canonical: string };
 type RouteKey = "home" | "company" | "contact" | "privacy" | "terms";
 

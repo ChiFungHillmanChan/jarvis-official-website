@@ -6,7 +6,7 @@ import { inter, jetbrainsMono, spaceGrotesk } from "@/app/fonts";
 import { Nav } from "@/components/layout/nav/Nav";
 import { Footer } from "@/components/layout/footer/Footer";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
-import { baseMetadata, buildAlternates, getRouteMetadata } from "@/content/metadata";
+import { baseMetadata, buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
@@ -26,6 +26,8 @@ export async function generateMetadata({
     title: { default: rm.home.title, template: "%s · JARVIS AI" },
     description: rm.home.description,
     alternates: buildAlternates(locale, "/"),
+    openGraph: buildOpenGraph(locale, rm.home),
+    twitter: buildTwitter(rm.home),
   };
 }
 

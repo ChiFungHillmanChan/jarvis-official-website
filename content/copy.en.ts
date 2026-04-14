@@ -25,7 +25,7 @@ export const copy = {
       items: [
         {
           title: "Company",
-          body: "Founder-led startup based in Hong Kong building desktop AI software.",
+          body: "Hong Kong-based software startup building desktop AI for operators and engineers.",
         },
         {
           title: "Product",
@@ -82,19 +82,19 @@ export const copy = {
       eyebrow: "Company",
       title: "A product site backed by a clear company profile.",
       sub:
-        "JARVIS AI is a Hong Kong startup founded in 2026 by Hillman Chan. The company is focused on product validation, private beta onboarding, and the first AWS-backed cloud services.",
+        "JARVIS AI is a Hong Kong-based AI software startup, launched in 2026. The company is focused on product validation, private beta onboarding, and the first AWS-backed cloud services.",
       cards: [
         {
-          title: "Company profile",
-          body: "JARVIS AI is a founder-led software startup focused on desktop AI for operators and engineers.",
+          title: "Product focus",
+          body: "JARVIS for macOS is the company's flagship product — a desktop AI assistant for operators and engineers, currently in private beta.",
         },
         {
-          title: "Founder",
-          body: "Hillman Chan leads product and engineering, bringing prior AWS production experience and experience shipping multiple AI products.",
+          title: "AWS cloud roadmap",
+          body: "Planned AWS services include Bedrock, Transcribe, Polly, Lambda, DynamoDB, Cognito, S3, and CloudWatch for optional sync, voice, and observability.",
         },
         {
-          title: "Cloud roadmap",
-          body: "Planned AWS services include Bedrock, Transcribe, Polly, Lambda, DynamoDB, Cognito, S3, and CloudWatch for optional sync and voice infrastructure.",
+          title: "Team",
+          body: "Operated by a core engineering team with prior AWS production experience and a track record of shipping multiple AI products, based in Hong Kong.",
         },
       ],
     },
@@ -134,7 +134,7 @@ export const copy = {
   companyPage: {
     heading: "About JARVIS AI",
     sub:
-      "JARVIS AI is a founder-led Hong Kong startup building desktop AI software for operators and engineers.",
+      "JARVIS AI is a Hong Kong-based AI software startup building desktop AI software for operators and engineers.",
     intro:
       "The company exists to make desktop work more direct. Instead of layering more browser tabs, JARVIS AI is building a native command surface that helps people move from context to action with less friction.",
     cards: [

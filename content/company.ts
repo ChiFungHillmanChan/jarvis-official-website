@@ -5,7 +5,7 @@ export const company = {
   tagline: "Desktop AI for operators and engineers.",
   contactEmail: "contact@jarvis-automation.com",
   locationLine: "Hong Kong SAR",
-  statusLine: "Founder-led startup",
+  statusLine: "Hong Kong AI software startup",
   github: "https://github.com/ChiFungHillmanChan/jarvis-ai-assistant",
   productName: "JARVIS",
   productVersion: "0.1.0",
@@ -27,7 +27,7 @@ const byLocale: Record<Locale, CompanyL10n> = {
   "zh-HK": {
     tagline: "為營運者與工程師而設的桌面 AI。",
     locationLine: "香港特別行政區",
-    statusLine: "創辦人主導初創",
+    statusLine: "香港 AI 軟件初創",
   },
 };
 
