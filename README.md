@@ -283,7 +283,7 @@ JARVIS AI is a Hong Kong-based startup founded in 2026 by Hillman Chan, an AI en
 
 **Business contact:** hillman@hillmanchan.com
 **Location:** Hong Kong SAR (registered entity pending)
-**GitHub:** github.com/ChiFungHillmanChan/jarvis-ai-assistant
+**Access:** private beta — request via the website waitlist
 
 ---
 
@@ -385,9 +385,8 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN
 
 ## 16. Quick Links (for the build team)
 
-- Product repo: `github.com/ChiFungHillmanChan/jarvis-ai-assistant`
-- Product README (feature source of truth): `<repo>/README.md`
-- Design language reference: `<repo>/src/styles/global.css`, `<repo>/src/components/3d/`
+- Product repo: private (private beta) — feature source of truth lives in the internal product README and is not linked from the website
+- Design language reference: internal — synced manually from the product repo
 - AWS Activate program: https://pages.awscloud.com/HK-Startup-Activate.html
 - Vercel docs (App Router i18n): https://vercel.com/docs
 - next-intl App Router guide: https://next-intl-docs.vercel.app/docs/getting-started/app-router

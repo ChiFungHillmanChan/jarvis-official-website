@@ -13,7 +13,6 @@ type UiStrings = {
   contact: {
     eyebrow: string;
     emailLabel: string;
-    githubLabel: string;
     locationLabel: string;
     emailInputLabel: string;
   };
@@ -48,7 +47,6 @@ const ui: Record<Locale, UiStrings> = {
     contact: {
       eyebrow: "Contact",
       emailLabel: "Email",
-      githubLabel: "GitHub",
       locationLabel: "Location",
       emailInputLabel: "Email address",
     },
@@ -75,7 +73,6 @@ const ui: Record<Locale, UiStrings> = {
     contact: {
       eyebrow: "聯絡",
       emailLabel: "電郵",
-      githubLabel: "GitHub",
       locationLabel: "地點",
       emailInputLabel: "電郵地址",
     },

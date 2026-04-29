@@ -7,7 +7,6 @@ import { localePath } from "@/lib/i18n/localePath";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { WaitlistForm } from "@/components/sections/waitlist-cta/WaitlistForm";
-import { ExternalLink } from "@/components/ui/ExternalLink";
 import { getUiFor } from "@/content/ui";
 
 export async function HomeAccess() {
@@ -39,10 +38,6 @@ export async function HomeAccess() {
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.locationLabel}: </span>
                 {companyL10n.locationLine}
-              </li>
-              <li>
-                <span className="font-medium text-[color:var(--text-primary)]">GitHub: </span>
-                <ExternalLink href={company.github}>{company.github.replace("https://", "")}</ExternalLink>
               </li>
             </ul>
             <Link

@@ -6,7 +6,6 @@ export const company = {
   contactEmail: "contact@jarvis-automation.com",
   locationLine: "Hong Kong SAR",
   statusLine: "Hong Kong AI software startup",
-  github: "https://github.com/ChiFungHillmanChan/jarvis-ai-assistant",
   productName: "JARVIS",
   productVersion: "0.1.0",
   foundingYear: 2026,
