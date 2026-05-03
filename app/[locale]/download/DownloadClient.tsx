@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import { fetchLatestRelease, isMacOs, type ReleaseInfo } from "@/lib/download";
 import type { Copy } from "@/content/getCopy";
 
@@ -8,13 +9,24 @@ interface Props {
   copy: Copy["download"];
 }
 
+// Stable subscribe (no-op) — UA never changes during a session, no resubscription needed.
+const subscribe = () => () => {};
+const getClientSnapshot = (): boolean => isMacOs(window.navigator.userAgent);
+const getServerSnapshot = (): boolean | null => null;
+
 export default function DownloadClient({ copy }: Props) {
   const [release, setRelease] = useState<ReleaseInfo | null>(null);
   const [source, setSource] = useState<"live" | "fallback">("fallback");
-  const [isMac, setIsMac] = useState<boolean | null>(null);
+  // useSyncExternalStore is the canonical React pattern for client-only values:
+  // returns null during SSR, resolves to the boolean on first client render.
+  // Avoids the setState-in-effect lint rule that fires on cascading renders.
+  const isMac = useSyncExternalStore<boolean | null>(
+    subscribe,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
 
   useEffect(() => {
-    setIsMac(isMacOs(navigator.userAgent));
     fetchLatestRelease().then(({ release, source }) => {
       setRelease(release);
       setSource(source);
@@ -31,7 +43,7 @@ export default function DownloadClient({ copy }: Props) {
         <p style={eyebrow}>{copy.eyebrow}</p>
         <h1 style={titleStyle}>{copy.nonMacosTitle}</h1>
         <p style={bodyStyle}>{copy.nonMacosBody}</p>
-        <a href="/" style={ctaStyle}>{copy.joinWaitlist}</a>
+        <Link href="/" style={ctaStyle}>{copy.joinWaitlist}</Link>
       </main>
     );
   }
