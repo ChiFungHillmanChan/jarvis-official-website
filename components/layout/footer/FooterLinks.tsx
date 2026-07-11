@@ -5,8 +5,8 @@ import { localePath } from "@/lib/i18n/localePath";
 export function FooterLinks({ locale }: { locale: string }) {
   const labels =
     locale === "zh-HK"
-      ? { product: "產品", company: "公司", contact: "聯絡" }
-      : { product: "Product", company: "Company", contact: "Contact" };
+      ? { product: "產品", company: "公司", download: "下載", contact: "聯絡" }
+      : { product: "Product", company: "Company", download: "Download", contact: "Contact" };
 
   return (
     <ul className="flex flex-wrap gap-5 text-sm text-[color:var(--text-secondary)]">
@@ -21,6 +21,11 @@ export function FooterLinks({ locale }: { locale: string }) {
       <li>
         <Link href={localePath(locale, "/company")} className="hover:text-[color:var(--text-primary)]">
           {labels.company}
+        </Link>
+      </li>
+      <li>
+        <Link href={localePath(locale, "/download")} className="hover:text-[color:var(--text-primary)]">
+          {labels.download}
         </Link>
       </li>
       <li>

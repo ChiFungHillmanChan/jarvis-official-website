@@ -1,0 +1,12 @@
+{
+  "version": "0.1.1",
+  "notes": "Seed manifest. scripts/release.sh in the jarvis-ai-assistant repo overwrites this file on every release, then you commit + push to deploy it. The in-app updater and the /download page both read this file from https://jarvis-automation.com/latest.json.",
+  "pub_date": "2026-07-11T00:00:00Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_latest_aarch64.dmg",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.1_aarch64.app.tar.gz"
+    }
+  }
+}
