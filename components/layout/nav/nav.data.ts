@@ -7,6 +7,7 @@ export function buildNavLinks(locale: string, ui: UiStrings): NavLink[] {
   return [
     { label: ui.nav.product, href: `${localePath(locale, "/")}#product` },
     { label: ui.nav.company, href: localePath(locale, "/company") },
+    { label: ui.nav.download, href: localePath(locale, "/download") },
     { label: ui.nav.contact, href: localePath(locale, "/contact") },
   ];
 }

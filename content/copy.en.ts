@@ -218,27 +218,42 @@ export const copy = {
   },
   security: {
     heading: "Security",
-    lastUpdated: "Last updated: 2026-04-14",
+    lastUpdated: "Last updated: 2026-05-08",
     sections: [
       {
         title: "Local-first by default",
         body:
-          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and credentials for connected services stay on the user's device by default. JARVIS AI does not currently operate a central customer data platform for product data.",
+          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and credentials for connected services stay on the user's device by default. Cloud sync and cloud inference are opt-in, never the default.",
       },
       {
-        title: "Data in transit",
+        title: "AWS-backed cloud control plane",
         body:
-          "All communication between this website, the product, and any third-party service uses TLS. Any AWS-backed cloud features on the roadmap will rely on AWS encryption in transit and at rest.",
+          "Optional cloud features are built on AWS in the Asia-Pacific (Singapore) region. We use Amazon Cognito for authentication, AWS KMS customer-managed keys (CMK) for envelope encryption, S3 with bucket-level encryption and TLS-only access for sync data, and DynamoDB with customer-managed encryption for user metadata. Cloud infrastructure is defined as code (AWS CDK) and reviewed against the AWS Well-Architected Framework.",
+      },
+      {
+        title: "Encryption at rest and in transit",
+        body:
+          "All cloud-stored data is encrypted at rest using AWS KMS customer-managed keys with annual key rotation. All network traffic uses TLS 1.2 or higher. End-to-end envelope encryption is on the roadmap for synced user content: each user's data is encrypted with a per-user data key wrapped by KMS, so JARVIS AI cannot decrypt customer payloads server-side.",
+      },
+      {
+        title: "Heavy inference is opt-in",
+        body:
+          "Routine workloads run on-device using local models. Only when the user opts in does JARVIS route a request to Amazon Bedrock for heavier inference. We do not retain prompts or completions beyond the request lifecycle, and Bedrock processing stays inside AWS regional boundaries.",
+      },
+      {
+        title: "Audit logging and monitoring",
+        body:
+          "AWS CloudTrail captures all control-plane actions across our AWS accounts. CloudWatch alarms notify the team on anomalous billing, error rate, and access patterns. Production change history is retained for at least 90 days.",
       },
       {
         title: "Service providers",
         body:
-          "Website form submissions are delivered through transactional email services. Those providers process data only to deliver the requested communication and are bound by their own published security commitments.",
+          "Website form submissions are delivered through Resend, a transactional email provider. Payments are processed by Stripe; JARVIS AI never stores raw card numbers. Each provider is bound by its own published security and data processing commitments.",
       },
       {
         title: "Access controls",
         body:
-          "Production systems are accessible only to the founding team. Access to any user-related data is scoped to the minimum needed to respond to a request or operate the private beta.",
+          "Production AWS access is restricted to a least-privilege IAM model with multi-factor authentication required for any human session. Daily operational identities cannot delete encryption keys or production data; deletion paths require a separate, audited role.",
       },
       {
         title: "Reporting a security concern",

@@ -5,6 +5,7 @@ type UiStrings = {
     product: string;
     company: string;
     contact: string;
+    download: string;
     requestAccess: string;
     openMenu: string;
     closeMenu: string;
@@ -39,6 +40,7 @@ const ui: Record<Locale, UiStrings> = {
       product: "Product",
       company: "Company",
       contact: "Contact",
+      download: "Download",
       requestAccess: "Request access",
       openMenu: "Open menu",
       closeMenu: "Close menu",
@@ -65,6 +67,7 @@ const ui: Record<Locale, UiStrings> = {
       product: "產品",
       company: "公司",
       contact: "聯絡",
+      download: "下載",
       requestAccess: "申請試用",
       openMenu: "開啟選單",
       closeMenu: "關閉選單",
