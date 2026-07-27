@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jarvis-automation.com";
+import { siteUrl } from "@/lib/constants/site";
 
 export const baseMetadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(siteUrl),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -31,7 +30,7 @@ export function buildOpenGraph(locale: string, route: RouteMeta): NonNullable<Me
     ...baseMetadata.openGraph,
     title: route.title,
     description: route.description,
-    url: `${baseUrl}/${normalized}${pathSuffix}`,
+    url: `${siteUrl}/${normalized}${pathSuffix}`,
     locale: OG_LOCALE[normalized],
     alternateLocale: alternate,
   };
@@ -47,13 +46,13 @@ export function buildTwitter(route: RouteMeta): NonNullable<Metadata["twitter"]>
 }
 
 type RouteMeta = { title: string; description: string; canonical: string };
-type RouteKey = "home" | "company" | "contact" | "privacy" | "terms" | "security";
+type RouteKey = "home" | "company" | "contact" | "download" | "privacy" | "terms" | "security";
 
 const en: Record<RouteKey, RouteMeta> = {
   home: {
     title: "JARVIS AI — Desktop AI for operators and engineers",
     description:
-      "JARVIS AI is a Hong Kong startup building JARVIS for macOS, a local-first desktop AI assistant for operators and engineers.",
+      "JARVIS AI is a Hong Kong startup building JARVIS for macOS, a desktop AI assistant for operators and engineers that keeps your data on your Mac.",
     canonical: "/",
   },
   company: {
@@ -67,9 +66,16 @@ const en: Record<RouteKey, RouteMeta> = {
     description: "Business contact, beta access requests, and company inquiries for JARVIS AI.",
     canonical: "/contact",
   },
+  download: {
+    title: "Download JARVIS for macOS",
+    description:
+      "Download JARVIS for macOS, the desktop AI assistant for operators and engineers. Requires macOS 12 or later on Apple Silicon.",
+    canonical: "/download",
+  },
   privacy: {
     title: "Privacy Policy · JARVIS AI",
-    description: "How JARVIS AI handles website submissions and local-first product data.",
+    description:
+      "How JARVIS AI handles website submissions and the product data stored on your Mac.",
     canonical: "/privacy",
   },
   terms: {
@@ -89,7 +95,7 @@ const zhHk: Record<RouteKey, RouteMeta> = {
   home: {
     title: "JARVIS AI — 為營運者與工程師而設的桌面 AI",
     description:
-      "JARVIS AI 是一間香港初創，正在打造 JARVIS for macOS，一款為營運者與工程師而設、本地優先的桌面 AI 助理。",
+      "JARVIS AI 是一間香港初創，正在打造 JARVIS for macOS，一款為營運者與工程師而設的桌面 AI 助理，資料儲存在本機，不設雲端同步。",
     canonical: "/",
   },
   company: {
@@ -102,9 +108,15 @@ const zhHk: Record<RouteKey, RouteMeta> = {
     description: "JARVIS AI 的商業聯絡、Beta 試用申請及公司查詢。",
     canonical: "/contact",
   },
+  download: {
+    title: "下載 JARVIS for macOS",
+    description:
+      "下載 JARVIS for macOS，為營運者與工程師而設的桌面 AI 助理。需要 macOS 12 或以上，並使用 Apple Silicon。",
+    canonical: "/download",
+  },
   privacy: {
     title: "私隱政策 · JARVIS AI",
-    description: "JARVIS AI 如何處理網站提交資料及本地優先產品數據。",
+    description: "JARVIS AI 如何處理網站提交資料，以及儲存在本機的產品數據。",
     canonical: "/privacy",
   },
   terms: {

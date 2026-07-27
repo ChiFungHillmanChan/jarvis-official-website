@@ -22,6 +22,9 @@ type UiStrings = {
   };
   waitlist: {
     submitting: string;
+    // Shown when /api/waitlist answers 429. {n} is the wait it reports.
+    rateLimitedMinutes: string;
+    rateLimitedHours: string;
   };
   notFound: {
     eyebrow: string;
@@ -44,7 +47,7 @@ const ui: Record<Locale, UiStrings> = {
       requestAccess: "Request access",
       openMenu: "Open menu",
       closeMenu: "Close menu",
-      languageToggle: "Switch language",
+      languageToggle: "Switch to {language}",
     },
     contact: {
       eyebrow: "Contact",
@@ -53,7 +56,12 @@ const ui: Record<Locale, UiStrings> = {
       emailInputLabel: "Email address",
     },
     legal: { eyebrow: "Legal" },
-    waitlist: { submitting: "…" },
+    waitlist: {
+      submitting: "…",
+      // Abbreviated units so one string covers a wait of one or of many.
+      rateLimitedMinutes: "Too many attempts right now. Please try again in about {n} min.",
+      rateLimitedHours: "Too many attempts right now. Please try again in about {n} hr.",
+    },
     notFound: {
       eyebrow: "404",
       title: "Page not found",
@@ -71,7 +79,7 @@ const ui: Record<Locale, UiStrings> = {
       requestAccess: "申請試用",
       openMenu: "開啟選單",
       closeMenu: "關閉選單",
-      languageToggle: "切換語言",
+      languageToggle: "切換至 {language}",
     },
     contact: {
       eyebrow: "聯絡",
@@ -80,7 +88,11 @@ const ui: Record<Locale, UiStrings> = {
       emailInputLabel: "電郵地址",
     },
     legal: { eyebrow: "法律" },
-    waitlist: { submitting: "…" },
+    waitlist: {
+      submitting: "…",
+      rateLimitedMinutes: "嘗試次數過多，請於約 {n} 分鐘後再試。",
+      rateLimitedHours: "嘗試次數過多，請於約 {n} 小時後再試。",
+    },
     notFound: {
       eyebrow: "404",
       title: "找不到此頁",

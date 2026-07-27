@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getUiFor } from "@/content/ui";
 import { routing } from "@/i18n/routing";
 
 export function LanguageToggle({ locale }: { locale: string }) {
@@ -16,12 +17,17 @@ export function LanguageToggle({ locale }: { locale: string }) {
     <Link
       href={href}
       prefetch={false}
-      aria-label={`Switch to ${other}`}
+      aria-label={languageToggleLabel(locale, other)}
       className="rounded-full border border-[var(--grid-line)] px-3 py-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[color:var(--text-muted)] transition-colors hover:border-[var(--accent-cyan-60)] hover:text-[color:var(--text-primary)]"
     >
       {otherLabel}
     </Link>
   );
+}
+
+export function languageToggleLabel(locale: string, target: string): string {
+  const targetName = target === "zh-HK" ? "繁體中文" : "English";
+  return getUiFor(locale).nav.languageToggle.replace("{language}", targetName);
 }
 
 function stripLocalePrefix(pathname: string): string {

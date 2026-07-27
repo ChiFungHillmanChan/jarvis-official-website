@@ -4,7 +4,7 @@ const RELEASES_BASE = "https://jarvis-releases.s3.ap-east-1.amazonaws.com";
 // via Vercel), not the private S3 bucket — that bucket returns 403 to the public.
 const MANIFEST_URL = "https://jarvis-automation.com/latest.json";
 // Stable alias maintained by scripts/release.sh — always points to the most recent DMG.
-const LATEST_DMG_URL = `${RELEASES_BASE}/JARVIS_latest_aarch64.dmg`;
+export const LATEST_DMG_URL = `${RELEASES_BASE}/JARVIS_latest_aarch64.dmg`;
 
 export interface ReleaseInfo {
   version: string;

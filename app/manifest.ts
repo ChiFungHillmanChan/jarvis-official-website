@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "JARVIS AI",
     short_name: "JARVIS",
     description:
-      "Desktop AI for operators and engineers — a local-first macOS assistant by a Hong Kong startup.",
+      "Desktop AI for operators and engineers — a macOS assistant that keeps your data on your Mac, by a Hong Kong startup.",
     start_url: "/",
     display: "standalone",
     background_color: "#09111b",
