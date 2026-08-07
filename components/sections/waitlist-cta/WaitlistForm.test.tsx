@@ -21,6 +21,10 @@ function renderForm() {
       errorInvalid="Enter a valid email."
       errorGeneric="Something went wrong."
       emailLabel="Email address"
+      roleLabel="What do you do"
+      rolePlaceholder="What do you do?"
+      painLabel="What should JARVIS take over first"
+      painPlaceholder="What should JARVIS take over first?"
     />,
   );
 }
@@ -48,8 +52,9 @@ describe("WaitlistForm honeypot", () => {
     expect(honeypot).toHaveAttribute("tabindex", "-1");
     expect(honeypot).toHaveAttribute("aria-hidden", "true");
     expect(honeypot).toHaveAttribute("autocomplete", "off");
-    // Only the email field is offered to someone filling the form normally.
-    expect(screen.getAllByRole("textbox")).toHaveLength(1);
+    // Email plus the two optional qualification fields are offered to someone
+    // filling the form normally; the honeypot stays out of the tree.
+    expect(screen.getAllByRole("textbox")).toHaveLength(3);
   });
 
   it("sends the decoy field under the key the API route reads", async () => {
@@ -66,7 +71,29 @@ describe("WaitlistForm honeypot", () => {
     expect(JSON.parse(init.body as string)).toEqual({
       email: "human@example.com",
       company: "Acme Corp",
+      role: "",
+      painPoint: "",
     });
+  });
+
+  it("sends the qualification answers when the visitor gives them", async () => {
+    const { container } = renderForm();
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "human@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("What do you do"), {
+      target: { value: "Agency owner" },
+    });
+    fireEvent.change(screen.getByLabelText("What should JARVIS take over first"), {
+      target: { value: "Chasing client replies" },
+    });
+    fireEvent.submit(container.querySelector("form")!);
+
+    await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const body = JSON.parse(init.body as string);
+    expect(body.role).toBe("Agency owner");
+    expect(body.painPoint).toBe("Chasing client replies");
   });
 
   it("sends an empty decoy field for a real signup", async () => {

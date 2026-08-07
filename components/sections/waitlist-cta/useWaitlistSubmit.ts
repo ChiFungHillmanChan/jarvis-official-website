@@ -41,7 +41,7 @@ export function useWaitlistSubmit({
 
   // `company` is the honeypot field WaitlistForm keeps hidden. It is passed
   // through untouched so the API route can decide what to do with it.
-  async function submit(email: string, company: string) {
+  async function submit(email: string, company: string, role?: string, painPoint?: string) {
     setError(null);
     if (!isEmail(email)) {
       setStatus("error");
@@ -53,7 +53,7 @@ export function useWaitlistSubmit({
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, company }),
+        body: JSON.stringify({ email, company, role, painPoint }),
       });
       if (res.status === 429) {
         setStatus("error");

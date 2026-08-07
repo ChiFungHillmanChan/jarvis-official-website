@@ -7,7 +7,7 @@ import latestRelease from "@/public/latest.json";
 
 export const company = {
   name: "JARVIS AI",
-  tagline: "Desktop AI for operators and engineers.",
+  tagline: "Desktop AI that turns Gmail into approved actions.",
   contactEmail: "contact@jarvis-automation.com",
   locationLine: "Hong Kong SAR",
   statusLine: "Hong Kong AI software startup",
@@ -29,7 +29,7 @@ const byLocale: Record<Locale, CompanyL10n> = {
     statusLine: company.statusLine,
   },
   "zh-HK": {
-    tagline: "為營運者與工程師而設的桌面 AI。",
+    tagline: "把 Gmail 變成經你批准的行動的桌面 AI。",
     locationLine: "香港特別行政區",
     statusLine: "香港 AI 軟件初創",
   },

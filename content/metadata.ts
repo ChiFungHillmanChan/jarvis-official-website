@@ -50,9 +50,9 @@ type RouteKey = "home" | "company" | "contact" | "download" | "privacy" | "terms
 
 const en: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS AI — Desktop AI for operators and engineers",
+    title: "JARVIS AI — Never miss a client follow-up again",
     description:
-      "JARVIS AI is a Hong Kong startup building JARVIS for macOS, a desktop AI assistant for operators and engineers that keeps your data on your Mac.",
+      "JARVIS turns Gmail and Calendar into a daily action brief on your Mac: what to reply, book, and chase — drafted first, approved by you. Built in Hong Kong.",
     canonical: "/",
   },
   company: {
@@ -69,7 +69,7 @@ const en: Record<RouteKey, RouteMeta> = {
   download: {
     title: "Download JARVIS for macOS",
     description:
-      "Download JARVIS for macOS, the desktop AI assistant for operators and engineers. Requires macOS 12 or later on Apple Silicon.",
+      "Download JARVIS for macOS, the desktop AI assistant that turns Gmail and Calendar into approved actions. Requires macOS 12 or later on Apple Silicon.",
     canonical: "/download",
   },
   privacy: {
@@ -93,9 +93,9 @@ const en: Record<RouteKey, RouteMeta> = {
 
 const zhHk: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS AI — 為營運者與工程師而設的桌面 AI",
+    title: "JARVIS AI — 唔再漏覆客、漏跟進",
     description:
-      "JARVIS AI 是一間香港初創，正在打造 JARVIS for macOS，一款為營運者與工程師而設的桌面 AI 助理，資料儲存在本機，不設雲端同步。",
+      "JARVIS 每朝把你的 Gmail 同 Calendar 整理成行動簡報：要覆、要約、要追的事先擬好草稿，由你批准先執行。香港打造，資料儲存在本機。",
     canonical: "/",
   },
   company: {
@@ -111,7 +111,7 @@ const zhHk: Record<RouteKey, RouteMeta> = {
   download: {
     title: "下載 JARVIS for macOS",
     description:
-      "下載 JARVIS for macOS，為營運者與工程師而設的桌面 AI 助理。需要 macOS 12 或以上，並使用 Apple Silicon。",
+      "下載 JARVIS for macOS，把 Gmail 同 Calendar 變成經你批准的行動的桌面 AI 助理。需要 macOS 12 或以上，並使用 Apple Silicon。",
     canonical: "/download",
   },
   privacy: {

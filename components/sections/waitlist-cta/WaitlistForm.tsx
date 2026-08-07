@@ -13,6 +13,10 @@ export function WaitlistForm({
   errorInvalid,
   errorGeneric,
   emailLabel,
+  roleLabel,
+  rolePlaceholder,
+  painLabel,
+  painPlaceholder,
 }: {
   placeholder: string;
   submitLabel: string;
@@ -21,8 +25,14 @@ export function WaitlistForm({
   errorInvalid: string;
   errorGeneric: string;
   emailLabel: string;
+  roleLabel: string;
+  rolePlaceholder: string;
+  painLabel: string;
+  painPlaceholder: string;
 }) {
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const [painPoint, setPainPoint] = useState("");
   // Honeypot. /api/waitlist reads this field off the raw payload and answers a
   // filled one with a normal success response without sending anything.
   const [company, setCompany] = useState("");
@@ -30,11 +40,14 @@ export function WaitlistForm({
 
   if (status === "success") return <WaitlistSuccess message={successMessage} />;
 
+  const fieldClass =
+    "flex-1 rounded-full border border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] px-5 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]";
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        void submit(email, company);
+        void submit(email, company, role, painPoint);
       }}
       className="flex flex-col gap-2"
       noValidate
@@ -63,11 +76,37 @@ export function WaitlistForm({
           placeholder={placeholder}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded-full border border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] px-5 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]"
+          className={fieldClass}
         />
         <Button type="submit" variant="primary">
           {status === "submitting" ? submittingLabel : submitLabel}
         </Button>
+      </div>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <label htmlFor="waitlist-role" className="sr-only">
+          {roleLabel}
+        </label>
+        <input
+          id="waitlist-role"
+          type="text"
+          maxLength={120}
+          placeholder={rolePlaceholder}
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className={fieldClass}
+        />
+        <label htmlFor="waitlist-pain" className="sr-only">
+          {painLabel}
+        </label>
+        <input
+          id="waitlist-pain"
+          type="text"
+          maxLength={500}
+          placeholder={painPlaceholder}
+          value={painPoint}
+          onChange={(e) => setPainPoint(e.target.value)}
+          className={fieldClass}
+        />
       </div>
       <p className="min-h-[1.25rem] text-sm text-[color:var(--accent-cyan)]" aria-live="polite">
         {error ?? ""}

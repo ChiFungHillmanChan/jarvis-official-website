@@ -66,7 +66,11 @@ export async function POST(req: Request) {
   // reads the visitor's retry as a duplicate, answers it with a silent success,
   // and the lead is lost with nobody told.
   try {
-    await sendWaitlistNotification({ signup: email });
+    await sendWaitlistNotification({
+      signup: email,
+      role: parsed.data.role,
+      painPoint: parsed.data.painPoint,
+    });
   } catch (err) {
     console.error("[waitlist] notification failed", err);
     releaseWaitlistAddress(email);

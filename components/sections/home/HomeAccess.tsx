@@ -63,6 +63,10 @@ export async function HomeAccess() {
                 errorInvalid={copy.waitlistCta.errorInvalid}
                 errorGeneric={copy.waitlistCta.errorGeneric}
                 emailLabel={ui.contact.emailInputLabel}
+                roleLabel={copy.waitlistCta.roleLabel}
+                rolePlaceholder={copy.waitlistCta.rolePlaceholder}
+                painLabel={copy.waitlistCta.painLabel}
+                painPlaceholder={copy.waitlistCta.painPlaceholder}
               />
             </div>
             <p className="mt-4 text-sm leading-6 text-[color:var(--text-muted)]">
