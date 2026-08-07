@@ -1,12 +1,12 @@
 {
-  "version": "0.1.1",
-  "notes": "Seed manifest. scripts/release.sh in the jarvis-ai-assistant repo overwrites this file on every release, then you commit + push to deploy it. The in-app updater and the /download page both read this file from https://jarvis-automation.com/latest.json.",
-  "pub_date": "2026-07-11T00:00:00Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_latest_aarch64.dmg",
+  "version": "0.1.2",
+  "notes": "JARVIS v0.1.2\n\nSecurity and reliability release.\n\n- Stronger protection against malicious email content: the assistant can no\n  longer be tricked into sending data out. Mail is always drafted for your\n  review, never sent automatically, and the same restrictions now apply to\n  local models.\n- Your GitHub, Notion, and Obsidian tokens moved from the local database into\n  the macOS Keychain.\n- Smarter model routing: routine tasks now run on faster, cheaper models\n  automatically; complex work still gets the most capable model.\n- Fixed onboarding losing API keys, the app addressing you by the wrong name,\n  and archived email reappearing in lists.\n- Startup is more resilient in the first minute after launch.\n- Download and automatic updates now work end to end.\n",
+  "pub_date": "2026-08-07T02:25:48Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.2_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.1_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmVpMHRid3dqTWVFMnBSaXlTVTRYanFmaXpudCtFaXJSeTdocW5OMndoQ1hPVm5MUHlaNDY2SGMvZ2V0VThBbzlpVjBYQi9aZFEvR011dDVaaGRTMXdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2MDY5Mzg5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKQ0d1M3RyaE5IS2dpZ29qL2tkQXVXdk93NkJrdXREa0h1cGZPQ2ViaDhTMTlxaEFnUXNYMEViOTd6Z3JFRTJMb3FuZUoxdUdVRzY3MG9lQzlOWnlvQWc9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.2_aarch64.app.tar.gz"
     }
   }
 }
