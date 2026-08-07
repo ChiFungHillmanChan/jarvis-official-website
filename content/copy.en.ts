@@ -14,7 +14,7 @@ export const copy = {
         "Private beta software for professionals who manage their day from the desktop and want one command surface for communication, scheduling, and execution.",
       bullets: [
         "Native macOS product in private beta",
-        "32 tools across communication, scheduling, and system control",
+        "Desktop, email, calendar, notes, and code tools in one command surface",
         "Local-first architecture with an AWS cloud roadmap for optional sync",
       ],
       imageAlt: "JARVIS for macOS product interface preview",
@@ -117,7 +117,7 @@ export const copy = {
     },
   },
   stats: [
-    { value: 32, label: "AI tools" },
+    { value: 0, label: "company servers storing product data" },
     { value: 5, label: "core integrations" },
     { value: 7, label: "automation jobs" },
     { value: 10, label: "MB native binary", suffix: "~" },
@@ -183,12 +183,17 @@ export const copy = {
   },
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 2026-04-14",
+    lastUpdated: "Last updated: 2026-07-27",
     sections: [
       {
-        title: "Local-first product design",
+        title: "Local storage by default",
         body:
-          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and connected service credentials are intended to remain on the user's device by default. JARVIS AI does not currently operate a customer data platform for storing this product data centrally.",
+          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and connected service credentials are intended to remain on the user's device by default. JARVIS AI does not currently operate a customer data platform for storing this product data centrally. Where model requests are sent is a separate question, answered in the next section.",
+      },
+      {
+        title: "Model providers and message content",
+        body:
+          "JARVIS answers a request by sending it to a model provider, so inference is not local by default. On a standard install that provider is Google: its Gemini API receives the message text and any email, calendar, or note content the assistant is asked to work with, sent under an API key the user supplies. Local inference is supported and can be switched on in Settings under Local AI, which keeps the request on the device. Amazon Bedrock is used only if the user configures AWS credentials and selects it. Prompts and responses are stored only in the local database on the user's device; JARVIS AI does not receive or retain them.",
       },
       {
         title: "Information collected on this website",
@@ -198,7 +203,7 @@ export const copy = {
       {
         title: "Third-party service providers",
         body:
-          "Website form submissions may be processed through service providers used for transactional email and internal notification workflows. Those providers process data only for the purpose of delivering the requested communication.",
+          "Website form submissions are delivered through Resend, a transactional email provider, and payments are processed by Stripe; JARVIS AI never stores raw card numbers. Inside the product, model requests go to the provider configured in the application, which on a standard install is Google. Each provider processes data only for the purpose it is engaged for, under its own published data processing commitments.",
       },
       {
         title: "Product integrations",
@@ -218,27 +223,27 @@ export const copy = {
   },
   security: {
     heading: "Security",
-    lastUpdated: "Last updated: 2026-05-08",
+    lastUpdated: "Last updated: 2026-07-27",
     sections: [
       {
-        title: "Local-first by default",
+        title: "Local storage by default",
         body:
-          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and credentials for connected services stay on the user's device by default. Cloud sync and cloud inference are opt-in, never the default.",
+          "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and credentials for connected services stay on the user's device: product data is held in a local SQLite database, and API keys are held in the macOS Keychain. JARVIS AI operates no sync service and no product backend, so none of this data is uploaded to us. Where model inference runs is a separate question, answered below.",
       },
       {
-        title: "AWS-backed cloud control plane",
+        title: "Planned AWS cloud control plane",
         body:
-          "Optional cloud features are built on AWS in the Asia-Pacific (Singapore) region. We use Amazon Cognito for authentication, AWS KMS customer-managed keys (CMK) for envelope encryption, S3 with bucket-level encryption and TLS-only access for sync data, and DynamoDB with customer-managed encryption for user metadata. Cloud infrastructure is defined as code (AWS CDK) and reviewed against the AWS Well-Architected Framework.",
+          "The shipped product has no cloud sync, so no product data reaches JARVIS AI infrastructure today. Optional cloud features are planned on AWS in the Asia-Pacific (Singapore) region and would use Amazon Cognito for authentication, AWS KMS customer-managed keys (CMK) for envelope encryption, S3 with bucket-level encryption and TLS-only access for sync data, and DynamoDB for user metadata. Those stacks are defined as code (AWS CDK) and reviewed against the AWS Well-Architected Framework, but they are not connected to the application. This page will be updated before any of them handles customer data.",
       },
       {
         title: "Encryption at rest and in transit",
         body:
-          "All cloud-stored data is encrypted at rest using AWS KMS customer-managed keys with annual key rotation. All network traffic uses TLS 1.2 or higher. End-to-end envelope encryption is on the roadmap for synced user content: each user's data is encrypted with a per-user data key wrapped by KMS, so JARVIS AI cannot decrypt customer payloads server-side.",
+          "The only store of product data today is the local SQLite database on the user's device, protected by macOS file permissions and by whatever full-disk encryption the user has enabled. API keys and service credentials are kept in the macOS Keychain rather than in that database. Network traffic to this website and to third-party APIs uses TLS 1.2 or higher. Envelope encryption with a per-user data key wrapped by AWS KMS is the design for synced content once cloud sync ships; it is not in production, and there is no cloud-stored customer data to which it applies.",
       },
       {
-        title: "Heavy inference is opt-in",
+        title: "Where model inference runs",
         body:
-          "Routine workloads run on-device using local models. Only when the user opts in does JARVIS route a request to Amazon Bedrock for heavier inference. We do not retain prompts or completions beyond the request lifecycle, and Bedrock processing stays inside AWS regional boundaries.",
+          "Inference is not local by default. On a standard install JARVIS sends the request to a cloud model provider, currently Google's Gemini API, so Google processes the message text and any email, calendar, or note content included in that request. The provider API key is supplied by the user; no model credentials are bundled with the software. Local inference is supported and can be enabled in Settings under Local AI, which keeps the request on the device. Amazon Bedrock is used only when the user configures AWS credentials and selects it for heavier inference. Prompts and completions are stored only in the local database on the user's device; JARVIS AI does not receive or retain them.",
       },
       {
         title: "Audit logging and monitoring",
@@ -248,7 +253,7 @@ export const copy = {
       {
         title: "Service providers",
         body:
-          "Website form submissions are delivered through Resend, a transactional email provider. Payments are processed by Stripe; JARVIS AI never stores raw card numbers. Each provider is bound by its own published security and data processing commitments.",
+          "Model requests are processed by the provider configured in the application. On a standard install that provider is Google: its Gemini API receives the message text and any email, calendar, or note content the assistant is asked to work with. If the user enables a local model, those requests stay on the device instead. Website form submissions are delivered through Resend, a transactional email provider. Payments are processed by Stripe; JARVIS AI never stores raw card numbers. Each provider is bound by its own published security and data processing commitments.",
       },
       {
         title: "Access controls",
@@ -306,6 +311,7 @@ export const copy = {
     nonMacosTitle: "macOS only — for now",
     nonMacosBody: "Windows and Linux builds are on the roadmap. Join the waitlist to be notified.",
     joinWaitlist: "Join the waitlist",
-    fetchError: "Could not load the latest version. The download below will give you v0.1.0.",
+    fetchError:
+      "Could not load the release details. The download below still points to the most recent build.",
   },
 } as const;

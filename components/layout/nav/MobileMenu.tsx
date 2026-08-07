@@ -44,6 +44,7 @@ export function MobileMenu({
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? closeLabel : openLabel}
         aria-expanded={open}
+        aria-controls="mobile-menu-panel"
         className="relative z-50 flex h-10 w-10 items-center justify-center text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--text-primary)]"
       >
         <svg
@@ -80,6 +81,8 @@ export function MobileMenu({
       )}
 
       <div
+        id="mobile-menu-panel"
+        inert={!open}
         className={`fixed left-0 right-0 top-[72px] z-40 border-b border-[var(--grid-line)] bg-[color:rgba(9,17,27,0.97)] backdrop-blur-lg transition-all duration-200 ${
           open
             ? "translate-y-0 opacity-100"

@@ -17,7 +17,7 @@ export const copy: DeepWiden<typeof enCopy> = {
         "面向專業人士的私人 Beta 軟件，為經常在桌面環境處理溝通、排程與執行工作的人提供單一指揮介面。",
       bullets: [
         "原生 macOS 產品，現正進行私人 Beta",
-        "32 個工具，覆蓋溝通、排程與系統控制",
+        "桌面、電郵、日曆、筆記與程式碼工具，統一於同一指令介面",
         "今天以本地優先為基礎，未來加入 AWS 雲端同步能力",
       ],
       imageAlt: "JARVIS for macOS 產品介面預覽",
@@ -120,7 +120,7 @@ export const copy: DeepWiden<typeof enCopy> = {
     },
   },
   stats: [
-    { value: 32, label: "個 AI 工具" },
+    { value: 0, label: "部公司伺服器儲存產品數據" },
     { value: 5, label: "項核心整合" },
     { value: 7, label: "項自動化工作" },
     { value: 10, label: "MB 原生執行檔", suffix: "~" },
@@ -185,12 +185,17 @@ export const copy: DeepWiden<typeof enCopy> = {
   },
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026-04-14",
+    lastUpdated: "最後更新：2026-07-27",
     sections: [
       {
-        title: "本地優先的產品設計",
+        title: "預設本機儲存",
         body:
-          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文及已連接服務的憑證，預設會留在用戶裝置內。JARVIS AI 目前並無營運集中式客戶資料平台去儲存這些產品數據。",
+          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文及已連接服務的憑證，預設會留在用戶裝置內。JARVIS AI 目前並無營運集中式客戶資料平台去儲存這些產品數據。至於模型請求會送去邊度，屬另一回事，下一節另有交代。",
+      },
+      {
+        title: "模型供應商與訊息內容",
+        body:
+          "JARVIS 要回應用戶的請求，就要將請求送往模型供應商，因此推理預設並非在本機執行。標準安裝下，該供應商是 Google：其 Gemini API 會收到訊息內容，以及助理被要求處理的電郵、日曆或筆記內容，並以用戶自行提供的 API 金鑰發出請求。本機推理同樣支援，可在「設定」的 Local AI 開啟，開啟後請求會留在裝置內。只有當用戶自行設定 AWS 憑證並選用 Amazon Bedrock，請求先會送往 Bedrock。Prompt 與回應只會儲存在用戶裝置上的本機資料庫，JARVIS AI 不會接收，亦不會保留。",
       },
       {
         title: "本網站收集的資料",
@@ -200,7 +205,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       {
         title: "第三方服務供應商",
         body:
-          "網站表單提交可能會透過交易電郵及內部通知服務供應商處理。該等服務供應商只會為了傳送你所要求的通訊而處理相關資料。",
+          "網站表單提交會透過 Resend 交易電郵服務傳送，付款則由 Stripe 處理；JARVIS AI 從不儲存原始信用卡號碼。至於產品內的模型請求，會交由應用程式中所設定的供應商處理，標準安裝下即 Google。各供應商只會為其受委託的目的處理相關資料，並受其自身已公開發布的資料處理承諾規範。",
       },
       {
         title: "產品整合",
@@ -220,27 +225,27 @@ export const copy: DeepWiden<typeof enCopy> = {
   },
   security: {
     heading: "安全",
-    lastUpdated: "最後更新：2026-05-08",
+    lastUpdated: "最後更新：2026-07-27",
     sections: [
       {
-        title: "預設本地優先",
+        title: "預設本機儲存",
         body:
-          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文以及已連接服務的憑證，預設會留在用戶裝置內。雲端同步及雲端推理屬選用 (opt-in) 功能，從不作為預設。",
+          "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文以及已連接服務的憑證，都會留在用戶裝置內：產品數據存放於本機 SQLite 資料庫，API 金鑰則存放於 macOS Keychain。JARVIS AI 並無營運任何同步服務或產品後端，所以這些數據不會上載到我哋這邊。至於模型推理喺邊度執行，屬另一回事，下文另有交代。",
       },
       {
-        title: "以 AWS 構建的雲端控制平台",
+        title: "計劃中的 AWS 雲端控制平台",
         body:
-          "選用雲端功能建構於 AWS 亞太（新加坡）區域。我哋使用 Amazon Cognito 處理身份驗證、AWS KMS 客戶管理金鑰 (CMK) 做信封加密、S3 啟用 bucket 級加密及僅限 TLS 存取存放同步數據、DynamoDB 啟用客戶管理加密儲存用戶 metadata。雲端基礎架構以代碼定義 (AWS CDK)，並以 AWS Well-Architected Framework 持續審查。",
+          "現時推出的產品並無雲端同步，因此不會有產品數據送到 JARVIS AI 的基礎設施。選用雲端功能計劃建構於 AWS 亞太（新加坡）區域，屆時會以 Amazon Cognito 處理身份驗證、AWS KMS 客戶管理金鑰 (CMK) 做信封加密、S3 啟用 bucket 級加密及僅限 TLS 存取存放同步數據，並以 DynamoDB 儲存用戶 metadata。相關 stack 已以代碼定義 (AWS CDK)，並按 AWS Well-Architected Framework 審查，但仍未接駁到應用程式。在其中任何一項開始處理客戶數據之前，我哋會先更新本頁。",
       },
       {
         title: "靜態與傳輸加密",
         body:
-          "所有雲端儲存數據均以 AWS KMS 客戶管理金鑰加密，每年自動輪換金鑰。所有網絡流量採用 TLS 1.2 或更高版本。同步用戶內容嘅端對端信封加密在路線圖上：每位用戶數據以個人化 data key 加密，再由 KMS 包裝，JARVIS AI 無法在伺服器端解密客戶數據。",
+          "現時唯一存放產品數據的地方，是用戶裝置上的本機 SQLite 資料庫，由 macOS 檔案權限，以及用戶自行啟用的全磁碟加密保護。API 金鑰與服務憑證存放於 macOS Keychain，不會寫入該資料庫。連接本網站及第三方 API 的網絡流量採用 TLS 1.2 或更高版本。以個人化 data key 加密、再由 AWS KMS 包裝的信封加密，是雲端同步推出後的設計方向；該機制尚未上線，現時亦沒有任何儲存在雲端的客戶數據需要它保護。",
       },
       {
-        title: "重型推理屬選用",
+        title: "模型推理喺邊度執行",
         body:
-          "日常工作負載以本機模型運行。只有用戶選擇啟用，JARVIS 先會將請求路由到 Amazon Bedrock 處理重型推理。我哋不會在請求生命周期以外保留 prompt 或回應，Bedrock 處理過程亦會留在 AWS 指定區域邊界內。",
+          "推理預設並非在本機執行。標準安裝下，JARVIS 會將請求送往雲端模型供應商，目前是 Google 的 Gemini API，因此訊息內容，以及請求中包含的電郵、日曆或筆記內容，都會交由 Google 處理。供應商 API 金鑰由用戶自行提供，軟件本身並無內置任何模型憑證。本機推理同樣支援，可在「設定」的 Local AI 開啟，開啟後請求會留在裝置內。只有當用戶自行設定 AWS 憑證並選用 Amazon Bedrock 處理重型推理，請求先會送往 Bedrock。Prompt 與回應只會儲存在用戶裝置上的本機資料庫，JARVIS AI 不會接收，亦不會保留。",
       },
       {
         title: "審計日誌與監控",
@@ -250,7 +255,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       {
         title: "服務供應商",
         body:
-          "網站表單提交會透過 Resend 交易電郵服務傳送。付款由 Stripe 處理；JARVIS AI 從不儲存原始信用卡號碼。各供應商受其自身已公開發布的安全及資料處理承諾所規範。",
+          "模型請求由應用程式內所設定的供應商處理。標準安裝下，該供應商是 Google：其 Gemini API 會收到訊息內容，以及助理被要求處理的電郵、日曆或筆記內容。若用戶啟用本機模型，相關請求則會留在裝置內。網站表單提交會透過 Resend 交易電郵服務傳送。付款由 Stripe 處理；JARVIS AI 從不儲存原始信用卡號碼。各供應商受其自身已公開發布的安全及資料處理承諾所規範。",
       },
       {
         title: "存取控制",
@@ -308,6 +313,6 @@ export const copy: DeepWiden<typeof enCopy> = {
     nonMacosTitle: "暫時只支援 macOS",
     nonMacosBody: "Windows 同 Linux 版本喺 roadmap 裡面。加入 waitlist 我哋會通知你。",
     joinWaitlist: "加入 waitlist",
-    fetchError: "未能載入最新版本資訊。下面個 download 會俾你 v0.1.0。",
+    fetchError: "未能載入版本資訊。下面嘅下載連結仍然指向最新版本。",
   },
 } as const;

@@ -2,11 +2,13 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { fetchLatestRelease, isMacOs, type ReleaseInfo } from "@/lib/download";
+import { fetchLatestRelease, isMacOs, LATEST_DMG_URL, type ReleaseInfo } from "@/lib/download";
+import { localePath } from "@/lib/i18n/localePath";
 import type { Copy } from "@/content/getCopy";
 
 interface Props {
   copy: Copy["download"];
+  locale: string;
 }
 
 // Stable subscribe (no-op) — UA never changes during a session, no resubscription needed.
@@ -14,7 +16,7 @@ const subscribe = () => () => {};
 const getClientSnapshot = (): boolean => isMacOs(window.navigator.userAgent);
 const getServerSnapshot = (): boolean | null => null;
 
-export default function DownloadClient({ copy }: Props) {
+export default function DownloadClient({ copy, locale }: Props) {
   const [release, setRelease] = useState<ReleaseInfo | null>(null);
   const [source, setSource] = useState<"live" | "fallback">("fallback");
   // useSyncExternalStore is the canonical React pattern for client-only values:
@@ -33,21 +35,20 @@ export default function DownloadClient({ copy }: Props) {
     });
   }, []);
 
-  if (isMac === null || release === null) {
-    return <main style={pageStyle}><p>{copy.loadingNotes}</p></main>;
-  }
-
-  if (!isMac) {
+  if (isMac === false) {
     return (
       <main style={pageStyle}>
         <p style={eyebrow}>{copy.eyebrow}</p>
         <h1 style={titleStyle}>{copy.nonMacosTitle}</h1>
         <p style={bodyStyle}>{copy.nonMacosBody}</p>
-        <Link href="/" style={ctaStyle}>{copy.joinWaitlist}</Link>
+        <Link href={`${localePath(locale, "/")}#access`} style={ctaStyle}>{copy.joinWaitlist}</Link>
       </main>
     );
   }
 
+  // isMac === null on the server and on the hydration render, and release is null
+  // until the client fetch lands. Both fall through to the macOS shell so the
+  // server HTML carries the heading, the requirements and a working download link.
   return (
     <main style={pageStyle}>
       <p style={eyebrow}>{copy.eyebrow}</p>
@@ -55,17 +56,21 @@ export default function DownloadClient({ copy }: Props) {
       <p style={subtitleStyle}>{copy.subtitle}</p>
       <p style={smallStyle}>{copy.systemRequirements}</p>
 
-      {source === "fallback" && <p style={warnStyle}>{copy.fetchError}</p>}
+      {release !== null && source === "fallback" && <p style={warnStyle}>{copy.fetchError}</p>}
 
-      <a href={release.downloadUrl} style={ctaStyle}>
-        {copy.primaryCta} (v{release.version})
+      <a href={release?.downloadUrl ?? LATEST_DMG_URL} style={ctaStyle}>
+        {release === null ? copy.primaryCta : `${copy.primaryCta} (v${release.version})`}
       </a>
 
-      {release.notes && (
-        <section style={notesSection}>
-          <h2 style={h2Style}>{copy.releaseNotesHeading}</h2>
-          <pre style={notesPre}>{release.notes}</pre>
-        </section>
+      {release === null ? (
+        <p style={smallStyle}>{copy.loadingNotes}</p>
+      ) : (
+        release.notes && (
+          <section style={notesSection}>
+            <h2 style={h2Style}>{copy.releaseNotesHeading}</h2>
+            <pre style={notesPre}>{release.notes}</pre>
+          </section>
+        )
       )}
     </main>
   );

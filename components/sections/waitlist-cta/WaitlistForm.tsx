@@ -23,6 +23,9 @@ export function WaitlistForm({
   emailLabel: string;
 }) {
   const [email, setEmail] = useState("");
+  // Honeypot. /api/waitlist reads this field off the raw payload and answers a
+  // filled one with a normal success response without sending anything.
+  const [company, setCompany] = useState("");
   const { submit, status, error } = useWaitlistSubmit({ errorInvalid, errorGeneric });
 
   if (status === "success") return <WaitlistSuccess message={successMessage} />;
@@ -31,11 +34,23 @@ export function WaitlistForm({
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        void submit(email);
+        void submit(email, company);
       }}
       className="flex flex-col gap-2"
       noValidate
     >
+      {/* Parked off-screen rather than display:none so a naive bot still fills
+          it, while tabIndex and aria-hidden keep it away from real visitors. */}
+      <input
+        type="text"
+        name="company"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="waitlist-email" className="sr-only">
           {emailLabel}

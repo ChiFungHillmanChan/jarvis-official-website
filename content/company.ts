@@ -1,4 +1,9 @@
 import type { Locale } from "@/i18n/routing";
+// The release manifest is the single source of the shipped version: the
+// download page reads it at runtime and scripts/release.sh in the desktop repo
+// rewrites it on every release. Anything on this site that names a version has
+// to come from here, or the site claims a build it does not serve.
+import latestRelease from "@/public/latest.json";
 
 export const company = {
   name: "JARVIS AI",
@@ -7,7 +12,7 @@ export const company = {
   locationLine: "Hong Kong SAR",
   statusLine: "Hong Kong AI software startup",
   productName: "JARVIS",
-  productVersion: "0.1.0",
+  productVersion: latestRelease.version,
   foundingYear: 2026,
 } as const;
 
