@@ -5,20 +5,20 @@ export const copy: DeepWiden<typeof enCopy> = {
   home: {
     hero: {
       eyebrow: "JARVIS AI",
-      title: "為營運者與工程師而設的桌面 AI。",
+      title: "唔再漏覆客、漏跟進。",
       sub:
-        "JARVIS 是一款原生 macOS 助理，把電郵、日曆、筆記、GitHub 以及系統操作整合成一個專注的工作介面。香港打造。本地優先。",
+        "JARVIS 每朝用三分鐘整理你的 Gmail 同 Google Calendar：邊封要覆、邊個要約、邊單要追，全部先擬好草稿，由你確認先執行。香港打造，中英粵語都聽得明。",
       primaryCta: "申請 Beta 試用",
       secondaryCta: "查看公司資料",
       summaryLabel: "目前版本",
-      summaryTitle: "JARVIS for macOS",
+      summaryTitle: "JARVIS for Gmail on macOS",
       summaryBadge: "私人 Beta",
       summaryBody:
-        "面向專業人士的私人 Beta 軟件，為經常在桌面環境處理溝通、排程與執行工作的人提供單一指揮介面。",
+        "為靠 Gmail 同 Google Calendar 營運業務的人而設的私人 Beta 軟件：JARVIS 讀取你選擇連接的收件箱，整理出需要回覆、排程或跟進的事項，並擬好草稿等你批准。",
       bullets: [
         "原生 macOS 產品，現正進行私人 Beta",
-        "桌面、電郵、日曆、筆記與程式碼工具，統一於同一指令介面",
-        "今天以本地優先為基礎，未來加入 AWS 雲端同步能力",
+        "以 Gmail 與 Calendar 為先：分流、擬回覆、排跟進",
+        "任何動作都要你批准先執行 — 郵件只會擬稿，永不自動發送",
       ],
       imageAlt: "JARVIS for macOS 產品介面預覽",
     },
@@ -28,7 +28,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       items: [
         {
           title: "公司",
-          body: "以香港為基地的桌面 AI 軟件初創，專注為營運者與工程師打造產品。",
+          body: "以香港為基地的桌面 AI 軟件初創，為日常靠 Gmail 服務客戶的創辦人與專業人士打造產品。",
         },
         {
           title: "產品",
@@ -36,48 +36,48 @@ export const copy: DeepWiden<typeof enCopy> = {
         },
         {
           title: "平台",
-          body: "今天以裝置本地運作為主，未來會以 AWS 提供選擇性同步與語音基礎設施。",
+          body: "你的數據儲存喺你部機 — 冇 JARVIS 伺服器。AI 請求會送到你自行選擇的模型供應商；亦可啟用本地模型，令請求留喺裝置內。",
         },
       ],
     },
     product: {
       eyebrow: "產品",
-      title: "把原本分散於五六個應用程式的工作，收斂到一個專注介面。",
+      title: "由塞滿的收件箱，變成一張做完的清單，全程由你話事。",
       sub:
-        "JARVIS 的設計目標，是令使用者感受到一個安靜而有秩序的工作空間，而不是一堆功能堆疊。",
+        "JARVIS 圍繞一個每日循環而設計：睇清楚今日邊三件事最緊要，批准草稿，然後繼續你的一日。",
       imageCaption: "產品預覽",
       items: [
         {
-          title: "統一日常上下文",
-          body: "把電郵、日曆、筆記、程式碼上下文與桌面操作集中在一起，減少來回切換分頁與視窗。",
+          title: "三分鐘晨間簡報",
+          body: "每朝 JARVIS 讀取你的 Gmail 同 Calendar，整理出最重要的三件事：邊個等緊你回覆、邊件事要排期、邊單跟進就快斷線。",
         },
         {
-          title: "語音與鍵盤操作",
-          body: "以自然語言觸發工作流程、查詢上下文或執行操作，同時維持在原生 macOS 環境內工作。",
+          title: "先擬稿，後批准",
+          body: "回覆同日曆動作一律先準備成草稿。未經你批准，唔會發送、移動或預約任何嘢 — 中英粵語、鍵盤定語音都得。",
         },
         {
-          title: "本地優先架構",
-          body: "對話紀錄、任務與已連接的上下文預設留在裝置內，只有在真正帶來價值時才引入雲端服務。",
+          title: "以私隱為本",
+          body: "對話紀錄、任務與同步的上下文儲存喺你部 Mac 的本地資料庫。冇 JARVIS 雲端帳戶，伺服器上冇你數據的副本。",
         },
       ],
     },
     audience: {
       eyebrow: "適用對象",
-      title: "為習慣用鍵盤管理工作的人而設。",
+      title: "為「客戶都住喺你收件箱」的人而設。",
       sub:
-        "產品面向需要快速掌握上下文、低摩擦執行操作，以及比瀏覽器分頁更高控制力的技術與營運使用者。",
+        "第一批用戶是香港用 Mac 工作的專業人士：靠 Gmail 同 Google Calendar 管理客戶同交付，中英夾雜係日常。",
       groups: [
         {
-          title: "營運者",
-          body: "用 JARVIS 在同一層指令介面管理 inbox、日曆、跟進事項與重複性桌面工作。",
+          title: "個人創辦人與顧問",
+          body: "每日二十幾封工作電郵、幾個客戶同時進行。JARVIS 令回覆、預約同跟進唔會漏 — 漏一單，蝕嘅係真金白銀。",
         },
         {
-          title: "工程師",
-          body: "把 GitHub、筆記、任務與系統操作留在同一桌面工作流程中，而不是分散在多個視窗。",
+          title: "Agency 同工作室老闆",
+          body: "客戶對話、報價同交接全部塞喺一個收件箱。JARVIS 將佢哋變成每日行動簡報，冇嘢會等兩日先有人覆。",
         },
         {
-          title: "創辦人與管理者",
-          body: "當工作同時涉及溝通、規劃與執行時，更快由上下文走到下一步行動。",
+          title: "工程師與營運者",
+          body: "把 GitHub、Notion、筆記與日曆上下文放埋收件箱旁邊，用鍵盤推進一日的工作，唔使周圍撳分頁。",
         },
       ],
     },
@@ -89,7 +89,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       cards: [
         {
           title: "產品焦點",
-          body: "JARVIS for macOS 是公司的旗艦產品，為營運者與工程師打造的桌面 AI 助理，現正進行私人 Beta。",
+          body: "JARVIS for macOS 是公司的旗艦產品 — 把 Gmail 同 Calendar 變成經你批准的行動的桌面 AI 助理，現正進行私人 Beta。",
         },
         {
           title: "AWS 雲端藍圖",
@@ -105,7 +105,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       eyebrow: "產品預覽",
       title: "看看目前的 macOS 版本。",
       sub:
-        "短片示範 JARVIS 如何把電郵、日曆、筆記與系統操作匯聚到一個專注的介面。",
+        "短片示範每日循環：Gmail 分流、一封擬好的回覆、一個日曆跟進 — 每一步都等你批准先執行。",
     },
     access: {
       eyebrow: "申請",
@@ -123,7 +123,7 @@ export const copy: DeepWiden<typeof enCopy> = {
     { value: 0, label: "部公司伺服器儲存產品數據" },
     { value: 5, label: "項核心整合" },
     { value: 7, label: "項自動化工作" },
-    { value: 10, label: "MB 原生執行檔", suffix: "~" },
+    { value: 17, label: "MB 簽署安裝檔", suffix: "~" },
     { value: 1, label: "個旗艦 macOS 產品" },
   ],
   waitlistCta: {
@@ -132,10 +132,14 @@ export const copy: DeepWiden<typeof enCopy> = {
     success: "我們已收到你的申請，Beta 開放時會再與你聯絡。",
     errorInvalid: "請輸入有效的電郵地址。",
     errorGeneric: "發生錯誤，請稍後再試。",
+    roleLabel: "你的工作",
+    rolePlaceholder: "你做邊行？（例如創辦人、agency 老闆）",
+    painLabel: "最想 JARVIS 接手的工作",
+    painPlaceholder: "最想 JARVIS 幫你接手邊件事？（可留空）",
   },
   companyPage: {
     heading: "關於 JARVIS AI",
-    sub: "JARVIS AI 是一間位於香港的 AI 軟件初創，專注打造為營運者與工程師而設的桌面 AI 軟件。",
+    sub: "JARVIS AI 是一間位於香港的 AI 軟件初創，為靠 Gmail 營運業務的專業人士打造桌面 AI 軟件。",
     intro:
       "公司的目標，是令桌面工作更直接。與其再疊加更多瀏覽器分頁，JARVIS AI 正在打造一個原生指令介面，幫助使用者以更低摩擦由上下文走到行動。",
     cards: [
@@ -149,7 +153,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       },
       {
         title: "我們如何看待雲端",
-        body: "產品今天以本地優先為核心。AWS 服務將用於選擇性的同步、語音基礎設施、可觀測性與未來的多裝置工作流程。",
+        body: "產品數據儲存在用戶裝置上；模型推理由用戶自行選擇供應商執行。AWS 服務將用於選擇性的同步、語音基礎設施、可觀測性與未來的多裝置工作流程。",
       },
     ],
     principlesHeading: "營運原則",
@@ -250,7 +254,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       {
         title: "審計日誌與監控",
         body:
-          "AWS CloudTrail 會記錄所有 AWS 帳戶嘅控制平台操作。CloudWatch 告警會通知團隊異常帳單、錯誤率及存取模式。生產環境變更紀錄保留最少 90 日。",
+          "JARVIS AI 的雲端基礎設施今天並無任何客戶數據，因此現時的監控只涵蓋我們自身的營運：AWS CloudTrail 事件歷史記錄帳戶內的控制平台操作，帳單告警會標示異常開支。在任何雲端功能處理客戶數據之前，我們會先在此頁公布更完整的可觀測性承諾。",
       },
       {
         title: "服務供應商",
@@ -260,7 +264,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       {
         title: "存取控制",
         body:
-          "生產 AWS 存取依最低權限 IAM 模型管制，任何人手 session 均強制使用多重認證。日常營運身份無權刪除加密金鑰或生產數據；刪除路徑須通過獨立並具審計嘅角色。",
+          "JARVIS AI 是單人營運的公司。AWS 存取只限於用作發佈與基礎設施工作、範圍受限的 IAM 身份，而該等帳戶內亦無任何客戶數據可供任何身份接觸。在雲端功能處理客戶數據之前，我們會先建立並在此公布正式的職權分離安排。",
       },
       {
         title: "通報安全問題",

@@ -2,20 +2,20 @@ export const copy = {
   home: {
     hero: {
       eyebrow: "JARVIS AI",
-      title: "Desktop AI for operators and engineers.",
+      title: "Never miss a client follow-up again.",
       sub:
-        "JARVIS is a native macOS assistant that brings email, calendar, notes, GitHub, and system actions into one focused workspace. Built in Hong Kong. Local-first from day one.",
+        "JARVIS turns Gmail and Calendar into a three-minute daily action brief for Mac-based founders and client-facing professionals. It drafts first — you approve every action. Built in Hong Kong, in English and Cantonese.",
       primaryCta: "Request beta access",
       secondaryCta: "View company",
       summaryLabel: "Current release",
-      summaryTitle: "JARVIS for macOS",
+      summaryTitle: "JARVIS for Gmail on macOS",
       summaryBadge: "Private beta",
       summaryBody:
-        "Private beta software for professionals who manage their day from the desktop and want one command surface for communication, scheduling, and execution.",
+        "Private beta software for people who run their business out of Gmail and Google Calendar: JARVIS reads the inbox you connect, surfaces what needs a reply, a booking, or a chase, and drafts the action for your approval.",
       bullets: [
         "Native macOS product in private beta",
-        "Desktop, email, calendar, notes, and code tools in one command surface",
-        "Local-first architecture with an AWS cloud roadmap for optional sync",
+        "Gmail and Calendar first: triage, draft replies, schedule follow-ups",
+        "Nothing is sent without your approval — mail is drafted, never auto-sent",
       ],
       imageAlt: "JARVIS for macOS product interface preview",
     },
@@ -25,7 +25,7 @@ export const copy = {
       items: [
         {
           title: "Company",
-          body: "Hong Kong-based software startup building desktop AI for operators and engineers.",
+          body: "Hong Kong-based software startup building desktop AI for founders and client-facing professionals who live in Gmail.",
         },
         {
           title: "Product",
@@ -33,48 +33,48 @@ export const copy = {
         },
         {
           title: "Platform",
-          body: "Local-first on device today, with AWS-backed cloud services planned for opt-in sync and voice infrastructure.",
+          body: "Your data is stored on your device — there is no JARVIS server. AI requests go to the model provider you choose; a local model option keeps them on the machine.",
         },
       ],
     },
     product: {
       eyebrow: "Product",
-      title: "A focused command surface for work that normally spans five or six apps.",
+      title: "From a full inbox to a done list, with you in control.",
       sub:
-        "JARVIS is designed to feel like one calm workspace rather than a collection of tools.",
+        "JARVIS is built around one daily loop: see what matters, approve the drafts, move on with your day.",
       imageCaption: "Product preview",
       items: [
         {
-          title: "Unified daily context",
-          body: "Bring email, calendar, notes, code context, and desktop actions into one place instead of switching across tabs and windows.",
+          title: "Three-minute daily brief",
+          body: "Every morning JARVIS reads your Gmail and Calendar and surfaces the three things that matter: who needs a reply, what needs scheduling, and which follow-up is about to slip.",
         },
         {
-          title: "Voice and keyboard control",
-          body: "Use natural language to trigger workflows, check context, or perform actions while staying inside a native macOS environment.",
+          title: "Draft first, approve always",
+          body: "Replies and calendar actions are prepared as drafts. Nothing is sent, moved, or booked until you approve it — in English or Cantonese, by keyboard or voice.",
         },
         {
-          title: "Local-first architecture",
-          body: "Conversation history, tasks, and connected context stay on the device by default, with cloud services planned only where they add clear value.",
+          title: "Private by design",
+          body: "Conversation history, tasks, and synced context live in a local database on your Mac. There is no JARVIS cloud account and no server-side copy of your data.",
         },
       ],
     },
     audience: {
       eyebrow: "Who it is for",
-      title: "Designed for people who manage work from the keyboard.",
+      title: "Built for people whose clients live in their inbox.",
       sub:
-        "The product is aimed at technical and operational users who need fast context, low-friction actions, and more control than a browser tab can offer.",
+        "The first users are Mac-based professionals in Hong Kong who manage clients and delivery through Gmail and Google Calendar — in English, Cantonese, or both in the same thread.",
       groups: [
         {
-          title: "Operators",
-          body: "Use JARVIS to manage inboxes, calendars, internal follow-ups, and repetitive desktop tasks from one command layer.",
+          title: "Solo founders and consultants",
+          body: "Twenty-plus work emails a day across multiple clients. JARVIS keeps the replies, bookings, and chases from slipping — a missed follow-up here costs real revenue.",
         },
         {
-          title: "Engineers",
-          body: "Keep GitHub, notes, tasks, and system actions close together without leaving the desktop workflow.",
+          title: "Agency and studio owners",
+          body: "Client threads, proposals, and hand-offs in one inbox. JARVIS turns them into a daily action brief so nothing waits two days for an answer.",
         },
         {
-          title: "Founders and managers",
-          body: "Move from incoming context to action faster when your day is split across communication, planning, and execution.",
+          title: "Engineers and operators",
+          body: "Keep GitHub, Notion, notes, and calendar context close to the inbox, and drive the day from the keyboard without tab-hopping.",
         },
       ],
     },
@@ -86,7 +86,7 @@ export const copy = {
       cards: [
         {
           title: "Product focus",
-          body: "JARVIS for macOS is the company's flagship product — a desktop AI assistant for operators and engineers, currently in private beta.",
+          body: "JARVIS for macOS is the company's flagship product — a desktop AI assistant that turns Gmail and Calendar into approved actions, currently in private beta.",
         },
         {
           title: "AWS cloud roadmap",
@@ -102,7 +102,7 @@ export const copy = {
       eyebrow: "Product preview",
       title: "See the current macOS build.",
       sub:
-        "A short walkthrough of how JARVIS brings email, calendar, notes, and system actions into one focused interface.",
+        "A short walkthrough of the daily loop: Gmail triage, a drafted reply, a calendar follow-up — each one waiting for your approval.",
     },
     access: {
       eyebrow: "Access",
@@ -120,7 +120,7 @@ export const copy = {
     { value: 0, label: "company servers storing product data" },
     { value: 5, label: "core integrations" },
     { value: 7, label: "automation jobs" },
-    { value: 10, label: "MB native binary", suffix: "~" },
+    { value: 17, label: "MB signed installer", suffix: "~" },
     { value: 1, label: "flagship macOS product" },
   ],
   waitlistCta: {
@@ -129,11 +129,15 @@ export const copy = {
     success: "Your request has been received. We will be in touch as the beta opens.",
     errorInvalid: "Please enter a valid email address.",
     errorGeneric: "Something went wrong. Please try again.",
+    roleLabel: "What do you do",
+    rolePlaceholder: "What do you do? (e.g. founder, agency owner)",
+    painLabel: "What should JARVIS take over first",
+    painPlaceholder: "What should JARVIS take over first? (optional)",
   },
   companyPage: {
     heading: "About JARVIS AI",
     sub:
-      "JARVIS AI is a Hong Kong-based AI software startup building desktop AI software for operators and engineers.",
+      "JARVIS AI is a Hong Kong-based AI software startup building desktop AI for professionals who run their business out of Gmail.",
     intro:
       "The company exists to make desktop work more direct. Instead of layering more browser tabs, JARVIS AI is building a native command surface that helps people move from context to action with less friction.",
     cards: [
@@ -147,7 +151,7 @@ export const copy = {
       },
       {
         title: "How we think about cloud",
-        body: "The product is local-first today. AWS services are planned for optional sync, voice infrastructure, observability, and future multi-device workflows.",
+        body: "Product data is stored on the user's device; inference runs with the provider the user chooses. AWS services are planned for optional sync, voice infrastructure, observability, and future multi-device workflows.",
       },
     ],
     principlesHeading: "Operating principles",
@@ -248,7 +252,7 @@ export const copy = {
       {
         title: "Audit logging and monitoring",
         body:
-          "AWS CloudTrail captures all control-plane actions across our AWS accounts. CloudWatch alarms notify the team on anomalous billing, error rate, and access patterns. Production change history is retained for at least 90 days.",
+          "No customer data lives in JARVIS AI cloud infrastructure today, so monitoring currently covers our own operations: AWS CloudTrail event history records control-plane actions in our accounts, and billing alerts flag anomalous spend. Fuller observability commitments will be published here before any cloud feature handles customer data.",
       },
       {
         title: "Service providers",
@@ -258,7 +262,7 @@ export const copy = {
       {
         title: "Access controls",
         body:
-          "Production AWS access is restricted to a least-privilege IAM model with multi-factor authentication required for any human session. Daily operational identities cannot delete encryption keys or production data; deletion paths require a separate, audited role.",
+          "JARVIS AI is a single-operator company. AWS access is limited to scoped IAM identities used for release and infrastructure work, and there is no customer data in those accounts for any identity to reach. Formal role separation will be introduced, and documented here, before cloud features handle customer data.",
       },
       {
         title: "Reporting a security concern",

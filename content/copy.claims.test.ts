@@ -66,3 +66,34 @@ describe("published descriptions: storage claim, not an inference claim", () => 
     expect(description).not.toMatch(/local-first/i);
   });
 });
+
+describe("marketing body copy carries no unsupported claims", () => {
+  // The 2026-08 audit found the hero and body copy still said "local-first"
+  // after the metadata was cleaned: the guard only looked at metadata.ts and
+  // the manifest. Walk every string in both copy trees so a claim cannot hide
+  // in a section the tests never read.
+  function allStrings(node: unknown, out: string[] = []): string[] {
+    if (typeof node === "string") out.push(node);
+    else if (Array.isArray(node)) node.forEach((v) => allStrings(v, out));
+    else if (node && typeof node === "object")
+      Object.values(node).forEach((v) => allStrings(v, out));
+    return out;
+  }
+
+  const banned: { pattern: RegExp; reason: string }[] = [
+    { pattern: /local-first/i, reason: "inference is cloud by default" },
+    { pattern: /本地優先/, reason: "inference is cloud by default" },
+    { pattern: /32 (AI )?tools/i, reason: "tool count claim removed 2026-07" },
+    { pattern: /on-device by default/i, reason: "inference is cloud by default" },
+    { pattern: /CloudWatch alarms notify/i, reason: "unverified ops claim removed 2026-08" },
+    { pattern: /multi-factor authentication required/i, reason: "unverified ops claim removed 2026-08" },
+  ];
+
+  it.each(banned)("no copy string matches $pattern ($reason)", ({ pattern }) => {
+    for (const tree of [en, zhHk]) {
+      for (const s of allStrings(tree)) {
+        expect(s).not.toMatch(pattern);
+      }
+    }
+  });
+});
