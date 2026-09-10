@@ -1,12 +1,12 @@
 {
-  "version": "0.1.2",
-  "notes": "JARVIS v0.1.2\n\nSecurity and reliability release.\n\n- Stronger protection against malicious email content: the assistant can no\n  longer be tricked into sending data out. Mail is always drafted for your\n  review, never sent automatically, and the same restrictions now apply to\n  local models.\n- Your GitHub, Notion, and Obsidian tokens moved from the local database into\n  the macOS Keychain.\n- Smarter model routing: routine tasks now run on faster, cheaper models\n  automatically; complex work still gets the most capable model.\n- Fixed onboarding losing API keys, the app addressing you by the wrong name,\n  and archived email reappearing in lists.\n- Startup is more resilient in the first minute after launch.\n- Download and automatic updates now work end to end.\n",
-  "pub_date": "2026-08-07T02:25:48Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.2_aarch64.dmg",
+  "version": "0.2.0",
+  "notes": "JARVIS v0.2.0\n\n今次改版將 JARVIS 整理成日常工作工具，同時保留 Automation 主頁嘅旋轉 3D 模型。\n\n- Automation 主頁顯示已啟用嘅自動化、執行狀態同結果；開啟主頁本身唔會啟動新工作。\n- 新側邊欄同可保留狀態嘅多分頁，方便喺 Mail、日曆、任務、自動化同設定之間切換。\n- 每個文字任務有獨立對話記錄；工具結果可直接開成工作分頁，背景結果唔會搶走目前畫面。\n- 本機 Mail 工作區集中多個 Gmail，支援搜尋、跨信箱分組、個人指示、來源記憶同 GPT 分析。\n- 日曆、Notion、GitHub、連接同設定採用清晰工作介面，並支援淺色、深色及跟隨系統外觀。\n- 建立自動化時先預覽解讀結果，再由用戶確認建立；暫停及啟用狀態會同步顯示。\n- 保留現有郵件、群組、記憶、模型選擇同 Keychain 憑證；新增任務記錄資料結構。\n- 包含咪高峰權限、廣東話語音、日曆時區、同步錯誤提示及工具權限修復。\n\n適用於 Apple Silicon Mac，macOS 12 或以上。\n",
+  "pub_date": "2026-09-10T23:03:25Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.2.0_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmVpMHRid3dqTWVFMnBSaXlTVTRYanFmaXpudCtFaXJSeTdocW5OMndoQ1hPVm5MUHlaNDY2SGMvZ2V0VThBbzlpVjBYQi9aZFEvR011dDVaaGRTMXdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2MDY5Mzg5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKQ0d1M3RyaE5IS2dpZ29qL2tkQXVXdk93NkJrdXREa0h1cGZPQ2ViaDhTMTlxaEFnUXNYMEViOTd6Z3JFRTJMb3FuZUoxdUdVRzY3MG9lQzlOWnlvQWc9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.1.2_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlNKUmtEeHNmaXh1MHcvTlBIdTNMam91bHEyNmFiS1pNS3RYakVzUVpON2VlTURUWjllU212Z2NnTzA1VUZmOXQ5Qy9vcmcwK1UyZVRXWVZ4dWdqK1E4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MDgxMjk5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKL2x5QXpMRnRPNkVyejl4c2xqZUlDbjN4VGEwWm41Nnk4TStENFp1ZVF3UkxyT0Qrc3Azck15L29WMkpab3dyUno1WW1aOGlzVWcxNUN5b1Y4aGw0Q1E9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.2.0_aarch64.app.tar.gz"
     }
   }
 }
