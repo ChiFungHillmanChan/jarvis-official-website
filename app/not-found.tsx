@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { headers } from "next/headers";
-import { inter, jetbrainsMono, spaceGrotesk } from "@/app/fonts";
 import { getUiFor } from "@/content/ui";
 import { routing, type Locale } from "@/i18n/routing";
 import { localePath } from "@/lib/i18n/localePath";
@@ -81,11 +80,10 @@ export default async function RootNotFound() {
       // Same tag app/[locale]/layout.tsx uses, so the site advertises one
       // language tag per locale rather than two.
       lang={locale === "zh-HK" ? "zh-Hant-HK" : "en"}
-      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
     >
       <body className="min-h-screen">
         <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-[color:var(--accent-cyan)]">
+          <p className="font-mono text-xs tracking-[0.28em] text-[color:var(--accent-cyan)] uppercase">
             {ui.notFound.eyebrow}
           </p>
           <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[color:var(--text-primary)]">

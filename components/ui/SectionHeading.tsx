@@ -19,18 +19,14 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div
-      className={classNames(
-        "max-w-3xl",
-        align === "center" && "mx-auto text-center",
-        className,
-      )}
+      className={classNames("max-w-3xl", align === "center" && "mx-auto text-center", className)}
     >
       {eyebrow ? (
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.32em] text-[color:var(--accent-cyan)]">
-          {eyebrow}
-        </p>
+        <p className="mb-4 text-sm font-medium text-[color:var(--accent-cyan)]">{eyebrow}</p>
       ) : null}
-      <HeadingTag className="font-display text-4xl leading-tight md:text-6xl">{title}</HeadingTag>
+      <HeadingTag className="font-display text-4xl leading-[1.12] font-semibold tracking-[-0.045em] md:text-6xl">
+        {title}
+      </HeadingTag>
       {sub ? (
         <p className="mt-5 text-base leading-7 text-[color:var(--text-secondary)] md:text-lg">
           {sub}

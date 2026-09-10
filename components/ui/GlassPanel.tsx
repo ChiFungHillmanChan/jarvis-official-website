@@ -8,7 +8,7 @@ export function GlassPanel({ children, className, ...props }: GlassPanelProps) {
     <div
       {...props}
       className={classNames(
-        "relative overflow-hidden rounded-[2rem] border border-[var(--grid-line)] bg-[var(--bg-panel)] p-6 shadow-[var(--shadow-soft)] backdrop-blur-sm",
+        "relative overflow-hidden rounded-2xl border border-[var(--grid-line)] bg-[var(--bg-panel)] p-6",
         className,
       )}
     >

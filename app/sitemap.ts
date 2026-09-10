@@ -2,10 +2,18 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/constants/site";
 import { routing } from "@/i18n/routing";
 
-const paths = ["/", "/company", "/contact", "/download", "/privacy", "/terms", "/security"] as const;
+const paths = [
+  "/",
+  "/how-it-works",
+  "/company",
+  "/contact",
+  "/download",
+  "/privacy",
+  "/terms",
+  "/security",
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of routing.locales) {
@@ -13,13 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const suffix = path === "/" ? "" : path;
       entries.push({
         url: `${siteUrl}/${locale}${suffix}`,
-        lastModified: now,
         changeFrequency: "monthly",
         priority: path === "/" ? 1 : 0.7,
         alternates: {
-          languages: Object.fromEntries(
-            routing.locales.map((l) => [l, `${siteUrl}/${l}${suffix}`])
-          ),
+          languages: {
+            ...Object.fromEntries(routing.locales.map((l) => [l, `${siteUrl}/${l}${suffix}`])),
+            "x-default": `${siteUrl}/en${suffix}`,
+          },
         },
       });
     }

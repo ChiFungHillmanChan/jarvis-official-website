@@ -9,6 +9,8 @@ const routes = [
   { path: "/", expect: [307] },
   { path: "/en", expect: [200] },
   { path: "/zh-HK", expect: [200] },
+  { path: "/en/how-it-works", expect: [200] },
+  { path: "/zh-HK/how-it-works", expect: [200] },
   { path: "/en/company", expect: [200] },
   { path: "/zh-HK/company", expect: [200] },
   { path: "/en/contact", expect: [200] },
@@ -19,6 +21,9 @@ const routes = [
   { path: "/zh-HK/terms", expect: [200] },
   { path: "/en/security", expect: [200] },
   { path: "/zh-HK/security", expect: [200] },
+  { path: "/en/download", expect: [200] },
+  { path: "/zh-HK/download", expect: [200] },
+  { path: "/social-image.png", expect: [200] },
   { path: "/sitemap.xml", expect: [200] },
   { path: "/robots.txt", expect: [200] },
   { path: "/en/does-not-exist", expect: [404] },
@@ -54,7 +59,7 @@ async function main() {
       const url = `${BASE}${path}`;
       const r = await fetch(url, { redirect: "manual" });
       const ok = expect.includes(r.status);
-      console.log(`${ok ? "✓" : "✗"} ${r.status} ${path}`);
+      console.log(`${ok ? "PASS" : "FAIL"} ${r.status} ${path}`);
       if (!ok) failures.push({ path, status: r.status, expected: expect });
     }
 

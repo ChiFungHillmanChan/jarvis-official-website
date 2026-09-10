@@ -9,14 +9,10 @@ export function buildSoftwareApplicationJsonLd() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: company.productName,
-    // Storage claim only. "Local-first" was removed here for the reason
-    // content/copy.claims.test.ts keeps it out of the route descriptions and
-    // the app manifest: /security says inference is not local by default, so
-    // the phrase reads as an inference claim the product does not support.
     description:
-      "Native macOS desktop AI assistant that unifies email, calendar, notes, GitHub, and system actions into one focused interface. Your data stays on your Mac.",
-    operatingSystem: "macOS",
-    applicationCategory: "ProductivityApplication",
+      "AI assistant for Mac that helps triage Gmail, draft email replies and manage Google Calendar. Conversation history is stored on your Mac. Cloud inference is the default, with optional local models.",
+    operatingSystem: "macOS 12 or later on Apple Silicon",
+    applicationCategory: "BusinessApplication",
     // Derived from public/latest.json via content/company.ts, the same manifest
     // the download page serves from, so the two cannot disagree in public.
     softwareVersion: company.productVersion,

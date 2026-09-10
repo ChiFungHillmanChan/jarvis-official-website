@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
+import {
+  buildAlternates,
+  buildOpenGraph,
+  buildTwitter,
+  getRouteMetadata,
+} from "@/content/metadata";
 import { HomeAccess } from "@/components/sections/home/HomeAccess";
 import { HomeAudience } from "@/components/sections/home/HomeAudience";
 import { HomeCompany } from "@/components/sections/home/HomeCompany";
 import { HomeDemo } from "@/components/sections/home/HomeDemo";
+import { HomeFaq } from "@/components/sections/home/HomeFaq";
 import { HomeHero } from "@/components/sections/home/HomeHero";
 import { HomeProduct } from "@/components/sections/home/HomeProduct";
 import { HomeTrust } from "@/components/sections/home/HomeTrust";
@@ -26,11 +32,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
@@ -38,11 +40,12 @@ export default async function HomePage({
     <>
       <SoftwareApplicationJsonLd />
       <HomeHero />
-      <HomeTrust />
       <HomeProduct />
       <HomeAudience />
-      <HomeCompany />
       <HomeDemo />
+      <HomeTrust />
+      <HomeCompany />
+      <HomeFaq />
       <HomeAccess />
     </>
   );

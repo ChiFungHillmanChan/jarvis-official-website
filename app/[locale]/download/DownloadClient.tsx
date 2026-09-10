@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { fetchLatestRelease, isMacOs, LATEST_DMG_URL, type ReleaseInfo } from "@/lib/download";
 import { localePath } from "@/lib/i18n/localePath";
 import type { Copy } from "@/content/getCopy";
@@ -15,6 +16,8 @@ interface Props {
 const subscribe = () => () => {};
 const getClientSnapshot = (): boolean => isMacOs(window.navigator.userAgent);
 const getServerSnapshot = (): boolean | null => null;
+const downloadButtonClassName =
+  "mt-8 inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--accent-cyan)] bg-[var(--accent-cyan)] px-6 py-3 text-sm font-medium text-white transition-colors hover:border-[#005653] hover:bg-[#005653] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-cyan)]";
 
 export default function DownloadClient({ copy, locale }: Props) {
   const [release, setRelease] = useState<ReleaseInfo | null>(null);
@@ -37,12 +40,17 @@ export default function DownloadClient({ copy, locale }: Props) {
 
   if (isMac === false) {
     return (
-      <main style={pageStyle}>
-        <p style={eyebrow}>{copy.eyebrow}</p>
-        <h1 style={titleStyle}>{copy.nonMacosTitle}</h1>
-        <p style={bodyStyle}>{copy.nonMacosBody}</p>
-        <Link href={`${localePath(locale, "/")}#access`} style={ctaStyle}>{copy.joinWaitlist}</Link>
-      </main>
+      <section className="mx-auto max-w-[800px] px-6 py-20 md:px-10 md:py-28">
+        <SectionHeading
+          eyebrow={copy.eyebrow}
+          title={copy.nonMacosTitle}
+          sub={copy.nonMacosBody}
+          as="h1"
+        />
+        <Link href={`${localePath(locale, "/")}#access`} className={downloadButtonClassName}>
+          {copy.joinWaitlist}
+        </Link>
+      </section>
     );
   }
 
@@ -50,40 +58,36 @@ export default function DownloadClient({ copy, locale }: Props) {
   // until the client fetch lands. Both fall through to the macOS shell so the
   // server HTML carries the heading, the requirements and a working download link.
   return (
-    <main style={pageStyle}>
-      <p style={eyebrow}>{copy.eyebrow}</p>
-      <h1 style={titleStyle}>{copy.title}</h1>
-      <p style={subtitleStyle}>{copy.subtitle}</p>
-      <p style={smallStyle}>{copy.systemRequirements}</p>
+    <section className="mx-auto max-w-[800px] px-6 py-20 md:px-10 md:py-28">
+      <SectionHeading eyebrow={copy.eyebrow} title={copy.title} sub={copy.subtitle} as="h1" />
+      <p className="mt-5 text-sm leading-6 text-[color:var(--text-muted)]">
+        {copy.systemRequirements}
+      </p>
 
-      {release !== null && source === "fallback" && <p style={warnStyle}>{copy.fetchError}</p>}
+      {release !== null && source === "fallback" && (
+        <p className="mt-6 rounded-xl border border-[var(--grid-line)] bg-[var(--bg-panel)] p-4 text-sm leading-6 text-[color:var(--text-secondary)]">
+          {copy.fetchError}
+        </p>
+      )}
 
-      <a href={release?.downloadUrl ?? LATEST_DMG_URL} style={ctaStyle}>
+      <a href={release?.downloadUrl ?? LATEST_DMG_URL} className={downloadButtonClassName}>
         {release === null ? copy.primaryCta : `${copy.primaryCta} (v${release.version})`}
       </a>
 
       {release === null ? (
-        <p style={smallStyle}>{copy.loadingNotes}</p>
+        <p className="mt-4 text-sm text-[color:var(--text-muted)]">{copy.loadingNotes}</p>
       ) : (
         release.notes && (
-          <section style={notesSection}>
-            <h2 style={h2Style}>{copy.releaseNotesHeading}</h2>
-            <pre style={notesPre}>{release.notes}</pre>
+          <section className="mt-14 border-t border-[var(--grid-line)] pt-8">
+            <h2 className="font-display text-2xl font-semibold tracking-[-0.025em]">
+              {copy.releaseNotesHeading}
+            </h2>
+            <pre className="mt-4 font-sans text-sm leading-7 whitespace-pre-wrap text-[color:var(--text-secondary)]">
+              {release.notes}
+            </pre>
           </section>
         )
       )}
-    </main>
+    </section>
   );
 }
-
-const pageStyle: React.CSSProperties = { maxWidth: 720, margin: "0 auto", padding: "64px 24px" };
-const eyebrow: React.CSSProperties = { fontFamily: "var(--font-mono, monospace)", letterSpacing: 4, fontSize: 12, opacity: 0.6 };
-const titleStyle: React.CSSProperties = { fontSize: 36, fontWeight: 600, marginTop: 8 };
-const subtitleStyle: React.CSSProperties = { fontSize: 18, opacity: 0.8, marginTop: 12 };
-const smallStyle: React.CSSProperties = { fontSize: 14, opacity: 0.6, marginTop: 8 };
-const ctaStyle: React.CSSProperties = { display: "inline-block", marginTop: 24, padding: "12px 20px", background: "rgba(0,180,255,0.18)", border: "1px solid rgba(0,180,255,0.5)", borderRadius: 8, color: "rgba(0,180,255,0.95)", fontFamily: "var(--font-mono, monospace)", textDecoration: "none" };
-const warnStyle: React.CSSProperties = { marginTop: 16, padding: 12, border: "1px solid rgba(255,180,0,0.4)", borderRadius: 6, fontSize: 14 };
-const notesSection: React.CSSProperties = { marginTop: 40 };
-const h2Style: React.CSSProperties = { fontSize: 18, marginBottom: 8 };
-const notesPre: React.CSSProperties = { whiteSpace: "pre-wrap", fontFamily: "var(--font-mono, monospace)", fontSize: 13, opacity: 0.85 };
-const bodyStyle: React.CSSProperties = { fontSize: 16, marginTop: 12, opacity: 0.85 };

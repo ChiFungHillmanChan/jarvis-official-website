@@ -3,6 +3,8 @@ import type { Locale } from "@/i18n/routing";
 type UiStrings = {
   nav: {
     product: string;
+    howItWorks: string;
+    primaryLabel: string;
     company: string;
     contact: string;
     download: string;
@@ -34,6 +36,12 @@ type UiStrings = {
   };
   footer: {
     rightsReserved: string;
+    productHeading: string;
+    companyHeading: string;
+    legalLabel: string;
+    privacy: string;
+    terms: string;
+    security: string;
   };
 };
 
@@ -41,10 +49,12 @@ const ui: Record<Locale, UiStrings> = {
   en: {
     nav: {
       product: "Product",
+      howItWorks: "How it works",
+      primaryLabel: "Main navigation",
       company: "Company",
       contact: "Contact",
       download: "Download",
-      requestAccess: "Request access",
+      requestAccess: "Request beta access",
       openMenu: "Open menu",
       closeMenu: "Close menu",
       languageToggle: "Switch to {language}",
@@ -68,15 +78,25 @@ const ui: Record<Locale, UiStrings> = {
       sub: "The page you were looking for does not exist on this site.",
       back: "Back to home",
     },
-    footer: { rightsReserved: "All rights reserved." },
+    footer: {
+      rightsReserved: "All rights reserved.",
+      productHeading: "Product",
+      companyHeading: "Company",
+      legalLabel: "Legal information",
+      privacy: "Privacy",
+      terms: "Terms",
+      security: "Security",
+    },
   },
   "zh-HK": {
     nav: {
       product: "產品",
+      howItWorks: "使用方式",
+      primaryLabel: "主要導覽",
       company: "公司",
       contact: "聯絡",
       download: "下載",
-      requestAccess: "申請試用",
+      requestAccess: "申請 Beta 試用",
       openMenu: "開啟選單",
       closeMenu: "關閉選單",
       languageToggle: "切換至 {language}",
@@ -99,7 +119,15 @@ const ui: Record<Locale, UiStrings> = {
       sub: "你正在尋找的頁面並不存在於本網站。",
       back: "返回首頁",
     },
-    footer: { rightsReserved: "版權所有，不得轉載。" },
+    footer: {
+      rightsReserved: "版權所有。",
+      productHeading: "產品",
+      companyHeading: "公司",
+      legalLabel: "法律資訊",
+      privacy: "私隱",
+      terms: "條款",
+      security: "安全",
+    },
   },
 };
 

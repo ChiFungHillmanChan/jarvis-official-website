@@ -41,7 +41,7 @@ export function WaitlistForm({
   if (status === "success") return <WaitlistSuccess message={successMessage} />;
 
   const fieldClass =
-    "flex-1 rounded-full border border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] px-5 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]";
+    "min-w-0 flex-1 rounded-lg border border-[var(--grid-line)] bg-[color:rgba(255,255,255,0.02)] px-5 py-3 text-sm text-[color:var(--text-primary)] placeholder:text-[color:var(--text-muted)]";
 
   return (
     <form
@@ -78,9 +78,6 @@ export function WaitlistForm({
           onChange={(e) => setEmail(e.target.value)}
           className={fieldClass}
         />
-        <Button type="submit" variant="primary">
-          {status === "submitting" ? submittingLabel : submitLabel}
-        </Button>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="waitlist-role" className="sr-only">
@@ -108,6 +105,9 @@ export function WaitlistForm({
           className={fieldClass}
         />
       </div>
+      <Button type="submit" variant="primary" className="mt-1 w-full rounded-lg">
+        {status === "submitting" ? submittingLabel : submitLabel}
+      </Button>
       <p className="min-h-[1.25rem] text-sm text-[color:var(--accent-cyan)]" aria-live="polite">
         {error ?? ""}
       </p>

@@ -3,11 +3,16 @@ import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { inter, jetbrainsMono, spaceGrotesk } from "@/app/fonts";
 import { Nav } from "@/components/layout/nav/Nav";
 import { Footer } from "@/components/layout/footer/Footer";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
-import { baseMetadata, buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
+import {
+  baseMetadata,
+  buildAlternates,
+  buildOpenGraph,
+  buildTwitter,
+  getRouteMetadata,
+} from "@/content/metadata";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
@@ -46,15 +51,15 @@ export default async function LocaleLayout({
   const htmlLang = locale === "zh-HK" ? "zh-Hant-HK" : "en";
 
   return (
-    <html
-      lang={htmlLang}
-      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
-    >
+    <html lang={htmlLang}>
       <body className="min-h-screen">
         <NextIntlClientProvider locale={locale}>
           <OrganizationJsonLd />
+          <a className="skip-link" href="#main-content">
+            {locale === "zh-HK" ? "跳至主要內容" : "Skip to content"}
+          </a>
           <Nav />
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </NextIntlClientProvider>
         <Analytics />

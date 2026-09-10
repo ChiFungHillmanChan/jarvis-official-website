@@ -1,28 +1,31 @@
+import { BookOpen, CalendarDays, FileText, GitPullRequest, Mail } from "lucide-react";
 import { getCopy } from "@/content/getCopy";
-import { section } from "@/lib/constants/spacing";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { GlassPanel } from "@/components/ui/GlassPanel";
 
 export async function HomeAudience() {
-  const copy = await getCopy();
-
+  const { home } = await getCopy();
+  const icons = [Mail, CalendarDays, FileText, GitPullRequest, BookOpen];
   return (
-    <section className={`${section.paddingY} ${section.paddingX}`}>
-      <div className={`mx-auto ${section.maxWidth}`}>
-        <SectionHeading
-          eyebrow={copy.home.audience.eyebrow}
-          title={copy.home.audience.title}
-          sub={copy.home.audience.sub}
-          align="center"
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {copy.home.audience.groups.map((group) => (
-            <GlassPanel key={group.title} className="h-full">
-              <h2 className="font-display text-2xl">{group.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">{group.body}</p>
-            </GlassPanel>
-          ))}
+    <section className="home-section integrations-section" aria-labelledby="integrations-heading">
+      <div className="site-container">
+        <div className="section-intro centered">
+          <h2 id="integrations-heading">{home.integrations.title}</h2>
+          <p>{home.integrations.sub}</p>
         </div>
+        <ul className="integration-list">
+          {home.integrations.items.map((item, index) => {
+            const Icon = icons[index]!;
+            return (
+              <li key={item.name}>
+                <span className={`integration-icon integration-icon-${index}`}>
+                  <Icon size={27} strokeWidth={1.5} aria-hidden="true" />
+                </span>
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="section-footnote">{home.integrations.note}</p>
       </div>
     </section>
   );
