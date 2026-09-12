@@ -1,12 +1,12 @@
 {
-  "version": "0.2.0",
-  "notes": "JARVIS v0.2.0\n\n今次改版將 JARVIS 整理成日常工作工具，同時保留 Automation 主頁嘅旋轉 3D 模型。\n\n- Automation 主頁顯示已啟用嘅自動化、執行狀態同結果；開啟主頁本身唔會啟動新工作。\n- 新側邊欄同可保留狀態嘅多分頁，方便喺 Mail、日曆、任務、自動化同設定之間切換。\n- 每個文字任務有獨立對話記錄；工具結果可直接開成工作分頁，背景結果唔會搶走目前畫面。\n- 本機 Mail 工作區集中多個 Gmail，支援搜尋、跨信箱分組、個人指示、來源記憶同 GPT 分析。\n- 日曆、Notion、GitHub、連接同設定採用清晰工作介面，並支援淺色、深色及跟隨系統外觀。\n- 建立自動化時先預覽解讀結果，再由用戶確認建立；暫停及啟用狀態會同步顯示。\n- 保留現有郵件、群組、記憶、模型選擇同 Keychain 憑證；新增任務記錄資料結構。\n- 包含咪高峰權限、廣東話語音、日曆時區、同步錯誤提示及工具權限修復。\n\n適用於 Apple Silicon Mac，macOS 12 或以上。\n",
-  "pub_date": "2026-09-10T23:03:25Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.2.0_aarch64.dmg",
+  "version": "0.3.0",
+  "notes": "JARVIS v0.3.0\n\n今次更新簡化電郵 AI 設定，加入香港繁體介面，同埋本機 AI 準備流程。\n\n- 左上視窗按鈕依次為紅色關閉、黃色最小化、綠色放大／還原。關閉視窗保留原有背景運作方式。\n- 新增三步設定導引：選擇及測試 AI、連接 Gmail 唯讀電郵工作區、揀信建立群組並核對分析引用。已有用戶可由頂欄或電郵頁重新開啟。\n- 本機 AI 可檢查 macOS、記憶體同磁碟空間，啟動已安裝嘅 Ollama、下載 Qwen 小模型並測試；成功後先套用電郵設定。首次安裝 Ollama 仍需用戶完成官方安裝步驟。\n- 支援取消下載、顯示進度及明確失敗原因；下載只有收到成功結果並確認模型存在先當完成。\n- OpenAI／AWS 設定會沿用已儲存憑證，測試失敗或其他頁面已更改設定時，唔會覆蓋目前電郵 AI 選擇。\n- 主要設定、電郵及工作區頁面加入香港繁體／廣東話文案；介面語言重開後保留，同 AI 回覆及語音辨識語言分開設定。\n- 保留原有本機郵件、群組、來源記憶同 Gmail 授權。本機 AI 失敗唔會自動將郵件轉交雲端。\n- Gmail 斷線後，設定導引仍可分析已下載嘅本機郵件副本；模型必須先通過測試。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上；本機 Ollama 準備流程要求 macOS 14 或以上。小模型速度及準確度視乎硬件、模型同郵件長度，分析結果仍需核對。雲端供應商須符合帳戶及地區資格，API 費用另計；未提供免 key 代管 AI 服務。\n",
+  "pub_date": "2026-09-12T20:42:19Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.3.0_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlNKUmtEeHNmaXh1MHcvTlBIdTNMam91bHEyNmFiS1pNS3RYakVzUVpON2VlTURUWjllU212Z2NnTzA1VUZmOXQ5Qy9vcmcwK1UyZVRXWVZ4dWdqK1E4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MDgxMjk5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKL2x5QXpMRnRPNkVyejl4c2xqZUlDbjN4VGEwWm41Nnk4TStENFp1ZVF3UkxyT0Qrc3Azck15L29WMkpab3dyUno1WW1aOGlzVWcxNUN5b1Y4aGw0Q1E9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.2.0_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmVPREZQY1MvZ0l3OFpsbUhHWEVOUU0xdFFmMGhRUFRnbjN6dE5Vbkp3aEthSzJndGdyYVljbCtidDRtNGNIejFVL1cyMFo0bHl0VW9KNDR6cVVkNmd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MjQ1NDAzCWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKeVhxblloenBncnZMM2lGaEl4aFlHc2dLYkxGQnM3VnRTaTVPTnppVlUzTWtVQWhxYUx2Yk5sZHNVWHBZQTBlQjlTSlp3YjJ5MDh0TzArYzIwREozQkE9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.3.0_aarch64.app.tar.gz"
     }
   }
 }
