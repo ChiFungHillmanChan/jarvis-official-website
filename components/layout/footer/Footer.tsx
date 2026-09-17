@@ -33,9 +33,16 @@ export async function Footer() {
         </div>
         <div className="mt-12 flex flex-col gap-5 border-t border-[var(--grid-line)] pt-6 md:mt-14 md:flex-row md:items-center md:justify-between">
           <p className="text-xs leading-5 text-[color:var(--text-muted)]">
-            © {company.foundingYear} {company.name}. {ui.footer.rightsReserved}
+            © {company.foundingYear} {company.legalName}. {ui.footer.rightsReserved}
           </p>
           <FooterLegal locale={locale} />
+        </div>
+        {/* Registered-name disclosure required of a Hong Kong company on any of
+            its websites (Cap. 622B ss.4-5). The footer renders on every page,
+            so the duty is met site-wide rather than on a single legal page. */}
+        <div className="mt-5 space-y-1 text-xs leading-5 text-[color:var(--text-muted)]">
+          <p>{companyL10n.legalLine}</p>
+          <p>{companyL10n.registeredOfficeLine}</p>
         </div>
       </div>
     </footer>

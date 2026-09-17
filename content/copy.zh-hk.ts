@@ -75,6 +75,11 @@ export const copy: DeepWiden<typeof enCopy> = {
     lastUpdated: "最後更新：2026-09-11",
     sections: [
       {
+        title: "本政策的發出者",
+        body: "本網站及 JARVIS 應用程式由 JARVIS AI LIMITED 營運。該公司為於香港註冊成立的有限公司（公司編號 81247037，商業登記號碼 81247037-000-09-26-7），註冊辦事處為 Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong。本政策提及的「JARVIS AI」即指該公司。該公司為下文所述個人資料的資料使用者，可經 contact@jarvis-automation.com 聯絡。",
+      },
+
+      {
         title: "預設本機儲存",
         body: "JARVIS 以原生 macOS 應用程式形式運作。對話紀錄、任務、快取上下文及已連接服務的憑證，預設會留在用戶裝置內。JARVIS AI 目前並無營運集中式客戶資料平台去儲存這些產品數據。至於模型請求會送去邊度，屬另一回事，下一節另有交代。",
       },
@@ -154,6 +159,11 @@ export const copy: DeepWiden<typeof enCopy> = {
     heading: "服務條款",
     lastUpdated: "最後更新：2026-04-14",
     sections: [
+      {
+        title: "你的合約對象",
+        body: "本網站及 JARVIS 應用程式由 JARVIS AI LIMITED 提供。該公司為於香港註冊成立的有限公司（公司編號 81247037，商業登記號碼 81247037-000-09-26-7），註冊辦事處為 Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong。本條款提及的「JARVIS AI」即指該公司。",
+      },
+
       {
         title: "網站用途",
         body: "本網站用於介紹 JARVIS AI 及其產品，並讓訪客申請 Beta 試用或與公司聯絡。你不得濫用本網站，亦不得干擾其正常運作。",

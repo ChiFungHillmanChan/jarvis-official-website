@@ -73,6 +73,11 @@ export const copy = {
     lastUpdated: "Last updated: 2026-09-11",
     sections: [
       {
+        title: "Who this policy is from",
+        body: "This website and the JARVIS application are operated by JARVIS AI LIMITED, a company incorporated in Hong Kong with limited liability (Company No. 81247037, Business Registration No. 81247037-000-09-26-7), registered office Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong. References to \"JARVIS AI\" in this policy mean that company. It is the data user responsible for the personal data described below, and can be reached at contact@jarvis-automation.com.",
+      },
+
+      {
         title: "Local storage by default",
         body: "JARVIS runs as a native macOS application. Conversation history, tasks, cached context, and connected service credentials are intended to remain on the user's device by default. JARVIS AI does not currently operate a customer data platform for storing this product data centrally. Where model requests are sent is a separate question, answered in the next section.",
       },
@@ -152,6 +157,11 @@ export const copy = {
     heading: "Terms of Service",
     lastUpdated: "Last updated: 2026-04-14",
     sections: [
+      {
+        title: "Who you are contracting with",
+        body: "This website and the JARVIS application are provided by JARVIS AI LIMITED, a company incorporated in Hong Kong with limited liability (Company No. 81247037, Business Registration No. 81247037-000-09-26-7), registered office Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong. References to \"JARVIS AI\" in these terms mean that company.",
+      },
+
       {
         title: "Website use",
         body: "This website is provided to describe JARVIS AI and its products, and to allow visitors to request beta access or contact the company. You may not misuse the site or interfere with its operation.",
