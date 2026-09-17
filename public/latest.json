@@ -1,12 +1,12 @@
 {
-  "version": "0.4.0",
-  "notes": "JARVIS v0.4.0\n\n今次更新集中處理本機儲存空間，並修正離線模型下載。\n\n- 設定新增「儲存空間」分頁，顯示資料庫、模型、網頁快取及舊備份的實際用量，並可逐項清理。所有資料只保存在本機。\n- 新增自動清理，預設保留 90 日，於啟動時執行。超過期限的郵件只會移除內文，主旨、寄件人及預覽會保留；已歸入郵件群組的郵件不會處理。可在同一分頁更改期限或關閉。\n- 資料庫 WAL 檔案加入 64 MB 上限及自動檢查點。此檔案原本沒有上限，長時間運行後可超出資料庫本身大小。\n- 修正離線語音模型下載。原有檔案清單與來源 repo 不符，所有下載必然失敗；現已改用正確清單，下載總量約 1.26 GB。\n- 離線語音辨識模型加入 SHA-256 核對。原本只檢查檔案長度，長度正確但內容錯誤的檔案會被當作有效模型。\n- 本機 AI 在 macOS 12 及 13 的錯誤訊息改為說明該限制來自 Ollama，並指出可改用 API 密鑰繼續使用 JARVIS。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上；本機 Ollama 準備流程要求 macOS 14 或以上。全新安裝約佔 30 MB，資料少於 5 MB；離線語音辨識模型 148 MB、離線語音合成模型 1.26 GB、Ollama 模型 2.7 至 6.6 GB，均只在啟用相關功能時下載。雲端供應商須符合帳戶及地區資格，API 費用另計；未提供免 key 代管 AI 服務。\n",
-  "pub_date": "2026-09-17T11:23:57Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.0_aarch64.dmg",
+  "version": "0.4.1",
+  "notes": "JARVIS v0.4.1\n\n今次更新只改動側邊欄底部及更新提示的位置，功能與 v0.4.0 相同。\n\n- 側邊欄底部的「連接服務」及「設定」合併為一列，顯示你在設定填寫的名稱。指向游標或點擊該列，兩個原有項目會在上方展開；亦可用鍵盤開啟，並以 Escape 關閉。未填寫名稱前，該列沿用「設定」字樣。\n- 設定的「外觀」分頁新增「顯示名稱」。名稱只儲存在此 Mac，JARVIS 並無需要登入的帳戶。\n- 更新提示由視窗頂部移至左下角，並可關閉。關閉只維持今次執行，下次檢查會再次顯示；下載進行中或失敗時會保持顯示，以便查看進度或重試。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上；本機 Ollama 準備流程要求 macOS 14 或以上。全新安裝約佔 30 MB，資料少於 5 MB；離線語音辨識模型 148 MB、離線語音合成模型 1.26 GB、Ollama 模型 2.7 至 6.6 GB，均只在啟用相關功能時下載。雲端供應商須符合帳戶及地區資格，API 費用另計；未提供免 key 代管 AI 服務。\n",
+  "pub_date": "2026-09-17T12:58:27Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.1_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmNueTBIeVh6bkd1ZzJ3blgvRE1RTFA2R01pVktFUUpnV0psTG9waU5ZUU4wRTgvYTA4Z0VVZkl4QXdKaC9lVmc3M3Z5TTRZdk1VSE9RRVdwMDQ3YkFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5NjEwMzI3CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKVUxJOEZJb1dPNmVlMnJlV1E2cjFvcGxwTEsrSXI2cGlwdkdoTHF6ak55SHZGRXVMTXlTNWdQc2hXeFVrNTAxa0JuQlZQUkNLYnpvVlFXdWY4VDl5QXc9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.0_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmZZOE1LOU1mQlpUMzlJQmpvVFJCeHEzNDErckNYTDFHUk5jY1FxVW95R092WjFpMzh5MHk4Tm1zSGdNQWVmV3RKWGNXQ0dZZ1lJcURjOGRHcHZwemdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5NjQ5MzA5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKV0c1OWhRNlhvRnBpNHFPR2ZmS3VCS2s1cUlnRnZXRkhzUExwTVpDdnNZRklBdjczblJiWDV5MWdsN0lCdHVjVDNSSUw2N3ZKQmpYVHVHOFgzUEtpQWc9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.1_aarch64.app.tar.gz"
     }
   }
 }
