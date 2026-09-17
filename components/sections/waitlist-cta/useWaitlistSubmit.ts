@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getUiFor } from "@/content/ui";
 import { isEmail } from "@/lib/utils/isEmail";
 
 type Status = "idle" | "submitting" | "success" | "error";
+type SubmissionResult = "success" | "invalid" | "error" | "ignored";
 
 /**
  * Turns the wait /api/waitlist reports on a 429 into something a visitor can
@@ -37,17 +38,26 @@ export function useWaitlistSubmit({
   errorGeneric: string;
 }) {
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{ message: string; field?: "email" } | null>(null);
+  const inFlight = useRef(false);
 
   // `company` is the honeypot field WaitlistForm keeps hidden. It is passed
   // through untouched so the API route can decide what to do with it.
-  async function submit(email: string, company: string, role?: string, painPoint?: string) {
+  async function submit(
+    email: string,
+    company: string,
+    role?: string,
+    painPoint?: string,
+  ): Promise<SubmissionResult> {
+    // The ref closes the gap before React renders the disabled submit button.
+    if (inFlight.current) return "ignored";
     setError(null);
     if (!isEmail(email)) {
       setStatus("error");
-      setError(errorInvalid);
-      return;
+      setError({ message: errorInvalid, field: "email" });
+      return "invalid";
     }
+    inFlight.current = true;
     setStatus("submitting");
     try {
       const res = await fetch("/api/waitlist", {
@@ -57,16 +67,20 @@ export function useWaitlistSubmit({
       });
       if (res.status === 429) {
         setStatus("error");
-        setError(rateLimitMessage(Number(res.headers.get("Retry-After"))) ?? errorGeneric);
-        return;
+        setError({ message: rateLimitMessage(Number(res.headers.get("Retry-After"))) ?? errorGeneric });
+        return "error";
       }
       if (!res.ok) throw new Error("request_failed");
       setStatus("success");
+      return "success";
     } catch {
       setStatus("error");
-      setError(errorGeneric);
+      setError({ message: errorGeneric });
+      return "error";
+    } finally {
+      inFlight.current = false;
     }
   }
 
-  return { submit, status, error };
+  return { submit, status, error: error?.message ?? null, invalidEmail: error?.field === "email" };
 }

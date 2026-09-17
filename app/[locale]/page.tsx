@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import {
-  buildAlternates,
-  buildOpenGraph,
-  buildTwitter,
-  getRouteMetadata,
-} from "@/content/metadata";
+import { buildPageMetadata } from "@/content/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HomeAccess } from "@/components/sections/home/HomeAccess";
 import { HomeAudience } from "@/components/sections/home/HomeAudience";
 import { HomeCompany } from "@/components/sections/home/HomeCompany";
@@ -22,14 +18,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const rm = getRouteMetadata(locale);
-  return {
-    title: { absolute: rm.home.title },
-    description: rm.home.description,
-    alternates: buildAlternates(locale, "/"),
-    openGraph: buildOpenGraph(locale, rm.home),
-    twitter: buildTwitter(rm.home),
-  };
+  return buildPageMetadata(locale, "home");
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -38,7 +27,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <SoftwareApplicationJsonLd />
+      <PageJsonLd locale={locale} routeKey="home" />
+      <SoftwareApplicationJsonLd locale={locale} />
       <HomeHero />
       <HomeProduct />
       <HomeAudience />

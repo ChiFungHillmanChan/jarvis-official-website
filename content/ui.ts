@@ -63,11 +63,11 @@ const ui: Record<Locale, UiStrings> = {
       eyebrow: "Contact",
       emailLabel: "Email",
       locationLabel: "Location",
-      emailInputLabel: "Email address",
+      emailInputLabel: "Email address (required)",
     },
     legal: { eyebrow: "Legal" },
     waitlist: {
-      submitting: "…",
+      submitting: "Sending your request…",
       // Abbreviated units so one string covers a wait of one or of many.
       rateLimitedMinutes: "Too many attempts right now. Please try again in about {n} min.",
       rateLimitedHours: "Too many attempts right now. Please try again in about {n} hr.",
@@ -105,11 +105,11 @@ const ui: Record<Locale, UiStrings> = {
       eyebrow: "聯絡",
       emailLabel: "電郵",
       locationLabel: "地點",
-      emailInputLabel: "電郵地址",
+      emailInputLabel: "電郵地址（必填）",
     },
     legal: { eyebrow: "法律" },
     waitlist: {
-      submitting: "…",
+      submitting: "正在提交申請…",
       rateLimitedMinutes: "嘗試次數過多，請於約 {n} 分鐘後再試。",
       rateLimitedHours: "嘗試次數過多，請於約 {n} 小時後再試。",
     },

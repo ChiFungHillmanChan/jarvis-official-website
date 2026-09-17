@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildAlternates, buildOpenGraph, getRouteMetadata } from "./metadata";
+import { baseMetadata, buildAlternates, buildOpenGraph, getRouteMetadata } from "./metadata";
 
 const locales = ["en", "zh-HK"] as const;
 
@@ -60,5 +60,31 @@ describe("route metadata locale parity", () => {
     expect(Object.keys(getRouteMetadata("zh-HK")).sort()).toEqual(
       Object.keys(getRouteMetadata("en")).sort(),
     );
+  });
+
+  it("falls back consistently for an unsupported locale, including its canonical URL", () => {
+    const route = getRouteMetadata("fr").home;
+    expect(buildAlternates("fr", route.canonical).canonical).toBe("/en");
+    expect(buildOpenGraph("fr", route).url).toMatch(/\/en$/);
+  });
+
+  it("keeps every public page distinct and exposes both language alternatives", () => {
+    for (const locale of locales) {
+      const routes = Object.values(getRouteMetadata(locale));
+      expect(new Set(routes.map((route) => route.title)).size).toBe(8);
+      expect(new Set(routes.map((route) => route.description)).size).toBe(8);
+      for (const route of routes) {
+        const alternates = buildAlternates(locale, route.canonical);
+        expect(alternates.languages).toHaveProperty("en");
+        expect(alternates.languages).toHaveProperty("zh-HK");
+        expect(alternates.languages["x-default"]).toBe(alternates.languages.en);
+      }
+    }
+  });
+
+  it("permits large image previews for indexed marketing pages", () => {
+    expect(baseMetadata).toMatchObject({
+      robots: { index: true, follow: true, googleBot: { "max-image-preview": "large" } },
+    });
   });
 });

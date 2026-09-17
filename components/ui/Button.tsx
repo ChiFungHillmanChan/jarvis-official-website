@@ -11,6 +11,7 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   ariaLabel?: string;
+  disabled?: boolean;
 }
 
 const base =
@@ -31,6 +32,7 @@ export function Button({
   children,
   className,
   ariaLabel,
+  disabled,
 }: ButtonProps) {
   const merged = classNames(base, styles[variant], className);
   if (href) {
@@ -41,7 +43,7 @@ export function Button({
     );
   }
   return (
-    <button type={type} onClick={onClick} className={merged} aria-label={ariaLabel}>
+    <button type={type} onClick={onClick} className={merged} aria-label={ariaLabel} disabled={disabled}>
       {children}
     </button>
   );

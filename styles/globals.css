@@ -88,7 +88,7 @@ summary {
   text-decoration-color: currentColor;
 }
 .home-hero {
-  padding-top: 74px;
+  padding-top: 48px;
 }
 .hero-copy {
   max-width: 850px;
@@ -111,8 +111,8 @@ summary {
   background: currentColor;
 }
 .hero-copy h1 {
-  margin-top: 21px;
-  font-size: clamp(46px, 5.5vw, 76px);
+  margin-top: 16px;
+  font-size: clamp(42px, 4.8vw, 64px);
   font-weight: 580;
   line-height: 1.065;
   letter-spacing: -0.055em;
@@ -121,9 +121,9 @@ summary {
 }
 .hero-description {
   max-width: 565px;
-  margin: 24px auto 0;
+  margin: 18px auto 0;
   color: var(--text-secondary);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.65;
 }
 .hero-actions {
@@ -150,250 +150,6 @@ summary {
   margin-top: 16px;
   color: var(--text-muted);
   font-size: 12px;
-  line-height: 1.6;
-}
-.workflow-showcase {
-  margin-top: 41px;
-}
-.workflow-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  margin-bottom: 23px;
-}
-.workflow-tabs button {
-  padding: 9px 17px;
-  border-radius: 99px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  transition:
-    background 0.15s,
-    color 0.15s;
-}
-.workflow-tabs button:hover {
-  background: #f0f4f4;
-}
-.workflow-tabs button[aria-selected="true"] {
-  color: #006b68;
-  background: #eaf4f2;
-}
-.workspace-mat {
-  padding: 42px 74px 0;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #e7efef;
-}
-.workspace-window {
-  max-width: 940px;
-  margin-inline: auto;
-  overflow: hidden;
-  border-radius: 12px 12px 0 0;
-  background: #1e2932;
-  color: #f5f7f8;
-  box-shadow: 0 14px 50px #1c343327;
-  text-align: left;
-}
-.workspace-toolbar {
-  display: flex;
-  align-items: center;
-  height: 37px;
-  padding-inline: 16px;
-  gap: 22px;
-  border-bottom: 1px solid #ffffff0e;
-  background: #18232b;
-  font-size: 10px;
-  color: #a5b4bd;
-}
-.window-controls {
-  display: flex;
-  gap: 6px;
-}
-.window-controls i {
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  background: #fd6c65;
-}
-.window-controls i:nth-child(2) {
-  background: #edbf52;
-}
-.window-controls i:nth-child(3) {
-  background: #5dbe87;
-}
-.toolbar-caption {
-  margin-left: auto;
-}
-.workspace-body {
-  display: grid;
-  grid-template-columns: 166px 1fr;
-  min-height: 452px;
-}
-.workspace-sidebar {
-  padding: 23px 12px 18px;
-  display: flex;
-  flex-direction: column;
-  background: #18232b;
-}
-.workspace-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 8px;
-  color: #f0f6f6;
-  font-size: 12px;
-  font-weight: 600;
-}
-.workspace-brand svg:last-child {
-  margin-left: auto;
-  color: #8c9fa9;
-}
-.workspace-sidebar > p {
-  font-size: 9px;
-  margin: 27px 10px 9px;
-  color: #8c9fa9;
-}
-.workspace-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 9px;
-  font-size: 11px;
-  color: #a9b9c3;
-  border-radius: 5px;
-}
-.workspace-nav-item.is-active {
-  color: #d7efea;
-  background: #2c3e45;
-}
-.workspace-nav-item svg:last-child:not(:first-child) {
-  margin-left: auto;
-}
-.workspace-local {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: auto;
-  padding: 14px 8px 0;
-  font-size: 9px;
-  color: #9cafa8;
-}
-.workspace-conversation {
-  padding: 0 28px 20px;
-  min-width: 0;
-}
-.conversation-top {
-  display: flex;
-  justify-content: space-between;
-  padding-block: 17px;
-  border-bottom: 1px solid #ffffff0b;
-  font-size: 11px;
-  color: #c4cfd5;
-}
-.model-label {
-  font-size: 9px;
-  color: #8c9fa9;
-}
-.conversation-messages {
-  max-width: 490px;
-  margin: 22px auto 20px;
-}
-.user-message {
-  margin-left: auto;
-  max-width: 88%;
-  width: fit-content;
-  padding: 11px 15px;
-  border-radius: 11px 11px 2px 11px;
-  font-size: 11px;
-  line-height: 1.55;
-  color: #e1ebee;
-  background: #34454f;
-}
-.assistant-message {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  margin: 23px 0 13px;
-  font-size: 11px;
-  line-height: 1.6;
-  color: #dae3e8;
-}
-.assistant-symbol {
-  color: #a9d5ca;
-}
-.draft-card {
-  margin-left: 27px;
-  padding: 17px 20px 0;
-  border-radius: 8px;
-  background: #fbfcfc;
-  color: #26343a;
-}
-.draft-label {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  color: #64737a;
-  font-size: 9px;
-}
-.draft-status-dot {
-  width: 5px;
-  height: 5px;
-  background: #248973;
-  border-radius: 50%;
-  margin-left: auto;
-}
-.draft-card h3 {
-  font-size: 13px;
-  font-weight: 600;
-  margin: 11px 0 3px;
-}
-.draft-recipient {
-  font-size: 9px;
-  color: #6d797f;
-}
-.draft-body {
-  min-height: 107px;
-  padding-block: 12px;
-  font-size: 10px;
-  line-height: 1.55;
-  white-space: pre-line;
-  color: #4d5a60;
-}
-.draft-status {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border-top: 1px solid #e7edec;
-  padding-block: 10px;
-  font-size: 9px;
-  color: #006b68;
-}
-.mock-composer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #ffffff1a;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 10px;
-  color: #a4b1ba;
-}
-.mock-composer > span:nth-child(2) {
-  margin-right: auto;
-}
-.mock-send {
-  display: grid;
-  place-items: center;
-  background: #3b565b;
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  color: #cae1dc;
-}
-.workflow-caption {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 11px;
-  color: var(--text-muted);
   line-height: 1.6;
 }
 .section-intro {
@@ -922,9 +678,6 @@ summary {
   .site-container {
     width: calc(100% - 64px);
   }
-  .workspace-mat {
-    padding: 30px 40px 0;
-  }
   .setup-layout,
   .privacy-layout {
     gap: 60px;
@@ -955,7 +708,7 @@ summary {
     width: calc(100% - 40px);
   }
   .home-hero {
-    padding-top: 50px;
+    padding-top: 32px;
   }
   .hero-copy h1 {
     font-size: clamp(38px, 7.2vw, 54px);
@@ -976,85 +729,6 @@ summary {
     font-size: 11px;
     max-width: 285px;
     margin-inline: auto;
-  }
-  .workflow-showcase {
-    margin-top: 32px;
-  }
-  .workflow-tabs {
-    gap: 1px;
-    margin-bottom: 18px;
-  }
-  .workflow-tabs button {
-    padding: 9px 12px;
-    font-size: 11px;
-  }
-  .workspace-mat {
-    padding: 19px 17px 0;
-    border-radius: 13px;
-  }
-  .workspace-toolbar {
-    height: 31px;
-    font-size: 8px;
-    padding-inline: 11px;
-    gap: 14px;
-  }
-  .toolbar-caption {
-    font-size: 8px;
-  }
-  .window-controls {
-    gap: 4px;
-  }
-  .window-controls i {
-    width: 6px;
-    height: 6px;
-  }
-  .workspace-body {
-    grid-template-columns: 1fr;
-    min-height: 418px;
-  }
-  .workspace-sidebar {
-    display: none;
-  }
-  .workspace-conversation {
-    padding: 0 15px 16px;
-  }
-  .conversation-top {
-    font-size: 10px;
-  }
-  .model-label {
-    display: none;
-  }
-  .conversation-messages {
-    margin-top: 18px;
-  }
-  .user-message {
-    max-width: 94%;
-    font-size: 10px;
-  }
-  .assistant-message {
-    font-size: 10px;
-  }
-  .draft-card {
-    padding-inline: 15px;
-    margin-left: 26px;
-  }
-  .draft-card h3 {
-    font-size: 11px;
-  }
-  .draft-body {
-    min-height: 112px;
-    font-size: 9px;
-  }
-  .mock-composer {
-    font-size: 9px;
-    padding: 8px;
-  }
-  .mock-composer > svg:nth-of-type(2) {
-    display: none;
-  }
-  .workflow-caption {
-    font-size: 10px;
-    padding-inline: 12px;
   }
   .home-section {
     padding-block: 68px;

@@ -5,11 +5,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "JARVIS AI",
     short_name: "JARVIS",
     description:
-      "An AI assistant for Mac that helps you search Gmail, draft replies, manage your calendar and keep track of tasks.",
+      "A personal AI email workspace for Mac. Bring Gmail accounts, email groups, your instructions and source memories together.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#006b68",
+    background_color: "#060d18",
+    theme_color: "#060d18",
     icons: [
       {
         src: "/icon-192x192.png",

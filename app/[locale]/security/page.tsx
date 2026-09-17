@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
+import { buildPageMetadata } from "@/content/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { getCopy } from "@/content/getCopy";
 import { getUiFor } from "@/content/ui";
 import { section } from "@/lib/constants/spacing";
@@ -12,14 +13,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const rm = getRouteMetadata(locale);
-  return {
-    title: { absolute: rm.security.title },
-    description: rm.security.description,
-    alternates: buildAlternates(locale, "/security"),
-    openGraph: buildOpenGraph(locale, rm.security),
-    twitter: buildTwitter(rm.security),
-  };
+  return buildPageMetadata(locale, "security");
 }
 
 export default async function SecurityPage({
@@ -34,6 +28,7 @@ export default async function SecurityPage({
 
   return (
     <article className={`${section.paddingY} ${section.paddingX}`}>
+      <PageJsonLd locale={locale} routeKey="security" />
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           eyebrow={ui.legal.eyebrow}

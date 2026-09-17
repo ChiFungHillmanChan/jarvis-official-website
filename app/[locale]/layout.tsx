@@ -6,12 +6,10 @@ import { setRequestLocale } from "next-intl/server";
 import { Nav } from "@/components/layout/nav/Nav";
 import { Footer } from "@/components/layout/footer/Footer";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import {
   baseMetadata,
-  buildAlternates,
-  buildOpenGraph,
-  buildTwitter,
-  getRouteMetadata,
+  buildPageMetadata,
 } from "@/content/metadata";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
@@ -26,14 +24,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const rm = getRouteMetadata(locale);
   return {
     ...baseMetadata,
-    title: { default: rm.home.title, template: "%s · JARVIS AI" },
-    description: rm.home.description,
-    alternates: buildAlternates(locale, "/"),
-    openGraph: buildOpenGraph(locale, rm.home),
-    twitter: buildTwitter(rm.home),
+    ...buildPageMetadata(locale, "home"),
   };
 }
 
@@ -55,6 +48,7 @@ export default async function LocaleLayout({
       <body className="min-h-screen">
         <NextIntlClientProvider locale={locale}>
           <OrganizationJsonLd />
+          <WebSiteJsonLd />
           <a className="skip-link" href="#main-content">
             {locale === "zh-HK" ? "跳至主要內容" : "Skip to content"}
           </a>

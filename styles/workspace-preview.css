@@ -1,0 +1,348 @@
+.product-demo {
+  width: min(1040px, 100%);
+  margin: 34px auto 0;
+  color: #182022;
+  text-align: left;
+  scroll-margin-top: 90px;
+}
+.product-demo-window {
+  overflow: hidden;
+  border: 1px solid #dfe5e7;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 14px 44px rgb(24 32 34 / 5%);
+}
+.product-demo-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 46px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e7ebec;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.product-demo-brand {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+.product-demo-toolbar-title,
+.product-demo-sample {
+  color: #657078;
+}
+.product-demo-sample {
+  margin-left: auto;
+}
+.product-demo-body {
+  display: grid;
+  grid-template-columns: 192px minmax(0, 1fr);
+  min-height: 358px;
+}
+.product-demo-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 14px 20px;
+  border-right: 1px solid #e7ebec;
+  background: #f7f9f9;
+}
+.product-demo-sidebar-label {
+  margin: 0 9px 9px;
+  color: #69747b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.product-demo-accounts {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.product-demo-accounts li,
+.product-demo-selected-group {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 37px;
+  padding: 8px 9px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.product-demo-accounts svg,
+.product-demo-selected-group svg {
+  flex-shrink: 0;
+}
+.product-demo-accounts svg {
+  color: #657078;
+}
+.product-demo-group-list {
+  margin-top: 30px;
+}
+.product-demo-selected-group {
+  border-radius: 6px;
+  background: #e7f0ef;
+  color: #005e5b;
+  font-weight: 550;
+}
+.product-demo-count {
+  margin-left: auto;
+  font-size: 12px;
+}
+.product-demo-local {
+  margin: auto 9px 0;
+  padding-top: 25px;
+  color: #69747b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.product-demo-main {
+  min-width: 0;
+  padding: 23px 28px;
+}
+.product-demo-group-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+}
+.product-demo-group-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.product-demo-group-heading > span {
+  color: #69747b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.product-demo [hidden] {
+  display: none !important;
+}
+.product-demo-instructions {
+  margin-top: 17px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  background: #f4f6f6;
+}
+.product-demo-instructions > span,
+.product-demo-memory span {
+  color: #657078;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.product-demo-instructions p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.product-demo-answer {
+  margin-top: 21px;
+}
+.product-demo-answer-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.product-demo-answer-heading h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+.product-demo-model {
+  margin-left: auto;
+  color: #69747b;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.product-demo-actions {
+  display: grid;
+  gap: 8px;
+  margin: 11px 0 0 33px;
+  padding: 0;
+  list-style: none;
+}
+.product-demo-actions li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 10px;
+}
+.product-demo-actions p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.product-demo-source-button {
+  border: 0;
+  border-radius: 4px;
+  background: #edf6f5;
+  padding: 3px 7px;
+  color: #00635f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.product-demo-source-button:hover {
+  background: #dceeea;
+}
+.product-demo-memory {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 13px;
+  border-top: 1px solid #e7ebec;
+}
+.product-demo-memory > svg {
+  color: #006b68;
+  flex-shrink: 0;
+}
+.product-demo-memory p {
+  margin: 2px 0 0;
+  color: #465357;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.product-demo-reader {
+  margin-top: 18px;
+}
+.product-demo-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  padding: 4px 0;
+  color: #006b68;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.product-demo-back:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.product-demo-reader-label {
+  margin: 21px 0 4px;
+  color: #69747b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.product-demo-reader h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+.product-demo-email-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 20px;
+  margin: 11px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.product-demo-email-meta > div {
+  display: flex;
+  gap: 7px;
+}
+.product-demo-email-meta dt {
+  color: #69747b;
+}
+.product-demo-email-meta dd {
+  margin: 0;
+}
+.product-demo-email-body {
+  max-width: 64ch;
+  margin: 21px 0 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.product-demo figcaption {
+  margin-top: 13px;
+  color: #69747b;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .product-demo-body {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+  .product-demo-main {
+    padding: 22px 20px;
+  }
+  .product-demo-sidebar {
+    padding-inline: 9px;
+  }
+  .product-demo-model {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .product-demo {
+    margin-top: 28px;
+  }
+  .product-demo-toolbar {
+    gap: 13px;
+    padding-inline: 16px;
+  }
+  .product-demo-toolbar-title {
+    display: none;
+  }
+  .product-demo-body {
+    display: block;
+    min-height: 0;
+  }
+  .product-demo-sidebar {
+    display: block;
+    padding: 10px 16px;
+    border-right: 0;
+    border-bottom: 1px solid #e7ebec;
+  }
+  .product-demo-sidebar-label,
+  .product-demo-group-list,
+  .product-demo-local {
+    display: none;
+  }
+  .product-demo-accounts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 20px;
+  }
+  .product-demo-accounts li {
+    min-height: 28px;
+    padding: 0;
+    font-size: 12px;
+  }
+  .product-demo-main {
+    padding: 20px 16px;
+  }
+  .product-demo-group-heading {
+    display: block;
+  }
+  .product-demo-group-heading > span {
+    display: block;
+    margin-top: 4px;
+  }
+  .product-demo-instructions {
+    padding-inline: 11px;
+  }
+  .product-demo-actions {
+    gap: 13px;
+    margin-left: 0;
+  }
+  .product-demo-source-button {
+    padding: 5px 9px;
+  }
+}

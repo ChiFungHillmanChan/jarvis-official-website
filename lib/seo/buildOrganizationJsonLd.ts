@@ -5,6 +5,7 @@ export function buildOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
     name: company.name,
     url: siteUrl,
     logo: `${siteUrl}/icon-512x512.png`,

@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
-import {
-  buildAlternates,
-  buildOpenGraph,
-  buildTwitter,
-  getRouteMetadata,
-} from "@/content/metadata";
+import { buildPageMetadata } from "@/content/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { getSetupCopy } from "@/content/setup";
 
 export async function generateMetadata({
@@ -15,14 +11,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const route = getRouteMetadata(locale).howItWorks;
-  return {
-    title: { absolute: route.title },
-    description: route.description,
-    alternates: buildAlternates(locale, route.canonical),
-    openGraph: buildOpenGraph(locale, route),
-    twitter: buildTwitter(route),
-  };
+  return buildPageMetadata(locale, "howItWorks");
 }
 
 export default async function HowItWorksPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -32,6 +21,7 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ loc
 
   return (
     <article className="page-shell">
+      <PageJsonLd locale={locale} routeKey="howItWorks" />
       <header className="page-intro">
         <p className="eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>

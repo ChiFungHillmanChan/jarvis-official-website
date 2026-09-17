@@ -1,155 +1,140 @@
 "use client";
 
-import { useRef, useState } from "react";
-import {
-  CalendarDays,
-  Check,
-  ChevronDown,
-  CircleCheck,
-  Command,
-  Inbox,
-  Mail,
-  MessageSquare,
-  Mic,
-  Plus,
-  Send,
-  ShieldCheck,
-} from "lucide-react";
-import type { DeepWiden } from "@/content/copy.types";
-import type { enHome } from "@/content/home";
+import { useEffect, useId, useRef, useState } from "react";
+import { ArrowLeft, Check, Folder, Mail } from "lucide-react";
+import { getWorkspacePreviewCopy } from "@/content/workspace-preview";
+import { BrandIcon } from "@/components/ui/BrandIcon";
+import "@/styles/workspace-preview.css";
 
-type PreviewCopy = DeepWiden<typeof enHome.preview>;
+export function WorkflowPreview({ locale }: { locale: string }) {
+  const copy = getWorkspacePreviewCopy(locale);
+  const [sourceId, setSourceId] = useState<number | null>(null);
+  const readerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const id = useId();
+  const source = copy.sources.find((email) => email.id === sourceId);
 
-export function WorkflowPreview({ copy }: { copy: PreviewCopy }) {
-  const [selected, setSelected] = useState(0);
-  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
-  const current = copy.tabs[selected]!;
-  const icons = [MessageSquare, Inbox, CalendarDays, CircleCheck];
+  useEffect(() => {
+    if (sourceId !== null) readerRef.current?.focus();
+    else triggerRef.current?.focus();
+  }, [sourceId]);
 
   return (
-    <div className="workflow-showcase" id="preview">
-      <h2 className="sr-only">{copy.label}</h2>
-      <div className="workflow-tabs" role="tablist" aria-label={copy.tabsLabel}>
-        {copy.tabs.map((tab, index) => (
-          <button
-            key={tab.label}
-            ref={(element) => {
-              buttons.current[index] = element;
-            }}
-            type="button"
-            role="tab"
-            id={`workflow-tab-${index}`}
-            aria-controls="workflow-panel"
-            aria-selected={selected === index}
-            tabIndex={selected === index ? 0 : -1}
-            onClick={() => setSelected(index)}
-            onKeyDown={(event) => {
-              let next = index;
-              if (event.key === "ArrowRight") next = (index + 1) % copy.tabs.length;
-              else if (event.key === "ArrowLeft")
-                next = (index - 1 + copy.tabs.length) % copy.tabs.length;
-              else if (event.key === "Home") next = 0;
-              else if (event.key === "End") next = copy.tabs.length - 1;
-              else return;
-              event.preventDefault();
-              setSelected(next);
-              buttons.current[next]?.focus();
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-      <div className="workspace-mat">
-        <div className="workspace-window">
-          <div className="workspace-toolbar">
-            <div className="window-controls" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-            </div>
-            <span>JARVIS</span>
-            <span className="toolbar-caption">{copy.sample}</span>
-          </div>
-          <div className="workspace-body">
-            <aside className="workspace-sidebar" aria-hidden="true">
-              <div className="workspace-brand">
-                <Command size={19} />
-                <span>JARVIS</span>
-                <ChevronDown size={13} />
-              </div>
-              <p>{copy.sidebarTitle}</p>
-              {copy.sidebarItems.map((item, index) => {
-                const Icon = icons[index]!;
-                return (
-                  <div
-                    className={`workspace-nav-item ${index === 0 ? "is-active" : ""}`}
-                    key={item}
-                  >
-                    <Icon size={16} />
-                    <span>{item}</span>
-                    {index === 0 && <Plus size={14} />}
-                  </div>
-                );
-              })}
-              <div className="workspace-local">
-                <ShieldCheck size={14} />
-                {copy.footer}
-              </div>
-            </aside>
-            <div
-              className="workspace-conversation"
-              id="workflow-panel"
-              role="tabpanel"
-              aria-labelledby={`workflow-tab-${selected}`}
-              tabIndex={0}
-            >
-              <div className="conversation-top">
-                <span>{current.title}</span>
-                <span className="model-label">JARVIS</span>
-              </div>
-              <div className="conversation-messages">
-                <div className="user-message">{current.prompt}</div>
-                <div className="assistant-message">
-                  <span className="assistant-symbol" aria-hidden="true">
-                    <Command size={17} />
-                  </span>
-                  <p>{current.response}</p>
-                </div>
-                <div className="draft-card">
-                  <div className="draft-label">
-                    {selected === 0 ? (
-                      <Mail size={15} />
-                    ) : selected === 1 ? (
-                      <CalendarDays size={15} />
-                    ) : (
-                      <CircleCheck size={15} />
-                    )}
-                    <span>{current.cardLabel}</span>
-                    <span className="draft-status-dot" />
-                  </div>
-                  <h3>{current.cardTitle}</h3>
-                  <p className="draft-recipient">{current.recipient}</p>
-                  <p className="draft-body">{current.body}</p>
-                  <div className="draft-status">
-                    <Check size={13} />
-                    <span>{current.status}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mock-composer" aria-hidden="true">
-                <Plus size={16} />
-                <span>{copy.input}</span>
-                <Mic size={16} />
-                <span className="mock-send">
-                  <Send size={14} />
-                </span>
+    <figure className="product-demo" id="preview" aria-label={copy.title}>
+      <div className="product-demo-window">
+        <div className="product-demo-toolbar">
+          <span className="product-demo-brand">JARVIS</span>
+          <span className="product-demo-toolbar-title">{copy.workspace}</span>
+          <span className="product-demo-sample">{copy.sampleLabel}</span>
+        </div>
+        <div className="product-demo-body">
+          <aside className="product-demo-sidebar" aria-label={copy.accountsLabel}>
+            <p className="product-demo-sidebar-label">{copy.accountsLabel}</p>
+            <ul className="product-demo-accounts">
+              {copy.accounts.map((account) => (
+                <li key={account}>
+                  <Mail size={16} aria-hidden="true" />
+                  <span>{account}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="product-demo-group-list">
+              <p className="product-demo-sidebar-label">{copy.groupsLabel}</p>
+              <div className="product-demo-selected-group">
+                <Folder size={16} aria-hidden="true" />
+                <span>{copy.group}</span>
+                <span className="product-demo-count">2</span>
               </div>
             </div>
+            <p className="product-demo-local">{copy.localLabel}</p>
+          </aside>
+          <div className="product-demo-main">
+            <header className="product-demo-group-heading">
+              <h2>{copy.group}</h2>
+              <span>{copy.groupDetail}</span>
+            </header>
+            <div className="product-demo-analysis" hidden={source !== undefined}>
+              <div className="product-demo-instructions">
+                <span>{copy.instructionsLabel}</span>
+                <p>{copy.instructions}</p>
+              </div>
+              <div className="product-demo-answer">
+                <div className="product-demo-answer-heading">
+                  <BrandIcon size={24} />
+                  <h3>{copy.analysisLabel}</h3>
+                  <span className="product-demo-model">{copy.modelLabel}</span>
+                </div>
+                <ul className="product-demo-actions">
+                  {copy.actions.map((action) => (
+                    <li key={action.sourceId}>
+                      <p>{action.text}</p>
+                      <button
+                        type="button"
+                        className="product-demo-source-button"
+                        aria-expanded={sourceId === action.sourceId}
+                        aria-controls={`${id}-reader`}
+                        onClick={(event) => {
+                          triggerRef.current = event.currentTarget;
+                          setSourceId(action.sourceId);
+                        }}
+                      >
+                        {copy.sourceLabel} #{action.sourceId}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="product-demo-memory">
+                <Check size={16} aria-hidden="true" />
+                <div>
+                  <span>{copy.memoryLabel}</span>
+                  <p>{copy.memory}</p>
+                </div>
+              </div>
+            </div>
+            {source && (
+              <section
+                ref={readerRef}
+                id={`${id}-reader`}
+                className="product-demo-reader"
+                aria-label={copy.sourceHeading}
+                tabIndex={-1}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.preventDefault();
+                    setSourceId(null);
+                  }
+                }}
+              >
+                <button
+                  type="button"
+                  className="product-demo-back"
+                  onClick={() => setSourceId(null)}
+                >
+                  <ArrowLeft size={15} aria-hidden="true" />
+                  {copy.backLabel}
+                </button>
+                <p className="product-demo-reader-label">
+                  {copy.sourceLabel} #{source.id}
+                </p>
+                <h3>{source.subject}</h3>
+                <dl className="product-demo-email-meta">
+                  <div>
+                    <dt>{copy.fromLabel}</dt>
+                    <dd>{source.from}</dd>
+                  </div>
+                  <div>
+                    <dt>{copy.inboxLabel}</dt>
+                    <dd>{source.account}</dd>
+                  </div>
+                </dl>
+                <p className="product-demo-email-body">{source.body}</p>
+              </section>
+            )}
           </div>
         </div>
       </div>
-      <p className="workflow-caption">{copy.caption}</p>
-    </div>
+      <figcaption>{copy.hint}</figcaption>
+    </figure>
   );
 }

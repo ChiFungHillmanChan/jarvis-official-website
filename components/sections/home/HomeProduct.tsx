@@ -1,9 +1,9 @@
-import { CalendarDays, Check, CheckCheck, Mail, MessageSquare, MoveRight } from "lucide-react";
+import { Brain, Check, FileText, Mail, MessageSquare, MoveRight } from "lucide-react";
 import { getCopy } from "@/content/getCopy";
 
 export async function HomeProduct() {
   const { home } = await getCopy();
-  const icons = [Mail, CalendarDays, CheckCheck];
+  const icons = [Mail, FileText, Brain];
   return (
     <section
       className="home-section product-section"

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { WaitlistForm } from "./WaitlistForm";
 
 vi.mock("next/link", () => ({
@@ -106,5 +106,60 @@ describe("WaitlistForm honeypot", () => {
     await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(JSON.parse(init.body as string).company).toBe("");
+  });
+
+  it("sends only one request when the form is submitted again before the first request finishes", async () => {
+    let completeRequest!: (response: Response) => void;
+    fetchMock.mockReturnValue(
+      new Promise<Response>((resolve) => {
+        completeRequest = resolve;
+      }),
+    );
+    const { container } = renderForm();
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "human@example.com" },
+    });
+
+    act(() => {
+      fireEvent.submit(container.querySelector("form")!);
+      fireEvent.submit(container.querySelector("form")!);
+    });
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole("button", { name: "Sending..." })).toBeDisabled();
+    expect(container.querySelector("form")).toHaveAttribute("aria-busy", "true");
+
+    await act(async () => completeRequest(new Response(null, { status: 200 })));
+    expect(screen.getByRole("status")).toHaveTextContent("You are on the list.");
+  });
+
+  it("focuses an invalid email and associates its explanation without sending a request", async () => {
+    const { container } = renderForm();
+    fireEvent.submit(container.querySelector("form")!);
+
+    const email = screen.getByLabelText("Email address");
+    await vi.waitFor(() => expect(email).toHaveFocus());
+    expect(email).toHaveAttribute("aria-invalid", "true");
+    expect(email).toHaveAccessibleDescription("Enter a valid email.");
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("lets the visitor retry after a server error without marking the email invalid", async () => {
+    fetchMock
+      .mockResolvedValueOnce(new Response(null, { status: 503 }))
+      .mockResolvedValueOnce(new Response(null, { status: 200 }));
+    const { container } = renderForm();
+    const email = screen.getByLabelText("Email address");
+    fireEvent.change(email, { target: { value: "human@example.com" } });
+    fireEvent.submit(container.querySelector("form")!);
+
+    const error = await screen.findByText("Something went wrong.");
+    await vi.waitFor(() => expect(error).toHaveFocus());
+    expect(email).not.toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("button", { name: "Request access" })).toBeEnabled();
+
+    fireEvent.submit(container.querySelector("form")!);
+    await screen.findByText("You are on the list.");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 });

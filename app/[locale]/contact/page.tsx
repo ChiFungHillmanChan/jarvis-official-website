@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
+import { buildPageMetadata } from "@/content/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { getCopy } from "@/content/getCopy";
 import { getUiFor } from "@/content/ui";
 import { company } from "@/content/company";
@@ -17,14 +18,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const rm = getRouteMetadata(locale);
-  return {
-    title: { absolute: rm.contact.title },
-    description: rm.contact.description,
-    alternates: buildAlternates(locale, "/contact"),
-    openGraph: buildOpenGraph(locale, rm.contact),
-    twitter: buildTwitter(rm.contact),
-  };
+  return buildPageMetadata(locale, "contact");
 }
 
 export default async function ContactPage({
@@ -40,6 +34,7 @@ export default async function ContactPage({
 
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
+      <PageJsonLd locale={locale} routeKey="contact" />
       <div className={`mx-auto ${section.maxWidth} space-y-16`}>
         <SectionHeading
           eyebrow={ui.contact.eyebrow}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildAlternates, buildOpenGraph, buildTwitter, getRouteMetadata } from "@/content/metadata";
+import { buildPageMetadata } from "@/content/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { getCopy } from "@/content/getCopy";
 import { company, getCompanyL10n } from "@/content/company";
 import { section } from "@/lib/constants/spacing";
@@ -14,14 +15,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const rm = getRouteMetadata(locale);
-  return {
-    title: { absolute: rm.company.title },
-    description: rm.company.description,
-    alternates: buildAlternates(locale, "/company"),
-    openGraph: buildOpenGraph(locale, rm.company),
-    twitter: buildTwitter(rm.company),
-  };
+  return buildPageMetadata(locale, "company");
 }
 
 export default async function CompanyPage({
@@ -50,6 +44,7 @@ export default async function CompanyPage({
 
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
+      <PageJsonLd locale={locale} routeKey="company" />
       <div className={`mx-auto ${section.maxWidth} space-y-16`}>
         <SectionHeading
           eyebrow={company.name}
