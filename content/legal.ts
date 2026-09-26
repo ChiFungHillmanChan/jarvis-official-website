@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.3",
+    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.4",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -50,7 +50,7 @@ export const enLegal: LegalCopy = {
       {
         id: "desktop-storage",
         title: "4. Information stored on your Mac",
-        body: "Depending on the features you use, JARVIS stores conversations, tasks, connected-service context, email copies, groups, personal instructions, preferences and confirmed memories in a local SQLite database. API keys and connection credentials are stored using macOS Keychain. Local diagnostic logs may also contain operational details or transcribed text. These local records are not uploaded to a JARVIS cloud workspace, and the current email workspace does not provide cross-device sync.\n\nThe local database has no separate application-level encryption. Its protection depends on your Mac’s account permissions, device security and any disk encryption you enable. Data you send to AI or connected services leaves the device as described below. Data you voluntarily send to support is also received by us.",
+        body: "Depending on the features you use, JARVIS stores conversations, tasks, connected-service context, email copies, groups, personal instructions, preferences and confirmed memories in a local SQLite database. API keys and connection credentials are stored using macOS Keychain. Local diagnostic logs may also contain operational details; from version 0.5.1 they no longer record transcribed text or tool content. These local records are not uploaded to a JARVIS cloud workspace, and the current email workspace does not provide cross-device sync.\n\nFrom version 0.5.1, the local database is encrypted with AES-256 (SQLCipher), its key is kept in macOS Keychain, and its folder can only be opened by your macOS account. Earlier versions stored it without separate application-level encryption; that data is converted the first time you open version 0.5.1. Anyone signed in to your macOS account can still use JARVIS, so your Mac’s account permissions, device security and disk encryption remain important. Data you send to AI or connected services leaves the device as described below. Data you voluntarily send to support is also received by us.",
       },
       {
         id: "google-access",
@@ -73,7 +73,7 @@ export const enLegal: LegalCopy = {
       {
         id: "google-limited-use",
         title: "7. Limited use of Google user data",
-        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. The AI provider you choose, and TypeSafe if you add its key, receive content under your own account and their own terms; they are not service providers acting on our behalf. Some free tiers allow submitted content to be used to improve the provider’s products and models (see section 6). To keep Gmail content out of that use, choose a paid tier whose terms exclude it, or a local Ollama model. This statement is not a claim of Google verification or certification.",
+        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. The AI provider you choose, and TypeSafe if you add its key, receive content under your own account and their own terms; they are not service providers acting on our behalf. From version 0.5.1, JARVIS sends Gmail content only to AI services whose terms exclude training on it by default: OpenAI, Anthropic Claude, Amazon Bedrock, a local Ollama model on your Mac, or Google Gemini after you confirm that your key has billing enabled, because Gemini’s unpaid tier may use submitted content to improve Google’s models (see section 6). Kimi, Qwen and other compatible services do not receive Gmail content. This statement is not a claim of Google verification or certification.",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace user data policy", href: workspacePolicy },
@@ -174,18 +174,18 @@ export const enLegal: LegalCopy = {
       {
         id: "local-data",
         title: "1. Local records and credentials",
-        body: "JARVIS stores desktop conversations and connected-service context in a local SQLite database. API keys and connection credentials use macOS Keychain. The database itself has no separate application-level encryption. Use an individual macOS account, keep your device updated, and consider FileVault and secure backups. Removing the app may leave data or credentials behind.\n\nWebsite beta applications are separate server-side records. Applying for access does not upload your Mac’s mailbox or conversations to that application record.",
+        body: "JARVIS stores desktop conversations and connected-service context in a local SQLite database. API keys and connection credentials use macOS Keychain. From version 0.5.1, the database is encrypted with AES-256 (SQLCipher), its key is kept in macOS Keychain, and its folder is limited to your macOS account. Use an individual macOS account, keep your device updated, and consider FileVault and secure backups. Removing the app may leave data or credentials behind.\n\nWebsite beta applications are separate server-side records. Applying for access does not upload your Mac’s mailbox or conversations to that application record.",
       },
       {
         id: "connections",
         title: "2. Connections and permissions",
-        body: "Google connections use OAuth, so you authorise access on Google’s own consent screen. The email workspace requests read-only Gmail access; the separate general-assistant connection has Gmail modification, Calendar and profile permissions. Review the scope of each connection. You can disconnect in JARVIS and revoke access through your Google Account.\n\nThe email workspace’s analysis does not send email or execute its suggested next steps. Automatic sorting has no tools either: it only classifies messages, writes summaries and extracts follow-ups. The general assistant creates Gmail drafts for review. Other connected tools can make changes within their supported permissions, so review actions and their results.",
+        body: "Google connections use OAuth, so you authorise access on Google’s own consent screen. The email workspace requests read-only Gmail access; the separate general-assistant connection has Gmail modification, Calendar and profile permissions. Review the scope of each connection. You can disconnect in JARVIS and revoke access through your Google Account. From version 0.5.1, removing or disconnecting an email-workspace mailbox also revokes JARVIS’s access at Google, unless it is the same Google account as the general-assistant connection.\n\nThe email workspace’s analysis does not send email or execute its suggested next steps. Automatic sorting has no tools either: it only classifies messages, writes summaries and extracts follow-ups. The general assistant creates Gmail drafts for review. From version 0.5.1, it asks you to allow each memory it saves, email it archives, calendar event it deletes and follow-up it changes. Other connected tools can make changes within their supported permissions, so review actions and their results.",
         links: [{ label: "Manage Google third-party connections", href: "https://support.google.com/accounts/answer/13533235" }],
       },
       {
         id: "processing",
         title: "3. Cloud processing is a separate choice",
-        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks; versions that ask you to choose an AI use only that one unless you add others. Email analysis uses the AI you chose or separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Automatic sorting, once you turn it on, sends message details to the AI you chose and, if you add its key, to TypeSafe. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
+        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks; versions that ask you to choose an AI use only that one unless you add others. Email analysis uses the AI you chose or separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Automatic sorting, once you turn it on, sends message details to the AI you chose and, if you add its key, to TypeSafe. From version 0.5.1, email content goes only to AI services that do not train on it, as listed in section 7 of the privacy policy. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
       },
       {
         id: "deletion",
@@ -211,7 +211,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.3",
+    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.4",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -238,7 +238,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "desktop-storage",
         title: "4. 儲存在 Mac 上的資料",
-        body: "視乎你使用的功能，JARVIS 會在本機 SQLite 資料庫儲存對話、任務、已連接服務的相關資料、郵件副本、群組、個人指示、偏好及已確認記憶。API key 及連接憑證使用 macOS 鑰匙圈儲存。本機診斷紀錄亦可能包含操作詳情或語音轉錄文字。這些本機紀錄不會上傳至 JARVIS 雲端工作區，目前的電郵工作區亦不提供跨裝置同步。\n\n本機資料庫沒有額外的應用程式層加密，其保護取決於 Mac 的帳戶權限、裝置安全及你啟用的磁碟加密。傳送至 AI 或已連接服務的資料會按下文所述離開裝置。你自願交予支援的資料亦會由我們接收。",
+        body: "視乎你使用的功能，JARVIS 會在本機 SQLite 資料庫儲存對話、任務、已連接服務的相關資料、郵件副本、群組、個人指示、偏好及已確認記憶。API key 及連接憑證使用 macOS 鑰匙圈儲存。本機診斷紀錄亦可能包含操作詳情；由 0.5.1 版起，紀錄不再包含語音轉錄文字或工具內容。這些本機紀錄不會上傳至 JARVIS 雲端工作區，目前的電郵工作區亦不提供跨裝置同步。\n\n由 0.5.1 版起，本機資料庫以 AES-256（SQLCipher）加密，金鑰存於 macOS 鑰匙圈，資料夾只限你的 macOS 帳戶開啟。較早版本儲存的資料庫沒有額外的應用程式層加密，會在你首次開啟 0.5.1 版時轉換。任何登入你 macOS 帳戶的人仍可使用 JARVIS，因此 Mac 的帳戶權限、裝置安全及磁碟加密仍然重要。傳送至 AI 或已連接服務的資料會按下文所述離開裝置。你自願交予支援的資料亦會由我們接收。",
       },
       {
         id: "google-access",
@@ -261,7 +261,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "google-limited-use",
         title: "7. Google 使用者資料的有限用途",
-        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。你選擇的 AI 供應商，以及你加入金鑰後的 TypeSafe，會以你自己的帳戶並按其條款接收內容，並非代我們處理資料的服務供應商。部分免費方案容許供應商將提交的內容用於改善其產品及模型（見第 6 節）。如不希望 Gmail 內容被如此使用，請選擇條款排除這類用途的付費方案，或使用本機 Ollama 模型。這項聲明不代表已取得 Google 驗證或認證。",
+        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。你選擇的 AI 供應商，以及你加入金鑰後的 TypeSafe，會以你自己的帳戶並按其條款接收內容，並非代我們處理資料的服務供應商。由 0.5.1 版起，JARVIS 只會把 Gmail 內容傳送至條款預設不以此訓練模型的 AI 服務：OpenAI、Anthropic Claude、Amazon Bedrock、你 Mac 上的本機 Ollama 模型，或在你確認金鑰已啟用付費後的 Google Gemini；Gemini 的免費額度可能以提交的內容改善 Google 的模型（見第 6 節）。Kimi、Qwen 及其他兼容服務不會接收 Gmail 內容。這項聲明不代表已取得 Google 驗證或認證。",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace 使用者資料政策", href: workspacePolicy },
@@ -362,18 +362,18 @@ export const zhLegal: LegalCopy = {
       {
         id: "local-data",
         title: "1. 本機紀錄及憑證",
-        body: "JARVIS 將桌面對話及已連接服務的相關資料儲存在本機 SQLite 資料庫，API key 及連接憑證則使用 macOS 鑰匙圈。資料庫本身沒有額外的應用程式層加密。請使用個人 macOS 帳戶、保持裝置更新，並考慮啟用 FileVault 及安全備份。移除應用程式可能留下資料或憑證。\n\n網站 Beta 申請是獨立的伺服器端紀錄。申請使用不會把 Mac 上的信箱或對話上傳至該申請紀錄。",
+        body: "JARVIS 將桌面對話及已連接服務的相關資料儲存在本機 SQLite 資料庫，API key 及連接憑證則使用 macOS 鑰匙圈。由 0.5.1 版起，資料庫以 AES-256（SQLCipher）加密，金鑰存於 macOS 鑰匙圈，資料夾只限你的 macOS 帳戶存取。請使用個人 macOS 帳戶、保持裝置更新，並考慮啟用 FileVault 及安全備份。移除應用程式可能留下資料或憑證。\n\n網站 Beta 申請是獨立的伺服器端紀錄。申請使用不會把 Mac 上的信箱或對話上傳至該申請紀錄。",
       },
       {
         id: "connections",
         title: "2. 連接及權限",
-        body: "Google 連接使用 OAuth，由你在 Google 的授權畫面批准。電郵工作區只申請 Gmail 唯讀權限；一般助理的獨立連接則有 Gmail 修改、日曆及個人資料權限。請閱讀各連接的權限範圍。你可在 JARVIS 斷開連接，並透過 Google 帳戶撤銷授權。\n\n電郵工作區的分析不會寄出郵件或執行建議步驟。自動整理同樣沒有任何工具，只會分類郵件、撰寫摘要及擷取跟進事項。一般助理會建立 Gmail 草稿供你審閱。其他已連接工具可在支援權限內進行更改，因此請核對操作及結果。",
+        body: "Google 連接使用 OAuth，由你在 Google 的授權畫面批准。電郵工作區只申請 Gmail 唯讀權限；一般助理的獨立連接則有 Gmail 修改、日曆及個人資料權限。請閱讀各連接的權限範圍。你可在 JARVIS 斷開連接，並透過 Google 帳戶撤銷授權。由 0.5.1 版起，移除或中斷電郵工作區信箱時，亦會向 Google 撤銷 JARVIS 的存取權；如該信箱與一般助理連接的是同一 Google 帳戶則除外。\n\n電郵工作區的分析不會寄出郵件或執行建議步驟。自動整理同樣沒有任何工具，只會分類郵件、撰寫摘要及擷取跟進事項。一般助理會建立 Gmail 草稿供你審閱。由 0.5.1 版起，一般助理每次儲存記憶、封存郵件、刪除日曆活動或更改跟進事項前，都會先請你批准。其他已連接工具可在支援權限內進行更改，因此請核對操作及結果。",
         links: [{ label: "管理 Google 第三方連接", href: "https://support.google.com/accounts/answer/13533235?hl=zh-Hant" }],
       },
       {
         id: "processing",
         title: "3. 雲端處理需要另行考慮",
-        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑；在會請你選擇 AI 的版本中，除非你另行加入，否則只使用所選的一個 AI。電郵分析可使用你選擇的 AI，或另設本機、OpenAI 及 Bedrock；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。自動整理功能開啟後，會將郵件資料傳送至你選擇的 AI；如你加入 TypeSafe 密鑰，亦會傳送至 TypeSafe。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
+        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑；在會請你選擇 AI 的版本中，除非你另行加入，否則只使用所選的一個 AI。電郵分析可使用你選擇的 AI，或另設本機、OpenAI 及 Bedrock；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。自動整理功能開啟後，會將郵件資料傳送至你選擇的 AI；如你加入 TypeSafe 密鑰，亦會傳送至 TypeSafe。由 0.5.1 版起，電郵內容只會傳送至不會以此訓練模型的 AI 服務，詳見私隱政策第 7 節。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
       },
       {
         id: "deletion",

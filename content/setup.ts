@@ -43,7 +43,7 @@ const en: SetupCopy = {
     {
       title: "Choose your AI",
       body: "The first setup step asks which AI you use: a local Ollama model, OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service. Enter your key, or pick a local model. JARVIS sends one short test message and saves your choice only if it answers, then checks email analysis with the same AI. Keys are stored in macOS Keychain.",
-      note: "JARVIS uses only this AI unless you add others in the advanced settings. You can change it later in Settings → Models, under Your AI. Email analysis can use a different provider in its own settings and does not switch providers automatically on failure.",
+      note: "JARVIS uses only this AI unless you add others in the advanced settings. You can change it later in Settings → Models, under Your AI. Email analysis can use a different provider in its own settings and does not switch providers automatically on failure. Email content goes only to OpenAI, Claude, AWS Bedrock, a local Ollama model, or Gemini after you confirm billing is enabled; with Kimi, Qwen or another service, chat works, but email features need one of these.",
     },
     {
       title: "Start a conversation with your assistant",
@@ -77,14 +77,14 @@ const en: SetupCopy = {
     title: "Need a draft or time on your calendar?",
     body: "JARVIS also has a general assistant with its own Google connection and AI settings. In chat, you can request a Gmail draft to review and send yourself, or ask for a calendar event. These are separate from the email group analysis above.",
     prompt: "Create a 30-minute calendar event tomorrow at 2 pm called Review the proposal.",
-    note: "Email groups and their memories are not automatically shared with general chat. Calendar changes can run when you request them; a separate approval step is not guaranteed for every action. Check the resulting event in Google Calendar.",
+    note: "Email groups and their memories are not automatically shared with general chat. New and changed calendar events run when you request them; deleting an event asks you to allow it first. Check the resulting event in Google Calendar.",
   },
   data: {
     title: "Understand where your information goes.",
     paragraphs: [
-      "Synced email text, groups, instructions and memories are stored in a local SQLite database on your Mac. The database has no separate application-level encryption. Provider API keys and Google refresh tokens are stored in macOS Keychain. This is a workspace on one Mac, without cross-device sync.",
+      "Synced email text, groups, instructions and memories are stored in a local SQLite database on your Mac. The database is encrypted (AES-256) with a key kept in macOS Keychain. Provider API keys and Google refresh tokens are stored in macOS Keychain. This is a workspace on one Mac, without cross-device sync.",
       "The group's emails, instructions and relevant memories are sent for analysis to the AI you chose, using your account; with AWS Bedrock they go to the AWS service you configure. Your local copy remains on your Mac; cloud analysis is not offline processing.",
-      "With a local Ollama model, analysis stays on your Mac. JARVIS uses only the AI you chose and does not fall back to another provider automatically. Optional AI email sorting, once you turn it on, also uses that AI, or TypeSafe for classification if you add its key. Google integrations and voice services have separate network use.",
+      "With a local Ollama model, analysis stays on your Mac. JARVIS uses only the AI you chose and does not fall back to another provider automatically. Optional AI email sorting, once you turn it on, also uses that AI if it may receive email, or TypeSafe for classification if you add its key. Google integrations and voice services have separate network use.",
     ],
   },
   next: {
@@ -121,7 +121,7 @@ const zhHk: SetupCopy = {
     {
       title: "選擇你的 AI",
       body: "首次設定的第一步會問你使用哪一個 AI：本機 Ollama 模型、OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式的服務。輸入你的密鑰，或選擇本機模型。JARVIS 會先傳送一句簡短訊息測試，成功後才儲存，並以同一個 AI 確認電郵分析可用。密鑰儲存於 macOS Keychain。",
-      note: "除非你在進階設定加入其他供應商，JARVIS 只會使用這一個 AI；之後可在「設定 → 模型」的「你的 AI」更換。電郵分析可在其設定中另選供應商，失敗時不會自動轉用其他供應商。",
+      note: "除非你在進階設定加入其他供應商，JARVIS 只會使用這一個 AI；之後可在「設定 → 模型」的「你的 AI」更換。電郵分析可在其設定中另選供應商，失敗時不會自動轉用其他供應商。電郵內容只會傳送至 OpenAI、Claude、AWS Bedrock、本機 Ollama 模型，或確認已啟用付費的 Gemini；選擇 Kimi、Qwen 或其他服務時，對話照常使用，但電郵功能需改用上述其中一個 AI。",
     },
     {
       title: "開始與助理對話",
@@ -155,14 +155,14 @@ const zhHk: SetupCopy = {
     title: "需要回覆草稿或安排日曆？",
     body: "JARVIS 的一般助理使用獨立的 Google 連接與 AI 設定。在聊天中，你可以要求建立 Gmail 草稿，自行檢閱及寄出，或要求新增日曆活動。這些功能與以上群組分析分開。",
     prompt: "在明天下午 2 時建立一個 30 分鐘的日曆活動，名稱是「檢查提案」。",
-    note: "電郵群組與記憶不會自動帶入一般聊天。日曆變更可在你提出要求後執行，並非每項操作都另設批准步驟；請到 Google Calendar 檢查結果。",
+    note: "電郵群組與記憶不會自動帶入一般聊天。新增及更改日曆活動會在你提出要求後執行，刪除活動前則會先請你批准；請到 Google Calendar 檢查結果。",
   },
   data: {
     title: "清楚了解資料的去向。",
     paragraphs: [
-      "同步郵件文字、群組、指示與記憶儲存於 Mac 的本機 SQLite 資料庫，資料庫沒有獨立的應用層加密。API 密鑰與 Google refresh token 則儲存於 macOS Keychain。工作區屬於這部 Mac，未支援跨裝置同步。",
+      "同步郵件文字、群組、指示與記憶儲存於 Mac 的本機 SQLite 資料庫，資料庫以 AES-256 加密，金鑰存於 macOS Keychain。API 密鑰與 Google refresh token 則儲存於 macOS Keychain。工作區屬於這部 Mac，未支援跨裝置同步。",
       "群組郵件、個人指示與有效記憶會透過你的帳戶傳送至你選擇的 AI 分析；選擇 AWS Bedrock 則傳送至你設定的 AWS 服務。本機副本仍然保留，但雲端分析並非離線處理。",
-      "使用本機 Ollama 模型時，分析留在你的 Mac。JARVIS 只使用你選擇的 AI，不會自動轉用其他供應商。開啟 AI 自動整理後，整理亦使用該 AI；如你加入 TypeSafe 密鑰，則由 TypeSafe 負責分類。Google 整合及部分語音服務亦會連接網絡。",
+      "使用本機 Ollama 模型時，分析留在你的 Mac。JARVIS 只使用你選擇的 AI，不會自動轉用其他供應商。開啟 AI 自動整理後，如該 AI 可接收電郵，整理亦使用該 AI；如你加入 TypeSafe 密鑰，則由 TypeSafe 負責分類。Google 整合及部分語音服務亦會連接網絡。",
     ],
   },
   next: {
