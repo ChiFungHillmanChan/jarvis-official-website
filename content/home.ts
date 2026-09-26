@@ -77,11 +77,11 @@ export const enHome = {
     items: [
       {
         title: "Stored on your Mac",
-        body: "Your conversations, tasks and synced context are stored in a local database. Service credentials are kept in macOS Keychain.",
+        body: "Your conversations, tasks and synced context are stored in an encrypted local database. Service credentials are kept in macOS Keychain.",
       },
       {
         title: "Your choice of AI",
-        body: "Choose one AI and JARVIS uses only that one, with your own key or a local model. Relevant email content, instructions and memories go to the AI you choose. Local storage does not mean offline processing.",
+        body: "Choose one AI and JARVIS uses only that one, with your own key or a local model. Relevant email content, instructions and memories go to the AI you choose, and only if it does not train on email: OpenAI, Claude, AWS Bedrock, a local model, or Gemini with billing enabled. Local storage does not mean offline processing.",
       },
       {
         title: "You stay in control",
@@ -123,12 +123,12 @@ export const enHome = {
       {
         question: "Does everything stay on my Mac?",
         answer:
-          "Synced emails, group instructions and confirmed memories are stored on your Mac. Analysis sends the relevant context to the AI you choose; a local Ollama model keeps it on your Mac. Group analysis results are shown in the app and are not automatically saved as memories. Voice services and connected apps have separate data flows.",
+          "Synced emails, group instructions and confirmed memories are stored on your Mac in an encrypted database. Analysis sends the relevant context to the AI you choose; a local Ollama model keeps it on your Mac. Group analysis results are shown in the app and are not automatically saved as memories. Voice services and connected apps have separate data flows.",
       },
       {
         question: "Can JARVIS send emails or change my calendar?",
         answer:
-          "The email workspace is read-only: group analysis cannot send emails or change your calendar. The separate general assistant can create Gmail drafts for you to review and send, and can change calendar events when requested. Not every general-assistant action has a separate confirmation step.",
+          "The email workspace is read-only: group analysis cannot send emails or change your calendar. The separate general assistant can create Gmail drafts for you to review and send, and can create or change calendar events when requested. It asks you to allow each memory it saves, email it archives, event it deletes and follow-up it changes.",
       },
       {
         question: "How do I join the beta, and what does it cost?",
@@ -222,11 +222,11 @@ export const zhHome: DeepWiden<typeof enHome> = {
     items: [
       {
         title: "資料儲存在 Mac",
-        body: "對話、待辦事項及同步內容儲存在本機資料庫。服務憑證則存放於 macOS 鑰匙圈。",
+        body: "對話、待辦事項及同步內容儲存在已加密的本機資料庫。服務憑證則存放於 macOS 鑰匙圈。",
       },
       {
         title: "AI 供應商，由你選擇",
-        body: "選擇一個 AI，JARVIS 就只使用這個 AI，以你自己的金鑰或本機模型運作。相關郵件、指示及記憶會傳送至你選擇的 AI。本機儲存不等於離線處理。",
+        body: "選擇一個 AI，JARVIS 就只使用這個 AI，以你自己的金鑰或本機模型運作。相關郵件、指示及記憶會傳送至你選擇的 AI，但只限不會以電郵訓練模型的 AI：OpenAI、Claude、AWS Bedrock、本機模型，或已啟用付費的 Gemini。本機儲存不等於離線處理。",
       },
       {
         title: "決定權始終在你手上",
@@ -268,12 +268,12 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         question: "所有資料都會留在我的 Mac 嗎？",
         answer:
-          "已同步郵件、群組指示及已確認記憶儲存在 Mac。分析會將相關背景傳送至你選擇的 AI；使用本機 Ollama 模型時則留在 Mac。群組分析結果在 App 顯示，不會自動儲存為記憶。語音服務及連接的應用程式另有資料流程。",
+          "已同步郵件、群組指示及已確認記憶以加密資料庫儲存在 Mac。分析會將相關背景傳送至你選擇的 AI；使用本機 Ollama 模型時則留在 Mac。群組分析結果在 App 顯示，不會自動儲存為記憶。語音服務及連接的應用程式另有資料流程。",
       },
       {
         question: "JARVIS 可以傳送電郵或更改行事曆嗎？",
         answer:
-          "電郵工作區屬唯讀：群組分析不能寄信或更改行事曆。獨立的一般助理可以建立 Gmail 草稿，由你檢閱及傳送，亦可按要求更改行事曆活動。一般助理並非每項操作都有獨立確認步驟。",
+          "電郵工作區屬唯讀：群組分析不能寄信或更改行事曆。獨立的一般助理可以建立 Gmail 草稿，由你檢閱及傳送，亦可按要求新增或更改行事曆活動。一般助理每次儲存記憶、封存郵件、刪除活動或更改跟進事項前，都會先請你批准。",
       },
       {
         question: "如何加入 Beta？費用是多少？",

@@ -29,7 +29,7 @@ describe("security copy: actual data boundaries", () => {
       storageBoundary: /local storage[^.]*does not mean local AI processing/i,
       fallback: /cloud providers and fallbacks/i,
       voice: /voice[^.]*own provider settings/i,
-      encryptionLimit: /no separate application-level encryption/i,
+      encryption: /encrypted with AES-256 \(SQLCipher\), its key is kept in macOS Keychain/i,
       separateApplications: /beta applications are separate server-side records/i,
       noMailboxUpload: /does not upload[^.]*mailbox or conversations/i,
       readOnly: /email workspace[^.]*read-only Gmail/i,
@@ -43,7 +43,7 @@ describe("security copy: actual data boundaries", () => {
       storageBoundary: /本機儲存不代表.*本機處理/,
       fallback: /雲端供應商及後備路徑/,
       voice: /語音轉錄及朗讀.*各有供應商設定/,
-      encryptionLimit: /沒有額外的應用程式層加密/,
+      encryption: /以 AES-256（SQLCipher）加密，金鑰存於 macOS 鑰匙圈/,
       separateApplications: /Beta 申請是獨立的伺服器端紀錄/,
       noMailboxUpload: /不會把.*信箱或對話上傳/,
       readOnly: /電郵工作區只申請 Gmail 唯讀/,
@@ -65,7 +65,7 @@ describe("security copy: actual data boundaries", () => {
   it.each(locales)("does not turn the beta database into a product cloud workspace ($locale)", (entry) => {
     const text = sectionBody(entry.copy.security, "local-data");
     expect(text).toContain("SQLite");
-    expect(text).toMatch(entry.encryptionLimit);
+    expect(text).toMatch(entry.encryption);
     expect(text).toMatch(entry.separateApplications);
     expect(text).toMatch(entry.noMailboxUpload);
   });
