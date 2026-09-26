@@ -80,6 +80,7 @@
 | --- | --- | --- |
 | 自動電郵整理 | 產品 `src-tauri/src/mail/triage.rs`（`JEV_TEXT_CHARS` 1,500、`LUNA_TEXT_CHARS` 6,000、`mailbox_owner.addresses`）；`mail_settings.auto_triage` 預設為 0 | 預設關閉；TypeSafe 收到寄件者、收件者、主旨、內文首 1,500 個字元及用戶自己的信箱地址；需要摘要或附日期跟進事項時，OpenAI 收到最多 6,000 個字元；兩者均使用用戶提供的 key |
 | 背景同步 | 產品 `migrations/V2__email_calendar_cron.sql`、`V3__notion_github.sql`、`src-tauri/src/scheduler/mod.rs` | 一般助理的 Google 連接每約 5 分鐘同步郵件及日曆；Notion 等連接會在背景更新。電郵工作區目前由用戶啟動同步，背景同步仍在開發，因此政策以「可能」表述 |
+| 整理頻率、費用及工具 | 產品 `mail/triage.rs` 在每次同步後處理未整理郵件；沒有工具或對外路徑；使用用戶自己的 key | 開啟後每次同步（包括自動同步）後進行整理；用量由用戶的供應商帳戶支付；自動整理沒有任何工具 |
 | 助理本機紀錄 | 產品 `src-tauri/src/ai/tools.rs`（`list_follow_ups`、`list_inbox_triage`、`list_tasks`） | 一般助理請求可包含所需的本機跟進事項及任務清單 |
 
 未處理：第 7 節的 Limited Use 聲明，與一般聊天預設使用 Gemini（免費服務條款可能容許用於改善模型）之間存在張力。此項須在 Google OAuth 驗證準備時決定，本次沒有修改。
