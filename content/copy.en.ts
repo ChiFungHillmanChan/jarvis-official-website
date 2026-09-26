@@ -70,7 +70,7 @@ export const copy = {
   },
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 2026-09-11",
+    lastUpdated: "Last updated: 2026-09-26",
     sections: [
       {
         title: "Who this policy is from",
@@ -87,7 +87,7 @@ export const copy = {
       },
       {
         title: "Email workspace, GPT and memories",
-        body: "The email workspace connects Gmail accounts with read-only access. Synced email text, groups, personal instructions and user-created memories are stored on this Mac, without cross-device sync. When you choose OpenAI GPT, the group's emails, instructions and relevant active memories are sent to OpenAI using your API key. If you choose AWS Bedrock, that content goes to your configured AWS service. Cloud analysis requires confirmation of this data use in Analysis settings, and provider usage is billed to your account. A supported local Ollama model is also available. Email analysis does not automatically fall back to another provider. The model does not save memories on your behalf; you create and manage them. Analysis results currently remain in the page session and must be generated again after reopening the app. Disconnecting Gmail keeps local copies; explicitly deleting the account removes its local emails and memories sourced from them, without deleting Gmail originals. Provider data policies still apply to cloud requests.",
+        body: "The email workspace connects Gmail accounts with read-only access. Connected mailboxes sync when you press Sync and automatically every five minutes while the JARVIS app is running. Synced email text, groups, personal instructions and user-created memories are stored on this Mac, without cross-device sync. When you choose OpenAI GPT, the group's emails, instructions and relevant active memories are sent to OpenAI using your API key. If you choose AWS Bedrock, that content goes to your configured AWS service. Cloud analysis requires confirmation of this data use in Analysis settings, and provider usage is billed to your account. A supported local Ollama model is also available. Email analysis does not automatically fall back to another provider. The model does not save memories on your behalf; you create and manage them. Analysis results currently remain in the page session and must be generated again after reopening the app. Disconnecting Gmail keeps local copies; explicitly deleting the account removes its local emails and memories sourced from them, without deleting Gmail originals. Optional AI sorting is off until you turn it on in Analysis settings and add your own TypeSafe API key. When it is on, each newly synced email's sender, recipients, subject and first 1,500 characters, together with your mailbox addresses, are sent to TypeSafe to classify it; if you have also added an OpenAI key, emails that need a summary or a dated follow-up send up to 6,000 characters to OpenAI. Sorting runs after each sync, including the automatic one, and usage is billed to your own keys. Provider data policies still apply to cloud requests.",
       },
       {
         title: "Information collected on this website",
@@ -95,7 +95,7 @@ export const copy = {
       },
       {
         title: "Third-party service providers",
-        body: "Website form submissions are delivered through Resend, a transactional email provider. The Stripe payment integration is in test mode; paid plans have not launched, and JARVIS AI does not store raw card numbers. Product model requests go to the selected provider: OpenAI or AWS for the corresponding email analysis mode, and the configured provider for general chat, whose default is Google Gemini. Provider data handling is governed by its own published policies.",
+        body: "Website form submissions are delivered through Resend, a transactional email provider. The Stripe payment integration is in test mode; paid plans have not launched, and JARVIS AI does not store raw card numbers. Product model requests go to the selected provider: OpenAI or AWS for the corresponding email analysis mode, TypeSafe and OpenAI for optional email sorting, and the configured provider for general chat, whose default is Google Gemini. Provider data handling is governed by its own published policies.",
       },
       {
         title: "Product integrations",
@@ -113,7 +113,7 @@ export const copy = {
   },
   security: {
     heading: "Security",
-    lastUpdated: "Last updated: 2026-09-11",
+    lastUpdated: "Last updated: 2026-09-26",
     sections: [
       {
         title: "Local storage by default",
@@ -133,7 +133,7 @@ export const copy = {
       },
       {
         title: "Email workspace permissions and processing",
-        body: "Gmail access in the email workspace is read-only. Sync is started by the user; groups are local and do not change Gmail labels. Analysis has no email-sending, calendar or other action tools. In OpenAI GPT mode, group emails, instructions and relevant active memories go to OpenAI using your API key; in AWS Bedrock mode, they go to your configured AWS service. Cloud modes require acknowledgement of this data use in Analysis settings. Email analysis does not automatically change providers after a failure. A supported local Ollama model can process the analysis on your Mac. Copies of emails, groups and memories remain local, while analysis results currently remain only in the page session. Memories are created and managed by the user. Citation checks verify source references, but do not guarantee that an answer is factually correct; check important details against the original email. Each cloud provider's data policies still apply.",
+        body: "Gmail access in the email workspace is read-only. Sync runs when the user presses Sync and every five minutes while the app is running; groups are local and do not change Gmail labels. Analysis has no email-sending, calendar or other action tools. Optional AI sorting, which sends email text to TypeSafe and, for some messages, OpenAI using your keys, has no tools either. In OpenAI GPT mode, group emails, instructions and relevant active memories go to OpenAI using your API key; in AWS Bedrock mode, they go to your configured AWS service. Cloud modes require acknowledgement of this data use in Analysis settings. Email analysis does not automatically change providers after a failure. A supported local Ollama model can process the analysis on your Mac. Copies of emails, groups and memories remain local, while analysis results currently remain only in the page session. Memories are created and managed by the user. Citation checks verify source references, but do not guarantee that an answer is factually correct; check important details against the original email. Each cloud provider's data policies still apply.",
       },
       {
         title: "Audit logging and monitoring",
