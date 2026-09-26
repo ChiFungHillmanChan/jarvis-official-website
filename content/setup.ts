@@ -28,7 +28,7 @@ const en: SetupCopy = {
     title: "Before you start",
     items: [
       "The current beta requires a Mac with Apple Silicon and macOS 12 or later.",
-      "Beta access and the JARVIS macOS app. Google sign-in may require your account to be added as a beta tester.",
+      "Beta access and the JARVIS macOS app. JARVIS has not yet completed Google verification, so Google shows a warning before you connect an account; step 1 explains how to continue.",
       "An AI you already use: your own API key for OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service, or a local Ollama model with no key. Provider usage is billed separately to your account. Your own AWS Bedrock is another email analysis option.",
       "For the email workflow: one or more Gmail accounts, and an internet connection for Gmail sync and cloud AI.",
     ],
@@ -38,12 +38,12 @@ const en: SetupCopy = {
     {
       title: "Request beta access and install JARVIS",
       body: "Join the waitlist to request access. If you already have beta access, use the download page to get the current macOS build. Open JARVIS and follow the onboarding steps.",
-      note: "If Google sign-in says your account is blocked or the app is not verified, contact us to check your tester access.",
+      note: "JARVIS has not yet completed Google verification. When you connect a Google account, during setup or in the email workspace, Google first shows “Google hasn’t verified this app”. To continue, choose Advanced, then the link to continue to JARVIS, and review the access requested before you allow it. Until verification is complete, only a limited number of Google accounts can connect; if Google refuses the sign-in, contact us.",
     },
     {
       title: "Choose your AI",
       body: "The first setup step asks which AI you use: a local Ollama model, OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service. Enter your key, or pick a local model. JARVIS sends one short test message and saves your choice only if it answers, then checks email analysis with the same AI. Keys are stored in macOS Keychain.",
-      note: "JARVIS uses only this AI unless you add others in the advanced settings. You can change it later in Settings → Your AI. Email analysis can use a different provider in its own settings and does not switch providers automatically on failure.",
+      note: "JARVIS uses only this AI unless you add others in the advanced settings. You can change it later in Settings → Models, under Your AI. Email analysis can use a different provider in its own settings and does not switch providers automatically on failure.",
     },
     {
       title: "Start a conversation with your assistant",
@@ -106,7 +106,7 @@ const zhHk: SetupCopy = {
     title: "開始之前",
     items: [
       "目前 Beta 需要一部配備 Apple Silicon、執行 macOS 12 或以上版本的 Mac。",
-      "Beta 使用資格及 JARVIS macOS 應用程式。你的 Google 帳戶可能需要先加入測試者名單，才能登入。",
+      "Beta 使用資格及 JARVIS macOS 應用程式。JARVIS 尚未完成 Google 驗證，連接帳戶前 Google 會先顯示警告；第 1 步說明如何繼續。",
       "你已在使用的 AI：OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式服務的 API 密鑰，或無須密鑰的本機 Ollama 模型。供應商用量另行計入你的帳戶。電郵分析亦可選擇你自己的 AWS Bedrock。",
       "進行電郵工作流程需要一個或多個 Gmail 帳戶，以及同步 Gmail 及使用雲端 AI 所需的網絡連線。",
     ],
@@ -116,12 +116,12 @@ const zhHk: SetupCopy = {
     {
       title: "申請 Beta 資格並安裝 JARVIS",
       body: "加入候補名單以申請試用。如果你已有 Beta 使用資格，可以前往下載頁取得目前的 macOS 版本。開啟 JARVIS，然後按照首次設定指引操作。",
-      note: "如果 Google 登入顯示帳戶受限制或應用程式尚未驗證，請聯絡我們確認你的測試者資格。",
+      note: "JARVIS 尚未完成 Google 驗證。在設定導引或電郵工作區連接 Google 帳戶時，Google 會先顯示應用程式未經驗證的警告。如要繼續，請選擇「進階」（Advanced），再選擇前往 JARVIS 的連結，並在允許前核對所要求的存取權限。完成驗證前，可連接的 Google 帳戶數目有限；如 Google 拒絕登入，請聯絡我們。",
     },
     {
       title: "選擇你的 AI",
       body: "首次設定的第一步會問你使用哪一個 AI：本機 Ollama 模型、OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式的服務。輸入你的密鑰，或選擇本機模型。JARVIS 會先傳送一句簡短訊息測試，成功後才儲存，並以同一個 AI 確認電郵分析可用。密鑰儲存於 macOS Keychain。",
-      note: "除非你在進階設定加入其他供應商，JARVIS 只會使用這一個 AI；之後可在「設定 → 你的 AI」更換。電郵分析可在其設定中另選供應商，失敗時不會自動轉用其他供應商。",
+      note: "除非你在進階設定加入其他供應商，JARVIS 只會使用這一個 AI；之後可在「設定 → 模型」的「你的 AI」更換。電郵分析可在其設定中另選供應商，失敗時不會自動轉用其他供應商。",
     },
     {
       title: "開始與助理對話",

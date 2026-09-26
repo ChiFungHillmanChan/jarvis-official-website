@@ -80,8 +80,6 @@ export const copy: DeepWiden<typeof enCopy> = {
     subtitle: "目前的私人 Beta 版本適用於 Apple Silicon Mac。",
     systemRequirements: "需要 macOS 12 或以上，Apple Silicon（M1 或更新）。",
     primaryCta: "下載 macOS 版本",
-    fallbackVersion: "0.1.0",
-    fallbackCta: "下載 v0.1.0",
     loadingNotes: "正在載入版本記錄...",
     releaseNotesHeading: "更新內容",
     nonMacosTitle: "目前提供 macOS 版本",

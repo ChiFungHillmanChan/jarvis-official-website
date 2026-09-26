@@ -78,8 +78,6 @@ export const copy = {
     subtitle: "The current beta release for Apple Silicon Macs.",
     systemRequirements: "Requires macOS 12 or later, Apple Silicon (M1 or later).",
     primaryCta: "Download for macOS",
-    fallbackVersion: "0.1.0",
-    fallbackCta: "Download v0.1.0",
     loadingNotes: "Loading release notes...",
     releaseNotesHeading: "What's new",
     nonMacosTitle: "Currently available for macOS",
