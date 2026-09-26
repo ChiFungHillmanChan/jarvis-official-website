@@ -71,3 +71,15 @@
 - 使用 Codex 內置 ARM Node 執行現有 `content/company.test.ts`，9 項通過。
 - 首次全站 `npm run typecheck` 被並行修改中的 `components/sections/demo/ProductDemo.tsx` 阻擋（`scene` 可能未定義），法律檔案未報錯；已回報主工作任務，由其整合後重跑。
 - 系統預設 Node 是 x64，直接以 `npx vitest` 執行會缺少 `@rolldown/binding-darwin-x64`。改用 `/Users/hillmanchan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node` 後，既有測試正常執行；沒有為此刪除或重裝專案依賴。
+
+## 2026-09-26 更新（私隱政策版本 2026-09-26）
+
+私隱政策及安全說明加入自動電郵整理、背景同步及助理可讀取的本機紀錄。條款版本維持 `2026-09-24`。此更新取代 PR #11 對舊 `content/copy.*.ts` 的修改；改版後這些段落已移至 `content/legal.ts`。
+
+| 項目 | 程式或配置依據 | 法律頁表達 |
+| --- | --- | --- |
+| 自動電郵整理 | 產品 `src-tauri/src/mail/triage.rs`（`JEV_TEXT_CHARS` 1,500、`LUNA_TEXT_CHARS` 6,000、`mailbox_owner.addresses`）；`mail_settings.auto_triage` 預設為 0 | 預設關閉；TypeSafe 收到寄件者、收件者、主旨、內文首 1,500 個字元及用戶自己的信箱地址；需要摘要或附日期跟進事項時，OpenAI 收到最多 6,000 個字元；兩者均使用用戶提供的 key |
+| 背景同步 | 產品 `migrations/V2__email_calendar_cron.sql`、`V3__notion_github.sql`、`src-tauri/src/scheduler/mod.rs` | 一般助理的 Google 連接每約 5 分鐘同步郵件及日曆；Notion 等連接會在背景更新。電郵工作區目前由用戶啟動同步，背景同步仍在開發，因此政策以「可能」表述 |
+| 助理本機紀錄 | 產品 `src-tauri/src/ai/tools.rs`（`list_follow_ups`、`list_inbox_triage`、`list_tasks`） | 一般助理請求可包含所需的本機跟進事項及任務清單 |
+
+未處理：第 7 節的 Limited Use 聲明，與一般聊天預設使用 Gemini（免費服務條款可能容許用於改善模型）之間存在張力。此項須在 Google OAuth 驗證準備時決定，本次沒有修改。

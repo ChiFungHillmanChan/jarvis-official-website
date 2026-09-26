@@ -26,7 +26,7 @@ const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
 const consent = {
   privacyAccepted: true,
   termsAccepted: true,
-  privacyVersion: "2026-09-24",
+  privacyVersion: "2026-09-26",
   termsVersion: "2026-09-24",
 };
 let records: Map<string, Record<string, AttributeValue>>;
@@ -111,7 +111,7 @@ describe("POST /api/waitlist", () => {
       painPoint: { S: "Follow-ups" },
       locale: { S: "zh-HK" },
       status: { S: "pending" },
-      privacyVersion: { S: "2026-09-24" },
+      privacyVersion: { S: "2026-09-26" },
       termsVersion: { S: "2026-09-24" },
     });
     expect(record.createdAt!.S).toMatch(/^\d{4}-\d{2}-\d{2}T/);

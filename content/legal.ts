@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 24 September 2026 · Version 2026-09-24",
+    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -55,12 +55,12 @@ export const enLegal: LegalCopy = {
       {
         id: "google-access",
         title: "5. Google connections and their permissions",
-        body: "The email workspace requests Gmail read-only access (gmail.readonly) to retrieve your account address, message metadata and email text for local reading, organisation and analysis. You initiate synchronisation. It does not send mail or change Gmail labels. Attachments are not downloaded by this workspace.\n\nThe separate general-assistant Google connection requests Gmail read/modify access (gmail.modify), Calendar access and basic profile information. It supports reading and organising email, saving drafts, calendar operations and displaying your name. This connection has broader permissions than the email workspace. The assistant’s email tool creates a draft in Gmail for you to review; it does not send the draft. Review the Google consent screen for the connection you enable.",
+        body: "The email workspace requests Gmail read-only access (gmail.readonly) to retrieve your account address, message metadata and email text for local reading, organisation and analysis. Synchronisation runs when you start it and may also run automatically, about every five minutes, while JARVIS is open. It does not send mail or change Gmail labels. Attachments are not downloaded by this workspace.\n\nThe separate general-assistant Google connection requests Gmail read/modify access (gmail.modify), Calendar access and basic profile information. It supports reading and organising email, saving drafts, calendar operations and displaying your name. While JARVIS is open, this connection syncs recent email and calendar events in the background about every five minutes. This connection has broader permissions than the email workspace. The assistant’s email tool creates a draft in Gmail for you to review; it does not send the draft. Review the Google consent screen for the connection you enable.",
       },
       {
         id: "ai-processing",
         title: "6. AI analysis, provider choice and voice",
-        body: "General assistant requests contain your prompt and relevant conversation or connected-service context. They go to the provider configured in the application. The default general-assistant route uses Google Gemini; enabled alternatives or fallbacks can include OpenAI, Anthropic, Amazon Bedrock and local models. A local model selection does not, by itself, disable enabled cloud fallbacks or separate voice services.\n\nThe email workspace has separate analysis settings. If you select OpenAI or Amazon Bedrock and acknowledge the cloud transfer, the group’s included email text, personal instructions and relevant active memories are sent to that provider using your account. Local Ollama analysis is also supported. Email analysis does not automatically switch to another provider on failure. Memories are created or confirmed by you; analysis does not save them automatically.\n\nWhen you use voice input and a Gemini key is available, recorded command audio is sent to Google for transcription; local Whisper is a supported fallback. MiniMax receives text to be spoken if you select its speech service. macOS speech and a configured local CosyVoice model are local alternatives. Selecting local text analysis does not change these voice settings.\n\nProvider terms, account settings and retention controls apply to content they receive. The email workspace requests OpenAI processing with response storage disabled; this does not guarantee zero provider retention. Gemini’s unpaid-service terms can allow use of submitted content for model improvement and human review. Do not send personal, sensitive, confidential or Google user data through a provider configuration that permits incompatible uses. Review provider settings before connecting work accounts or processing private material.",
+        body: "General assistant requests contain your prompt, relevant conversation or connected-service context, and local JARVIS records a request needs, such as email follow-ups and your task list. They go to the provider configured in the application. The default general-assistant route uses Google Gemini; enabled alternatives or fallbacks can include OpenAI, Anthropic, Amazon Bedrock and local models. A local model selection does not, by itself, disable enabled cloud fallbacks or separate voice services.\n\nThe email workspace has separate analysis settings. If you select OpenAI or Amazon Bedrock and acknowledge the cloud transfer, the group’s included email text, personal instructions and relevant active memories are sent to that provider using your account. Local Ollama analysis is also supported. Email analysis does not automatically switch to another provider on failure. Memories are created or confirmed by you; analysis does not save them automatically.\n\nThe email workspace also offers automatic sorting, which stays off until you turn it on. When it is on, the sender, recipients, subject and first 1,500 characters of each message not yet sorted, together with your own mailbox addresses, are sent to TypeSafe to classify the message. For messages that need a summary or a dated follow-up, up to 6,000 characters of the message are also sent to OpenAI. Both use API keys you provide. The resulting categories, summaries and follow-ups are stored on your Mac.\n\nWhen you use voice input and a Gemini key is available, recorded command audio is sent to Google for transcription; local Whisper is a supported fallback. MiniMax receives text to be spoken if you select its speech service. macOS speech and a configured local CosyVoice model are local alternatives. Selecting local text analysis does not change these voice settings.\n\nProvider terms, account settings and retention controls apply to content they receive. The email workspace requests OpenAI processing with response storage disabled; this does not guarantee zero provider retention. Gemini’s unpaid-service terms can allow use of submitted content for model improvement and human review. Do not send personal, sensitive, confidential or Google user data through a provider configuration that permits incompatible uses. Review provider settings before connecting work accounts or processing private material.",
         links: [
           { label: "OpenAI API data controls", href: "https://developers.openai.com/api/docs/guides/your-data" },
           { label: "Gemini API terms and data use", href: "https://ai.google.dev/gemini-api/terms" },
@@ -79,7 +79,7 @@ export const enLegal: LegalCopy = {
       {
         id: "sharing",
         title: "8. Recipients and international processing",
-        body: "Website and support data can be handled by our hosting, database, email-delivery and company-email providers and authorised personnel managing applications or support. Connected services such as Google, Notion and GitHub receive the requests you make through their integrations. Your configured AI and voice providers receive the content described above. These providers may process data outside Hong Kong, including in the United States or other locations supported by their services; choosing a local database does not limit cloud processing to Hong Kong.\n\nWe do not sell personal data. We may disclose information where legally required, to address fraud or security incidents, or to protect legal rights, subject to applicable law and any stricter Google-data restrictions. If ownership of the service changes, applicable privacy obligations continue; any transfer of Google user data that requires prior consent will be subject to that consent.",
+        body: "Website and support data can be handled by our hosting, database, email-delivery and company-email providers and authorised personnel managing applications or support. Connected services such as Google, Notion and GitHub receive the requests made through their integrations, including background refreshes while JARVIS is open. Your configured AI, email-sorting and voice providers, such as Google, OpenAI, Anthropic, Amazon, TypeSafe and MiniMax, receive the content described above. These providers may process data outside Hong Kong, including in the United States or other locations supported by their services; choosing a local database does not limit cloud processing to Hong Kong.\n\nWe do not sell personal data. We may disclose information where legally required, to address fraud or security incidents, or to protect legal rights, subject to applicable law and any stricter Google-data restrictions. If ownership of the service changes, applicable privacy obligations continue; any transfer of Google user data that requires prior consent will be subject to that consent.",
       },
       {
         id: "retention",
@@ -165,7 +165,7 @@ export const enLegal: LegalCopy = {
   },
   security: {
     heading: "Security and Data Controls",
-    lastUpdated: "Last updated: 24 September 2026",
+    lastUpdated: "Last updated: 26 September 2026",
     summary: "The controls available today, their limits and how to report a security concern.",
     sections: [
       {
@@ -182,7 +182,7 @@ export const enLegal: LegalCopy = {
       {
         id: "processing",
         title: "3. Cloud processing is a separate choice",
-        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks. Email analysis has separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
+        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks. Email analysis has separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Automatic sorting, once you turn it on, sends message details to TypeSafe and, for some messages, OpenAI. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
       },
       {
         id: "deletion",
@@ -208,7 +208,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 9 月 24 日 · 版本 2026-09-24",
+    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -240,12 +240,12 @@ export const zhLegal: LegalCopy = {
       {
         id: "google-access",
         title: "5. Google 連接及權限",
-        body: "電郵工作區申請 Gmail 唯讀權限（gmail.readonly），以取得帳戶地址、郵件資料及內文，供本機閱讀、整理及分析。同步由你啟動。此工作區不會寄出郵件或更改 Gmail 標籤，亦不會下載附件。\n\n一般助理另有獨立的 Google 連接，申請 Gmail 讀取及修改權限（gmail.modify）、日曆權限及基本個人資料，用於閱讀與整理郵件、儲存草稿、操作日曆及顯示你的名稱。其權限範圍比電郵工作區廣。助理的郵件工具會在 Gmail 建立草稿供你審閱，不會寄出草稿。請閱讀你所啟用連接的 Google 授權畫面。",
+        body: "電郵工作區申請 Gmail 唯讀權限（gmail.readonly），以取得帳戶地址、郵件資料及內文，供本機閱讀、整理及分析。同步可由你啟動，亦可能在 JARVIS 開啟期間每約五分鐘自動進行。此工作區不會寄出郵件或更改 Gmail 標籤，亦不會下載附件。\n\n一般助理另有獨立的 Google 連接，申請 Gmail 讀取及修改權限（gmail.modify）、日曆權限及基本個人資料，用於閱讀與整理郵件、儲存草稿、操作日曆及顯示你的名稱。JARVIS 開啟期間，此連接會每約五分鐘在背景同步近期郵件及日曆活動。其權限範圍比電郵工作區廣。助理的郵件工具會在 Gmail 建立草稿供你審閱，不會寄出草稿。請閱讀你所啟用連接的 Google 授權畫面。",
       },
       {
         id: "ai-processing",
         title: "6. AI 分析、供應商選擇及語音",
-        body: "一般助理會將你的提示、相關對話及已連接服務的背景資料傳送至應用程式設定的供應商。一般助理的預設路徑使用 Google Gemini；啟用的其他供應商或後備路徑可包括 OpenAI、Anthropic、Amazon Bedrock 及本機模型。單純選擇本機模型，不會停用已啟用的雲端後備路徑或獨立語音服務。\n\n電郵工作區有獨立的分析設定。你選擇 OpenAI 或 Amazon Bedrock 並確認雲端傳送後，納入分析的群組郵件、個人指示及相關有效記憶，會使用你的帳戶傳送至該供應商。你亦可使用支援的本機 Ollama 分析。電郵分析失敗時不會自動轉用另一供應商。記憶由你建立或確認，分析不會自動儲存記憶。\n\n使用語音輸入時，如已設定可用的 Gemini key，錄下的指令音訊會傳送至 Google 轉錄；本機 Whisper 是支援的後備方式。如選用 MiniMax 語音服務，需朗讀的文字會傳送至 MiniMax。macOS 語音及已設定的本機 CosyVoice 模型則提供本機選項。選擇本機文字分析不會改變這些語音設定。\n\n供應商收到的內容受其條款、帳戶設定及保留控制影響。電郵工作區向 OpenAI 要求停用回應儲存，但這不保證供應商完全不保留資料。Gemini 免費服務的條款可能容許將提交內容用於改善模型及人工審閱。請勿透過容許不相容用途的供應商設定傳送個人、敏感、機密或 Google 使用者資料；連接工作帳戶或處理私人內容前，應先檢查供應商設定。",
+        body: "一般助理會將你的提示、相關對話、已連接服務的背景資料，以及請求所需的 JARVIS 本機紀錄（例如電郵跟進事項及任務清單）傳送至應用程式設定的供應商。一般助理的預設路徑使用 Google Gemini；啟用的其他供應商或後備路徑可包括 OpenAI、Anthropic、Amazon Bedrock 及本機模型。單純選擇本機模型，不會停用已啟用的雲端後備路徑或獨立語音服務。\n\n電郵工作區有獨立的分析設定。你選擇 OpenAI 或 Amazon Bedrock 並確認雲端傳送後，納入分析的群組郵件、個人指示及相關有效記憶，會使用你的帳戶傳送至該供應商。你亦可使用支援的本機 Ollama 分析。電郵分析失敗時不會自動轉用另一供應商。記憶由你建立或確認，分析不會自動儲存記憶。\n\n電郵工作區亦提供自動整理功能，預設關閉，須由你開啟。開啟後，尚未整理的郵件的寄件者、收件者、主旨及內文首 1,500 個字元，連同你自己的信箱地址，會傳送至 TypeSafe 作分類。需要摘要或附日期跟進事項的郵件，最多 6,000 個字元的內容亦會傳送至 OpenAI。兩者均使用你提供的 API key。分類、摘要及跟進事項儲存在你的 Mac。\n\n使用語音輸入時，如已設定可用的 Gemini key，錄下的指令音訊會傳送至 Google 轉錄；本機 Whisper 是支援的後備方式。如選用 MiniMax 語音服務，需朗讀的文字會傳送至 MiniMax。macOS 語音及已設定的本機 CosyVoice 模型則提供本機選項。選擇本機文字分析不會改變這些語音設定。\n\n供應商收到的內容受其條款、帳戶設定及保留控制影響。電郵工作區向 OpenAI 要求停用回應儲存，但這不保證供應商完全不保留資料。Gemini 免費服務的條款可能容許將提交內容用於改善模型及人工審閱。請勿透過容許不相容用途的供應商設定傳送個人、敏感、機密或 Google 使用者資料；連接工作帳戶或處理私人內容前，應先檢查供應商設定。",
         links: [
           { label: "OpenAI API 資料控制", href: "https://developers.openai.com/api/docs/guides/your-data" },
           { label: "Gemini API 條款及資料用途", href: "https://ai.google.dev/gemini-api/terms" },
@@ -264,7 +264,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "sharing",
         title: "8. 資料接收者及跨境處理",
-        body: "網站及支援資料可由託管、資料庫、電郵傳送及公司信箱供應商，以及負責申請或支援的獲授權人員處理。Google、Notion 及 GitHub 等已連接服務會收到你透過整合功能提出的請求。你設定的 AI 及語音供應商則會收到上文所述內容。供應商可能在香港以外處理資料，包括美國或其服務支援的其他地點；使用本機資料庫不代表雲端處理只在香港進行。\n\n我們不會出售個人資料。在法律要求、處理詐騙或安全事故，或保障合法權益時，我們可能按適用法律及 Google 資料的較嚴格限制披露必要資料。服務擁有權如有變更，適用的私隱責任仍然有效；如轉移 Google 使用者資料須事先取得同意，我們會遵守該要求。",
+        body: "網站及支援資料可由託管、資料庫、電郵傳送及公司信箱供應商，以及負責申請或支援的獲授權人員處理。Google、Notion 及 GitHub 等已連接服務會收到透過整合功能提出的請求，包括 JARVIS 開啟期間的背景更新。你設定的 AI、電郵整理及語音供應商（例如 Google、OpenAI、Anthropic、Amazon、TypeSafe 及 MiniMax）則會收到上文所述內容。供應商可能在香港以外處理資料，包括美國或其服務支援的其他地點；使用本機資料庫不代表雲端處理只在香港進行。\n\n我們不會出售個人資料。在法律要求、處理詐騙或安全事故，或保障合法權益時，我們可能按適用法律及 Google 資料的較嚴格限制披露必要資料。服務擁有權如有變更，適用的私隱責任仍然有效；如轉移 Google 使用者資料須事先取得同意，我們會遵守該要求。",
       },
       {
         id: "retention",
@@ -350,7 +350,7 @@ export const zhLegal: LegalCopy = {
   },
   security: {
     heading: "安全及資料控制",
-    lastUpdated: "最後更新：2026 年 9 月 24 日",
+    lastUpdated: "最後更新：2026 年 9 月 26 日",
     summary: "目前提供的保護措施、實際限制，以及安全問題的通報方式。",
     sections: [
       {
@@ -367,7 +367,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "processing",
         title: "3. 雲端處理需要另行考慮",
-        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑。電郵分析有獨立的本機、OpenAI 及 Bedrock 設定；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
+        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑。電郵分析有獨立的本機、OpenAI 及 Bedrock 設定；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。自動整理功能開啟後，會將郵件資料傳送至 TypeSafe，部分郵件亦會傳送至 OpenAI。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
       },
       {
         id: "deletion",

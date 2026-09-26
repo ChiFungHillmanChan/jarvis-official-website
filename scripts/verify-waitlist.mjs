@@ -23,7 +23,7 @@ const payload = {
   locale: "en",
   privacyAccepted: true,
   termsAccepted: true,
-  privacyVersion: "2026-09-24",
+  privacyVersion: "2026-09-26",
   termsVersion: "2026-09-24",
 };
 const post = (body) =>
