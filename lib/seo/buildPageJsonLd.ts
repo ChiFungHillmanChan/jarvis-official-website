@@ -21,6 +21,7 @@ export function buildPageJsonLd(locale: string, routeKey: RouteKey) {
   const route = getRouteMetadata(normalized)[routeKey];
   const url = `${siteUrl}${localePath(normalized, route.canonical)}`;
   const isHome = routeKey === "home";
+  const describesSoftware = ["home", "product", "demo", "howItWorks", "download", "beta"].includes(routeKey);
   const page = {
     "@type": routeKey === "contact" ? "ContactPage" : routeKey === "company" ? "AboutPage" : "WebPage",
     "@id": `${url}#webpage`,
@@ -30,7 +31,9 @@ export function buildPageJsonLd(locale: string, routeKey: RouteKey) {
     inLanguage: normalized === "zh-HK" ? "zh-Hant-HK" : "en",
     isPartOf: { "@id": `${siteUrl}/#website` },
     publisher: { "@id": `${siteUrl}/#organization` },
-    ...(isHome ? { mainEntity: { "@id": `${siteUrl}/#software` } } : { breadcrumb: { "@id": `${url}#breadcrumb` } }),
+    ...(describesSoftware ? { about: { "@id": `${siteUrl}/#software` } } : {}),
+    ...(isHome || routeKey === "product" ? { mainEntity: { "@id": `${siteUrl}/#software` } } : {}),
+    ...(!isHome ? { breadcrumb: { "@id": `${url}#breadcrumb` } } : {}),
   };
   const breadcrumb = {
     "@type": "BreadcrumbList",

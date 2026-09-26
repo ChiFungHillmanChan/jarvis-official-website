@@ -82,6 +82,7 @@ export default async function ContactPage({
             </p>
             <div className="mt-6">
               <WaitlistForm
+              locale={locale}
                 placeholder={copy.waitlistCta.placeholder}
                 submitLabel={copy.waitlistCta.submit}
                 submittingLabel={ui.waitlist.submitting}

@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: JARVIS website beta applications and scoped Vercel OIDC access
+Parameters:
+  TableName:
+    Type: String
+    Default: jarvis-website-beta-production
+    AllowedPattern: "[A-Za-z0-9_.-]{3,255}"
+  VercelTeamSlug:
+    Type: String
+    Default: hillmans-projects-ef63d7ca
+    AllowedPattern: "[a-z0-9-]+"
+  VercelProjectName:
+    Type: String
+    Default: jarvis-official-website
+    AllowedPattern: "[a-z0-9_-]+"
+  VercelEnvironment:
+    Type: String
+    Default: production
+    AllowedValues: [production, preview]
+  ExistingOidcProviderArn:
+    Type: String
+    Default: ""
+    Description: Reuse the team OIDC provider when deploying another environment
+Conditions:
+  CreateOidcProvider: !Equals [!Ref ExistingOidcProviderArn, ""]
+Resources:
+  Applications:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: !Ref TableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+      DeletionProtectionEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Project
+          Value: jarvis-official-website
+        - Key: Purpose
+          Value: beta-applications
+  VercelOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateOidcProvider
+    Properties:
+      Url: !Sub "https://oidc.vercel.com/${VercelTeamSlug}"
+      ClientIdList:
+        - !Sub "https://vercel.com/${VercelTeamSlug}"
+  ApplicationWriter:
+    Type: AWS::IAM::Role
+    Properties:
+      Description: Allows only this Vercel project and environment to capture beta applications
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Fn::Sub:
+          - |
+            {
+              "Version": "2012-10-17",
+              "Statement": [{
+                "Effect": "Allow",
+                "Principal": { "Federated": "${ProviderArn}" },
+                "Action": "sts:AssumeRoleWithWebIdentity",
+                "Condition": {
+                  "StringEquals": {
+                    "oidc.vercel.com/${VercelTeamSlug}:aud": "https://vercel.com/${VercelTeamSlug}",
+                    "oidc.vercel.com/${VercelTeamSlug}:sub": "owner:${VercelTeamSlug}:project:${VercelProjectName}:environment:${VercelEnvironment}"
+                  }
+                }
+              }]
+            }
+          - ProviderArn:
+              !If [CreateOidcProvider, !Ref VercelOidcProvider, !Ref ExistingOidcProviderArn]
+      Policies:
+        - PolicyName: CaptureBetaApplication
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt Applications.Arn
+Outputs:
+  WaitlistTableName:
+    Value: !Ref Applications
+  AwsRegion:
+    Value: !Ref AWS::Region
+  AwsRoleArn:
+    Value: !GetAtt ApplicationWriter.Arn
+  OidcProviderArn:
+    Value: !If [CreateOidcProvider, !Ref VercelOidcProvider, !Ref ExistingOidcProviderArn]

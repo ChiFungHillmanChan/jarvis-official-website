@@ -21,7 +21,7 @@ export const company = {
   // certificate at every business address -- but shown here as a trust signal.
   businessRegistrationNumber: "81247037-000-09-26-7",
   registeredAddress: "Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong",
-  tagline: "An AI assistant for the work on your Mac.",
+  tagline: "Your personal AI assistant for everyday work.",
   contactEmail: "contact@jarvis-automation.com",
   locationLine: "Hong Kong SAR",
   statusLine: "Hong Kong AI software startup",
@@ -49,7 +49,7 @@ const byLocale: Record<Locale, CompanyL10n> = {
     registeredOfficeLine: `Registered office: ${company.registeredAddress}. Company No. ${company.companyNumber}. Business Registration No. ${company.businessRegistrationNumber}.`,
   },
   "zh-HK": {
-    tagline: "為你在 Mac 上的日常工作而設的 AI 助理。",
+    tagline: "協助你處理日常工作的個人 AI 助理。",
     locationLine: "香港特別行政區",
     statusLine: "香港 AI 軟件初創",
     // The registered name stays in English because that is the only name on the

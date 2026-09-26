@@ -60,7 +60,7 @@ describe("DownloadClient non-macOS branch", () => {
 
     expect(screen.getByRole("link", { name: en.download.joinWaitlist })).toHaveAttribute(
       "href",
-      "/zh-HK#access",
+      "/zh-HK/beta",
     );
   });
 });

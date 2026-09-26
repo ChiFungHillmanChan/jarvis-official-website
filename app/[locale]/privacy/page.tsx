@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/content/metadata";
-import { PageJsonLd } from "@/components/seo/PageJsonLd";
-import { getCopy } from "@/content/getCopy";
-import { getUiFor } from "@/content/ui";
-import { section } from "@/lib/constants/spacing";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { LegalDocument } from "@/components/legal/LegalDocument";
 
 export async function generateMetadata({
   params,
@@ -23,28 +19,5 @@ export default async function PrivacyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const copy = await getCopy();
-  const ui = getUiFor(locale);
-
-  return (
-    <article className={`${section.paddingY} ${section.paddingX}`}>
-      <PageJsonLd locale={locale} routeKey="privacy" />
-      <div className="mx-auto max-w-3xl">
-        <SectionHeading
-          eyebrow={ui.legal.eyebrow}
-          title={copy.privacy.heading}
-          sub={copy.privacy.lastUpdated}
-          as="h1"
-        />
-        <div className="mt-12 space-y-10">
-          {copy.privacy.sections.map((s) => (
-            <section key={s.title} className="rounded-[2rem] border border-[var(--grid-line)] bg-[var(--bg-panel)] p-8 shadow-[var(--shadow-soft)]">
-              <h2 className="font-display text-2xl">{s.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-[color:var(--text-secondary)]">{s.body}</p>
-            </section>
-          ))}
-        </div>
-      </div>
-    </article>
-  );
+  return <LegalDocument locale={locale} page="privacy" />;
 }

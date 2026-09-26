@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { getUiFor } from "@/content/ui";
+import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/waitlist/policy";
 import { isEmail } from "@/lib/utils/isEmail";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -48,6 +49,7 @@ export function useWaitlistSubmit({
     company: string,
     role?: string,
     painPoint?: string,
+    locale = "en",
   ): Promise<SubmissionResult> {
     // The ref closes the gap before React renders the disabled submit button.
     if (inFlight.current) return "ignored";
@@ -63,7 +65,7 @@ export function useWaitlistSubmit({
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, company, role, painPoint }),
+        body: JSON.stringify({ email, company, role, painPoint, locale, privacyAccepted: true, termsAccepted: true, privacyVersion: PRIVACY_VERSION, termsVersion: TERMS_VERSION }),
       });
       if (res.status === 429) {
         setStatus("error");

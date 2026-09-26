@@ -155,12 +155,24 @@ function enforceBound<T>(map: Map<string, T>, max: number): void {
   }
 }
 
+function countIpAttempt(ip: string, windows: IpWindows | undefined, now: number): void {
+  if (windows) {
+    windows.hourCount += 1;
+    windows.dayCount += 1;
+  } else {
+    ipWindows.set(ip, { hourStart: now, hourCount: 1, dayStart: now, dayCount: 1 });
+    enforceBound(ipWindows, MAX_TRACKED_IPS);
+  }
+}
+
 /**
  * Counts one attempt from `ip` for `email` and reports whether it may proceed.
- * A "duplicate" verdict means the address already went through inside the
- * window, so nothing new should be sent to it.
+ * A "duplicate" verdict means an earlier attempt reserved this address inside
+ * the window. It is not evidence that storage succeeded: the route must still
+ * perform the atomic database capture before returning success.
  *
- * Only an attempt that passes every gate is counted. Counting one that is then
+ * Only attempts that proceed to storage are counted, including duplicates.
+ * Counting one that is then
  * rejected inflates the windows and makes the limits stricter than advertised:
  * blind retries against an hour-long throttle would eat the day budget and turn
  * it into a day-long one.
@@ -200,6 +212,9 @@ export function checkWaitlistAttempt(
 
   const seenAt = emailsSeen.get(exact);
   if (seenAt !== undefined && now - seenAt < DUPLICATE_WINDOW_MS) {
+    // Duplicates still perform a conditional database write, so they consume
+    // the caller's request budget without consuming another mail reservation.
+    countIpAttempt(ip, windows, now);
     return { allowed: false, reason: "duplicate" };
   }
 
@@ -214,14 +229,8 @@ export function checkWaitlistAttempt(
     }
   }
 
-  // Past every gate, so this attempt is the one that turns into mail. Count it.
-  if (windows) {
-    windows.hourCount += 1;
-    windows.dayCount += 1;
-  } else {
-    ipWindows.set(ip, { hourStart: now, hourCount: 1, dayStart: now, dayCount: 1 });
-    enforceBound(ipWindows, MAX_TRACKED_IPS);
-  }
+  // Past every gate: reserve an attempt before the durable capture. Count it.
+  countIpAttempt(ip, windows, now);
 
   emailsSeen.set(exact, now);
   enforceBound(emailsSeen, MAX_TRACKED_EMAILS);
@@ -259,11 +268,7 @@ export function releaseWaitlistAddress(email: string): void {
  * -- the day cap can outlast the hour cap, and the destination cap can outlast
  * both -- because a caller told to retry too early only burns more of it.
  */
-export function retryAfterSecondsFor(
-  ip: string,
-  email: string,
-  now: number = Date.now(),
-): number {
+export function retryAfterSecondsFor(ip: string, email: string, now: number = Date.now()): number {
   const waits: number[] = [];
 
   const windows = ipWindows.get(ip);

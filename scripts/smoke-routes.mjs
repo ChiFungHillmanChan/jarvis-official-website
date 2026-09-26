@@ -11,6 +11,7 @@ const routes = [
   { path: "/", expect: [307] },
   { path: "/en", expect: [200] },
   { path: "/zh-HK", expect: [200] },
+  ...["en", "zh-HK"].flatMap(locale => ["product", "demo", "beta"].map(page => ({ path: `/${locale}/${page}`, expect: [200] }))),
   { path: "/en/how-it-works", expect: [200] },
   { path: "/zh-HK/how-it-works", expect: [200] },
   { path: "/en/company", expect: [200] },
@@ -25,6 +26,12 @@ const routes = [
   { path: "/zh-HK/security", expect: [200] },
   { path: "/en/download", expect: [200] },
   { path: "/zh-HK/download", expect: [200] },
+  { path: "/payment/success?session_id=cs_return_route_test", expect: [307], redirect: "/en/payment/success?session_id=cs_return_route_test" },
+  { path: "/payment/cancel", expect: [307], redirect: "/en/payment/cancel" },
+  { path: "/en/payment/success", expect: [200] },
+  { path: "/zh-HK/payment/success", expect: [200] },
+  { path: "/en/payment/cancel", expect: [200] },
+  { path: "/zh-HK/payment/cancel", expect: [200] },
   { path: "/social-image.png", expect: [200] },
   { path: "/sitemap.xml", expect: [200] },
   { path: "/robots.txt", expect: [200] },
@@ -77,7 +84,25 @@ function checkPageSeo(html, path) {
   if (!graph.some((node) => node["@type"] === "WebSite")) issues.push("missing website structured data");
   if (!graph.some((node) => node["@id"] === `${canonical}#webpage` && node.url === canonical)) issues.push("missing localized page structured data");
   if (suffix && !graph.some((node) => node["@type"] === "BreadcrumbList")) issues.push("missing breadcrumb structured data");
-  if (!suffix && !graph.some((node) => node["@type"] === "SoftwareApplication" && node.url === canonical)) issues.push("missing localized app structured data");
+  if (!suffix && !graph.some((node) => node["@type"] === "SoftwareApplication" && node.url === `${SITE_ORIGIN}/${locale}/product`)) issues.push("missing localized app structured data");
+  dom.window.close();
+  return issues;
+}
+
+function checkPaymentReturn(html, path) {
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+  const locale = path.split("/")[1];
+  const issues = [];
+  if (document.documentElement.lang !== (locale === "zh-HK" ? "zh-Hant-HK" : "en")) issues.push("incorrect payment return language");
+  if (document.querySelectorAll("h1").length !== 1) issues.push("payment return must contain one h1");
+  for (const name of ["robots", "googlebot"]) {
+    if (!document.head.querySelector(`meta[name="${name}"]`)?.getAttribute("content")?.includes("noindex")) issues.push(`payment return lacks ${name} noindex`);
+  }
+  if (document.head.querySelector('link[rel="canonical"]')?.getAttribute("href") !== `${SITE_ORIGIN}${path}`) issues.push("incorrect payment return canonical");
+  for (const target of [`/${locale}`, `/${locale}/download`]) {
+    if (!document.querySelector(`main a[href="${target}"]`)) issues.push(`missing payment return link: ${target}`);
+  }
   dom.window.close();
   return issues;
 }
@@ -97,17 +122,22 @@ async function main() {
     await waitForReady(`${BASE}/en`, Date.now() + READY_TIMEOUT_MS);
 
     const failures = [];
-    for (const { path, expect } of routes) {
+    for (const { path, expect, redirect } of routes) {
       const url = `${BASE}${path}`;
       const r = await fetch(url, { redirect: "manual", headers: { "user-agent": "Twitterbot/1.0" } });
       const issues = [];
       if (!expect.includes(r.status)) issues.push(`expected HTTP ${expect.join(" or ")}`);
+      if (redirect) {
+        const target = new URL(r.headers.get("location") || "/", BASE);
+        if (target.pathname + target.search !== redirect) issues.push("incorrect payment callback redirect");
+      }
       if (r.status === 200 && /^\/(en|zh-HK)(\/|$)/.test(path)) {
-        issues.push(...checkPageSeo(await r.text(), path));
+        const html = await r.text();
+        issues.push(...(path.includes("/payment/") ? checkPaymentReturn(html, path) : checkPageSeo(html, path)));
       }
       if (path === "/sitemap.xml" && r.ok) {
         const xml = new JSDOM(await r.text(), { contentType: "text/xml" });
-        if (xml.window.document.querySelectorAll("url").length !== 16) issues.push("sitemap must contain sixteen localized URLs");
+        if (xml.window.document.querySelectorAll("url").length !== 22) issues.push("sitemap must contain 22 localized URLs");
         xml.window.close();
       }
       const ok = issues.length === 0;
@@ -119,7 +149,7 @@ async function main() {
       console.error("\nFAILED:", JSON.stringify(failures, null, 2));
       process.exitCode = 1;
     } else {
-      console.log(`\nAll ${routes.length} routes passed, including SEO markup on sixteen public pages.`);
+      console.log(`\nAll ${routes.length} routes passed, including SEO markup on 22 public pages.`);
     }
   } finally {
     stop();

@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { baseMetadata, buildAlternates, buildOpenGraph, getRouteMetadata } from "./metadata";
+import { baseMetadata, buildAlternates, buildOpenGraph, buildPageMetadata, buildSiteVerification, getRouteMetadata } from "./metadata";
+import { routes } from "@/lib/constants/routes";
 
 const locales = ["en", "zh-HK"] as const;
 
@@ -71,8 +72,8 @@ describe("route metadata locale parity", () => {
   it("keeps every public page distinct and exposes both language alternatives", () => {
     for (const locale of locales) {
       const routes = Object.values(getRouteMetadata(locale));
-      expect(new Set(routes.map((route) => route.title)).size).toBe(8);
-      expect(new Set(routes.map((route) => route.description)).size).toBe(8);
+      expect(new Set(routes.map((route) => route.title)).size).toBe(routes.length);
+      expect(new Set(routes.map((route) => route.description)).size).toBe(routes.length);
       for (const route of routes) {
         const alternates = buildAlternates(locale, route.canonical);
         expect(alternates.languages).toHaveProperty("en");
@@ -82,9 +83,50 @@ describe("route metadata locale parity", () => {
     }
   });
 
+  it("gives each new discovery and signup page a localized canonical and social identity", () => {
+    for (const locale of locales) {
+      for (const key of ["product", "demo", "beta"] as const) {
+        const metadata = buildPageMetadata(locale, key);
+        const route = getRouteMetadata(locale)[key];
+        expect(metadata.title).toEqual({ absolute: route.title });
+        expect(metadata.description).toBe(route.description);
+        expect(metadata.alternates).toEqual(buildAlternates(locale, routes[key]));
+        expect(metadata.openGraph).toMatchObject({
+          title: route.title,
+          description: route.description,
+          url: expect.stringMatching(new RegExp(`/${locale}${routes[key]}$`)),
+          locale: locale === "zh-HK" ? "zh_HK" : "en_US",
+          images: expect.arrayContaining([expect.objectContaining({ width: 1200, height: 630 })]),
+        });
+        expect(metadata.twitter).toMatchObject({ card: "summary_large_image", title: route.title });
+      }
+    }
+  });
+
+  it("does not treat inherited object keys as supported Open Graph locales", () => {
+    expect(getRouteMetadata("constructor")).toBe(getRouteMetadata("en"));
+    expect(buildOpenGraph("constructor", getRouteMetadata("en").home)).toMatchObject({
+      locale: "en_US",
+      url: expect.stringMatching(/\/en$/),
+    });
+  });
+
   it("permits large image previews for indexed marketing pages", () => {
     expect(baseMetadata).toMatchObject({
       robots: { index: true, follow: true, googleBot: { "max-image-preview": "large" } },
     });
+  });
+});
+
+describe("Search Console verification", () => {
+  it("includes the configured token without whitespace", () => {
+    expect(buildSiteVerification("  test-google-verification_token  ")).toEqual({
+      google: "test-google-verification_token",
+    });
+  });
+
+  it("does not publish an empty verification tag when no token is configured", () => {
+    expect(buildSiteVerification("")).toBeUndefined();
+    expect(buildSiteVerification("  ")).toBeUndefined();
   });
 });

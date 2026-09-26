@@ -3,10 +3,18 @@ import type { Locale } from "@/i18n/routing";
 import { siteUrl } from "@/lib/constants/site";
 import { routes } from "@/lib/constants/routes";
 
+export function buildSiteVerification(
+  token = process.env.GOOGLE_SITE_VERIFICATION,
+): Metadata["verification"] {
+  const google = token?.trim();
+  return google ? { google } : undefined;
+}
+
 export const baseMetadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "JARVIS AI",
   category: "productivity",
+  verification: buildSiteVerification(),
   robots: {
     index: true,
     follow: true,
@@ -34,7 +42,7 @@ export const baseMetadata = {
         url: "/social-image.png",
         width: 1200,
         height: 630,
-        alt: "JARVIS — a personal AI email workspace for Mac",
+        alt: "JARVIS — your personal AI assistant. Currently in beta for macOS.",
       },
     ],
   },
@@ -47,7 +55,7 @@ export function buildOpenGraph(
   locale: string,
   route: RouteMeta,
 ): NonNullable<Metadata["openGraph"]> {
-  const normalized = (locale as Locale) in OG_LOCALE ? (locale as Locale) : "en";
+  const normalized = locale === "zh-HK" ? "zh-HK" : "en";
   const alternate = normalized === "zh-HK" ? ["en_US"] : ["zh_HK"];
   const pathSuffix = route.canonical === "/" ? "" : route.canonical;
   return {
@@ -74,20 +82,38 @@ type RouteKey = keyof typeof routes;
 
 const en: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS — Personal AI Email Workspace for Mac",
+    title: "JARVIS — Personal AI Assistant for Everyday Work",
     description:
-      "Bring multiple Gmail accounts into one Mac workspace. Group related emails, add your instructions and source memories, and review AI answers with email references.",
+      "Meet JARVIS, your personal AI assistant for voice, text and Gmail workflows, with instructions and memories you control. Currently in beta for macOS.",
     canonical: routes.home,
   },
-  howItWorks: {
-    title: "How JARVIS Works — Gmail Workspace & Mac Setup",
+  product: {
+    title: "JARVIS AI Assistant — Voice, Memory & Gmail Workflows",
     description:
-      "Connect Gmail accounts, group related emails and analyse them with your instructions and source memories. Learn Mac setup, GPT processing and data controls.",
+      "Explore JARVIS: voice and text conversations, multiple Gmail accounts, email groups and source-linked memories. See what the current macOS beta can do.",
+    canonical: routes.product,
+  },
+  demo: {
+    title: "JARVIS Demo — See Your Personal AI Assistant in Action",
+    description:
+      "See JARVIS in action and explore how voice, personal context and Gmail workflows fit into everyday work. Learn about the current beta and its limits.",
+    canonical: routes.demo,
+  },
+  beta: {
+    title: "Join the JARVIS Beta — Personal AI Assistant",
+    description:
+      "Apply to try the JARVIS personal AI assistant, currently in beta for macOS. Share your workflow and help shape voice, memory and email features.",
+    canonical: routes.beta,
+  },
+  howItWorks: {
+    title: "How JARVIS Works — AI Assistant Setup & Gmail Guide",
+    description:
+      "Set up JARVIS for voice and text, then connect Gmail, group messages and analyse them with your own context. Learn AI settings, data controls and beta limits.",
     canonical: routes.howItWorks,
   },
   company: {
     title: "About JARVIS AI",
-    description: "Meet JARVIS AI, the Hong Kong startup building a personal email workspace for Mac. Learn about our approach to useful AI, clear controls and everyday work.",
+    description: "Meet JARVIS AI LIMITED, the Hong Kong company building a personal AI assistant. Learn about our approach to useful AI, clear controls and everyday work.",
     canonical: routes.company,
   },
   contact: {
@@ -96,9 +122,9 @@ const en: Record<RouteKey, RouteMeta> = {
     canonical: routes.contact,
   },
   download: {
-    title: "Download JARVIS for Mac — AI Email Workspace",
+    title: "Download JARVIS for Mac — Personal AI Assistant Beta",
     description:
-      "Get the JARVIS beta for Apple Silicon Mac, with multiple Gmail accounts, email groups and personal AI context. Requires macOS 12 or later. Read the setup guide.",
+      "Get the JARVIS personal AI assistant beta for Apple Silicon Mac. Explore voice, text and Gmail workflows. Requires macOS 12 or later; setup guide included.",
     canonical: routes.download,
   },
   privacy: {
@@ -122,20 +148,38 @@ const en: Record<RouteKey, RouteMeta> = {
 
 const zhHk: Record<RouteKey, RouteMeta> = {
   home: {
-    title: "JARVIS — Mac 個人化 AI 電郵工作區，多個 Gmail 一起整理",
+    title: "JARVIS — 協助日常工作的個人 AI 助理",
     description:
-      "將多個 Gmail 集中喺同一個 Mac 工作區。跨信箱分組、加入個人指示同來源記憶，再用 AI 整理重點及下一步，每次分析附有可核對嘅郵件引用。",
+      "認識 JARVIS 個人 AI 助理，以語音或文字處理日常工作，集中整理 Gmail，配合由你管理的指示與來源記憶。目前提供 macOS Beta，讓你逐步建立自己的 AI 工作流程。",
     canonical: routes.home,
   },
-  howItWorks: {
-    title: "JARVIS 使用指南 — Gmail 工作區、GPT 分析同 Mac 設定",
+  product: {
+    title: "JARVIS AI 助理功能 — 語音、記憶與 Gmail 工作流程",
     description:
-      "了解點樣連接多個 Gmail、跨信箱分組，配合個人指示同來源記憶進行分析。由 Mac 設定到 GPT 資料處理，一步步掌握 JARVIS 工作流程。",
+      "了解 JARVIS 的語音及文字對話、多個 Gmail 帳戶、跨信箱分組與可核對來源的記憶。查看目前 macOS Beta 的功能、資料處理方式與使用限制。",
+    canonical: routes.product,
+  },
+  demo: {
+    title: "JARVIS 產品示範 — 了解個人 AI 助理的工作方式",
+    description:
+      "觀看 JARVIS 示範，了解語音、個人背景與 Gmail 工作流程如何融入日常工作。查看目前 Beta 的使用方式與功能界線，再決定是否參與試用。",
+    canonical: routes.demo,
+  },
+  beta: {
+    title: "申請 JARVIS Beta — 參與個人 AI 助理試用",
+    description:
+      "申請試用 JARVIS 個人 AI 助理，目前提供 macOS Beta。分享你的工作流程與需求，協助改善語音互動、個人記憶及電郵整理體驗。",
+    canonical: routes.beta,
+  },
+  howItWorks: {
+    title: "JARVIS 使用指南 — AI 助理設定與 Gmail 工作區",
+    description:
+      "從語音及文字對話開始設定 JARVIS，再連接 Gmail、跨信箱分組，配合個人指示與來源記憶分析。了解 AI 設定、資料處理及目前 Beta 的使用界線。",
     canonical: routes.howItWorks,
   },
   company: {
     title: "關於 JARVIS AI",
-    description: "認識 JARVIS AI，為 Mac 打造個人化電郵工作區嘅香港初創。了解我哋點樣將實用 AI、清晰控制同日常工作結合。",
+    description: "認識 JARVIS AI LIMITED，打造個人 AI 助理的香港公司。了解我們如何將實用 AI、清晰控制與日常工作結合，讓產品隨用戶的需要持續改善。",
     canonical: routes.company,
   },
   contact: {
@@ -144,9 +188,9 @@ const zhHk: Record<RouteKey, RouteMeta> = {
     canonical: routes.contact,
   },
   download: {
-    title: "下載 JARVIS for Mac — 個人化 AI 電郵工作區",
+    title: "下載 JARVIS for Mac — 個人 AI 助理 Beta",
     description:
-      "下載 JARVIS Beta，喺 Mac 集中多個 Gmail、建立電郵分組同個人 AI 背景。適用於 Apple Silicon Mac 及 macOS 12 或以上，附設設定指南。",
+      "下載 JARVIS 個人 AI 助理 Beta，體驗語音、文字與 Gmail 工作流程。現階段適用於 Apple Silicon Mac 及 macOS 12 或以上，附設安裝與設定指南。",
     canonical: routes.download,
   },
   privacy: {
@@ -172,7 +216,7 @@ const byLocale: Record<Locale, Record<RouteKey, RouteMeta>> = {
 };
 
 export function getRouteMetadata(locale: string): Record<RouteKey, RouteMeta> {
-  return byLocale[locale as Locale] ?? en;
+  return byLocale[locale === "zh-HK" ? "zh-HK" : "en"];
 }
 
 export function buildAlternates(locale: string, path: string) {

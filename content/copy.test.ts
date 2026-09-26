@@ -1,13 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { copy as en } from "./copy.en";
 import { copy as zhHk } from "./copy.zh-hk";
+import type { LegalPageCopy } from "./legal";
 
-type SecurityCopy = {
-  security: { sections: readonly { title: string; body: string }[] };
-};
-
-function securityText(c: SecurityCopy): string {
-  return c.security.sections.map((s) => `${s.title} ${s.body}`).join("\n");
+function sectionBody(page: LegalPageCopy, id: string): string {
+  const section = page.sections.find((section) => section.id === id);
+  if (!section) throw new Error(`Missing legal section: ${id}`);
+  return section.body;
 }
 
 function keyPaths(value: unknown, prefix = ""): string[] {
@@ -23,57 +22,67 @@ function keyPaths(value: unknown, prefix = ""): string[] {
   return [];
 }
 
-describe("security copy: where inference runs", () => {
-  it("does not claim routine inference runs on-device (en)", () => {
-    const text = securityText(en);
-    expect(text).not.toMatch(/on-device using local models/i);
-    expect(text).not.toMatch(/cloud inference are opt-in/i);
+describe("security copy: actual data boundaries", () => {
+  const locales = [
+    {
+      locale: "en", copy: en,
+      storageBoundary: /local storage[^.]*does not mean local AI processing/i,
+      fallback: /cloud providers and fallbacks/i,
+      voice: /voice[^.]*own provider settings/i,
+      encryptionLimit: /no separate application-level encryption/i,
+      separateApplications: /beta applications are separate server-side records/i,
+      noMailboxUpload: /does not upload[^.]*mailbox or conversations/i,
+      readOnly: /email workspace[^.]*read-only Gmail/i,
+      broaderConnection: /general-assistant connection[^.]*Gmail modification, Calendar and profile/i,
+      drafts: /creates Gmail drafts for review/i,
+      noSync: /does not offer cloud backup or cross-device sync/i,
+      noCertification: /do not establish[^.]*certification[^.]*Google OAuth verification/i,
+    },
+    {
+      locale: "zh-HK", copy: zhHk,
+      storageBoundary: /本機儲存不代表.*本機處理/,
+      fallback: /雲端供應商及後備路徑/,
+      voice: /語音轉錄及朗讀.*各有供應商設定/,
+      encryptionLimit: /沒有額外的應用程式層加密/,
+      separateApplications: /Beta 申請是獨立的伺服器端紀錄/,
+      noMailboxUpload: /不會把.*信箱或對話上傳/,
+      readOnly: /電郵工作區只申請 Gmail 唯讀/,
+      broaderConnection: /一般助理的獨立連接.*Gmail 修改、日曆及個人資料/,
+      drafts: /建立 Gmail 草稿供你審閱/,
+      noSync: /不提供雲端備份或跨裝置同步/,
+      noCertification: /不代表取得安全認證.*Google OAuth 驗證/,
+    },
+  ];
+
+  it.each(locales)("separates storage, cloud analysis and voice ($locale)", (entry) => {
+    const text = sectionBody(entry.copy.security, "processing");
+    expect(text).toMatch(entry.storageBoundary);
+    expect(text).toMatch(entry.fallback);
+    expect(text).toMatch(entry.voice);
+    for (const provider of ["OpenAI", "Bedrock"]) expect(text).toContain(provider);
   });
 
-  it("does not claim routine inference runs on-device (zh-HK)", () => {
-    const text = securityText(zhHk);
-    expect(text).not.toContain("日常工作負載以本機模型運行");
-    expect(text).not.toContain("雲端推理屬選用");
+  it.each(locales)("does not turn the beta database into a product cloud workspace ($locale)", (entry) => {
+    const text = sectionBody(entry.copy.security, "local-data");
+    expect(text).toContain("SQLite");
+    expect(text).toMatch(entry.encryptionLimit);
+    expect(text).toMatch(entry.separateApplications);
+    expect(text).toMatch(entry.noMailboxUpload);
   });
 
-  it("states that inference is cloud by default (en)", () => {
-    expect(securityText(en)).toMatch(/not local by default/i);
+  it.each(locales)("distinguishes Google permissions and draft review ($locale)", (entry) => {
+    const text = sectionBody(entry.copy.security, "connections");
+    expect(text).toMatch(entry.readOnly);
+    expect(text).toMatch(entry.broaderConnection);
+    expect(text).toMatch(entry.drafts);
   });
 
-  it("states that inference is cloud by default (zh-HK)", () => {
-    expect(securityText(zhHk)).toContain("推理預設並非在本機執行");
-  });
-
-  it("discloses Google as a processor of message content in both locales", () => {
-    for (const text of [securityText(en), securityText(zhHk)]) {
-      expect(text).toContain("Google");
-      expect(text).toContain("Gemini");
-    }
-  });
-
-  it("discloses Google in the service-provider section alongside Resend and Stripe", () => {
-    for (const c of [en, zhHk] as SecurityCopy[]) {
-      const providers = c.security.sections.find((s) => s.body.includes("Resend"));
-      expect(providers).toBeDefined();
-      expect(providers!.body).toContain("Google");
-      expect(providers!.body).toContain("Stripe");
-    }
-  });
-});
-
-describe("security copy: AWS control plane is planned, not live", () => {
-  it("does not describe Cognito, KMS, or DynamoDB in present tense (en)", () => {
-    const text = securityText(en);
-    expect(text).not.toMatch(/We use Amazon Cognito/i);
-    expect(text).not.toMatch(/All cloud-stored data is encrypted at rest/i);
-    expect(text).toMatch(/planned on AWS/i);
-  });
-
-  it("does not describe Cognito, KMS, or DynamoDB in present tense (zh-HK)", () => {
-    const text = securityText(zhHk);
-    expect(text).not.toContain("我哋使用 Amazon Cognito");
-    expect(text).not.toContain("所有雲端儲存數據均以 AWS KMS 客戶管理金鑰加密");
-    expect(text).toContain("計劃建構於 AWS");
+  it.each(locales)("keeps sync and certification limits explicit ($locale)", (entry) => {
+    const text = sectionBody(entry.copy.security, "limits");
+    expect(text).toMatch(entry.noSync);
+    expect(text).toMatch(entry.noCertification);
+    expect(entry.copy.security.sections.map((section) => section.body).join("\n"))
+      .not.toMatch(/Cognito|customer-managed key|客戶管理金鑰/i);
   });
 });
 

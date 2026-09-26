@@ -13,6 +13,7 @@ import {
 } from "@/content/metadata";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
+import "@/styles/assistant-site.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -1,0 +1,59 @@
+.assistant-film { min-width:0; text-align:left; }
+.film-topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 23px; border:1px solid #dce3ed; border-radius:14px 14px 0 0; background:#fff; }
+.film-topbar > span:first-child { display:flex; align-items:center; gap:9px; font-size:13px; font-weight:650; letter-spacing:.04em; }
+.film-topbar > span:last-child { font-size:10px; color:#667385; }
+.film-stage { min-height:348px; background:#f2f5fa; border-inline:1px solid #dce3ed; padding:23px; }
+.film-project { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:11px; color:#68768a; margin-bottom:20px; }
+.film-project > span:first-child { display:flex; align-items:center; gap:8px; font-size:12px; color:#253851; font-weight:600; }
+.project-dot { width:7px; height:7px; background:#4f69c6; border-radius:2px; }
+.film-question { max-width:330px; font-size:21px; line-height:1.4; letter-spacing:-.025em; color:#24354d; margin-bottom:20px; }
+.film-scene { animation:film-enter .3s ease-out; }
+.film-email { display:flex; align-items:flex-start; gap:12px; padding:16px; background:white; border:1px solid #e0e6ef; border-radius:8px; margin-top:10px; }
+.film-avatar { background:#edf0f8; color:#50608c; display:grid; place-items:center; width:32px; height:32px; flex:0 0 32px; border-radius:50%; font-size:10px; font-weight:600; }
+.film-email > div { flex:1; min-width:0; }
+.film-email > svg { color:#4461bc; flex-shrink:0; margin-top:3px; }
+.film-email-from { display:flex; gap:10px; justify-content:space-between; align-items:baseline; }
+.film-email-from strong { font-size:11px; font-weight:600; }
+.film-email-from span { font-size:9px; color:#68768a; }
+.film-email h3 { font-size:12px; font-weight:600; margin-top:4px; }
+.film-email p { color:#667385; font-size:11px; line-height:1.6; margin-top:5px; }
+.film-context-count { display:flex; align-items:center; gap:10px; color:#586a85; font-size:11px; margin:12px 0 22px; }
+.film-instruction { background:#fff; border:1px solid #ced8ed; border-radius:9px; padding:22px; }
+.film-instruction > span { font-size:11px; color:#667385; }
+.film-instruction p { margin-top:12px; font-size:20px; line-height:1.5; letter-spacing:-.02em; }
+.film-memory { margin-top:22px; display:flex; align-items:start; gap:10px; color:#536889; font-size:11px; line-height:1.6; }
+.film-memory svg { flex-shrink:0; margin-top:2px; }
+.film-memory strong { font-weight:600; }
+.film-memory p { margin-top:4px; }
+.film-user-prompt { background:#e4ebf9; color:#3c5074; padding:12px 16px; margin:0 0 20px auto; width:90%; border-radius:10px 10px 2px 10px; font-size:12px; line-height:1.65; }
+.film-answer { display:flex; align-items:flex-start; gap:12px; padding:4px 2px; }
+.film-answer > svg { flex-shrink:0; }
+.film-answer h3 { font-size:18px; font-weight:550; letter-spacing:-.025em; margin-bottom:8px; }
+.film-answer ol { list-style:decimal; padding-left:18px; }
+.film-answer li { padding:12px 0 12px 3px; color:#293a51; font-size:13px; line-height:1.6; }
+.film-answer li::marker { color:#6b7b93; font-size:11px; }
+.film-answer li span { display:inline-block; margin-top:6px; font-size:10px; color:#526fac; padding:2px 7px; border-radius:4px; background:#e4ebf7; }
+.film-draft { background:#fff; padding:15px 20px; border:1px solid #dde4ee; border-radius:7px; }
+.film-draft > div { display:flex; align-items:center; gap:7px; font-size:10px; color:#69798d; border-bottom:1px solid #ecf0f4; padding-bottom:9px; }
+.film-draft h3 { font-size:12px; font-weight:600; margin-top:10px; }
+.film-draft > p { white-space:pre-line; font-size:11px; line-height:1.65; color:#526277; margin-top:8px; }
+.film-draft-note { display:flex; align-items:center; gap:7px; color:#536a60; font-size:10px; margin-top:12px; }
+.film-controls { display:flex; align-items:center; gap:12px; padding:12px 17px; background:#fff; border:1px solid #dce3ed; border-radius:0 0 14px 14px; }
+.film-controls button { display:flex; align-items:center; justify-content:center; min-width:30px; height:36px; color:#344c73; }
+.film-controls button:disabled { opacity:.3; cursor:default; }
+.film-controls .film-play { gap:7px; font-size:11px; font-weight:550; min-width:88px; justify-content:start; }
+.film-track { display:flex; gap:4px; flex:1; }
+.film-track > span { width:25%; height:3px; background:#e2e8f2; border-radius:2px; overflow:hidden; }
+.film-track i { display:block; height:100%; background:#4b65b8; }
+.film-time { color:#667385; font-size:10px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.film-chapters { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:18px; }
+.film-chapters button { display:flex; align-items:center; gap:7px; font-size:10px; line-height:1.5; text-align:left; color:#6b7889; padding:5px 0; }
+.film-chapters button > span { font-size:9px; width:19px; height:19px; flex-shrink:0; display:grid; place-items:center; border:1px solid #d6deeb; border-radius:50%; }
+.film-chapters button[aria-current] { color:#304f9f; font-weight:600; }
+.film-chapters button[aria-current] > span { border-color:#8196ca; background:#edf1fb; }
+.assistant-film figcaption { min-height:57px; margin-top:13px; font-size:11px; line-height:1.7; color:#67758a; }
+.assistant-film figcaption strong { font-weight:550; color:#445671; }
+@keyframes film-enter { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media(min-width:1000px) { .demo-full .film-stage { min-height:430px; padding:30px 48px; } .demo-full .film-email p,.demo-full .film-draft > p { font-size:14px; } .demo-full .film-email h3 { font-size:15px; } .demo-full .film-email-from strong { font-size:13px; } .demo-full .film-draft h3 { font-size:15px; } .demo-full .film-user-prompt { font-size:15px; } .demo-full .film-question { max-width:none; font-size:28px; } .demo-full .film-chapters button { font-size:13px; } }
+@media(max-width:600px) { .film-topbar { padding:15px; } .film-stage { min-height:385px; padding:18px 15px; } .film-topbar > span:last-child { font-size:9px; } .film-project > span:last-child { display:none; } .film-email { padding:12px; gap:8px; } .film-email-from { display:block; } .film-email-from span { margin-left:8px; } .film-question { font-size:21px; } .film-chapters { grid-template-columns:repeat(2,1fr); gap:2px 14px; } .film-chapters button { font-size:11px; min-height:32px; } .film-controls { gap:6px; padding-inline:12px; } .film-instruction p { font-size:18px; } .film-track { min-width:28px; } .film-controls .film-play { min-width:84px; } }
+@media(prefers-reduced-motion:reduce) { .film-scene { animation:none; } }

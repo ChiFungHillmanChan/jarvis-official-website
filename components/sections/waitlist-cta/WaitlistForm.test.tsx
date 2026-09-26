@@ -11,8 +11,8 @@ vi.mock("next/link", () => ({
 
 const fetchMock = vi.fn();
 
-function renderForm() {
-  return render(
+function renderForm(accept = true) {
+  const result = render(
     <WaitlistForm
       placeholder="you@company.com"
       submitLabel="Request access"
@@ -27,6 +27,8 @@ function renderForm() {
       painPlaceholder="What should JARVIS take over first?"
     />,
   );
+  if (accept) fireEvent.click(screen.getByRole("checkbox"));
+  return result;
 }
 
 function honeypotFrom(container: HTMLElement): HTMLInputElement {
@@ -44,6 +46,15 @@ describe("WaitlistForm honeypot", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("requires an explicit policy acknowledgement before sending personal data", async () => {
+    const { container } = renderForm(false);
+    fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "human@example.com" } });
+    fireEvent.submit(container.querySelector("form")!);
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByRole("checkbox")).toHaveFocus();
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
   });
 
   it("keeps the decoy field out of the tab order and the accessibility tree", () => {
@@ -73,6 +84,11 @@ describe("WaitlistForm honeypot", () => {
       company: "Acme Corp",
       role: "",
       painPoint: "",
+      privacyAccepted: true,
+      termsAccepted: true,
+      privacyVersion: "2026-09-24",
+      termsVersion: "2026-09-24",
+      locale: "en",
     });
   });
 

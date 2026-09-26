@@ -4,9 +4,9 @@ import robots from "./robots";
 import { siteUrl } from "@/lib/constants/site";
 
 describe("crawler entry points", () => {
-  it("lists exactly the sixteen canonical public pages with reciprocal language alternatives", () => {
+  it("lists exactly the twenty-two canonical public pages with reciprocal language alternatives", () => {
     const entries = sitemap();
-    const paths = ["", "/how-it-works", "/company", "/contact", "/download", "/privacy", "/terms", "/security"];
+    const paths = ["", "/product", "/demo", "/beta", "/how-it-works", "/company", "/contact", "/download", "/privacy", "/terms", "/security"];
     const expected = ["en", "zh-HK"].flatMap((locale) => paths.map((path) => `${siteUrl}/${locale}${path}`));
     expect(entries.map((entry) => entry.url).sort()).toEqual(expected.sort());
     for (const path of paths) {
@@ -18,6 +18,16 @@ describe("crawler entry points", () => {
       for (const locale of ["en", "zh-HK"]) {
         expect(entries.find((entry) => entry.url === `${siteUrl}/${locale}${path}`)?.alternates?.languages).toEqual(alternatives);
       }
+    }
+  });
+
+  it("excludes payment returns, APIs, tracking queries and fragments from discovery", () => {
+    for (const entry of sitemap()) {
+      const url = new URL(entry.url);
+      expect(url.pathname).not.toMatch(/\/(payment|api)(\/|$)/);
+      expect(url.search).toBe("");
+      expect(url.hash).toBe("");
+      expect(entry).not.toHaveProperty("lastModified");
     }
   });
 

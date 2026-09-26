@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import {
+  ADDRESS_DAILY_LIMIT,
+  normalizeAddressKey,
   DAILY_LIMIT,
   DUPLICATE_WINDOW_MS,
   HOURLY_LIMIT,
@@ -81,8 +83,70 @@ describe("checkWaitlistAttempt", () => {
 
   it("accepts the same address again once the duplicate window has passed", () => {
     checkWaitlistAttempt("1.1.1.1", "repeat@example.com", T0);
-    expect(
-      checkWaitlistAttempt("3.3.3.3", "repeat@example.com", T0 + DUPLICATE_WINDOW_MS),
-    ).toEqual({ allowed: true });
+    expect(checkWaitlistAttempt("3.3.3.3", "repeat@example.com", T0 + DUPLICATE_WINDOW_MS)).toEqual(
+      { allowed: true },
+    );
+  });
+});
+
+// The rate-limit key normalisation and the window accounting are what make the
+// destination cap hold. They are asserted here, next to the endpoint that
+// depends on them, because both need an injectable clock or a peek at the key
+// that POST does not expose.
+describe("waitlist rate-limit keys", () => {
+  it("collapses the spellings that reach one inbox", () => {
+    // Sub-addressing: the cheapest way to mint budgets.
+    expect(normalizeAddressKey("victim+jarvis@fastmail.com")).toBe("victim@fastmail.com");
+    // Case is not an identity either.
+    expect(normalizeAddressKey("Victim@Fastmail.com")).toBe("victim@fastmail.com");
+    // Gmail ignores dots and serves googlemail.com from the same mailbox.
+    expect(normalizeAddressKey("v.i.c.t.i.m+42@GMail.com")).toBe("victim@gmail.com");
+    expect(normalizeAddressKey("victim@googlemail.com")).toBe("victim@gmail.com");
+  });
+
+  it("keeps dots outside Gmail, where they are different people", () => {
+    expect(normalizeAddressKey("first.last@acme.com")).toBe("first.last@acme.com");
+    expect(normalizeAddressKey("firstlast@acme.com")).toBe("firstlast@acme.com");
+  });
+});
+
+describe("waitlist window accounting", () => {
+  const T0 = 1_700_000_000_000;
+  const HOUR_MS = 60 * 60 * 1000;
+
+  beforeEach(() => {
+    resetWaitlistLimiter();
+  });
+
+  // A rejected attempt sends nothing, so charging it to the window makes the
+  // limit stricter than advertised: the blind retries a throttled visitor makes
+  // would spend the day budget and turn an hour-long throttle into a day-long
+  // one.
+  it("does not spend the budget on attempts it rejects", () => {
+    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
+      expect(checkWaitlistAttempt("198.51.100.1", `ok${i}@example.com`, T0).allowed).toBe(true);
+    }
+    for (let i = 0; i < DAILY_LIMIT; i += 1) {
+      expect(checkWaitlistAttempt("198.51.100.1", `blind${i}@example.com`, T0 + 1000).allowed).toBe(
+        false,
+      );
+    }
+
+    // Next hour: the day budget still has everything the rejections did not buy.
+    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
+      expect(
+        checkWaitlistAttempt("198.51.100.1", `next${i}@example.com`, T0 + HOUR_MS).allowed,
+      ).toBe(true);
+    }
+  });
+
+  it("frees the destination budget again the next day", () => {
+    for (let i = 0; i < ADDRESS_DAILY_LIMIT; i += 1) {
+      expect(checkWaitlistAttempt(`10.0.0.${i}`, `v+${i}@gmail.com`, T0).allowed).toBe(true);
+    }
+    expect(checkWaitlistAttempt("10.0.0.9", "v+late@gmail.com", T0).allowed).toBe(false);
+    expect(checkWaitlistAttempt("10.0.0.9", "v+late@gmail.com", T0 + 24 * HOUR_MS).allowed).toBe(
+      true,
+    );
   });
 });

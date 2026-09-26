@@ -66,7 +66,7 @@ export default async function CompanyPage({
               </li>
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{labels.product}: </span>
-                {company.productName} for macOS
+                {company.productName} {locale === "zh-HK" ? "（目前提供 macOS Beta）" : "(currently in beta for macOS)"}
               </li>
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{labels.location}: </span>

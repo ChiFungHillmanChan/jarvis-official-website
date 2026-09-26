@@ -1,257 +1,281 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+// @vitest-environment node
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import {
+  DynamoDBClient,
+  ConditionalCheckFailedException,
+  PutItemCommand,
+  type AttributeValue,
+} from "@aws-sdk/client-dynamodb";
 
-vi.mock("@/lib/resend/sendWaitlistNotification", () => ({
-  sendWaitlistNotification: vi.fn(),
-}));
-vi.mock("@/lib/resend/sendWaitlistConfirmation", () => ({
-  sendWaitlistConfirmation: vi.fn(),
-}));
+vi.mock("@/lib/resend/sendWaitlistNotification", () => ({ sendWaitlistNotification: vi.fn() }));
+vi.mock("@/lib/resend/sendWaitlistConfirmation", () => ({ sendWaitlistConfirmation: vi.fn() }));
 
 import { POST } from "./route";
 import { sendWaitlistNotification } from "@/lib/resend/sendWaitlistNotification";
 import { sendWaitlistConfirmation } from "@/lib/resend/sendWaitlistConfirmation";
 import {
-  ADDRESS_DAILY_LIMIT,
-  DAILY_LIMIT,
   HOURLY_LIMIT,
-  checkWaitlistAttempt,
-  normalizeAddressKey,
+  ADDRESS_DAILY_LIMIT,
   resetWaitlistLimiter,
 } from "@/lib/ratelimit/waitlistLimiter";
 
 const notifyMock = vi.mocked(sendWaitlistNotification);
 const confirmMock = vi.mocked(sendWaitlistConfirmation);
+const sendMock = vi.spyOn(DynamoDBClient.prototype, "send");
 const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+const consent = {
+  privacyAccepted: true,
+  termsAccepted: true,
+  privacyVersion: "2026-09-24",
+  termsVersion: "2026-09-24",
+};
+let records: Map<string, Record<string, AttributeValue>>;
 
-function makeRequest(body: unknown, ip = "203.0.113.10") {
+function makeRequest(body: Record<string, unknown>, ip = "203.0.113.10") {
   return new Request("http://localhost/api/waitlist", {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-forwarded-for": ip },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ ...consent, ...body }),
   });
 }
 
 describe("POST /api/waitlist", () => {
   beforeEach(() => {
+    vi.stubEnv("WAITLIST_TABLE_NAME", "test-waitlist");
+    vi.stubEnv("AWS_REGION", "ap-southeast-1");
+    vi.stubEnv("AWS_ROLE_ARN", "");
+    vi.stubEnv("VERCEL", "");
+    vi.stubEnv("WAITLIST_EMAILS_ENABLED", "true");
     resetWaitlistLimiter();
     consoleError.mockClear();
-    notifyMock.mockReset();
-    confirmMock.mockReset();
-    notifyMock.mockResolvedValue("notif-id");
-    confirmMock.mockResolvedValue("conf-id");
+    records = new Map();
+    sendMock.mockReset();
+    sendMock.mockImplementation(async (command) => {
+      const input = (command as PutItemCommand).input;
+      expect(input.ConditionExpression).toBe("attribute_not_exists(#email)");
+      const item = input.Item!;
+      const email = item.email!.S!;
+      if (records.has(email))
+        throw new ConditionalCheckFailedException({ message: "exists", $metadata: {} });
+      records.set(email, item);
+      return { $metadata: { httpStatusCode: 200 } };
+    });
+    notifyMock.mockReset().mockResolvedValue("notif-id");
+    confirmMock.mockReset().mockResolvedValue("conf-id");
   });
 
-  it("returns 200 and sends both emails for a valid email", async () => {
-    const res = await POST(makeRequest({ email: "Good@Example.COM" }));
-    expect(res.status).toBe(200);
-    const json = await res.json();
-    expect(json.ok).toBe(true);
-    expect(notifyMock).toHaveBeenCalledTimes(1);
-    expect(notifyMock).toHaveBeenCalledWith({ signup: "good@example.com" });
-    expect(confirmMock).toHaveBeenCalledTimes(1);
-    expect(confirmMock).toHaveBeenCalledWith({ to: "good@example.com" });
-  });
+  afterEach(() => vi.unstubAllEnvs());
 
-  it("still returns 200 when the confirmation email fails", async () => {
-    confirmMock.mockRejectedValueOnce(new Error("resend_failed:blocked"));
-    const res = await POST(makeRequest({ email: "good@example.com" }));
-    expect(res.status).toBe(200);
-    const json = await res.json();
-    expect(json.ok).toBe(true);
-    expect(notifyMock).toHaveBeenCalledTimes(1);
-  });
-
-  it("returns 500 when the notification email fails", async () => {
-    notifyMock.mockRejectedValueOnce(new Error("resend_env_missing"));
-    const res = await POST(makeRequest({ email: "good@example.com" }));
-    expect(res.status).toBe(500);
-    const json = await res.json();
-    expect(json.error).toBe("send_failed");
-    expect(confirmMock).not.toHaveBeenCalled();
-  });
-
-  // A transient Resend failure must not blacklist the address: the retry the
-  // visitor is invited to make has to reach the founder, not be swallowed as a
-  // duplicate.
-  it("lets the same address retry after a failed notification", async () => {
-    notifyMock.mockRejectedValueOnce(new Error("resend_failed:429"));
-    const first = await POST(makeRequest({ email: "lead@acme.com" }));
-    expect(first.status).toBe(500);
-
-    const second = await POST(makeRequest({ email: "lead@acme.com" }));
-    expect(second.status).toBe(200);
-    expect((await second.json()).ok).toBe(true);
-    expect(notifyMock).toHaveBeenCalledTimes(2);
-    expect(confirmMock).toHaveBeenCalledTimes(1);
-  });
-
-  // The other side of the same coin: once the notification has landed the lead
-  // is captured, so the address stays held even though the confirmation failed.
-  it("keeps the duplicate hold when only the confirmation failed", async () => {
-    confirmMock.mockRejectedValueOnce(new Error("resend_failed:blocked"));
-    expect((await POST(makeRequest({ email: "held@acme.com" }))).status).toBe(200);
-
-    const second = await POST(makeRequest({ email: "held@acme.com" }));
-    expect(second.status).toBe(200);
-    expect(notifyMock).toHaveBeenCalledTimes(1);
-  });
-
-  it("returns 200 for a honeypot submission without sending anything", async () => {
-    const res = await POST(makeRequest({ email: "bot@example.com", company: "Acme" }));
-    expect(res.status).toBe(200);
-    const json = await res.json();
-    expect(json.ok).toBe(true);
+  it("does not report success without database configuration", async () => {
+    vi.stubEnv("WAITLIST_TABLE_NAME", "");
+    const res = await POST(makeRequest({ email: "durable@example.com" }));
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: "storage_unavailable" });
+    expect(records.size).toBe(0);
     expect(notifyMock).not.toHaveBeenCalled();
     expect(confirmMock).not.toHaveBeenCalled();
   });
 
-  it("returns 429 once the per-IP hourly limit is exceeded", async () => {
-    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
-      const ok = await POST(makeRequest({ email: `user${i}@example.com` }));
-      expect(ok.status).toBe(200);
-    }
-    const res = await POST(makeRequest({ email: "late@example.com" }));
-    expect(res.status).toBe(429);
-    const json = await res.json();
-    expect(json.error).toBe("rate_limited");
-    expect(notifyMock).toHaveBeenCalledTimes(HOURLY_LIMIT);
+  it("requires an OIDC role for Vercel instead of falling back to local credentials", async () => {
+    vi.stubEnv("VERCEL", "1");
+    const res = await POST(makeRequest({ email: "durable@example.com" }));
+    expect(res.status).toBe(503);
+    expect(records.size).toBe(0);
   });
 
-  it("tells a throttled caller when to come back instead of failing blind", async () => {
-    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
-      await POST(makeRequest({ email: `burst${i}@example.com` }));
-    }
+  it("stores normalized data and consent before sending either email", async () => {
+    notifyMock.mockImplementationOnce(async () => {
+      expect(records.has("good@example.com")).toBe(true);
+      return "notif-id";
+    });
+    confirmMock.mockImplementationOnce(async () => {
+      expect(records.has("good@example.com")).toBe(true);
+      return "conf-id";
+    });
+    const res = await POST(
+      makeRequest({
+        email: " Good@Example.COM ",
+        role: " Founder ",
+        painPoint: " Follow-ups ",
+        locale: "zh-HK",
+        ip: "untrusted",
+        userAgent: "untrusted",
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    const record = records.get("good@example.com")!;
+    expect(record).toMatchObject({
+      email: { S: "good@example.com" },
+      role: { S: "Founder" },
+      painPoint: { S: "Follow-ups" },
+      locale: { S: "zh-HK" },
+      status: { S: "pending" },
+      privacyVersion: { S: "2026-09-24" },
+      termsVersion: { S: "2026-09-24" },
+    });
+    expect(record.createdAt!.S).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect(record.privacyAcceptedAt).toEqual(record.createdAt);
+    expect(record.termsAcceptedAt).toEqual(record.createdAt);
+    expect(record.ip).toBeUndefined();
+    expect(record.userAgent).toBeUndefined();
+    expect(notifyMock).toHaveBeenCalledOnce();
+    expect(confirmMock).toHaveBeenCalledOnce();
+  });
+
+  it("does not send mail or claim capture when the database fails, and permits retry", async () => {
+    sendMock.mockRejectedValueOnce(new Error("provider error containing lead@example.com"));
+    const first = await POST(makeRequest({ email: "lead@example.com" }));
+    expect(first.status).toBe(503);
+    expect(notifyMock).not.toHaveBeenCalled();
+    expect(confirmMock).not.toHaveBeenCalled();
+    expect(records.size).toBe(0);
+    expect(JSON.stringify(consoleError.mock.calls)).not.toContain("lead@example.com");
+    const second = await POST(makeRequest({ email: "lead@example.com" }));
+    expect(second.status).toBe(200);
+    expect(records.has("lead@example.com")).toBe(true);
+  });
+
+  it("never treats an in-flight local reservation as a saved application", async () => {
+    let failFirst!: (reason: Error) => void;
+    sendMock.mockImplementationOnce(
+      () =>
+        new Promise((_, reject) => {
+          failFirst = reject;
+        }),
+    );
+    const first = POST(makeRequest({ email: "concurrent@example.com" }));
+    await vi.waitFor(() => expect(failFirst).toBeDefined());
+    sendMock.mockRejectedValueOnce(new Error("database down"));
+    const second = await POST(makeRequest({ email: "concurrent@example.com" }));
+    expect(second.status).toBe(503);
+    failFirst(new Error("database down"));
+    expect((await first).status).toBe(503);
+    expect(records.size).toBe(0);
+    expect(notifyMock).not.toHaveBeenCalled();
+  });
+
+  it("deduplicates concurrent submissions durably", async () => {
+    const responses = await Promise.all([
+      POST(makeRequest({ email: "race@example.com", role: "First" })),
+      POST(makeRequest({ email: "RACE@example.com", role: "Second" }, "203.0.113.11")),
+    ]);
+    expect(responses.map((res) => res.status)).toEqual([200, 200]);
+    expect(records.size).toBe(1);
+    expect(records.get("race@example.com")!.role!.S).toBe("First");
+    expect(notifyMock).toHaveBeenCalledOnce();
+    expect(confirmMock).toHaveBeenCalledOnce();
+  });
+
+  it("keeps deduplication after process-local state is lost", async () => {
+    await POST(makeRequest({ email: "repeat@example.com", role: "Original" }));
+    resetWaitlistLimiter();
+    const second = await POST(
+      makeRequest({ email: "repeat@example.com", role: "Overwrite attempt" }),
+    );
+    expect(second.status).toBe(200);
+    expect(records.get("repeat@example.com")!.role!.S).toBe("Original");
+    expect(notifyMock).toHaveBeenCalledOnce();
+  });
+
+  it.each(["notification", "confirmation"])(
+    "retains durable capture when %s email fails",
+    async (kind) => {
+      (kind === "notification" ? notifyMock : confirmMock).mockRejectedValueOnce(
+        new Error("email contains private@example.com"),
+      );
+      const res = await POST(makeRequest({ email: "private@example.com" }));
+      expect(res.status).toBe(200);
+      expect(records.has("private@example.com")).toBe(true);
+      expect(JSON.stringify(consoleError.mock.calls)).not.toContain("private@example.com");
+      resetWaitlistLimiter();
+      await POST(makeRequest({ email: "private@example.com" }));
+      expect(notifyMock).toHaveBeenCalledOnce();
+      expect(confirmMock).toHaveBeenCalledOnce();
+    },
+  );
+
+  it("can capture applications with both supplementary emails disabled", async () => {
+    vi.stubEnv("WAITLIST_EMAILS_ENABLED", "false");
+    const res = await POST(makeRequest({ email: "smoke@example.com" }));
+    expect(res.status).toBe(200);
+    expect(records.has("smoke@example.com")).toBe(true);
+    expect(notifyMock).not.toHaveBeenCalled();
+    expect(confirmMock).not.toHaveBeenCalled();
+  });
+
+  it("discards honeypot submissions without storing or mailing", async () => {
+    const res = await POST(makeRequest({ email: "bot@example.com", company: "Acme" }));
+    expect(res.status).toBe(200);
+    expect(records.size).toBe(0);
+    expect(notifyMock).not.toHaveBeenCalled();
+    expect(confirmMock).not.toHaveBeenCalled();
+  });
+
+  it("returns 429 with retry timing after the per-IP hourly budget", async () => {
+    for (let i = 0; i < HOURLY_LIMIT; i++)
+      expect((await POST(makeRequest({ email: `user${i}@example.com` }))).status).toBe(200);
     const res = await POST(makeRequest({ email: "late@example.com" }));
     expect(res.status).toBe(429);
     const retryAfter = Number(res.headers.get("Retry-After"));
     expect(retryAfter).toBeGreaterThan(0);
-    expect(retryAfter).toBeLessThanOrEqual(60 * 60);
+    expect(retryAfter).toBeLessThanOrEqual(3600);
     expect((await res.json()).retryAfterSeconds).toBe(retryAfter);
+    expect(records.size).toBe(HOURLY_LIMIT);
   });
 
-  it("absorbs a burst from one shared network before throttling", async () => {
-    // A room of people on one office or venue NAT egresses from a single IP.
-    for (let i = 0; i < 10; i += 1) {
-      const res = await POST(makeRequest({ email: `guest${i}@example.com` }, "203.0.113.99"));
-      expect(res.status).toBe(200);
+  it("counts duplicate database attempts towards the IP budget", async () => {
+    for (let i = 0; i < HOURLY_LIMIT; i++) {
+      expect((await POST(makeRequest({ email: "repeat-budget@example.com" }))).status).toBe(200);
     }
-    expect(notifyMock).toHaveBeenCalledTimes(10);
+    const blocked = await POST(makeRequest({ email: "repeat-budget@example.com" }));
+    expect(blocked.status).toBe(429);
+    expect(sendMock).toHaveBeenCalledTimes(HOURLY_LIMIT);
+    expect(records.size).toBe(1);
+    expect(notifyMock).toHaveBeenCalledOnce();
   });
 
-  // The per-IP budget is generous on purpose, so it cannot be the control that
-  // protects a victim inbox: a mail-bomber changes IP, or plus-addresses their
-  // way past a dedupe keyed on the raw address. The cap that stops them is the
-  // one keyed on the destination.
-  it("caps how much mail one inbox can be sent, whatever IP asks", async () => {
-    for (let i = 0; i < ADDRESS_DAILY_LIMIT; i += 1) {
-      const res = await POST(
-        makeRequest({ email: `victim+${i}@gmail.com` }, `203.0.113.${20 + i}`),
-      );
-      expect(res.status).toBe(200);
-    }
-
-    const res = await POST(makeRequest({ email: "victim+last@gmail.com" }, "203.0.113.90"));
-    expect(res.status).toBe(429);
-    expect((await res.json()).error).toBe("rate_limited");
-    // Every request came from a fresh IP well inside the per-IP budget, so the
-    // destination cap is the only thing that could have stopped this.
-    expect(notifyMock).toHaveBeenCalledTimes(ADDRESS_DAILY_LIMIT);
-    expect(confirmMock).toHaveBeenCalledTimes(ADDRESS_DAILY_LIMIT);
-    // Normalisation is for the rate-limit key only: the mail still goes to the
-    // address as it was submitted, and that is the address reported.
-    expect(notifyMock).toHaveBeenCalledWith({ signup: "victim+0@gmail.com" });
-    expect(confirmMock).toHaveBeenCalledWith({ to: "victim+0@gmail.com" });
-  });
-
-  it("does not re-send to the same address inside the window", async () => {
-    const first = await POST(makeRequest({ email: "repeat@example.com" }));
-    expect(first.status).toBe(200);
-    const second = await POST(makeRequest({ email: "repeat@example.com" }, "198.51.100.7"));
-    expect(second.status).toBe(200);
-    expect((await second.json()).ok).toBe(true);
-    expect(notifyMock).toHaveBeenCalledTimes(1);
-    expect(confirmMock).toHaveBeenCalledTimes(1);
-  });
-
-  it("returns 400 for invalid email", async () => {
-    const res = await POST(makeRequest({ email: "not-an-email" }));
-    expect(res.status).toBe(400);
-    const json = await res.json();
-    expect(json.error).toBe("invalid_email");
-    expect(notifyMock).not.toHaveBeenCalled();
-  });
-
-  it("returns 400 for malformed body", async () => {
-    const req = new Request("http://localhost/api/waitlist", {
-      method: "POST",
-      body: "not json",
+  it("recovers when a write committed but its acknowledgement was lost", async () => {
+    sendMock.mockImplementationOnce(async (command) => {
+      const item = (command as PutItemCommand).input.Item!;
+      records.set(item.email!.S!, item);
+      throw new Error("socket closed after commit");
     });
-    const res = await POST(req);
-    expect(res.status).toBe(400);
-    const json = await res.json();
-    expect(json.error).toBe("invalid_body");
+    const first = await POST(makeRequest({ email: "ambiguous@example.com" }));
+    expect(first.status).toBe(503);
+    expect(records.size).toBe(1);
+    const retry = await POST(makeRequest({ email: "ambiguous@example.com" }));
+    expect(retry.status).toBe(200);
+    expect(records.size).toBe(1);
     expect(notifyMock).not.toHaveBeenCalled();
   });
-});
 
-// The rate-limit key normalisation and the window accounting are what make the
-// destination cap hold. They are asserted here, next to the endpoint that
-// depends on them, because both need an injectable clock or a peek at the key
-// that POST does not expose.
-describe("waitlist rate-limit keys", () => {
-  it("collapses the spellings that reach one inbox", () => {
-    // Sub-addressing: the cheapest way to mint budgets.
-    expect(normalizeAddressKey("victim+jarvis@fastmail.com")).toBe("victim@fastmail.com");
-    // Case is not an identity either.
-    expect(normalizeAddressKey("Victim@Fastmail.com")).toBe("victim@fastmail.com");
-    // Gmail ignores dots and serves googlemail.com from the same mailbox.
-    expect(normalizeAddressKey("v.i.c.t.i.m+42@GMail.com")).toBe("victim@gmail.com");
-    expect(normalizeAddressKey("victim@googlemail.com")).toBe("victim@gmail.com");
+  it("limits address variants from different IPs before storage or mail", async () => {
+    for (let i = 0; i < ADDRESS_DAILY_LIMIT; i++)
+      await POST(makeRequest({ email: `victim+${i}@gmail.com` }, `203.0.113.${20 + i}`));
+    const res = await POST(makeRequest({ email: "victim+last@gmail.com" }, "203.0.113.99"));
+    expect(res.status).toBe(429);
+    expect(records.size).toBe(ADDRESS_DAILY_LIMIT);
   });
 
-  it("keeps dots outside Gmail, where they are different people", () => {
-    expect(normalizeAddressKey("first.last@acme.com")).toBe("first.last@acme.com");
-    expect(normalizeAddressKey("firstlast@acme.com")).toBe("firstlast@acme.com");
-  });
-});
-
-describe("waitlist window accounting", () => {
-  const T0 = 1_700_000_000_000;
-  const HOUR_MS = 60 * 60 * 1000;
-
-  beforeEach(() => {
-    resetWaitlistLimiter();
+  it.each([
+    [{ email: "bad" }, "invalid_email"],
+    [{ email: "good@example.com", privacyAccepted: false }, "consent_required"],
+    [{ email: "good@example.com", termsVersion: "outdated" }, "consent_required"],
+    [{ email: "good@example.com", painPoint: "x".repeat(501) }, "invalid_input"],
+  ])("rejects invalid input before persistence: %j", async (body, error) => {
+    const res = await POST(makeRequest(body));
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error });
+    expect(records.size).toBe(0);
   });
 
-  // A rejected attempt sends nothing, so charging it to the window makes the
-  // limit stricter than advertised: the blind retries a throttled visitor makes
-  // would spend the day budget and turn an hour-long throttle into a day-long
-  // one.
-  it("does not spend the budget on attempts it rejects", () => {
-    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
-      expect(checkWaitlistAttempt("198.51.100.1", `ok${i}@example.com`, T0).allowed).toBe(true);
-    }
-    for (let i = 0; i < DAILY_LIMIT; i += 1) {
-      expect(checkWaitlistAttempt("198.51.100.1", `blind${i}@example.com`, T0 + 1000).allowed).toBe(
-        false,
-      );
-    }
-
-    // Next hour: the day budget still has everything the rejections did not buy.
-    for (let i = 0; i < HOURLY_LIMIT; i += 1) {
-      expect(
-        checkWaitlistAttempt("198.51.100.1", `next${i}@example.com`, T0 + HOUR_MS).allowed,
-      ).toBe(true);
-    }
-  });
-
-  it("frees the destination budget again the next day", () => {
-    for (let i = 0; i < ADDRESS_DAILY_LIMIT; i += 1) {
-      expect(checkWaitlistAttempt(`10.0.0.${i}`, `v+${i}@gmail.com`, T0).allowed).toBe(true);
-    }
-    expect(checkWaitlistAttempt("10.0.0.9", "v+late@gmail.com", T0).allowed).toBe(false);
-    expect(
-      checkWaitlistAttempt("10.0.0.9", "v+late@gmail.com", T0 + 24 * HOUR_MS).allowed,
-    ).toBe(true);
+  it("returns 400 for malformed JSON", async () => {
+    const res = await POST(
+      new Request("http://localhost/api/waitlist", { method: "POST", body: "not json" }),
+    );
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: "invalid_body" });
+    expect(records.size).toBe(0);
   });
 });

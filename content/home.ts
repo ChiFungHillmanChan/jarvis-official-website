@@ -2,16 +2,16 @@ import type { DeepWiden } from "./copy.types";
 
 export const enHome = {
   hero: {
-    label: "AI email workspace for Mac",
-    title: "Your email.\nA clearer next step.",
-    sub: "Bring your Gmail accounts together. Find the deadlines, understand the context, and check the source with JARVIS.",
+    label: "Your personal AI assistant",
+    title: "Less busywork.\nMore room to think.",
+    sub: "Bring your email, plans and everyday tasks into focus. JARVIS helps you find the context, prepare the next step and keep work moving.",
     primaryCta: "Request beta access",
-    secondaryCta: "Try the demo",
-    availability: "Private beta for Apple Silicon Macs.",
+    secondaryCta: "Explore the demo",
+    availability: "Currently available as a private beta for macOS.",
   },
   product: {
-    title: "The context behind\nevery next step.",
-    sub: "A workspace that follows the way you think about work: by client, by project, and by what needs your attention.",
+    title: "An assistant that knows\nwhat matters to you.",
+    sub: "Find the right information, prepare a considered reply and follow through on the details. Start with the tools you already use.",
     items: [
       {
         label: "Bring it together",
@@ -52,7 +52,7 @@ export const enHome = {
     note: "Connections are optional. Each service needs its own setup and permissions.",
   },
   setup: {
-    title: "At home on your Mac.",
+    title: "A useful start.\nOn your terms.",
     sub: "Start with the emails and context that matter to you. The setup guide walks you through Gmail, GPT and your first group.",
     steps: [
       {
@@ -92,7 +92,7 @@ export const enHome = {
   },
   company: {
     title: "Built in Hong Kong.\nMade for your working day.",
-    body: "We’re building JARVIS for founders, consultants and small teams who manage client work on a Mac. We’re working with early users to make the everyday details easier to handle.",
+    body: "We’re building JARVIS for founders, consultants and small teams who manage client work. We’re working with early users to make the everyday details easier to handle.",
     link: "Meet JARVIS AI",
   },
   faq: {
@@ -103,12 +103,12 @@ export const enHome = {
       {
         question: "What is JARVIS?",
         answer:
-          "JARVIS is a personal AI email workspace and desktop assistant for Mac. Bring multiple Gmail accounts together, group related emails, add your own instructions and ask GPT for analysis with source references. The current version is a private beta.",
+          "JARVIS is a personal AI assistant for everyday work, currently available as a macOS beta. Bring multiple Gmail accounts together, group related emails, add your own instructions and ask GPT for analysis with source references. The current version is a private beta.",
       },
       {
         question: "Who is it for?",
         answer:
-          "JARVIS is designed for Mac-based founders, consultants, agency owners and other client-facing professionals who spend much of their day in email and meetings. You can use it in English or Cantonese.",
+          "JARVIS is designed for founders, consultants, agency owners and other client-facing professionals who spend much of their day in email and meetings. The interface supports English and Traditional Chinese, with Cantonese voice support.",
       },
       {
         question: "Which Macs are supported?",
@@ -133,13 +133,13 @@ export const enHome = {
       {
         question: "How do I join the beta, and what does it cost?",
         answer:
-          "Request beta access using the form below. We’ll contact you as onboarding places become available. The current beta download is free; paid plans have not been announced. Any usage charges from your chosen AI provider are separate.",
+          "Request beta access using our application form. We’ll contact you as onboarding places become available. The current beta download is free; paid plans have not been announced. Any usage charges from your chosen AI provider are separate.",
       },
     ],
   },
   access: {
     title: "Make room for\na better working day.",
-    sub: "Join the private beta for Mac. Tell us a little about your work, and help shape what JARVIS takes care of next.",
+    sub: "Join the private beta, currently available for macOS. Tell us a little about your work, and help shape what JARVIS takes care of next.",
     note: "Already have beta access?",
     download: "Download for Mac",
     contactLinkLabel: "Contact the company",
@@ -150,16 +150,16 @@ export const enHome = {
 
 export const zhHome: DeepWiden<typeof enHome> = {
   hero: {
-    label: "Mac 上的 AI 電郵工作區",
-    title: "理清電郵，\n看清下一步。",
-    sub: "集中你的 Gmail 帳戶，讓 JARVIS 整理限期、理解背景，每個重點都有來源可核對。",
+    label: "你的個人 AI 助理",
+    title: "少一點瑣事，\n多一點專注。",
+    sub: "讓電郵、計劃和日常待辦更有條理。JARVIS 幫你掌握背景、準備下一步，讓工作繼續向前。",
     primaryCta: "申請 Beta 試用",
-    secondaryCta: "試用示範",
-    availability: "適用於 Apple Silicon Mac，現正進行私人 Beta 測試。",
+    secondaryCta: "觀看完整示範",
+    availability: "目前提供 macOS 私人 Beta 版本。",
   },
   product: {
-    title: "每個下一步，\n都有背景可循。",
-    sub: "按客戶、按項目、按你關心的事情整理，讓工作區跟上你的思考方式。",
+    title: "一位了解你重點的\n個人助理。",
+    sub: "從熟悉的工具開始，找出所需資料、準備合適回覆，並跟進工作中的細節。",
     items: [
       {
         label: "集中所需內容",
@@ -200,7 +200,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
     note: "所有連結均屬自選，每項服務需獨立設定及授權。",
   },
   setup: {
-    title: "為你的 Mac 而設。",
+    title: "由你決定，\n如何開始。",
     sub: "從你關心的郵件和背景開始。設定指南會帶你連接 Gmail、選擇 GPT，並建立第一個群組。",
     steps: [
       {
@@ -237,7 +237,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
   },
   company: {
     title: "在香港建立，\n為每天的工作而設。",
-    body: "我們為使用 Mac 處理客戶工作的創辦人、顧問及小型團隊開發 JARVIS，並與早期用戶一起，讓日常細節更容易處理。",
+    body: "我們為處理客戶工作的創辦人、顧問及小型團隊開發 JARVIS，並與早期用戶一起，讓日常細節更容易處理。",
     link: "認識 JARVIS AI",
   },
   faq: {
@@ -248,12 +248,12 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         question: "JARVIS 是甚麼？",
         answer:
-          "JARVIS 是 Mac 個人化 AI 電郵工作區及桌面助理，可集中多個 Gmail、將相關郵件分組、加入個人指示，再讓 GPT 產生附來源引用的分析。目前版本正進行私人 Beta 測試。",
+          "JARVIS 是協助日常工作的個人 AI 助理，目前提供 macOS Beta 版本，可集中多個 Gmail、將相關郵件分組、加入個人指示，再讓 GPT 產生附來源引用的分析。目前版本正進行私人 Beta 測試。",
       },
       {
         question: "JARVIS 適合誰使用？",
         answer:
-          "JARVIS 為使用 Mac 的創辦人、顧問、代理公司負責人及其他客戶服務專業人士而設，尤其適合經常處理電郵和會議的工作。你可使用英文或廣東話。",
+          "JARVIS 為創辦人、顧問、代理公司負責人及其他客戶服務專業人士而設，尤其適合經常處理電郵和會議的工作。介面支援英文及繁體中文，並提供廣東話語音支援。",
       },
       {
         question: "支援哪些 Mac？",
@@ -278,13 +278,13 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         question: "如何加入 Beta？費用是多少？",
         answer:
-          "請使用下方表格申請試用。我們會在有名額時聯絡你安排入門。現有 Beta 版本可免費下載，付費計劃尚未公布。所選 AI 供應商的用量費用另計。",
+          "請使用 Beta 申請表登記試用。我們會在有名額時聯絡你安排入門。現有 Beta 版本可免費下載，付費計劃尚未公布。所選 AI 供應商的用量費用另計。",
       },
     ],
   },
   access: {
     title: "為更好的工作日，\n留一點空間。",
-    sub: "申請 Mac 私人 Beta 試用。告訴我們你的工作情況，一起決定 JARVIS 下一步可以幫忙處理甚麼。",
+    sub: "申請私人 Beta 試用，目前版本適用於 macOS。告訴我們你的工作情況，一起決定 JARVIS 下一步可以幫忙處理甚麼。",
     note: "已取得 Beta 試用資格？",
     download: "下載 Mac 版本",
     contactLinkLabel: "聯絡公司",

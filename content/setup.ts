@@ -21,24 +21,29 @@ type SetupCopy = {
 
 const en: SetupCopy = {
   eyebrow: "How it works",
-  title: "From your inbox to your next action.",
+  title: "Set up JARVIS for your working day.",
   intro:
-    "Bring related email from your Gmail accounts into one workspace on your Mac. Group the messages, explain what matters to you, then use GPT to find next steps you can check against the original emails. Here is how to start with the private beta.",
+    "JARVIS is a personal AI assistant for voice, text and connected workflows. The current beta runs on macOS. Start with a conversation, then use this guide to bring related Gmail messages together, add your context and ask GPT for next steps you can check against the sources.",
   requirements: {
     title: "Before you start",
     items: [
-      "A Mac with Apple Silicon and macOS 12 or later.",
+      "The current beta requires a Mac with Apple Silicon and macOS 12 or later.",
       "Beta access and the JARVIS macOS app. Google sign-in may require your account to be added as a beta tester.",
       "Your own OpenAI API key for the GPT workflow below. Provider usage is billed separately to your account. Local Ollama and your own AWS Bedrock are other email analysis options.",
-      "One or more Gmail accounts, and an internet connection for Gmail sync and cloud AI.",
+      "For the email workflow: one or more Gmail accounts, and an internet connection for Gmail sync and cloud AI.",
     ],
   },
-  stepsTitle: "Your first workflow",
+  stepsTitle: "From your first conversation to an email workflow",
   steps: [
     {
       title: "Request beta access and install JARVIS",
       body: "Join the waitlist to request access. If you already have beta access, use the download page to get the current macOS build. Open JARVIS and follow the onboarding steps.",
       note: "If Google sign-in says your account is blocked or the app is not verified, contact us to check your tester access.",
+    },
+    {
+      title: "Start a conversation with your assistant",
+      body: "Open Assistant and type a request after configuring its AI provider in Settings. To use voice, allow microphone access and review the voice settings. You can choose English or Cantonese speech recognition according to your needs.",
+      note: "The assistant, voice and email analysis have separate settings. Changing the interface language does not change the speech-recognition language. Voice may use cloud services; it is not guaranteed to work offline.",
     },
     {
       title: "Choose GPT for your email analysis",
@@ -84,7 +89,7 @@ const en: SetupCopy = {
   },
   next: {
     title: "Start with a real task from your day.",
-    body: "Request beta access and tell us which inbox or project is hardest to keep up with. Already a tester? Get the current Mac build and follow the steps above.",
+    body: "Request beta access and tell us which task, inbox or project you want help with. Already a tester? Get the current macOS build and follow the steps above.",
     requestLabel: "Request beta access",
     downloadLabel: "Download for Mac",
     privacyLabel: "Read our privacy policy",
@@ -94,19 +99,19 @@ const en: SetupCopy = {
 
 const zhHk: SetupCopy = {
   eyebrow: "使用指南",
-  title: "從收件箱，走到下一步行動。",
+  title: "為日常工作設定你的 JARVIS。",
   intro:
-    "將幾個 Gmail 帳戶嘅相關電郵，集中到 Mac 上同一個工作區。先分組、交代你重視嘅背景，再用 GPT 整理可以對照原信核對嘅下一步。以下係私人 Beta 嘅開始方法。",
+    "JARVIS 是支援語音、文字及連接服務的個人 AI 助理，目前 Beta 適用於 macOS。先從一次對話開始，再依照本指南整理相關 Gmail 郵件、加入你的背景，並請 GPT 提出可以對照來源核對的下一步。",
   requirements: {
     title: "開始之前",
     items: [
-      "一部配備 Apple Silicon、執行 macOS 12 或以上版本的 Mac。",
+      "目前 Beta 需要一部配備 Apple Silicon、執行 macOS 12 或以上版本的 Mac。",
       "Beta 使用資格及 JARVIS macOS 應用程式。你的 Google 帳戶可能需要先加入測試者名單，才能登入。",
-      "以下 GPT 流程需要你自己嘅 OpenAI API key，供應商用量另行計入你嘅帳戶。電郵分析亦可選本機 Ollama 或你自己嘅 AWS Bedrock。",
-      "一個或多個 Gmail 帳戶，以及同步 Gmail 同使用雲端 AI 所需嘅網絡。",
+      "以下 GPT 流程需要你自己的 OpenAI API 密鑰，供應商用量另行計入你的帳戶。電郵分析亦可選擇本機 Ollama 或你自己的 AWS Bedrock。",
+      "進行電郵工作流程需要一個或多個 Gmail 帳戶，以及同步 Gmail 及使用雲端 AI 所需的網絡連線。",
     ],
   },
-  stepsTitle: "你的第一個工作流程",
+  stepsTitle: "從第一次對話到電郵工作流程",
   steps: [
     {
       title: "申請 Beta 資格並安裝 JARVIS",
@@ -114,50 +119,55 @@ const zhHk: SetupCopy = {
       note: "如果 Google 登入顯示帳戶受限制或應用程式尚未驗證，請聯絡我們確認你的測試者資格。",
     },
     {
+      title: "開始與助理對話",
+      body: "在「設定」完成助理的 AI 供應商設定後，開啟「AI 助理」並輸入要求。使用語音時，請允許麥克風存取並檢查語音設定；你可以按需要選擇英文或廣東話語音辨識。",
+      note: "助理、語音及電郵分析有各自的設定。切換介面語言不會更改語音辨識語言。語音可能使用雲端服務，不能保證離線運作。",
+    },
+    {
       title: "選擇 GPT 分析電郵",
-      body: "喺 Settings 儲存 OpenAI API key，再打開電郵工作區，喺「分析設定」揀 OpenAI GPT。閱讀並確認會傳送嘅內容：群組郵件、個人指示同有效記憶。JARVIS 會將 API key 存喺 macOS Keychain。",
-      note: "電郵分析有獨立供應商設定，失敗唔會自動轉用其他供應商。一般聊天同語音有各自設定。",
+      body: "在「設定」儲存 OpenAI API 密鑰，再開啟電郵工作區，在「電郵分析設定」選擇 OpenAI GPT。閱讀並確認會傳送的內容：群組郵件、個人指示與有效記憶。JARVIS 會將 API 密鑰儲存於 macOS Keychain。",
+      note: "電郵分析有獨立的供應商設定，失敗時不會自動轉用其他供應商。一般聊天與語音有各自的設定。",
     },
     {
-      title: "連接 Gmail，同步需要嘅郵件",
-      body: "喺電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取。逐個加入你想用嘅帳戶，再按「同步最近郵件」。每次最多載入 50 封；按「載入更舊郵件」繼續。",
-      note: "每次同步由你啟動。本機分組唔會更改 Gmail 標籤、寄信或刪除原信；目前未支援附件下載或完整信箱備份。",
+      title: "連接 Gmail，同步需要的郵件",
+      body: "在電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取。逐一加入你想使用的帳戶，再按「同步最近郵件」。每次最多載入 50 封；按「載入更舊郵件」繼續。",
+      note: "每次同步由你啟動。本機分組不會更改 Gmail 標籤、寄信或刪除原信；目前未支援附件下載或完整信箱備份。",
     },
     {
-      title: "選信分組，加入你嘅指示",
-      body: "為客戶、項目或申請建立群組，跨 Gmail 信箱揀相關郵件加入。寫低你想分析重點關注嘅問題、限期同細節。",
+      title: "選取郵件分組，加入你的指示",
+      body: "為客戶、項目或申請建立群組，選取不同 Gmail 信箱的相關郵件加入。寫下你希望分析重點關注的問題、限期與細節。",
       prompt:
-        "列出要我回覆嘅問題同已確認限期，分清必要行動同可選建議，並引用原信。",
-      note: "郵件同指示由你揀；JARVIS 唔會自動將新郵件分入呢啲群組。",
+        "列出需要我回覆的問題與已確認限期，區分必要行動及可選建議，並引用原信。",
+      note: "郵件與指示由你選擇；JARVIS 不會自動將新郵件加入這些群組。",
     },
     {
-      title: "分析群組，打開來源核對",
-      body: "按「分析呢個群組」，閱讀結果，再打開引用原信，核對重要日期、金額同承諾。分析會提出下一步建議，唔會寄信或更改日曆。",
-      note: "分析最多使用最近 50 封郵件正文，並設總輸入上限。App 會顯示未納入郵件數量；引用有效唔代表模型一定理解正確。",
+      title: "分析群組，開啟來源核對",
+      body: "按「分析此群組」，閱讀結果，再開啟引用的原信，核對重要日期、金額與承諾。分析會提出下一步建議，不會寄信或更改日曆。",
+      note: "分析最多使用最近 50 封郵件正文，並設有總輸入上限。App 會顯示未納入的郵件數量；引用有效不代表模型一定理解正確。",
     },
     {
-      title: "儲存你確認過嘅背景",
-      body: "將想保留嘅事實、偏好或承諾新增為群組記憶，可以附上來源郵件、設定到期日、標記完成、修改或刪除。模型唔會自行儲存記憶。",
-      note: "郵件、群組、指示同記憶會保留喺呢部 Mac。分析結果目前只留喺頁面，重開 App 後要再按分析。",
+      title: "儲存你已確認的背景",
+      body: "將想保留的事實、偏好或承諾新增為群組記憶，可以附上來源郵件、設定到期日、標記完成、修改或刪除。模型不會自行儲存記憶。",
+      note: "郵件、群組、指示與記憶會保留在這部 Mac。分析結果目前只保留於頁面，重開 App 後需要重新分析。",
     },
   ],
   calendar: {
-    title: "需要回覆草稿，或者安排日曆？",
-    body: "JARVIS 亦有一般助理，使用獨立 Google 連接同 AI 設定。喺聊天中，你可以要求建立 Gmail 草稿，自行檢閱及寄出，或者要求新增日曆活動。呢啲功能同以上群組分析分開。",
+    title: "需要回覆草稿或安排日曆？",
+    body: "JARVIS 的一般助理使用獨立的 Google 連接與 AI 設定。在聊天中，你可以要求建立 Gmail 草稿，自行檢閱及寄出，或要求新增日曆活動。這些功能與以上群組分析分開。",
     prompt: "在明天下午 2 時建立一個 30 分鐘的日曆活動，名稱是「檢查提案」。",
-    note: "電郵群組同記憶唔會自動帶入一般聊天。日曆變更可喺你提出要求後執行，唔係每項操作都另設批准步驟；請到 Google Calendar 檢查結果。",
+    note: "電郵群組與記憶不會自動帶入一般聊天。日曆變更可在你提出要求後執行，並非每項操作都另設批准步驟；請到 Google Calendar 檢查結果。",
   },
   data: {
     title: "清楚了解資料的去向。",
     paragraphs: [
-      "同步郵件文字、群組、指示同記憶會存喺 Mac 嘅本機 SQLite 資料庫，資料庫冇獨立應用層加密。API key 同 Google refresh token 則存喺 macOS Keychain。工作區屬於呢部 Mac，未支援跨裝置同步。",
-      "揀 GPT 時，群組郵件、個人指示同有效記憶會透過你嘅 API 帳戶傳到 OpenAI 分析；揀 AWS Bedrock 則傳到你設定嘅 AWS 服務。本機副本仍然保留，但雲端分析唔係離線處理。",
-      "電郵分析亦支援合適嘅本機 Ollama 模型，唔會自動轉用雲端。一般聊天有獨立供應商次序，預設雲端選項為 Gemini，並可設定後備供應商。Google 整合同語音服務各自有網絡使用。",
+      "同步郵件文字、群組、指示與記憶儲存於 Mac 的本機 SQLite 資料庫，資料庫沒有獨立的應用層加密。API 密鑰與 Google refresh token 則儲存於 macOS Keychain。工作區屬於這部 Mac，未支援跨裝置同步。",
+      "選擇 GPT 時，群組郵件、個人指示與有效記憶會透過你的 API 帳戶傳送至 OpenAI 分析；選擇 AWS Bedrock 則傳送至你設定的 AWS 服務。本機副本仍然保留，但雲端分析並非離線處理。",
+      "電郵分析亦支援合適的本機 Ollama 模型，不會自動轉用雲端。一般聊天有獨立的供應商次序，預設雲端選項為 Gemini，並可設定後備供應商。Google 整合及部分語音服務亦會連接網絡。",
     ],
   },
   next: {
     title: "由今天的一項實際工作開始。",
-    body: "申請 Beta 試用，話畀我哋知邊個信箱或項目最難跟得貼。如果你已經係測試者，可以下載目前 Mac 版本，按以上步驟開始。",
+    body: "申請 Beta 試用，告訴我們你希望在哪項工作、信箱或項目上獲得協助。如果你已是測試者，可以下載目前的 macOS 版本，按以上步驟開始。",
     requestLabel: "申請 Beta 試用",
     downloadLabel: "下載 Mac 版本",
     privacyLabel: "閱讀私隱政策",

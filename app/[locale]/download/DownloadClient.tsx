@@ -47,7 +47,7 @@ export default function DownloadClient({ copy, locale }: Props) {
           sub={copy.nonMacosBody}
           as="h1"
         />
-        <Link href={`${localePath(locale, "/")}#access`} className={downloadButtonClassName}>
+        <Link href={localePath(locale, "/beta")} className={downloadButtonClassName}>
           {copy.joinWaitlist}
         </Link>
       </section>

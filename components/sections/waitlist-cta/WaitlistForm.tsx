@@ -1,11 +1,13 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { useWaitlistSubmit } from "./useWaitlistSubmit";
 import { WaitlistSuccess } from "./WaitlistSuccess";
 
 export function WaitlistForm({
+  locale = "en",
   placeholder,
   submitLabel,
   submittingLabel,
@@ -18,6 +20,7 @@ export function WaitlistForm({
   painLabel,
   painPlaceholder,
 }: {
+  locale?: string;
   placeholder: string;
   submitLabel: string;
   submittingLabel: string;
@@ -30,6 +33,10 @@ export function WaitlistForm({
   painLabel: string;
   painPlaceholder: string;
 }) {
+  const [accepted, setAccepted] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const consentRef = useRef<HTMLInputElement>(null);
+  const zh = locale === "zh-HK";
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [painPoint, setPainPoint] = useState("");
@@ -53,7 +60,12 @@ export function WaitlistForm({
     <form
       onSubmit={async (e) => {
         e.preventDefault();
-        const result = await submit(email, company, role, painPoint);
+        if (!accepted) {
+          setConsentError(true);
+          consentRef.current?.focus();
+          return;
+        }
+        const result = await submit(email, company, role, painPoint, locale);
         if (result === "invalid") emailRef.current?.focus();
         else if (result === "error") errorRef.current?.focus();
       }}
@@ -123,6 +135,23 @@ export function WaitlistForm({
             className={fieldClass}
           />
         </div>
+      </div>
+      <div className="policy-consent">
+        <div className="policy-consent-row">
+          <input ref={consentRef} id={`${formId}-consent`} type="checkbox" required
+            checked={accepted} disabled={isSubmitting}
+            aria-invalid={consentError || undefined}
+            aria-describedby={consentError ? `${formId}-consent-error` : undefined}
+            onChange={(event) => { setAccepted(event.target.checked); setConsentError(false); }} />
+          <label htmlFor={`${formId}-consent`}>
+            {zh ? "我同意 Beta 使用條款，並已閱讀私隱政策，了解申請資料會用於處理申請及相關聯絡。" : "I agree to the beta terms and acknowledge the privacy policy. My details will be used to manage my request and related beta communication."}
+          </label>
+        </div>
+        <p className="policy-links">
+          <Link href={`/${locale}/terms`} target="_blank" rel="noopener noreferrer">{zh ? "Beta 使用條款（新分頁）" : "Beta terms (new tab)"}</Link>
+          <Link href={`/${locale}/privacy`} target="_blank" rel="noopener noreferrer">{zh ? "私隱政策（新分頁）" : "Privacy policy (new tab)"}</Link>
+        </p>
+        {consentError && <p id={`${formId}-consent-error`} role="alert">{zh ? "請閱讀及確認使用條款和私隱政策。" : "Please read and acknowledge the terms and privacy policy."}</p>}
       </div>
       <Button
         type="submit"

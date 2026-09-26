@@ -19,7 +19,7 @@ const base =
 
 const styles: Record<Variant, string> = {
   primary:
-    "border-[color:var(--accent-cyan)] bg-[color:var(--accent-cyan)] text-white hover:border-[#005653] hover:bg-[#005653]",
+    "border-[color:var(--accent-cyan)] bg-[color:var(--accent-cyan)] text-white hover:border-[#294888] hover:bg-[#294888]",
   ghost:
     "border-[var(--grid-line)] bg-white text-[color:var(--text-primary)] hover:border-[#a9b7bc] hover:bg-[var(--bg-panel)]",
 };

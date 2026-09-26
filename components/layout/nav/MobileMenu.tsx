@@ -145,7 +145,7 @@ export function MobileMenu({
           </Link>
           <div className="mt-3 border-t border-[var(--grid-line)] pt-4">
             <Button
-              href={`${localePath(locale, "/contact")}#request-access`}
+              href={localePath(locale, "/beta")}
               onClick={close}
               variant="primary"
               className="w-full"

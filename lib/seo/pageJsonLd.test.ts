@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildPageJsonLd, buildWebSiteJsonLd } from "./buildPageJsonLd";
 import { siteUrl } from "@/lib/constants/site";
+import { routes } from "@/lib/constants/routes";
 
 describe("page structured data", () => {
   it("connects the localized contact page to its website and breadcrumb trail", () => {
@@ -42,5 +43,27 @@ describe("page structured data", () => {
       inLanguage: ["en", "zh-Hant-HK"],
       publisher: { "@id": `${siteUrl}/#organization` },
     });
+  });
+
+  it("connects the product page to the same software entity and retains breadcrumbs", () => {
+    for (const locale of ["en", "zh-HK"]) {
+      const data = buildPageJsonLd(locale, "product");
+      expect(data["@graph"][0]).toMatchObject({
+        "@id": `${siteUrl}/${locale}/product#webpage`,
+        mainEntity: { "@id": `${siteUrl}/#software` },
+        breadcrumb: { "@id": `${siteUrl}/${locale}/product#breadcrumb` },
+      });
+      expect(data["@graph"][1]).toMatchObject({ "@type": "BreadcrumbList" });
+    }
+  });
+
+  it("does not invent video, ratings or offer facts on discovery pages", () => {
+    for (const key of Object.keys(routes) as (keyof typeof routes)[]) {
+      for (const entity of buildPageJsonLd("en", key)["@graph"]) {
+        expect(entity["@type"]).not.toBe("VideoObject");
+        expect(entity).not.toHaveProperty("aggregateRating");
+        expect(entity).not.toHaveProperty("offers");
+      }
+    }
   });
 });

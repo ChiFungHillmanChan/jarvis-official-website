@@ -38,7 +38,7 @@ describe("JSON-LD components", () => {
   it("links the Chinese software description to the Chinese page and download", () => {
     const data = JSON.parse(ldJsonPayload(renderToStaticMarkup(<SoftwareApplicationJsonLd locale="zh-HK" />)));
     expect(data.inLanguage).toBe("zh-Hant-HK");
-    expect(data.url).toBe(`${siteUrl}/zh-HK`);
+    expect(data.url).toBe(`${siteUrl}/zh-HK/product`);
     expect(data.downloadUrl).toBe(`${siteUrl}/zh-HK/download`);
     expect(data.description).toContain("Gmail");
     expect(data.description).toContain("記憶");

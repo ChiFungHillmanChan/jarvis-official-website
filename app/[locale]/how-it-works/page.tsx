@@ -79,7 +79,7 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ loc
         <h2 id="next-heading">{copy.next.title}</h2>
         <p>{copy.next.body}</p>
         <div className="setup-links">
-          <Link href={`/${locale}#access`}>{copy.next.requestLabel}</Link>
+          <Link href={`/${locale}/beta`}>{copy.next.requestLabel}</Link>
           <Link href={`/${locale}/download`}>{copy.next.downloadLabel}</Link>
         </div>
       </section>

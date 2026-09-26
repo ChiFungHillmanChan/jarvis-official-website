@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { waitlistSchema } from "@/lib/validation/waitlistSchema";
 import { sendWaitlistNotification } from "@/lib/resend/sendWaitlistNotification";
 import { sendWaitlistConfirmation } from "@/lib/resend/sendWaitlistConfirmation";
+import { captureWaitlistSignup } from "@/lib/waitlist/store";
 import {
   checkWaitlistAttempt,
   clientIpFrom,
@@ -11,13 +12,9 @@ import {
 
 export const runtime = "nodejs";
 
-// A field the form keeps hidden and out of the tab order, so only a bot fills
-// it. waitlistSchema strips unknown keys, so it is read off the raw payload.
-const HONEYPOT_FIELD = "company";
-
 function honeypotFilled(payload: unknown): boolean {
   if (typeof payload !== "object" || payload === null) return false;
-  const value = (payload as Record<string, unknown>)[HONEYPOT_FIELD];
+  const value = (payload as Record<string, unknown>).company;
   return typeof value === "string" && value.trim().length > 0;
 }
 
@@ -31,59 +28,64 @@ export async function POST(req: Request) {
 
   const parsed = waitlistSchema.safeParse(payload);
   if (!parsed.success) {
-    return NextResponse.json({ error: "invalid_email" }, { status: 400 });
+    const fields = parsed.error.issues.map((issue) => issue.path[0]);
+    const error = fields.includes("email")
+      ? "invalid_email"
+      : fields.some((field) =>
+            ["privacyAccepted", "termsAccepted", "privacyVersion", "termsVersion"].includes(
+              String(field),
+            ),
+          )
+        ? "consent_required"
+        : "invalid_input";
+    return NextResponse.json({ error }, { status: 400 });
   }
 
-  // Answer a bot with exactly what a real signup gets, so it cannot tell it was
-  // caught. Nothing is sent and nothing is counted.
-  if (honeypotFilled(payload)) {
-    return NextResponse.json({ ok: true });
-  }
+  // Silently discard bots; this branch does not represent a genuine application.
+  if (honeypotFilled(payload)) return NextResponse.json({ ok: true });
 
-  const email = parsed.data.email;
+  const { email } = parsed.data;
   const ip = clientIpFrom(req.headers);
   const gate = checkWaitlistAttempt(ip, email);
-  if (!gate.allowed) {
-    if (gate.reason === "rate_limited") {
-      // Say when the caller may try again instead of failing blind, so a
-      // throttled visitor can be told to wait rather than to retry now. The
-      // address is part of the question: the throttle may be on this IP or on
-      // how much mail that destination has already had today.
-      const retryAfterSeconds = retryAfterSecondsFor(ip, email);
-      return NextResponse.json(
-        { error: "rate_limited", retryAfterSeconds },
-        { status: 429, headers: { "Retry-After": String(retryAfterSeconds) } },
-      );
-    }
-    // Already signed up inside the window. Report success without re-sending,
-    // so the endpoint cannot be used to mail one address repeatedly.
+  if (!gate.allowed && gate.reason === "rate_limited") {
+    const retryAfterSeconds = retryAfterSecondsFor(ip, email);
+    return NextResponse.json(
+      { error: "rate_limited", retryAfterSeconds },
+      { status: 429, headers: { "Retry-After": String(retryAfterSeconds) } },
+    );
+  }
+
+  let created: boolean;
+  try {
+    // Even a local "duplicate" must reach DynamoDB: another request can still
+    // be in flight and fail. An in-memory hold is never evidence of capture.
+    ({ created } = await captureWaitlistSignup(parsed.data));
+  } catch {
+    if (gate.allowed) releaseWaitlistAddress(email);
+    // Provider errors can include input values. Log a fixed operational code only.
+    console.error("[waitlist] storage_unavailable");
+    return NextResponse.json({ error: "storage_unavailable" }, { status: 503 });
+  }
+
+  if (!created || process.env.WAITLIST_EMAILS_ENABLED !== "true") {
     return NextResponse.json({ ok: true });
   }
 
-  // The founder notification is the capture: there is no database behind this
-  // endpoint, so until that mail lands the signup does not exist anywhere. If
-  // it fails the address must go back to being submittable, otherwise the gate
-  // reads the visitor's retry as a duplicate, answers it with a silent success,
-  // and the lead is lost with nobody told.
+  // Capture is already durable. Email is supplementary and cannot roll it back.
+  // Only the request that inserted the row may send, including across cold starts.
   try {
     await sendWaitlistNotification({
       signup: email,
       role: parsed.data.role,
       painPoint: parsed.data.painPoint,
     });
-  } catch (err) {
-    console.error("[waitlist] notification failed", err);
-    releaseWaitlistAddress(email);
-    return NextResponse.json({ error: "send_failed" }, { status: 500 });
+  } catch {
+    console.error("[waitlist] notification_failed");
   }
-
-  // Captured. The visitor's confirmation is best effort from here: failing it
-  // must not tell them to retry, because the retry would re-send the
-  // notification and burn more quota for a lead already in hand.
   try {
     await sendWaitlistConfirmation({ to: email });
-  } catch (err) {
-    console.error("[waitlist] confirmation failed", err);
+  } catch {
+    console.error("[waitlist] confirmation_failed");
   }
 
   return NextResponse.json({ ok: true });

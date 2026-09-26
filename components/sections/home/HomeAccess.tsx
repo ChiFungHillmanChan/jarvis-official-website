@@ -26,6 +26,7 @@ export async function HomeAccess() {
         <div className="access-form" id="request-access">
           <h3>{copy.home.hero.primaryCta}</h3>
           <WaitlistForm
+              locale={locale}
             placeholder={copy.waitlistCta.placeholder}
             submitLabel={copy.waitlistCta.submit}
             submittingLabel={ui.waitlist.submitting}

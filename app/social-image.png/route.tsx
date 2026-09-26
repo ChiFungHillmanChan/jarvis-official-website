@@ -23,13 +23,13 @@ export async function GET() {
       <div style={{ display: "flex", position: "absolute", right: 145, top: 293, width: 24, height: 24, borderRadius: "50%", background: "#c7fcff", boxShadow: "0 0 50px #a2e9ee" }} />
 
       <div style={{ display: "flex", flexDirection: "column", marginTop: 79 }}>
-        <div style={{ display: "flex", fontSize: 84, lineHeight: 1.04, letterSpacing: -4, fontWeight: 600 }}>Your inbox.</div>
-        <div style={{ display: "flex", fontSize: 84, lineHeight: 1.04, letterSpacing: -4, fontWeight: 600, color: "#a2e9ee" }}>Understood.</div>
-        <div style={{ display: "flex", marginTop: 26, fontSize: 26, color: "#b5c6d5" }}>Personal AI email workspace for Mac</div>
+        <div style={{ display: "flex", fontSize: 84, lineHeight: 1.04, letterSpacing: -4, fontWeight: 600 }}>Your personal</div>
+        <div style={{ display: "flex", fontSize: 84, lineHeight: 1.04, letterSpacing: -4, fontWeight: 600, color: "#a2e9ee" }}>AI assistant.</div>
+        <div style={{ display: "flex", marginTop: 26, fontSize: 26, color: "#b5c6d5" }}>Voice. Context. Everyday work.</div>
       </div>
 
       <div style={{ display: "flex", marginTop: "auto", paddingTop: 24, alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #263545", fontSize: 18, color: "#9aafc2" }}>
-        <span>Multiple Gmail accounts. Your context. Clear next steps.</span>
+        <span>Your instructions. Your memories. Your workflow.</span>
         <span style={{ color: "#a2e9ee", fontSize: 16 }}>Beta for macOS</span>
       </div>
     </div>,

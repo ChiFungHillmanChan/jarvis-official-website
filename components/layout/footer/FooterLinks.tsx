@@ -8,8 +8,9 @@ export function FooterLinks({ locale }: { locale: string }) {
     {
       heading: ui.footer.productHeading,
       links: [
-        { label: ui.nav.product, href: `${localePath(locale, "/")}#product` },
+        { label: ui.nav.product, href: localePath(locale, "/product") },
         { label: ui.nav.howItWorks, href: localePath(locale, "/how-it-works") },
+        { label: locale === "zh-HK" ? "產品示範" : "Product demo", href: localePath(locale, "/demo") },
         { label: ui.nav.download, href: localePath(locale, "/download") },
         { label: ui.footer.security, href: localePath(locale, "/security") },
       ],
@@ -19,7 +20,7 @@ export function FooterLinks({ locale }: { locale: string }) {
       links: [
         { label: ui.nav.company, href: localePath(locale, "/company") },
         { label: ui.nav.contact, href: localePath(locale, "/contact") },
-        { label: ui.nav.requestAccess, href: `${localePath(locale, "/contact")}#request-access` },
+        { label: ui.nav.requestAccess, href: localePath(locale, "/beta") },
       ],
     },
   ];
