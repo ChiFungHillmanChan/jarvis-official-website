@@ -24,7 +24,8 @@ describe("privacy policy: actual processors and consent", () => {
   const locales = [
     {
       locale: "en", copy: en,
-      defaultProvider: /default general-assistant[^.]*Google Gemini/i,
+      defaultProvider: /Requests then go only to that provider unless you add others/i,
+      earlierDefault: /Earlier beta versions use Google Gemini by default/i,
       cloudConsent: /acknowledge the cloud transfer[^.]*email text[^.]*instructions[^.]*memories[^.]*sent to that provider/i,
       localAnalysis: /local Ollama analysis[^.]*supported/i,
       noAutomaticFallback: /email analysis does not automatically switch/i,
@@ -40,7 +41,8 @@ describe("privacy policy: actual processors and consent", () => {
     },
     {
       locale: "zh-HK", copy: zhHk,
-      defaultProvider: /一般助理的預設路徑使用 Google Gemini/,
+      defaultProvider: /除非你在進階設定加入其他供應商，請求只會傳送至該供應商/,
+      earlierDefault: /較早的測試版本中，一般助理預設使用 Google Gemini/,
       cloudConsent: /確認雲端傳送後.*群組郵件、個人指示.*記憶.*傳送至該供應商/,
       localAnalysis: /使用支援的本機 Ollama 分析/,
       noAutomaticFallback: /電郵分析失敗時不會自動轉用另一供應商/,
@@ -56,10 +58,12 @@ describe("privacy policy: actual processors and consent", () => {
     },
   ];
 
-  it.each(locales)("discloses default cloud processing and independent email consent ($locale)", (entry) => {
+  it.each(locales)("discloses the chosen provider, earlier defaults and independent email consent ($locale)", (entry) => {
     const text = sectionBody(entry.copy.privacy, "ai-processing");
     expect(text).toMatch(entry.defaultProvider);
-    for (const provider of ["OpenAI", "Anthropic", "Amazon Bedrock", "MiniMax"]) {
+    expect(text).toMatch(entry.earlierDefault);
+    expect(text).toContain("TypeSafe");
+    for (const provider of ["OpenAI", "Anthropic", "Amazon Bedrock", "MiniMax", "Moonshot AI", "Qwen", "Ollama"]) {
       expect(text).toContain(provider);
     }
     expect(text).toMatch(entry.cloudConsent);
