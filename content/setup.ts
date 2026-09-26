@@ -23,13 +23,13 @@ const en: SetupCopy = {
   eyebrow: "How it works",
   title: "Set up JARVIS for your working day.",
   intro:
-    "JARVIS is a personal AI assistant for voice, text and connected workflows. The current beta runs on macOS. Start with a conversation, then use this guide to bring related Gmail messages together, add your context and ask GPT for next steps you can check against the sources.",
+    "JARVIS is a personal AI assistant for voice, text and connected workflows. The current beta runs on macOS. Start with a conversation, then use this guide to bring related Gmail messages together, add your context and ask the AI you chose for next steps you can check against the sources.",
   requirements: {
     title: "Before you start",
     items: [
       "The current beta requires a Mac with Apple Silicon and macOS 12 or later.",
       "Beta access and the JARVIS macOS app. Google sign-in may require your account to be added as a beta tester.",
-      "Your own OpenAI API key for the GPT workflow below. Provider usage is billed separately to your account. Local Ollama and your own AWS Bedrock are other email analysis options.",
+      "An AI you already use: your own API key for OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service, or a local Ollama model with no key. Provider usage is billed separately to your account. Your own AWS Bedrock is another email analysis option.",
       "For the email workflow: one or more Gmail accounts, and an internet connection for Gmail sync and cloud AI.",
     ],
   },
@@ -41,19 +41,19 @@ const en: SetupCopy = {
       note: "If Google sign-in says your account is blocked or the app is not verified, contact us to check your tester access.",
     },
     {
-      title: "Start a conversation with your assistant",
-      body: "Open Assistant and type a request after configuring its AI provider in Settings. To use voice, allow microphone access and review the voice settings. You can choose English or Cantonese speech recognition according to your needs.",
-      note: "The assistant, voice and email analysis have separate settings. Changing the interface language does not change the speech-recognition language. Voice may use cloud services; it is not guaranteed to work offline.",
+      title: "Choose your AI",
+      body: "The first setup step asks which AI you use: a local Ollama model, OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service. Enter your key, or pick a local model. JARVIS sends one short test message and saves your choice only if it answers, then checks email analysis with the same AI. Keys are stored in macOS Keychain.",
+      note: "JARVIS uses only this AI unless you add others in the advanced settings. You can change it later in Settings → Your AI. Email analysis can use a different provider in its own settings and does not switch providers automatically on failure.",
     },
     {
-      title: "Choose GPT for your email analysis",
-      body: "Save your OpenAI API key in Settings, then open the email workspace and choose OpenAI GPT in Analysis settings. Review and confirm which content will be sent: the group's emails, instructions and relevant memories. JARVIS stores your API key in macOS Keychain.",
-      note: "Email analysis has its own provider selection and does not automatically switch providers on failure. General chat and voice have separate settings.",
+      title: "Start a conversation with your assistant",
+      body: "Open Assistant and type a request. To use voice, allow microphone access and review the voice settings. You can choose English or Cantonese speech recognition according to your needs.",
+      note: "Voice uses cloud speech recognition only when Gemini is your chosen AI; otherwise a speech model on your Mac transcribes it, downloaded once (about 148 MB). Changing the interface language does not change the speech-recognition language.",
     },
     {
       title: "Connect Gmail and sync your messages",
-      body: "In the email workspace, choose Connect Gmail account and approve read-only access. Add the accounts you want, then sync recent mail. Each sync loads up to 50 messages; choose Load older emails to continue.",
-      note: "You start each sync. Local grouping does not change Gmail labels, send replies or delete the original messages. Attachments and full mailbox backup are not supported.",
+      body: "In the email workspace, choose Connect Gmail account and approve read-only access. Add the accounts you want, then choose Sync for recent mail. To go further back, choose Load 50 older emails in the account settings.",
+      note: "While JARVIS is open, new mail may also sync automatically about every five minutes. Local grouping does not change Gmail labels, send replies or delete the original messages. Attachments and full mailbox backup are not supported.",
     },
     {
       title: "Group related messages and add your instructions",
@@ -83,8 +83,8 @@ const en: SetupCopy = {
     title: "Understand where your information goes.",
     paragraphs: [
       "Synced email text, groups, instructions and memories are stored in a local SQLite database on your Mac. The database has no separate application-level encryption. Provider API keys and Google refresh tokens are stored in macOS Keychain. This is a workspace on one Mac, without cross-device sync.",
-      "When you choose GPT, the group's emails, instructions and relevant memories are sent to OpenAI for analysis using your API account. With AWS Bedrock they go to the AWS service you configure. Your local copy remains on your Mac; cloud analysis is not offline processing.",
-      "Email analysis can also use a supported local Ollama model, without automatically falling back to cloud AI. General chat uses its own provider order, with Gemini as its default cloud option and optional fallbacks. Google integrations and voice services have separate network use.",
+      "The group's emails, instructions and relevant memories are sent for analysis to the AI you chose, using your account; with AWS Bedrock they go to the AWS service you configure. Your local copy remains on your Mac; cloud analysis is not offline processing.",
+      "With a local Ollama model, analysis stays on your Mac. JARVIS uses only the AI you chose and does not fall back to another provider automatically. Optional AI email sorting, once you turn it on, also uses that AI, or TypeSafe for classification if you add its key. Google integrations and voice services have separate network use.",
     ],
   },
   next: {
@@ -101,13 +101,13 @@ const zhHk: SetupCopy = {
   eyebrow: "使用指南",
   title: "為日常工作設定你的 JARVIS。",
   intro:
-    "JARVIS 是支援語音、文字及連接服務的個人 AI 助理，目前 Beta 適用於 macOS。先從一次對話開始，再依照本指南整理相關 Gmail 郵件、加入你的背景，並請 GPT 提出可以對照來源核對的下一步。",
+    "JARVIS 是支援語音、文字及連接服務的個人 AI 助理，目前 Beta 適用於 macOS。先從一次對話開始，再依照本指南整理相關 Gmail 郵件、加入你的背景，並請你選擇的 AI 提出可以對照來源核對的下一步。",
   requirements: {
     title: "開始之前",
     items: [
       "目前 Beta 需要一部配備 Apple Silicon、執行 macOS 12 或以上版本的 Mac。",
       "Beta 使用資格及 JARVIS macOS 應用程式。你的 Google 帳戶可能需要先加入測試者名單，才能登入。",
-      "以下 GPT 流程需要你自己的 OpenAI API 密鑰，供應商用量另行計入你的帳戶。電郵分析亦可選擇本機 Ollama 或你自己的 AWS Bedrock。",
+      "你已在使用的 AI：OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式服務的 API 密鑰，或無須密鑰的本機 Ollama 模型。供應商用量另行計入你的帳戶。電郵分析亦可選擇你自己的 AWS Bedrock。",
       "進行電郵工作流程需要一個或多個 Gmail 帳戶，以及同步 Gmail 及使用雲端 AI 所需的網絡連線。",
     ],
   },
@@ -119,19 +119,19 @@ const zhHk: SetupCopy = {
       note: "如果 Google 登入顯示帳戶受限制或應用程式尚未驗證，請聯絡我們確認你的測試者資格。",
     },
     {
-      title: "開始與助理對話",
-      body: "在「設定」完成助理的 AI 供應商設定後，開啟「AI 助理」並輸入要求。使用語音時，請允許麥克風存取並檢查語音設定；你可以按需要選擇英文或廣東話語音辨識。",
-      note: "助理、語音及電郵分析有各自的設定。切換介面語言不會更改語音辨識語言。語音可能使用雲端服務，不能保證離線運作。",
+      title: "選擇你的 AI",
+      body: "首次設定的第一步會問你使用哪一個 AI：本機 Ollama 模型、OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式的服務。輸入你的密鑰，或選擇本機模型。JARVIS 會先傳送一句簡短訊息測試，成功後才儲存，並以同一個 AI 確認電郵分析可用。密鑰儲存於 macOS Keychain。",
+      note: "除非你在進階設定加入其他供應商，JARVIS 只會使用這一個 AI；之後可在「設定 → 你的 AI」更換。電郵分析可在其設定中另選供應商，失敗時不會自動轉用其他供應商。",
     },
     {
-      title: "選擇 GPT 分析電郵",
-      body: "在「設定」儲存 OpenAI API 密鑰，再開啟電郵工作區，在「電郵分析設定」選擇 OpenAI GPT。閱讀並確認會傳送的內容：群組郵件、個人指示與有效記憶。JARVIS 會將 API 密鑰儲存於 macOS Keychain。",
-      note: "電郵分析有獨立的供應商設定，失敗時不會自動轉用其他供應商。一般聊天與語音有各自的設定。",
+      title: "開始與助理對話",
+      body: "開啟「AI 助理」並輸入要求。使用語音時，請允許麥克風存取並檢查語音設定；你可以按需要選擇英文或廣東話語音辨識。",
+      note: "只有當你選擇的 AI 是 Gemini 時，語音才會使用雲端辨識；否則由此 Mac 上的語音模型轉錄，只需下載一次（約 148 MB）。切換介面語言不會更改語音辨識語言。",
     },
     {
       title: "連接 Gmail，同步需要的郵件",
-      body: "在電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取。逐一加入你想使用的帳戶，再按「同步最近郵件」。每次最多載入 50 封；按「載入更舊郵件」繼續。",
-      note: "每次同步由你啟動。本機分組不會更改 Gmail 標籤、寄信或刪除原信；目前未支援附件下載或完整信箱備份。",
+      body: "在電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取。逐一加入你想使用的帳戶，再按「同步」取得最近的郵件；如需較早的郵件，可在帳戶設定按「載入 50 封較舊郵件」。",
+      note: "JARVIS 開啟期間，新郵件亦可能約每五分鐘自動同步。本機分組不會更改 Gmail 標籤、寄信或刪除原信；目前未支援附件下載或完整信箱備份。",
     },
     {
       title: "選取郵件分組，加入你的指示",
@@ -161,8 +161,8 @@ const zhHk: SetupCopy = {
     title: "清楚了解資料的去向。",
     paragraphs: [
       "同步郵件文字、群組、指示與記憶儲存於 Mac 的本機 SQLite 資料庫，資料庫沒有獨立的應用層加密。API 密鑰與 Google refresh token 則儲存於 macOS Keychain。工作區屬於這部 Mac，未支援跨裝置同步。",
-      "選擇 GPT 時，群組郵件、個人指示與有效記憶會透過你的 API 帳戶傳送至 OpenAI 分析；選擇 AWS Bedrock 則傳送至你設定的 AWS 服務。本機副本仍然保留，但雲端分析並非離線處理。",
-      "電郵分析亦支援合適的本機 Ollama 模型，不會自動轉用雲端。一般聊天有獨立的供應商次序，預設雲端選項為 Gemini，並可設定後備供應商。Google 整合及部分語音服務亦會連接網絡。",
+      "群組郵件、個人指示與有效記憶會透過你的帳戶傳送至你選擇的 AI 分析；選擇 AWS Bedrock 則傳送至你設定的 AWS 服務。本機副本仍然保留，但雲端分析並非離線處理。",
+      "使用本機 Ollama 模型時，分析留在你的 Mac。JARVIS 只使用你選擇的 AI，不會自動轉用其他供應商。開啟 AI 自動整理後，整理亦使用該 AI；如你加入 TypeSafe 密鑰，則由 TypeSafe 負責分類。Google 整合及部分語音服務亦會連接網絡。",
     ],
   },
   next: {
