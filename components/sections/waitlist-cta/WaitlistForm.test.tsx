@@ -86,7 +86,7 @@ describe("WaitlistForm honeypot", () => {
       painPoint: "",
       privacyAccepted: true,
       termsAccepted: true,
-      privacyVersion: "2026-09-26.2",
+      privacyVersion: "2026-09-26.3",
       termsVersion: "2026-09-24",
       locale: "en",
     });

@@ -8,7 +8,10 @@ export const LATEST_DMG_URL = `${RELEASES_BASE}/JARVIS_latest_aarch64.dmg`;
 
 export interface ReleaseInfo {
   version: string;
+  // `notes` is the Traditional Chinese text the in-app updater also shows;
+  // `notesEn` is the optional English version for the English site.
   notes: string;
+  notesEn: string;
   pubDate: string;
   downloadUrl: string;
 }
@@ -16,9 +19,16 @@ export interface ReleaseInfo {
 const FALLBACK: ReleaseInfo = {
   version: "latest",
   notes: "",
+  notesEn: "",
   pubDate: "",
   downloadUrl: LATEST_DMG_URL,
 };
+
+// A release without English notes still shows the Chinese ones on the English
+// page rather than nothing.
+export function releaseNotesFor(release: ReleaseInfo, locale: string): string {
+  return locale === "en" && release.notesEn ? release.notesEn : release.notes;
+}
 
 export async function fetchLatestRelease(): Promise<{
   release: ReleaseInfo;
@@ -37,6 +47,7 @@ export async function fetchLatestRelease(): Promise<{
       release: {
         version: data.version,
         notes: data.notes ?? "",
+        notesEn: data.notes_en ?? "",
         pubDate: data.pub_date ?? "",
         downloadUrl: dmgUrl,
       },

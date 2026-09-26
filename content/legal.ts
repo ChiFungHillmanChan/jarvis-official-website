@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.2",
+    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.3",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -73,7 +73,7 @@ export const enLegal: LegalCopy = {
       {
         id: "google-limited-use",
         title: "7. Limited use of Google user data",
-        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. This statement is not a claim of Google verification or certification.",
+        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. The AI provider you choose, and TypeSafe if you add its key, receive content under your own account and their own terms; they are not service providers acting on our behalf. Some free tiers allow submitted content to be used to improve the provider’s products and models (see section 6). To keep Gmail content out of that use, choose a paid tier whose terms exclude it, or a local Ollama model. This statement is not a claim of Google verification or certification.",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace user data policy", href: workspacePolicy },
@@ -211,7 +211,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.2",
+    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.3",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -261,7 +261,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "google-limited-use",
         title: "7. Google 使用者資料的有限用途",
-        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。這項聲明不代表已取得 Google 驗證或認證。",
+        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。你選擇的 AI 供應商，以及你加入金鑰後的 TypeSafe，會以你自己的帳戶並按其條款接收內容，並非代我們處理資料的服務供應商。部分免費方案容許供應商將提交的內容用於改善其產品及模型（見第 6 節）。如不希望 Gmail 內容被如此使用，請選擇條款排除這類用途的付費方案，或使用本機 Ollama 模型。這項聲明不代表已取得 Google 驗證或認證。",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace 使用者資料政策", href: workspacePolicy },

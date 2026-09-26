@@ -3,7 +3,13 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { fetchLatestRelease, isMacOs, LATEST_DMG_URL, type ReleaseInfo } from "@/lib/download";
+import {
+  fetchLatestRelease,
+  isMacOs,
+  LATEST_DMG_URL,
+  releaseNotesFor,
+  type ReleaseInfo,
+} from "@/lib/download";
 import { localePath } from "@/lib/i18n/localePath";
 import type { Copy } from "@/content/getCopy";
 
@@ -77,13 +83,13 @@ export default function DownloadClient({ copy, locale }: Props) {
       {release === null ? (
         <p className="mt-4 text-sm text-[color:var(--text-muted)]">{copy.loadingNotes}</p>
       ) : (
-        release.notes && (
+        releaseNotesFor(release, locale) && (
           <section className="mt-14 border-t border-[var(--grid-line)] pt-8">
             <h2 className="font-display text-2xl font-semibold tracking-[-0.025em]">
               {copy.releaseNotesHeading}
             </h2>
             <pre className="mt-4 font-sans text-sm leading-7 whitespace-pre-wrap text-[color:var(--text-secondary)]">
-              {release.notes}
+              {releaseNotesFor(release, locale)}
             </pre>
           </section>
         )
