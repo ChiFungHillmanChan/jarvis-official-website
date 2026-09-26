@@ -1,12 +1,12 @@
 {
-  "version": "0.4.1",
-  "notes": "JARVIS v0.4.1\n\n今次更新只改動側邊欄底部及更新提示的位置，功能與 v0.4.0 相同。\n\n- 側邊欄底部的「連接服務」及「設定」合併為一列，顯示你在設定填寫的名稱。指向游標或點擊該列，兩個原有項目會在上方展開；亦可用鍵盤開啟，並以 Escape 關閉。未填寫名稱前，該列沿用「設定」字樣。\n- 設定的「外觀」分頁新增「顯示名稱」。名稱只儲存在此 Mac，JARVIS 並無需要登入的帳戶。\n- 更新提示由視窗頂部移至左下角，並可關閉。關閉只維持今次執行，下次檢查會再次顯示；下載進行中或失敗時會保持顯示，以便查看進度或重試。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上；本機 Ollama 準備流程要求 macOS 14 或以上。全新安裝約佔 30 MB，資料少於 5 MB；離線語音辨識模型 148 MB、離線語音合成模型 1.26 GB、Ollama 模型 2.7 至 6.6 GB，均只在啟用相關功能時下載。雲端供應商須符合帳戶及地區資格，API 費用另計；未提供免 key 代管 AI 服務。\n",
-  "pub_date": "2026-09-17T12:58:27Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.1_aarch64.dmg",
+  "version": "0.5.0",
+  "notes": "JARVIS v0.5.0\n\n今次更新讓你只用一個自己選擇的 AI，並加入電郵 AI 整理、日曆檢視及背景同步。\n\n選擇你的 AI\n- 首次設定會先問你使用哪一個 AI：本機 Ollama、OpenAI、Google Gemini、Anthropic Claude、Kimi、Qwen，或其他兼容 OpenAI 格式的服務。JARVIS 會先以一句簡短訊息測試，成功後才儲存；AI 助理、電郵分析及自動整理只會使用這一個 AI。\n- Kimi 及 Qwen 可選國際或中國內地帳戶；模型清單直接讀取自服務本身。\n- 已在使用的用戶設定不變，可在「設定 → 你的 AI」選擇或更換。\n- 選擇 AI 後，語音輸入只在你選擇 Gemini 時使用雲端辨識；其他情況使用此 Mac 上的語音模型（約 148 MB，可在「設定 → 語音」下載）。\n\n電郵\n- 新增 AI 自動整理（預設關閉）：分類郵件、標示需要處理的郵件、撰寫摘要，並找出待辦及日期。沒有 TypeSafe 金鑰時由你選擇的 AI 處理；加入 TypeSafe 金鑰可降低分類費用。\n- 寄件人其後來信更正日期時，舊日期會由新日期取代；重覆的跟進只保留一項。\n- 開啟 JARVIS 期間約每 5 分鐘在背景同步新郵件，並補回之前漏掉的郵件。\n- AI 助理可查閱及更新電郵跟進，並查閱郵件分類及待辦。\n\n日曆及其他\n- 日曆新增日、週、月檢視及「今日」摘要。\n- Notion 同步不再因工作區方案而失敗；GitHub 可直接連接，無須自行建立應用程式。\n- 記住視窗大小及位置。\n- 修正首次開啟時語言選擇畫面無法移動視窗、文字超出方框等介面問題。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上；本機 Ollama 準備流程要求 macOS 14 或以上。語音模型 148 MB、離線語音合成模型 1.26 GB、Ollama 模型 2.7 至 6.6 GB，均只在啟用相關功能時下載。雲端 AI 須符合帳戶及地區資格，API 費用由你的供應商帳戶支付；JARVIS 不提供免 key 代管 AI 服務。\n",
+  "pub_date": "2026-09-26T14:55:32Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.0_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdmZZOE1LOU1mQlpUMzlJQmpvVFJCeHEzNDErckNYTDFHUk5jY1FxVW95R092WjFpMzh5MHk4Tm1zSGdNQWVmV3RKWGNXQ0dZZ1lJcURjOGRHcHZwemdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5NjQ5MzA5CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKV0c1OWhRNlhvRnBpNHFPR2ZmS3VCS2s1cUlnRnZXRkhzUExwTVpDdnNZRklBdjczblJiWDV5MWdsN0lCdHVjVDNSSUw2N3ZKQmpYVHVHOFgzUEtpQWc9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.4.1_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlhoTWZFRzhnYy9XUmVmOVZYWlg1VUFwTXRPY0xFQ0p0cEF3UUpRdGg3cXg4NjFXanUvbVlPUFV4ckZRNlo2K0dGd21EY3ZBMEZtWjNDMk9qaDk4a0FJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNDM0Mzk2CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKOXJYRGk5Yi9VZGJaMGMyOGM4eXd6VTVRT0tXRXdoZUVKam55L29OVFZWdzQ0WVhOdCsrYTlYbDBuYUcwZUpSZG4xdHp4aUF6U1lNRDF5WXZIVVB3RGc9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.0_aarch64.app.tar.gz"
     }
   }
 }
