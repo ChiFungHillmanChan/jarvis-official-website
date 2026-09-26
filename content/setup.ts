@@ -52,7 +52,7 @@ const en: SetupCopy = {
     },
     {
       title: "Connect Gmail and sync your messages",
-      body: "In the email workspace, choose Connect Gmail account and approve read-only access. Add the accounts you want, then choose Sync for recent mail. To go further back, choose Load 50 older emails in the account settings.",
+      body: "In the email workspace, choose Connect Gmail account and approve read-only access to mail and calendar events. Add the accounts you want, then choose Sync for recent mail. Each account’s events appear on the Calendar page; you can also add accounts in Settings under Assistant Google. To go further back, choose Load 50 older emails in the account settings.",
       note: "While JARVIS is open, new mail may also sync automatically about every five minutes. Local grouping does not change Gmail labels, send replies or delete the original messages. Attachments and full mailbox backup are not supported.",
     },
     {
@@ -130,7 +130,7 @@ const zhHk: SetupCopy = {
     },
     {
       title: "連接 Gmail，同步需要的郵件",
-      body: "在電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取。逐一加入你想使用的帳戶，再按「同步」取得最近的郵件；如需較早的郵件，可在帳戶設定按「載入 50 封較舊郵件」。",
+      body: "在電郵工作區按「連接 Gmail 帳戶」，授權唯讀存取郵件及日曆活動。逐一加入你想使用的帳戶，再按「同步」取得最近的郵件；各帳戶的活動會顯示在日曆頁，你亦可在「設定 → 助手 Google」加入帳戶。如需較早的郵件，可在帳戶設定按「載入 50 封較舊郵件」。",
       note: "JARVIS 開啟期間，新郵件亦可能約每五分鐘自動同步。本機分組不會更改 Gmail 標籤、寄信或刪除原信；目前未支援附件下載或完整信箱備份。",
     },
     {

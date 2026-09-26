@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.4",
+    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.5",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -55,7 +55,7 @@ export const enLegal: LegalCopy = {
       {
         id: "google-access",
         title: "5. Google connections and their permissions",
-        body: "The email workspace requests Gmail read-only access (gmail.readonly) to retrieve your account address, message metadata and email text for local reading, organisation and analysis. Synchronisation runs when you start it and may also run automatically, about every five minutes, while JARVIS is open. It does not send mail or change Gmail labels. Attachments are not downloaded by this workspace.\n\nThe separate general-assistant Google connection requests Gmail read/modify access (gmail.modify), Calendar access and basic profile information. It supports reading and organising email, saving drafts, calendar operations and displaying your name. While JARVIS is open, this connection syncs recent email and calendar events in the background about every five minutes. This connection has broader permissions than the email workspace. The assistant’s email tool creates a draft in Gmail for you to review; it does not send the draft. Review the Google consent screen for the connection you enable.",
+        body: "The email workspace requests Gmail read-only access (gmail.readonly) to retrieve your account address, message metadata and email text for local reading, organisation and analysis. From version 0.5.2, each email-workspace account also requests read-only access to its Google Calendar events (calendar.events.readonly), so its events appear on the JARVIS Calendar page next to your main account’s and the general assistant can read them when you ask; the general assistant can also search and read that account’s email. JARVIS cannot change these accounts’ calendars, and you can decline Calendar access on Google’s consent screen and keep the mailbox. Synchronisation runs when you start it and may also run automatically, about every five minutes, while JARVIS is open. It does not send mail or change Gmail labels. Attachments are not downloaded by this workspace. From version 0.5.2, messages you delete, move to the trash or mark as spam in Gmail are also removed from the local copies.\n\nThe separate general-assistant Google connection requests Gmail read/modify access (gmail.modify), Calendar access and basic profile information. It supports reading and organising email, saving drafts, calendar operations and displaying your name. While JARVIS is open, this connection syncs recent email and calendar events in the background about every five minutes. This connection has broader permissions than the email workspace. The assistant’s email tool creates a draft in Gmail for you to review; it does not send the draft. Review the Google consent screen for the connection you enable.",
       },
       {
         id: "ai-processing",
@@ -179,7 +179,7 @@ export const enLegal: LegalCopy = {
       {
         id: "connections",
         title: "2. Connections and permissions",
-        body: "Google connections use OAuth, so you authorise access on Google’s own consent screen. The email workspace requests read-only Gmail access; the separate general-assistant connection has Gmail modification, Calendar and profile permissions. Review the scope of each connection. You can disconnect in JARVIS and revoke access through your Google Account. From version 0.5.1, removing or disconnecting an email-workspace mailbox also revokes JARVIS’s access at Google, unless it is the same Google account as the general-assistant connection.\n\nThe email workspace’s analysis does not send email or execute its suggested next steps. Automatic sorting has no tools either: it only classifies messages, writes summaries and extracts follow-ups. The general assistant creates Gmail drafts for review. From version 0.5.1, it asks you to allow each memory it saves, email it archives, calendar event it deletes and follow-up it changes. Other connected tools can make changes within their supported permissions, so review actions and their results.",
+        body: "Google connections use OAuth, so you authorise access on Google’s own consent screen. The email workspace requests read-only Gmail access and, from version 0.5.2, read-only access to Calendar events; the separate general-assistant connection has Gmail modification, Calendar and profile permissions. Review the scope of each connection. You can disconnect in JARVIS and revoke access through your Google Account. From version 0.5.1, removing or disconnecting an email-workspace mailbox also revokes JARVIS’s access at Google, unless it is the same Google account as the general-assistant connection. From version 0.5.2, the reverse also holds: disconnecting the general-assistant connection does not revoke access at Google while an email-workspace mailbox still uses the same Google account; revoke it in your Google Account to end both.\n\nThe email workspace’s analysis does not send email or execute its suggested next steps. Automatic sorting has no tools either: it only classifies messages, writes summaries and extracts follow-ups. The general assistant creates Gmail drafts for review. From version 0.5.1, it asks you to allow each memory it saves, email it archives, calendar event it deletes and follow-up it changes. Other connected tools can make changes within their supported permissions, so review actions and their results.",
         links: [{ label: "Manage Google third-party connections", href: "https://support.google.com/accounts/answer/13533235" }],
       },
       {
@@ -211,7 +211,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.4",
+    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.5",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -243,7 +243,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "google-access",
         title: "5. Google 連接及權限",
-        body: "電郵工作區申請 Gmail 唯讀權限（gmail.readonly），以取得帳戶地址、郵件資料及內文，供本機閱讀、整理及分析。同步可由你啟動，亦可能在 JARVIS 開啟期間每約五分鐘自動進行。此工作區不會寄出郵件或更改 Gmail 標籤，亦不會下載附件。\n\n一般助理另有獨立的 Google 連接，申請 Gmail 讀取及修改權限（gmail.modify）、日曆權限及基本個人資料，用於閱讀與整理郵件、儲存草稿、操作日曆及顯示你的名稱。JARVIS 開啟期間，此連接會每約五分鐘在背景同步近期郵件及日曆活動。其權限範圍比電郵工作區廣。助理的郵件工具會在 Gmail 建立草稿供你審閱，不會寄出草稿。請閱讀你所啟用連接的 Google 授權畫面。",
+        body: "電郵工作區申請 Gmail 唯讀權限（gmail.readonly），以取得帳戶地址、郵件資料及內文，供本機閱讀、整理及分析。由 0.5.2 版起，每個電郵工作區帳戶亦會申請其 Google 日曆活動的唯讀權限（calendar.events.readonly），使其活動與主帳戶的活動一同顯示在 JARVIS 日曆頁，並在你要求時供一般助理讀取；一般助理亦可搜尋及閱讀這些帳戶的郵件。JARVIS 不能更改這些帳戶的日曆；你可在 Google 授權畫面拒絕日曆權限，只保留郵件。同步可由你啟動，亦可能在 JARVIS 開啟期間每約五分鐘自動進行。此工作區不會寄出郵件或更改 Gmail 標籤，亦不會下載附件。由 0.5.2 版起，你在 Gmail 刪除、移至垃圾桶或標為垃圾郵件的郵件，亦會從本機副本移除。\n\n一般助理另有獨立的 Google 連接，申請 Gmail 讀取及修改權限（gmail.modify）、日曆權限及基本個人資料，用於閱讀與整理郵件、儲存草稿、操作日曆及顯示你的名稱。JARVIS 開啟期間，此連接會每約五分鐘在背景同步近期郵件及日曆活動。其權限範圍比電郵工作區廣。助理的郵件工具會在 Gmail 建立草稿供你審閱，不會寄出草稿。請閱讀你所啟用連接的 Google 授權畫面。",
       },
       {
         id: "ai-processing",
@@ -367,7 +367,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "connections",
         title: "2. 連接及權限",
-        body: "Google 連接使用 OAuth，由你在 Google 的授權畫面批准。電郵工作區只申請 Gmail 唯讀權限；一般助理的獨立連接則有 Gmail 修改、日曆及個人資料權限。請閱讀各連接的權限範圍。你可在 JARVIS 斷開連接，並透過 Google 帳戶撤銷授權。由 0.5.1 版起，移除或中斷電郵工作區信箱時，亦會向 Google 撤銷 JARVIS 的存取權；如該信箱與一般助理連接的是同一 Google 帳戶則除外。\n\n電郵工作區的分析不會寄出郵件或執行建議步驟。自動整理同樣沒有任何工具，只會分類郵件、撰寫摘要及擷取跟進事項。一般助理會建立 Gmail 草稿供你審閱。由 0.5.1 版起，一般助理每次儲存記憶、封存郵件、刪除日曆活動或更改跟進事項前，都會先請你批准。其他已連接工具可在支援權限內進行更改，因此請核對操作及結果。",
+        body: "Google 連接使用 OAuth，由你在 Google 的授權畫面批准。電郵工作區只申請 Gmail 唯讀權限，由 0.5.2 版起另申請日曆活動的唯讀權限；一般助理的獨立連接則有 Gmail 修改、日曆及個人資料權限。請閱讀各連接的權限範圍。你可在 JARVIS 斷開連接，並透過 Google 帳戶撤銷授權。由 0.5.1 版起，移除或中斷電郵工作區信箱時，亦會向 Google 撤銷 JARVIS 的存取權；如該信箱與一般助理連接的是同一 Google 帳戶則除外。由 0.5.2 版起，反之亦然：如電郵工作區信箱仍使用同一 Google 帳戶，中斷一般助理連接時不會向 Google 撤銷存取權；如要同時結束兩者，請在 Google 帳戶撤銷。\n\n電郵工作區的分析不會寄出郵件或執行建議步驟。自動整理同樣沒有任何工具，只會分類郵件、撰寫摘要及擷取跟進事項。一般助理會建立 Gmail 草稿供你審閱。由 0.5.1 版起，一般助理每次儲存記憶、封存郵件、刪除日曆活動或更改跟進事項前，都會先請你批准。其他已連接工具可在支援權限內進行更改，因此請核對操作及結果。",
         links: [{ label: "管理 Google 第三方連接", href: "https://support.google.com/accounts/answer/13533235?hl=zh-Hant" }],
       },
       {
