@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Nav } from "@/components/layout/nav/Nav";
@@ -41,6 +42,9 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  // The CSP nonce from proxy.ts is per request, so pages must never be
+  // prerendered: static HTML would carry no nonce and every script would be blocked.
+  await connection();
 
   const htmlLang = locale === "zh-HK" ? "zh-Hant-HK" : "en";
 
