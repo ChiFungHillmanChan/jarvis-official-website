@@ -53,11 +53,11 @@ export const enHome = {
   },
   setup: {
     title: "A useful start.\nOn your terms.",
-    sub: "Start with the emails and context that matter to you. The setup guide walks you through Gmail, GPT and your first group.",
+    sub: "Start with the emails and context that matter to you. The setup guide walks you through choosing your AI, connecting Gmail and creating your first group.",
     steps: [
       {
         title: "Make it yours",
-        body: "Install the beta, add your OpenAI API key and choose GPT in the email workspace.",
+        body: "Install the beta and choose the AI you already use: a local Ollama model, OpenAI, Gemini, Claude, Kimi, Qwen or another compatible service.",
       },
       {
         title: "Bring your emails together",
@@ -81,7 +81,7 @@ export const enHome = {
       },
       {
         title: "Your choice of AI",
-        body: "Use GPT with your OpenAI API key for group analysis. Relevant email content, instructions and memories go to OpenAI. Local storage does not mean offline processing.",
+        body: "Choose one AI and JARVIS uses only that one, with your own key or a local model. Relevant email content, instructions and memories go to the AI you choose. Local storage does not mean offline processing.",
       },
       {
         title: "You stay in control",
@@ -103,7 +103,7 @@ export const enHome = {
       {
         question: "What is JARVIS?",
         answer:
-          "JARVIS is a personal AI assistant for everyday work, currently available as a macOS beta. Bring multiple Gmail accounts together, group related emails, add your own instructions and ask GPT for analysis with source references. The current version is a private beta.",
+          "JARVIS is a personal AI assistant for everyday work, currently available as a macOS beta. Bring multiple Gmail accounts together, group related emails, add your own instructions and ask the AI you choose for analysis with source references. The current version is a private beta.",
       },
       {
         question: "Who is it for?",
@@ -118,12 +118,12 @@ export const enHome = {
       {
         question: "Do I need my own AI API key?",
         answer:
-          "For GPT group analysis, use your own OpenAI API key. Provider usage charges are separate from JARVIS. The email workspace also supports a local model or your own AWS Bedrock configuration. The general assistant has separate AI settings.",
+          "Use your own API key for the AI you choose, such as OpenAI, Gemini, Claude, Kimi, Qwen or another OpenAI-compatible service, or a local Ollama model with no key. Provider usage charges are separate from JARVIS, and JARVIS does not provide hosted AI. The email workspace can also use your own AWS Bedrock configuration.",
       },
       {
         question: "Does everything stay on my Mac?",
         answer:
-          "Synced emails, group instructions and confirmed memories are stored on your Mac. GPT analysis sends the relevant context to OpenAI; Bedrock sends it to AWS. Group analysis results are shown in the app and are not automatically saved as memories. The general assistant, voice services and connected apps have separate data flows.",
+          "Synced emails, group instructions and confirmed memories are stored on your Mac. Analysis sends the relevant context to the AI you choose; a local Ollama model keeps it on your Mac. Group analysis results are shown in the app and are not automatically saved as memories. Voice services and connected apps have separate data flows.",
       },
       {
         question: "Can JARVIS send emails or change my calendar?",
@@ -201,11 +201,11 @@ export const zhHome: DeepWiden<typeof enHome> = {
   },
   setup: {
     title: "由你決定，\n如何開始。",
-    sub: "從你關心的郵件和背景開始。設定指南會帶你連接 Gmail、選擇 GPT，並建立第一個群組。",
+    sub: "從你關心的郵件和背景開始。設定指南會帶你選擇 AI、連接 Gmail，並建立第一個群組。",
     steps: [
       {
         title: "設定你的工作空間",
-        body: "安裝 Beta、加入你的 OpenAI API 金鑰，並在電郵工作區選擇 GPT。",
+        body: "安裝 Beta，選擇你已在使用的 AI：本機 Ollama 模型、OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容服務。",
       },
       {
         title: "集中你的郵件",
@@ -226,7 +226,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
       },
       {
         title: "AI 供應商，由你選擇",
-        body: "使用你的 OpenAI API 金鑰，以 GPT 分析群組。相關郵件、指示及記憶會傳送至 OpenAI。本機儲存不等於離線處理。",
+        body: "選擇一個 AI，JARVIS 就只使用這個 AI，以你自己的金鑰或本機模型運作。相關郵件、指示及記憶會傳送至你選擇的 AI。本機儲存不等於離線處理。",
       },
       {
         title: "決定權始終在你手上",
@@ -248,7 +248,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         question: "JARVIS 是甚麼？",
         answer:
-          "JARVIS 是協助日常工作的個人 AI 助理，目前提供 macOS Beta 版本，可集中多個 Gmail、將相關郵件分組、加入個人指示，再讓 GPT 產生附來源引用的分析。目前版本正進行私人 Beta 測試。",
+          "JARVIS 是協助日常工作的個人 AI 助理，目前提供 macOS Beta 版本，可集中多個 Gmail、將相關郵件分組、加入個人指示，再讓你選擇的 AI 產生附來源引用的分析。目前版本正進行私人 Beta 測試。",
       },
       {
         question: "JARVIS 適合誰使用？",
@@ -263,12 +263,12 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         question: "我需要自己的 AI API 金鑰嗎？",
         answer:
-          "使用 GPT 群組分析需要你自己的 OpenAI API 金鑰，供應商用量費用與 JARVIS 分開計算。電郵工作區亦支援本機模型或你自己的 AWS Bedrock 設定；一般助理有獨立 AI 設定。",
+          "你可以使用自己的 API 金鑰連接所選的 AI，例如 OpenAI、Gemini、Claude、Kimi、Qwen 或其他兼容 OpenAI 格式的服務，亦可使用無須金鑰的本機 Ollama 模型。供應商用量費用與 JARVIS 分開計算，JARVIS 不提供代管 AI 服務。電郵工作區亦支援你自己的 AWS Bedrock 設定。",
       },
       {
         question: "所有資料都會留在我的 Mac 嗎？",
         answer:
-          "已同步郵件、群組指示及已確認記憶儲存在 Mac。GPT 分析會將相關背景傳送至 OpenAI；Bedrock 會傳送至 AWS。群組分析結果在 App 顯示，不會自動儲存為記憶。一般助理、語音服務及連接的應用程式另有資料流程。",
+          "已同步郵件、群組指示及已確認記憶儲存在 Mac。分析會將相關背景傳送至你選擇的 AI；使用本機 Ollama 模型時則留在 Mac。群組分析結果在 App 顯示，不會自動儲存為記憶。語音服務及連接的應用程式另有資料流程。",
       },
       {
         question: "JARVIS 可以傳送電郵或更改行事曆嗎？",

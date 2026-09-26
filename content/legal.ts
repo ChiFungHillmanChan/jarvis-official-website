@@ -185,7 +185,7 @@ export const enLegal: LegalCopy = {
       {
         id: "processing",
         title: "3. Cloud processing is a separate choice",
-        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks. Email analysis has separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Automatic sorting, once you turn it on, sends message details to TypeSafe and, for some messages, OpenAI. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
+        body: "Local storage does not mean local AI processing. General chat can use configured cloud providers and fallbacks; versions that ask you to choose an AI use only that one unless you add others. Email analysis uses the AI you chose or separate local, OpenAI and Bedrock settings; its cloud modes disclose the transfer of group messages, instructions and active memories. Automatic sorting, once you turn it on, sends message details to the AI you chose and, if you add its key, to TypeSafe. Voice transcription and speech output have their own provider settings.\n\nCloud service requests use HTTPS. A supported local email-analysis model avoids that analysis transfer, but email synchronisation, updates, downloads and separately enabled cloud services still need a network connection. This is not an end-to-end encryption or zero-retention service.",
       },
       {
         id: "deletion",
@@ -373,7 +373,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "processing",
         title: "3. 雲端處理需要另行考慮",
-        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑。電郵分析有獨立的本機、OpenAI 及 Bedrock 設定；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。自動整理功能開啟後，會將郵件資料傳送至 TypeSafe，部分郵件亦會傳送至 OpenAI。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
+        body: "本機儲存不代表 AI 在本機處理。一般聊天可使用已設定的雲端供應商及後備路徑；在會請你選擇 AI 的版本中，除非你另行加入，否則只使用所選的一個 AI。電郵分析可使用你選擇的 AI，或另設本機、OpenAI 及 Bedrock；雲端模式會說明傳送群組郵件、指示及有效記憶的安排。自動整理功能開啟後，會將郵件資料傳送至你選擇的 AI；如你加入 TypeSafe 密鑰，亦會傳送至 TypeSafe。語音轉錄及朗讀亦各有供應商設定。\n\n雲端服務請求使用 HTTPS。使用支援的本機電郵分析模型可避免該次分析內容的雲端傳送，但郵件同步、更新、下載及另行啟用的雲端服務仍需要網絡連接。此服務不提供端到端加密或零資料保留保證。",
       },
       {
         id: "deletion",
