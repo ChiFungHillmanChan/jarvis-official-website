@@ -1,13 +1,13 @@
 {
-  "version": "0.5.4",
-  "notes": "JARVIS v0.5.4\n\n本次更新提升本機資料庫的穩定性。\n\n資料庫\n- 若 0.5.1 版開始的資料庫加密在進行期間被中斷（例如 App 被關閉或 Mac 斷電），JARVIS 下次開啟時會自動完成或還原，只保留一個已加密的資料庫：此 Mac 上不會留下未加密的郵件副本，JARVIS 亦不會改為開啟空白的資料庫。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上。\n",
-  "notes_en": "JARVIS v0.5.4\n\nThis update makes the local database more reliable.\n\nDatabase\n- If the database encryption that began in 0.5.1 was interrupted (for example, the app was quit or the Mac lost power), JARVIS now finishes or reverses it the next time it opens. Only one encrypted database is kept: no unencrypted copy of your mail is left on this Mac, and JARVIS does not start with an empty database in its place.\n\nFor Apple Silicon Macs; the app requires macOS 12 or later.",
-  "pub_date": "2026-10-07T19:37:40Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.4_aarch64.dmg",
+  "version": "0.5.5",
+  "notes": "JARVIS v0.5.5\n\n本次更新修正 AI 整理郵件，並讓你為所選的 AI 選擇模型。\n\n電郵\n- 修正：選擇 OpenAI 而沒有 TypeSafe 密鑰時，「AI 整理」不會整理任何郵件，背景自動整理亦同樣失效。現在由你選擇的 AI 判斷分類及撰寫摘要，TypeSafe 改為選用。\n- 已開啟 AI 整理但尚未設定 AI 時，郵件頁會顯示「設定你的 AI」，不再提供無法使用的按鈕。\n- 引用的舊郵件按寄件人分段顯示，不再顯示「>」符號。\n- 使用本機模型整理郵件時，結果會顯示使用的 tokens（本機模型免費）。\n\n你的 AI\n- 可為 OpenAI、Gemini 及 Claude 選擇模型，清單直接從供應商讀取，新模型推出後即可選用。\n- 未選擇模型時使用「最新模型（建議）」，會隨 JARVIS 更新。Claude 的建議模型更新為 Claude Sonnet 5.5，亦可選用 Claude Haiku 5.5。\n\n費用\n- 修正：經本機 Ollama 整理或分析郵件時，費用面板誤把本機模型計算為收費模型。本機模型現時顯示為免費並列出 tokens；更新前的紀錄不會更改。\n\n適用於 Apple Silicon Mac，App 要求 macOS 12 或以上。\n",
+  "notes_en": "JARVIS v0.5.5\n\nThis update fixes AI mail sorting and lets you choose the model for your AI.\n\nMail\n- Fixed: with OpenAI as your AI and no TypeSafe key, \"Sort with AI\" sorted nothing, and background sorting failed the same way. Your chosen AI now decides the category and writes the summary; TypeSafe is optional.\n- If AI sorting is on but no AI is set up, the Mail page shows \"Set up your AI\" instead of a button that cannot work.\n- Quoted earlier emails are shown in sections by sender, without \">\" marks.\n- Sorting with a local model shows the tokens used (local models are free).\n\nYour AI\n- Choose the model for OpenAI, Gemini or Claude. The list comes straight from the provider, so new models appear as soon as they launch.\n- Without a choice, \"Latest (recommended)\" is used and updates with JARVIS. The recommended Claude model is now Claude Sonnet 5.5, and Claude Haiku 5.5 is available.\n\nCosts\n- Fixed: mail sorted or analysed with a local Ollama model was counted as paid in the cost panel. Local models now show as free with their tokens; earlier records are not changed.\n\nFor Apple Silicon Macs; the app requires macOS 12 or later.",
+  "pub_date": "2026-10-07T20:37:13Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.5_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlJRRERYdURsSlZKbkdYVlBsbzRYQUtJRDNaT0NRelJtYU5aaHMxY2M5eDNSV0N1c2hJMDdVak9nc284YnZvY1F6RUxZNTZibDRGQllUcDdsNHk3cVFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxNDAxNTIxCWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKNkhLRElMOEROdXFad0pEeGhaazRWODAvZThRNnowQm9YSTNjUGNEaU5WMkZZUGVBaGJVK0pvOE4vTW5EY0Y3aFlTZFp2L2ljNHd5WHVDVEZGa1lDQ2c9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.4_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlZCMElxbUJDYXFoSllqZ1lIL01pQm4zYkJlTlAwK1dmWllCMjZzK2loWnR6U2dOTVovYmJkV21td2NzM0l4K0c1U3R3OWVtL1N1eGoyczZtSkwrV0F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxNDA1MjY3CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKMlY0bjhGbkdxYkt4SW9zanVnRmVWSnRuemg4YWdoa3h0UjRvWHcxam91UFk5eU5zdGtFNGJpbERPL0hrWW9manh1SW56NVVnWWl6L0hvQUt4b1l6Q2c9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.5_aarch64.app.tar.gz"
     }
   }
 }
