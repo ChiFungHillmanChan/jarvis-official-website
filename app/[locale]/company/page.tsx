@@ -32,13 +32,11 @@ export default async function CompanyPage({
       ? {
           company: "公司",
           product: "產品",
-          location: "地點",
           status: "狀態",
         }
       : {
           company: "Company",
           product: "Product",
-          location: "Location",
           status: "Status",
         };
 
@@ -67,10 +65,6 @@ export default async function CompanyPage({
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{labels.product}: </span>
                 {company.productName} {locale === "zh-HK" ? "（目前提供 macOS Beta）" : "(currently in beta for macOS)"}
-              </li>
-              <li>
-                <span className="font-medium text-[color:var(--text-primary)]">{labels.location}: </span>
-                {companyL10n.locationLine}
               </li>
               <li>
                 <span className="font-medium text-[color:var(--text-primary)]">{labels.status}: </span>

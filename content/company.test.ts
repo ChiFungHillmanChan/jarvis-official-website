@@ -3,6 +3,9 @@ import { company, getCompanyL10n } from "./company";
 import { routing } from "@/i18n/routing";
 import { copy as en } from "./copy.en";
 import { copy as zhHk } from "./copy.zh-hk";
+import { enHome, zhHome } from "./home";
+import { getRouteMetadata } from "./metadata";
+import { getWorkspacePreviewCopy } from "./workspace-preview";
 
 // Cap. 622B ss.4-5 requires a Hong Kong company to display its registered name
 // on any website of the company. These tests pin the registered details to the
@@ -48,9 +51,42 @@ describe("registered company identity", () => {
     }
   });
 
-  it("names the registered office in every locale", () => {
+  it("keeps the site-wide company lines free of a location", () => {
+    // The site targets users worldwide. The registered office and jurisdiction
+    // belong on the privacy and terms pages, not on every page via the footer.
     for (const locale of routing.locales) {
-      expect(getCompanyL10n(locale).registeredOfficeLine).toContain("1806");
+      const { legalLine, statusLine } = getCompanyL10n(locale);
+      for (const line of [legalLine, statusLine]) {
+        expect(line).not.toMatch(/Hong Kong|香港/);
+      }
+    }
+  });
+});
+
+describe("marketing surfaces are location-neutral", () => {
+  // The site targets users worldwide. Jurisdiction stays on the legal pages,
+  // where it governs the terms and data handling; everywhere else it narrows
+  // the audience for no gain.
+  const location = /Hong Kong|香港|HKSTP|HK\$/;
+  const legalRoutes = new Set(["privacy", "terms"]);
+
+  it("keeps the homepage, company page and preview copy location-free", () => {
+    const surfaces = [
+      enHome, zhHome,
+      getWorkspacePreviewCopy("en"), getWorkspacePreviewCopy("zh-HK"),
+      en.companyPage, zhHk.companyPage,
+    ];
+    for (const surface of surfaces) {
+      expect(JSON.stringify(surface)).not.toMatch(location);
+    }
+  });
+
+  it("keeps non-legal page metadata location-free", () => {
+    for (const locale of routing.locales) {
+      for (const [key, route] of Object.entries(getRouteMetadata(locale))) {
+        if (legalRoutes.has(key)) continue;
+        expect(JSON.stringify(route)).not.toMatch(location);
+      }
     }
   });
 });

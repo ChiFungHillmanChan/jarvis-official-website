@@ -113,7 +113,7 @@ const en: Record<RouteKey, RouteMeta> = {
   },
   company: {
     title: "About JARVIS AI",
-    description: "Meet JARVIS AI LIMITED, the Hong Kong company building a personal AI assistant. Learn about our approach to useful AI, clear controls and everyday work.",
+    description: "Meet JARVIS AI LIMITED, the company building a personal AI assistant. Learn about our approach to useful AI, clear controls and everyday work.",
     canonical: routes.company,
   },
   contact: {
@@ -179,7 +179,7 @@ const zhHk: Record<RouteKey, RouteMeta> = {
   },
   company: {
     title: "關於 JARVIS AI",
-    description: "認識 JARVIS AI LIMITED，打造個人 AI 助理的香港公司。了解我們如何將實用 AI、清晰控制與日常工作結合，讓產品隨用戶的需要持續改善。",
+    description: "認識 JARVIS AI LIMITED，打造個人 AI 助理的公司。了解我們如何將實用 AI、清晰控制與日常工作結合，讓產品隨用戶的需要持續改善。",
     canonical: routes.company,
   },
   contact: {

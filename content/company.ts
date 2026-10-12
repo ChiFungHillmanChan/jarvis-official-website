@@ -23,8 +23,7 @@ export const company = {
   registeredAddress: "Unit 1806, 18/F., 9 Wing Hong Street, Cheung Sha Wan, Hong Kong",
   tagline: "Your personal AI assistant for everyday work.",
   contactEmail: "contact@jarvis-automation.com",
-  locationLine: "Hong Kong SAR",
-  statusLine: "Hong Kong AI software startup",
+  statusLine: "AI software startup",
   productName: "JARVIS",
   productVersion: latestRelease.version,
   foundingYear: 2026,
@@ -32,30 +31,23 @@ export const company = {
 
 type CompanyL10n = {
   tagline: string;
-  locationLine: string;
   statusLine: string;
   /** Registered-name disclosure line shown in the footer. */
   legalLine: string;
-  /** Registered office and registration numbers. */
-  registeredOfficeLine: string;
 };
 
 const byLocale: Record<Locale, CompanyL10n> = {
   en: {
     tagline: company.tagline,
-    locationLine: company.locationLine,
     statusLine: company.statusLine,
-    legalLine: `${company.legalName}, a company incorporated in Hong Kong with limited liability.`,
-    registeredOfficeLine: `Registered office: ${company.registeredAddress}. Company No. ${company.companyNumber}. Business Registration No. ${company.businessRegistrationNumber}.`,
+    legalLine: `${company.legalName} (Company No. ${company.companyNumber}).`,
   },
   "zh-HK": {
     tagline: "協助你處理日常工作的個人 AI 助理。",
-    locationLine: "香港特別行政區",
-    statusLine: "香港 AI 軟件初創",
+    statusLine: "AI 軟件初創",
     // The registered name stays in English because that is the only name on the
     // Certificate of Incorporation; a Chinese rendering would not be registered.
-    legalLine: `${company.legalName}，於香港註冊成立的有限公司。`,
-    registeredOfficeLine: `註冊辦事處：${company.registeredAddress}。公司編號 ${company.companyNumber}。商業登記號碼 ${company.businessRegistrationNumber}。`,
+    legalLine: `${company.legalName}（公司編號 ${company.companyNumber}）。`,
   },
 };
 

@@ -22,7 +22,7 @@ export const copy = {
   },
   companyPage: {
     heading: "About JARVIS AI",
-    sub: "We’re a Hong Kong company building a personal AI assistant for everyday work.",
+    sub: "We’re building a personal AI assistant for everyday work.",
     intro:
       "Client work comes with emails to answer, meetings to arrange and details to follow up. We’re building JARVIS to help you handle those everyday jobs in one desktop workspace, so more of your attention can go to the work that needs you.",
     cards: [
