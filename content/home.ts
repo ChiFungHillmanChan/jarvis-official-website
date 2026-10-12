@@ -91,7 +91,7 @@ export const enHome = {
     link: "Learn about privacy and security",
   },
   company: {
-    title: "Built in Hong Kong.\nMade for your working day.",
+    title: "Built with early users.\nMade for your working day.",
     body: "We’re building JARVIS for founders, consultants and small teams who manage client work. We’re working with early users to make the everyday details easier to handle.",
     link: "Meet JARVIS AI",
   },
@@ -236,7 +236,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
     link: "了解私隱及安全措施",
   },
   company: {
-    title: "在香港建立，\n為每天的工作而設。",
+    title: "與早期用戶一起打造，\n為每天的工作而設。",
     body: "我們為處理客戶工作的創辦人、顧問及小型團隊開發 JARVIS，並與早期用戶一起，讓日常細節更容易處理。",
     link: "認識 JARVIS AI",
   },

@@ -25,7 +25,7 @@ export const copy: DeepWiden<typeof enCopy> = {
   },
   companyPage: {
     heading: "關於 JARVIS AI",
-    sub: "我們是一間香港公司，為日常工作打造個人 AI 助理。",
+    sub: "我們為日常工作打造個人 AI 助理。",
     intro:
       "處理客戶工作，總伴隨着待回覆的電郵、待安排的會議和待跟進的細節。我們開發 JARVIS，希望讓你在同一個桌面工作空間處理這些日常事項，把更多心力留給需要你專注的工作。",
     cards: [

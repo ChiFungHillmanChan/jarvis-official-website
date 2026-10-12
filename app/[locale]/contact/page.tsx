@@ -6,7 +6,6 @@ import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { getCopy } from "@/content/getCopy";
 import { getUiFor } from "@/content/ui";
 import { company } from "@/content/company";
-import { getCompanyL10n } from "@/content/company";
 import { section } from "@/lib/constants/spacing";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassPanel } from "@/components/ui/GlassPanel";
@@ -30,7 +29,6 @@ export default async function ContactPage({
   setRequestLocale(locale);
   const copy = await getCopy();
   const ui = getUiFor(locale);
-  const companyL10n = getCompanyL10n(locale);
 
   return (
     <section className={`${section.paddingY} ${section.paddingX}`}>
@@ -57,10 +55,6 @@ export default async function ContactPage({
                 >
                   {company.contactEmail}
                 </a>
-              </li>
-              <li>
-                <span className="font-medium text-[color:var(--text-primary)]">{ui.contact.locationLabel}: </span>
-                {companyL10n.locationLine}
               </li>
             </ul>
             <div className="mt-10 border-t border-[var(--grid-line)] pt-6">

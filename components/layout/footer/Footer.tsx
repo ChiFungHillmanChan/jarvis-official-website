@@ -19,12 +19,9 @@ export async function Footer() {
             <p className="mt-5 max-w-[280px] text-base leading-6 text-[color:var(--text-secondary)]">
               {companyL10n.tagline}
             </p>
-            <p className="mt-6 text-xs text-[color:var(--text-muted)]">
-              {companyL10n.locationLine}
-            </p>
             <a
               href={`mailto:${company.contactEmail}`}
-              className="mt-2 inline-block text-sm text-[color:var(--text-secondary)] transition-colors hover:text-[color:var(--accent-cyan)]"
+              className="mt-6 inline-block text-sm text-[color:var(--text-secondary)] transition-colors hover:text-[color:var(--accent-cyan)]"
             >
               {company.contactEmail}
             </a>
@@ -39,10 +36,12 @@ export async function Footer() {
         </div>
         {/* Registered-name disclosure required of a Hong Kong company on any of
             its websites (Cap. 622B ss.4-5). The footer renders on every page,
-            so the duty is met site-wide rather than on a single legal page. */}
+            so the duty is met site-wide rather than on a single legal page.
+            Only the name is required; the registered office and jurisdiction
+            are stated on the privacy and terms pages, so the site-wide footer
+            stays free of a location. */}
         <div className="mt-5 space-y-1 text-xs leading-5 text-[color:var(--text-muted)]">
           <p>{companyL10n.legalLine}</p>
-          <p>{companyL10n.registeredOfficeLine}</p>
         </div>
       </div>
     </footer>
