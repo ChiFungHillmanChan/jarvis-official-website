@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 26 September 2026 · Version 2026-09-26.5",
+    lastUpdated: "Last updated: 25 October 2026 · Version 2026-10-25",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -68,12 +68,13 @@ export const enLegal: LegalCopy = {
           { label: "Anthropic privacy policy", href: "https://www.anthropic.com/legal/privacy" },
           { label: "Moonshot AI (Kimi) privacy policy", href: "https://platform.moonshot.ai/docs/agreement/userprivacy" },
           { label: "Alibaba Cloud privacy policy", href: "https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy" },
+          { label: "TypeSafe privacy policy", href: "https://typesafe.ai/privacy" },
         ],
       },
       {
         id: "google-limited-use",
         title: "7. Limited use of Google user data",
-        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. The AI provider you choose, and TypeSafe if you add its key, receive content under your own account and their own terms; they are not service providers acting on our behalf. From version 0.5.1, JARVIS sends Gmail content only to AI services whose terms exclude training on it by default: OpenAI, Anthropic Claude, Amazon Bedrock, a local Ollama model on your Mac, or Google Gemini after you confirm that your key has billing enabled, because Gemini’s unpaid tier may use submitted content to improve Google’s models (see section 6). Kimi, Qwen and other compatible services do not receive Gmail content. This statement is not a claim of Google verification or certification.",
+        body: "JARVIS’s use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including its Limited Use requirements, and the applicable Google Workspace user data policy. Google user data is used to provide the user-facing features you request. Transfers for those features require your consent.\n\nWe do not sell Google user data, use it for advertising or credit decisions, or use it to train general-purpose AI models. Our personnel may access specific Google content you provide for support only with your explicit permission, or where necessary for security or legal obligations as permitted by Google’s policy. These restrictions also apply to service providers handling that data on our behalf. The AI provider you choose, and TypeSafe if you add its key, receive content under your own account and their own terms; they are not service providers acting on our behalf. From version 0.5.1, JARVIS sends Gmail content only to AI services whose terms exclude training on it by default: OpenAI, Anthropic Claude, Amazon Bedrock, a local Ollama model on your Mac, or Google Gemini after you confirm that your key has billing enabled, because Gemini’s unpaid tier may use submitted content to improve Google’s models (see section 6). Kimi, Qwen and other compatible services do not receive Gmail content. TypeSafe, if you add its key for email sorting, receives the email details described in section 6; its privacy policy states that it does not train or fine-tune models on your input. From version 0.5.6, Google Calendar event titles and locations follow the same rule: other AI services are told only how many meetings you have today. This statement is not a claim of Google verification or certification.",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace user data policy", href: workspacePolicy },
@@ -87,7 +88,7 @@ export const enLegal: LegalCopy = {
       {
         id: "retention",
         title: "9. Retention and deletion",
-        body: "We retain website applications and related correspondence only while needed to manage your request or participation, resolve an outstanding issue, or meet a legal obligation. When those purposes end, we delete or de-identify records. A limited record of a withdrawal or consent may be kept where needed to honour your choice or establish how the request was handled. There is no blanket promise that all records disappear immediately: copies in email systems, provider logs and backups may remain under the relevant retention arrangements. You may contact us to request deletion and information about any justified retention.\n\nDesktop records remain on your Mac until you delete them; uninstalling the app alone may leave its data and Keychain entries. In the email workspace, disconnecting an account removes its local connection credential but keeps downloaded emails. Explicitly deleting that account removes its local emails and memories sourced from them, without deleting Gmail originals. Deleting a group removes its memberships and memories, not the underlying local emails. You can also edit or delete individual memories.\n\nRevoking access in your Google Account stops future authorised access but does not itself erase existing local copies. It can affect other JARVIS connections using the same Google authorisation. For help removing remaining local data or credentials, contact us. We cannot remotely erase your Mac or automatically delete records held under your own provider accounts.",
+        body: "We retain website applications and related correspondence only while needed to manage your request or participation, resolve an outstanding issue, or meet a legal obligation. When those purposes end, we delete or de-identify records. A limited record of a withdrawal or consent may be kept where needed to honour your choice or establish how the request was handled. There is no blanket promise that all records disappear immediately: copies in email systems, provider logs and backups may remain under the relevant retention arrangements. You may contact us to request deletion and information about any justified retention.\n\nDesktop records remain on your Mac until you delete them; uninstalling the app alone may leave its data and Keychain entries. From version 0.5.6, Settings > Storage > Delete all JARVIS data on this Mac revokes JARVIS’s Google access, deletes its local database, the models JARVIS downloaded, backups and Keychain entries, and then restarts JARVIS as a fresh install; Ollama and its models are not touched. Use it before uninstalling. In the email workspace, disconnecting an account removes its local connection credential but keeps downloaded emails. Explicitly deleting that account removes its local emails and memories sourced from them, without deleting Gmail originals. Deleting a group removes its memberships and memories, not the underlying local emails. You can also edit or delete individual memories.\n\nRevoking access in your Google Account stops future authorised access but does not itself erase existing local copies. It can affect other JARVIS connections using the same Google authorisation. For help removing remaining local data or credentials, contact us. We cannot remotely erase your Mac or automatically delete records held under your own provider accounts.",
         links: [{ label: "Manage Google third-party connections", href: "https://support.google.com/accounts/answer/13533235" }],
       },
       {
@@ -211,7 +212,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 9 月 26 日 · 版本 2026-09-26.5",
+    lastUpdated: "最後更新：2026 年 10 月 25 日 · 版本 2026-10-25",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -256,12 +257,13 @@ export const zhLegal: LegalCopy = {
           { label: "Anthropic 私隱政策", href: "https://www.anthropic.com/legal/privacy" },
           { label: "Moonshot AI（Kimi）私隱政策", href: "https://platform.moonshot.ai/docs/agreement/userprivacy" },
           { label: "阿里雲私隱政策", href: "https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy" },
+          { label: "TypeSafe 私隱政策", href: "https://typesafe.ai/privacy" },
         ],
       },
       {
         id: "google-limited-use",
         title: "7. Google 使用者資料的有限用途",
-        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。你選擇的 AI 供應商，以及你加入金鑰後的 TypeSafe，會以你自己的帳戶並按其條款接收內容，並非代我們處理資料的服務供應商。由 0.5.1 版起，JARVIS 只會把 Gmail 內容傳送至條款預設不以此訓練模型的 AI 服務：OpenAI、Anthropic Claude、Amazon Bedrock、你 Mac 上的本機 Ollama 模型，或在你確認金鑰已啟用付費後的 Google Gemini；Gemini 的免費額度可能以提交的內容改善 Google 的模型（見第 6 節）。Kimi、Qwen 及其他兼容服務不會接收 Gmail 內容。這項聲明不代表已取得 Google 驗證或認證。",
+        body: "JARVIS 使用及向其他應用程式轉移 Google API 資料時，將遵循 Google API Services User Data Policy，包括其中的 Limited Use 要求，以及適用的 Google Workspace 使用者資料政策。Google 使用者資料用於提供你要求且在產品中可見的功能；為提供這些功能而轉移資料，須取得你的同意。\n\n我們不會出售 Google 使用者資料、將其用於廣告或信貸決定，或用於訓練通用 AI 模型。我們的人員只會在你明確允許下，為支援而查看你提供的特定 Google 內容，或按 Google 政策容許的情況，為安全或法定需要而查閱。代我們處理該等資料的服務供應商亦受這些限制約束。你選擇的 AI 供應商，以及你加入金鑰後的 TypeSafe，會以你自己的帳戶並按其條款接收內容，並非代我們處理資料的服務供應商。由 0.5.1 版起，JARVIS 只會把 Gmail 內容傳送至條款預設不以此訓練模型的 AI 服務：OpenAI、Anthropic Claude、Amazon Bedrock、你 Mac 上的本機 Ollama 模型，或在你確認金鑰已啟用付費後的 Google Gemini；Gemini 的免費額度可能以提交的內容改善 Google 的模型（見第 6 節）。Kimi、Qwen 及其他兼容服務不會接收 Gmail 內容。如你為自動整理加入 TypeSafe 密鑰，TypeSafe 會收到第 6 節所述的郵件資料；其私隱政策列明不會以你的輸入內容訓練或微調模型。由 0.5.6 版起，Google 日曆活動的標題及地點亦按同一規則處理：其他 AI 服務只會得知你當天有多少個會議。這項聲明不代表已取得 Google 驗證或認證。",
         links: [
           { label: "Google API Services User Data Policy", href: googlePolicy },
           { label: "Google Workspace 使用者資料政策", href: workspacePolicy },
@@ -275,7 +277,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "retention",
         title: "9. 資料保留及刪除",
-        body: "我們只在處理申請或參與安排、解決未完事項或履行法律責任所需的期間，保留網站申請及相關往來資料。上述目的完結後，我們會刪除或去識別化資料。如有需要尊重你的選擇或說明申請處理方式，可能保留有限的撤回或同意紀錄。我們不承諾所有副本會即時消失：電郵系統、供應商紀錄及備份中的副本，可能按相關保留安排繼續存在。你可聯絡我們要求刪除，並查詢任何有正當理由保留的紀錄。\n\n桌面資料會保留在 Mac，直至你將其刪除；單純解除安裝應用程式可能留下資料及鑰匙圈項目。在電郵工作區中，斷開帳戶會移除本機連接憑證，但保留已下載郵件。明確刪除帳戶會移除該帳戶的本機郵件及以其為來源的記憶，不會刪除 Gmail 原信。刪除群組會清除群組關係及記憶，不會刪除底層本機郵件。你亦可逐項編輯或刪除記憶。\n\n在 Google 帳戶撤銷授權可停止之後的授權存取，但不會自行清除現有本機副本，亦可能影響共用該 Google 授權的其他 JARVIS 連接。如需清除剩餘本機資料或憑證的協助，請聯絡我們。我們無法遙距清除你的 Mac，或自動刪除你個人供應商帳戶內的紀錄。",
+        body: "我們只在處理申請或參與安排、解決未完事項或履行法律責任所需的期間，保留網站申請及相關往來資料。上述目的完結後，我們會刪除或去識別化資料。如有需要尊重你的選擇或說明申請處理方式，可能保留有限的撤回或同意紀錄。我們不承諾所有副本會即時消失：電郵系統、供應商紀錄及備份中的副本，可能按相關保留安排繼續存在。你可聯絡我們要求刪除，並查詢任何有正當理由保留的紀錄。\n\n桌面資料會保留在 Mac，直至你將其刪除；單純解除安裝應用程式可能留下資料及鑰匙圈項目。由 0.5.6 版起，「設定 > 儲存空間 > 刪除此 Mac 上的所有 JARVIS 資料」會撤銷 JARVIS 的 Google 存取權限，刪除其本機資料庫、JARVIS 下載的模型、備份及鑰匙圈項目，然後以全新安裝狀態重新啟動 JARVIS；Ollama 及其中的模型不受影響。解除安裝前可先使用此功能。在電郵工作區中，斷開帳戶會移除本機連接憑證，但保留已下載郵件。明確刪除帳戶會移除該帳戶的本機郵件及以其為來源的記憶，不會刪除 Gmail 原信。刪除群組會清除群組關係及記憶，不會刪除底層本機郵件。你亦可逐項編輯或刪除記憶。\n\n在 Google 帳戶撤銷授權可停止之後的授權存取，但不會自行清除現有本機副本，亦可能影響共用該 Google 授權的其他 JARVIS 連接。如需清除剩餘本機資料或憑證的協助，請聯絡我們。我們無法遙距清除你的 Mac，或自動刪除你個人供應商帳戶內的紀錄。",
         links: [{ label: "管理 Google 第三方連接", href: "https://support.google.com/accounts/answer/13533235?hl=zh-Hant" }],
       },
       {
