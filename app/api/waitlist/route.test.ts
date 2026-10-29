@@ -9,6 +9,15 @@ import {
 
 vi.mock("@/lib/resend/sendWaitlistNotification", () => ({ sendWaitlistNotification: vi.fn() }));
 vi.mock("@/lib/resend/sendWaitlistConfirmation", () => ({ sendWaitlistConfirmation: vi.fn() }));
+// Outside a real request after() throws, so queue its callbacks and run them
+// when a test says the response has gone out.
+const afterTasks = vi.hoisted(() => [] as Array<() => unknown>);
+vi.mock("next/server", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("next/server")>()),
+  after: (task: () => unknown) => {
+    afterTasks.push(task);
+  },
+}));
 
 import { POST } from "./route";
 import { sendWaitlistNotification } from "@/lib/resend/sendWaitlistNotification";
@@ -39,6 +48,17 @@ function makeRequest(body: Record<string, unknown>, ip = "203.0.113.10") {
   });
 }
 
+async function runAfterTasks() {
+  while (afterTasks.length) await afterTasks.shift()!();
+}
+
+// The response, plus whatever it scheduled to run once it was sent.
+async function post(req: Request) {
+  const res = await POST(req);
+  await runAfterTasks();
+  return res;
+}
+
 describe("POST /api/waitlist", () => {
   beforeEach(() => {
     vi.stubEnv("WAITLIST_TABLE_NAME", "test-waitlist");
@@ -47,6 +67,7 @@ describe("POST /api/waitlist", () => {
     vi.stubEnv("VERCEL", "");
     vi.stubEnv("WAITLIST_EMAILS_ENABLED", "true");
     resetWaitlistLimiter();
+    afterTasks.length = 0;
     consoleError.mockClear();
     records = new Map();
     sendMock.mockReset();
@@ -64,11 +85,14 @@ describe("POST /api/waitlist", () => {
     confirmMock.mockReset().mockResolvedValue("conf-id");
   });
 
-  afterEach(() => vi.unstubAllEnvs());
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.useRealTimers();
+  });
 
   it("does not report success without database configuration", async () => {
     vi.stubEnv("WAITLIST_TABLE_NAME", "");
-    const res = await POST(makeRequest({ email: "durable@example.com" }));
+    const res = await post(makeRequest({ email: "durable@example.com" }));
     expect(res.status).toBe(503);
     expect(await res.json()).toEqual({ error: "storage_unavailable" });
     expect(records.size).toBe(0);
@@ -78,7 +102,7 @@ describe("POST /api/waitlist", () => {
 
   it("requires an OIDC role for Vercel instead of falling back to local credentials", async () => {
     vi.stubEnv("VERCEL", "1");
-    const res = await POST(makeRequest({ email: "durable@example.com" }));
+    const res = await post(makeRequest({ email: "durable@example.com" }));
     expect(res.status).toBe(503);
     expect(records.size).toBe(0);
   });
@@ -92,7 +116,7 @@ describe("POST /api/waitlist", () => {
       expect(records.has("good@example.com")).toBe(true);
       return "conf-id";
     });
-    const res = await POST(
+    const res = await post(
       makeRequest({
         email: " Good@Example.COM ",
         role: " Founder ",
@@ -125,13 +149,13 @@ describe("POST /api/waitlist", () => {
 
   it("does not send mail or claim capture when the database fails, and permits retry", async () => {
     sendMock.mockRejectedValueOnce(new Error("provider error containing lead@example.com"));
-    const first = await POST(makeRequest({ email: "lead@example.com" }));
+    const first = await post(makeRequest({ email: "lead@example.com" }));
     expect(first.status).toBe(503);
     expect(notifyMock).not.toHaveBeenCalled();
     expect(confirmMock).not.toHaveBeenCalled();
     expect(records.size).toBe(0);
     expect(JSON.stringify(consoleError.mock.calls)).not.toContain("lead@example.com");
-    const second = await POST(makeRequest({ email: "lead@example.com" }));
+    const second = await post(makeRequest({ email: "lead@example.com" }));
     expect(second.status).toBe(200);
     expect(records.has("lead@example.com")).toBe(true);
   });
@@ -144,10 +168,10 @@ describe("POST /api/waitlist", () => {
           failFirst = reject;
         }),
     );
-    const first = POST(makeRequest({ email: "concurrent@example.com" }));
+    const first = post(makeRequest({ email: "concurrent@example.com" }));
     await vi.waitFor(() => expect(failFirst).toBeDefined());
     sendMock.mockRejectedValueOnce(new Error("database down"));
-    const second = await POST(makeRequest({ email: "concurrent@example.com" }));
+    const second = await post(makeRequest({ email: "concurrent@example.com" }));
     expect(second.status).toBe(503);
     failFirst(new Error("database down"));
     expect((await first).status).toBe(503);
@@ -157,8 +181,8 @@ describe("POST /api/waitlist", () => {
 
   it("deduplicates concurrent submissions durably", async () => {
     const responses = await Promise.all([
-      POST(makeRequest({ email: "race@example.com", role: "First" })),
-      POST(makeRequest({ email: "RACE@example.com", role: "Second" }, "203.0.113.11")),
+      post(makeRequest({ email: "race@example.com", role: "First" })),
+      post(makeRequest({ email: "RACE@example.com", role: "Second" }, "203.0.113.11")),
     ]);
     expect(responses.map((res) => res.status)).toEqual([200, 200]);
     expect(records.size).toBe(1);
@@ -168,9 +192,9 @@ describe("POST /api/waitlist", () => {
   });
 
   it("keeps deduplication after process-local state is lost", async () => {
-    await POST(makeRequest({ email: "repeat@example.com", role: "Original" }));
+    await post(makeRequest({ email: "repeat@example.com", role: "Original" }));
     resetWaitlistLimiter();
-    const second = await POST(
+    const second = await post(
       makeRequest({ email: "repeat@example.com", role: "Overwrite attempt" }),
     );
     expect(second.status).toBe(200);
@@ -184,12 +208,12 @@ describe("POST /api/waitlist", () => {
       (kind === "notification" ? notifyMock : confirmMock).mockRejectedValueOnce(
         new Error("email contains private@example.com"),
       );
-      const res = await POST(makeRequest({ email: "private@example.com" }));
+      const res = await post(makeRequest({ email: "private@example.com" }));
       expect(res.status).toBe(200);
       expect(records.has("private@example.com")).toBe(true);
       expect(JSON.stringify(consoleError.mock.calls)).not.toContain("private@example.com");
       resetWaitlistLimiter();
-      await POST(makeRequest({ email: "private@example.com" }));
+      await post(makeRequest({ email: "private@example.com" }));
       expect(notifyMock).toHaveBeenCalledOnce();
       expect(confirmMock).toHaveBeenCalledOnce();
     },
@@ -197,7 +221,7 @@ describe("POST /api/waitlist", () => {
 
   it("can capture applications with both supplementary emails disabled", async () => {
     vi.stubEnv("WAITLIST_EMAILS_ENABLED", "false");
-    const res = await POST(makeRequest({ email: "smoke@example.com" }));
+    const res = await post(makeRequest({ email: "smoke@example.com" }));
     expect(res.status).toBe(200);
     expect(records.has("smoke@example.com")).toBe(true);
     expect(notifyMock).not.toHaveBeenCalled();
@@ -205,7 +229,7 @@ describe("POST /api/waitlist", () => {
   });
 
   it("discards honeypot submissions without storing or mailing", async () => {
-    const res = await POST(makeRequest({ email: "bot@example.com", company: "Acme" }));
+    const res = await post(makeRequest({ email: "bot@example.com", company: "Acme" }));
     expect(res.status).toBe(200);
     expect(records.size).toBe(0);
     expect(notifyMock).not.toHaveBeenCalled();
@@ -214,8 +238,8 @@ describe("POST /api/waitlist", () => {
 
   it("returns 429 with retry timing after the per-IP hourly budget", async () => {
     for (let i = 0; i < HOURLY_LIMIT; i++)
-      expect((await POST(makeRequest({ email: `user${i}@example.com` }))).status).toBe(200);
-    const res = await POST(makeRequest({ email: "late@example.com" }));
+      expect((await post(makeRequest({ email: `user${i}@example.com` }))).status).toBe(200);
+    const res = await post(makeRequest({ email: "late@example.com" }));
     expect(res.status).toBe(429);
     const retryAfter = Number(res.headers.get("Retry-After"));
     expect(retryAfter).toBeGreaterThan(0);
@@ -226,9 +250,9 @@ describe("POST /api/waitlist", () => {
 
   it("counts duplicate database attempts towards the IP budget", async () => {
     for (let i = 0; i < HOURLY_LIMIT; i++) {
-      expect((await POST(makeRequest({ email: "repeat-budget@example.com" }))).status).toBe(200);
+      expect((await post(makeRequest({ email: "repeat-budget@example.com" }))).status).toBe(200);
     }
-    const blocked = await POST(makeRequest({ email: "repeat-budget@example.com" }));
+    const blocked = await post(makeRequest({ email: "repeat-budget@example.com" }));
     expect(blocked.status).toBe(429);
     expect(sendMock).toHaveBeenCalledTimes(HOURLY_LIMIT);
     expect(records.size).toBe(1);
@@ -241,10 +265,10 @@ describe("POST /api/waitlist", () => {
       records.set(item.email!.S!, item);
       throw new Error("socket closed after commit");
     });
-    const first = await POST(makeRequest({ email: "ambiguous@example.com" }));
+    const first = await post(makeRequest({ email: "ambiguous@example.com" }));
     expect(first.status).toBe(503);
     expect(records.size).toBe(1);
-    const retry = await POST(makeRequest({ email: "ambiguous@example.com" }));
+    const retry = await post(makeRequest({ email: "ambiguous@example.com" }));
     expect(retry.status).toBe(200);
     expect(records.size).toBe(1);
     expect(notifyMock).not.toHaveBeenCalled();
@@ -252,8 +276,8 @@ describe("POST /api/waitlist", () => {
 
   it("limits address variants from different IPs before storage or mail", async () => {
     for (let i = 0; i < ADDRESS_DAILY_LIMIT; i++)
-      await POST(makeRequest({ email: `victim+${i}@gmail.com` }, `203.0.113.${20 + i}`));
-    const res = await POST(makeRequest({ email: "victim+last@gmail.com" }, "203.0.113.99"));
+      await post(makeRequest({ email: `victim+${i}@gmail.com` }, `203.0.113.${20 + i}`));
+    const res = await post(makeRequest({ email: "victim+last@gmail.com" }, "203.0.113.99"));
     expect(res.status).toBe(429);
     expect(records.size).toBe(ADDRESS_DAILY_LIMIT);
   });
@@ -264,14 +288,45 @@ describe("POST /api/waitlist", () => {
     [{ email: "good@example.com", termsVersion: "outdated" }, "consent_required"],
     [{ email: "good@example.com", painPoint: "x".repeat(501) }, "invalid_input"],
   ])("rejects invalid input before persistence: %j", async (body, error) => {
-    const res = await POST(makeRequest(body));
+    const res = await post(makeRequest(body));
     expect(res.status).toBe(400);
     expect(await res.json()).toEqual({ error });
     expect(records.size).toBe(0);
   });
 
+  it("answers the signup before either email is sent", async () => {
+    const res = await POST(makeRequest({ email: "fast@example.com" }));
+    expect(res.status).toBe(200);
+    expect(records.has("fast@example.com")).toBe(true);
+    expect(notifyMock).not.toHaveBeenCalled();
+    expect(confirmMock).not.toHaveBeenCalled();
+    await runAfterTasks();
+    expect(notifyMock).toHaveBeenCalledOnce();
+    expect(confirmMock).toHaveBeenCalledOnce();
+  });
+
+  it("sends both emails at once and gives up on a hung send after five seconds", async () => {
+    notifyMock.mockReturnValueOnce(new Promise<string>(() => {}));
+    const res = await POST(makeRequest({ email: "hung@example.com" }));
+    expect(res.status).toBe(200);
+
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout"] });
+    let settled = false;
+    const sending = runAfterTasks().then(() => {
+      settled = true;
+    });
+    // The confirmation does not queue behind the notification that never answers.
+    expect(confirmMock).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(4_999);
+    expect(settled).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+    await sending;
+    expect(consoleError).toHaveBeenCalledWith("[waitlist] notification_failed");
+    expect(consoleError).not.toHaveBeenCalledWith("[waitlist] confirmation_failed");
+  });
+
   it("returns 400 for malformed JSON", async () => {
-    const res = await POST(
+    const res = await post(
       new Request("http://localhost/api/waitlist", { method: "POST", body: "not json" }),
     );
     expect(res.status).toBe(400);
