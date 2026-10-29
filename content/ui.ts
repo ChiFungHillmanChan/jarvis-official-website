@@ -26,6 +26,9 @@ type UiStrings = {
     // Shown when /api/waitlist answers 429. {n} is the wait it reports.
     rateLimitedMinutes: string;
     rateLimitedHours: string;
+    // Shown when /api/waitlist answers consent_required: the policy versions
+    // this page was loaded with have since been replaced.
+    consentOutdated: string;
   };
   notFound: {
     eyebrow: string;
@@ -69,6 +72,8 @@ const ui: Record<Locale, UiStrings> = {
       // Abbreviated units so one string covers a wait of one or of many.
       rateLimitedMinutes: "Too many attempts right now. Please try again in about {n} min.",
       rateLimitedHours: "Too many attempts right now. Please try again in about {n} hr.",
+      consentOutdated:
+        "Our Privacy Policy or Terms were updated after this page loaded. Please reload the page and submit again.",
     },
     notFound: {
       eyebrow: "404",
@@ -109,6 +114,7 @@ const ui: Record<Locale, UiStrings> = {
       submitting: "正在提交申請…",
       rateLimitedMinutes: "嘗試次數過多，請於約 {n} 分鐘後再試。",
       rateLimitedHours: "嘗試次數過多，請於約 {n} 小時後再試。",
+      consentOutdated: "本頁載入後，我們的私隱政策或條款已有更新。請重新載入本頁後再提交。",
     },
     notFound: {
       eyebrow: "404",

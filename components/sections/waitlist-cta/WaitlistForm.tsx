@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { useWaitlistSubmit } from "./useWaitlistSubmit";
@@ -47,6 +47,13 @@ export function WaitlistForm({
   const formId = useId();
   const emailRef = useRef<HTMLInputElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
+  // Focus moves to the email field after React commits: a rejection from the
+  // server arrives while the field is still disabled for the request, and a
+  // disabled field cannot take focus. A counter refocuses on every rejection.
+  const [emailFocusRequest, setEmailFocusRequest] = useState(0);
+  useEffect(() => {
+    if (emailFocusRequest > 0) emailRef.current?.focus();
+  }, [emailFocusRequest]);
   const isSubmitting = status === "submitting";
   const errorId = `${formId}-error`;
 
@@ -66,7 +73,7 @@ export function WaitlistForm({
           return;
         }
         const result = await submit(email, company, role, painPoint, locale);
-        if (result === "invalid") emailRef.current?.focus();
+        if (result === "invalid") setEmailFocusRequest((n) => n + 1);
         else if (result === "error") errorRef.current?.focus();
       }}
       className="flex flex-col gap-4"

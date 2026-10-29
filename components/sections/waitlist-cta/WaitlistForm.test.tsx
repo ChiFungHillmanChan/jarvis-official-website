@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { getUiFor } from "@/content/ui";
 import { WaitlistForm } from "./WaitlistForm";
 
 vi.mock("next/link", () => ({
@@ -177,5 +178,70 @@ describe("WaitlistForm honeypot", () => {
     fireEvent.submit(container.querySelector("form")!);
     await screen.findByText("You are on the list.");
     expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("marks the email invalid when the server rejects it, rather than inviting a retry", async () => {
+    fetchMock.mockResolvedValue(Response.json({ error: "invalid_email" }, { status: 400 }));
+    const { container } = renderForm();
+    const email = screen.getByLabelText("Email address");
+    fireEvent.change(email, { target: { value: "human@example.com" } });
+    fireEvent.submit(container.querySelector("form")!);
+
+    await vi.waitFor(() => expect(email).toHaveFocus());
+    expect(email).toHaveAttribute("aria-invalid", "true");
+    expect(email).toHaveAccessibleDescription("Enter a valid email.");
+    expect(screen.queryByText("Something went wrong.")).toBeNull();
+  });
+
+  it("asks the visitor to reload when the policy versions on the page are out of date", async () => {
+    fetchMock.mockResolvedValue(Response.json({ error: "consent_required" }, { status: 400 }));
+    const { container } = renderForm();
+    const email = screen.getByLabelText("Email address");
+    fireEvent.change(email, { target: { value: "human@example.com" } });
+    fireEvent.submit(container.querySelector("form")!);
+
+    const error = await screen.findByText(getUiFor("en").waitlist.consentOutdated);
+    await vi.waitFor(() => expect(error).toHaveFocus());
+    expect(email).not.toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("asks for a reload in Traditional Chinese on a zh-HK page", async () => {
+    document.documentElement.lang = "zh-HK";
+    try {
+      fetchMock.mockResolvedValue(Response.json({ error: "consent_required" }, { status: 400 }));
+      const { container } = renderForm();
+      fireEvent.change(screen.getByLabelText("Email address"), {
+        target: { value: "human@example.com" },
+      });
+      fireEvent.submit(container.querySelector("form")!);
+      await screen.findByText(getUiFor("zh-HK").waitlist.consentOutdated);
+    } finally {
+      document.documentElement.lang = "";
+    }
+  });
+
+  it("tells a throttled visitor how long to wait instead of asking for a retry now", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ error: "rate_limited" }, { status: 429, headers: { "Retry-After": "90" } }),
+    );
+    const { container } = renderForm();
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "human@example.com" },
+    });
+    fireEvent.submit(container.querySelector("form")!);
+
+    await screen.findByText("Too many attempts right now. Please try again in about 2 min.");
+    expect(screen.queryByText("Something went wrong.")).toBeNull();
+  });
+
+  it("falls back to the generic error on a 429 without a usable Retry-After", async () => {
+    fetchMock.mockResolvedValue(new Response(null, { status: 429 }));
+    const { container } = renderForm();
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "human@example.com" },
+    });
+    fireEvent.submit(container.querySelector("form")!);
+
+    await screen.findByText("Something went wrong.");
   });
 });
