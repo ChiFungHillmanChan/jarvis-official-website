@@ -97,7 +97,10 @@ export async function POST(req: Request) {
         }),
         EMAIL_TIMEOUT_MS,
       ),
-      withTimeout(sendWaitlistConfirmation({ to: email }), EMAIL_TIMEOUT_MS),
+      withTimeout(
+        sendWaitlistConfirmation({ to: email, locale: parsed.data.locale }),
+        EMAIL_TIMEOUT_MS,
+      ),
     ]);
     if (notification.status === "rejected") console.error("[waitlist] notification_failed");
     if (confirmation.status === "rejected") console.error("[waitlist] confirmation_failed");

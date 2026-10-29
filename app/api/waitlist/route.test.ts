@@ -178,7 +178,7 @@ describe("POST /api/waitlist", () => {
     expect(record.ip).toBeUndefined();
     expect(record.userAgent).toBeUndefined();
     expect(notifyMock).toHaveBeenCalledOnce();
-    expect(confirmMock).toHaveBeenCalledOnce();
+    expect(confirmMock).toHaveBeenCalledExactlyOnceWith({ to: "good@example.com", locale: "zh-HK" });
   });
 
   it("does not send mail or claim capture when the database fails, and permits retry", async () => {
