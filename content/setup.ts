@@ -47,7 +47,7 @@ const en: SetupCopy = {
     },
     {
       title: "Start a conversation with your assistant",
-      body: "Open Assistant and type a request. To use voice, allow microphone access and review the voice settings. You can choose English or Cantonese speech recognition according to your needs.",
+      body: "Open Assistant and type a request. To use voice, allow microphone access and review the voice settings. You can choose English or Cantonese speech recognition according to your needs. If Gemini is not your chosen AI, set the speech-to-text language to Auto-detect for Cantonese: the speech model on your Mac does not yet handle the Cantonese setting correctly.",
       note: "Voice uses cloud speech recognition only when Gemini is your chosen AI; otherwise a speech model on your Mac transcribes it, downloaded once (about 148 MB). Changing the interface language does not change the speech-recognition language.",
     },
     {
@@ -125,7 +125,7 @@ const zhHk: SetupCopy = {
     },
     {
       title: "開始與助理對話",
-      body: "開啟「AI 助理」並輸入要求。使用語音時，請允許麥克風存取並檢查語音設定；你可以按需要選擇英文或廣東話語音辨識。",
+      body: "開啟「AI 助理」並輸入要求。使用語音時，請允許麥克風存取並檢查語音設定；你可以按需要選擇英文或廣東話語音辨識。如你選擇的 AI 不是 Gemini，說廣東話時請將「語音辨識語言」設為「自動偵測」；目前 Mac 上的語音模型未能正確處理「廣東話」設定。",
       note: "只有當你選擇的 AI 是 Gemini 時，語音才會使用雲端辨識；否則由此 Mac 上的語音模型轉錄，只需下載一次（約 148 MB）。切換介面語言不會更改語音辨識語言。",
     },
     {
@@ -152,7 +152,7 @@ const zhHk: SetupCopy = {
     },
   ],
   calendar: {
-    title: "需要回覆草稿或安排日曆？",
+    title: "需要電郵草稿或安排日曆？",
     body: "JARVIS 的一般助理使用獨立的 Google 連接與 AI 設定。在聊天中，你可以要求建立 Gmail 草稿，自行檢閱及寄出，或要求新增日曆活動。這些功能與以上群組分析分開。",
     prompt: "在明天下午 2 時建立一個 30 分鐘的日曆活動，名稱是「檢查提案」。",
     note: "電郵群組與記憶不會自動帶入一般聊天。新增及更改日曆活動會在你提出要求後執行，刪除活動前則會先請你批准；請到 Google Calendar 檢查結果。",

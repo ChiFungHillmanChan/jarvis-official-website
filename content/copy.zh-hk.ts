@@ -35,7 +35,7 @@ export const copy: DeepWiden<typeof enCopy> = {
       },
       {
         title: "JARVIS 可以做甚麼",
-        body: "JARVIS 協助你整理電郵、行事曆和待辦事項。你可以跨 Gmail 帳戶分組、加入個人指示，再取得附來源的 GPT 分析；一般助理亦可使用獨立連接和設定準備電郵草稿及管理活動。",
+        body: "JARVIS 協助你整理電郵、行事曆和待辦事項。你可以跨 Gmail 帳戶分組、加入個人指示，再由你選擇的 AI 產生附來源的分析；一般助理亦可使用獨立連接和設定準備電郵草稿及管理活動。",
       },
       {
         title: "我們為誰而設",

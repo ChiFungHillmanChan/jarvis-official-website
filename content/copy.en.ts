@@ -32,7 +32,7 @@ export const copy = {
       },
       {
         title: "What JARVIS does",
-        body: "JARVIS brings Gmail accounts into a workspace on your Mac, with cross-inbox groups, personal instructions, GPT analysis and memories you confirm. Its general assistant also supports email drafts, calendar events and tasks through separate connections and settings.",
+        body: "JARVIS brings Gmail accounts into a workspace on your Mac, with cross-inbox groups, personal instructions, analysis by the AI you choose and memories you confirm. Its general assistant also supports email drafts, calendar events and tasks through separate connections and settings.",
       },
       {
         title: "Who we’re building for",
