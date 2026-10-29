@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getUiFor } from "@/content/ui";
-import { routing } from "@/i18n/routing";
+import { stripLocalePrefix } from "@/lib/i18n/stripLocalePrefix";
 
 export function LanguageToggle({ locale }: { locale: string }) {
   const pathname = usePathname() ?? "/";
@@ -28,12 +28,4 @@ export function LanguageToggle({ locale }: { locale: string }) {
 export function languageToggleLabel(locale: string, target: string): string {
   const targetName = target === "zh-HK" ? "繁體中文" : "English";
   return getUiFor(locale).nav.languageToggle.replace("{language}", targetName);
-}
-
-function stripLocalePrefix(pathname: string): string {
-  for (const loc of routing.locales) {
-    if (pathname === `/${loc}`) return "/";
-    if (pathname.startsWith(`/${loc}/`)) return pathname.slice(loc.length + 1);
-  }
-  return pathname;
 }
