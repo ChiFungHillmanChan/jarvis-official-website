@@ -3,7 +3,9 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   DynamoDBClient,
   ConditionalCheckFailedException,
+  DynamoDBServiceException,
   PutItemCommand,
+  type PutItemCommandInput,
   type AttributeValue,
 } from "@aws-sdk/client-dynamodb";
 
@@ -40,6 +42,40 @@ const consent = {
 };
 let records: Map<string, Record<string, AttributeValue>>;
 
+function validationError(message: string) {
+  return new DynamoDBServiceException({
+    name: "ValidationException",
+    $fault: "client",
+    $metadata: { httpStatusCode: 400 },
+    message,
+  });
+}
+
+/**
+ * Evaluates the PutItem condition as DynamoDB does: a #name placeholder only
+ * means something through ExpressionAttributeNames, and a missing or unused
+ * mapping is a ValidationException rather than a silent pass.
+ */
+function conditionHolds(input: PutItemCommandInput): boolean {
+  const placeholder = /^attribute_not_exists\((#\w+)\)$/.exec(input.ConditionExpression ?? "")?.[1];
+  if (!placeholder)
+    throw new Error(`fake does not support condition: ${input.ConditionExpression}`);
+  const names = input.ExpressionAttributeNames ?? {};
+  const attribute = names[placeholder];
+  if (!attribute)
+    throw validationError(
+      `An expression attribute name used in the document path is not defined; attribute name: ${placeholder}`,
+    );
+  const unused = Object.keys(names).filter((name) => name !== placeholder);
+  if (unused.length)
+    throw validationError(
+      `Value provided in ExpressionAttributeNames unused in expressions: keys: {${unused.join(", ")}}`,
+    );
+  // The table's partition key is email, so that is the item the condition sees.
+  const existing = records.get(input.Item!.email!.S!);
+  return existing?.[attribute] === undefined;
+}
+
 function makeRequest(body: Record<string, unknown>, ip = "203.0.113.10") {
   return new Request("http://localhost/api/waitlist", {
     method: "POST",
@@ -73,12 +109,10 @@ describe("POST /api/waitlist", () => {
     sendMock.mockReset();
     sendMock.mockImplementation(async (command) => {
       const input = (command as PutItemCommand).input;
-      expect(input.ConditionExpression).toBe("attribute_not_exists(#email)");
-      const item = input.Item!;
-      const email = item.email!.S!;
-      if (records.has(email))
+      if (!conditionHolds(input))
         throw new ConditionalCheckFailedException({ message: "exists", $metadata: {} });
-      records.set(email, item);
+      const item = input.Item!;
+      records.set(item.email!.S!, item);
       return { $metadata: { httpStatusCode: 200 } };
     });
     notifyMock.mockReset().mockResolvedValue("notif-id");

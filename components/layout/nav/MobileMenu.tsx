@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import type { NavLink } from "./nav.data";
-import { routing } from "@/i18n/routing";
 import { getUiFor } from "@/content/ui";
 import { localePath } from "@/lib/i18n/localePath";
+import { stripLocalePrefix } from "@/lib/i18n/stripLocalePrefix";
 
 export function MobileMenu({
   links,
@@ -157,12 +157,4 @@ export function MobileMenu({
       </div>
     </div>
   );
-}
-
-function stripLocalePrefix(pathname: string): string {
-  for (const loc of routing.locales) {
-    if (pathname === `/${loc}`) return "/";
-    if (pathname.startsWith(`/${loc}/`)) return pathname.slice(loc.length + 1);
-  }
-  return pathname;
 }
