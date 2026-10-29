@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { copy as en } from "@/content/copy.en";
-import { LATEST_DMG_URL } from "@/lib/download";
+import { fetchLatestRelease, LATEST_DMG_URL } from "@/lib/download";
 import DownloadClient from "./DownloadClient";
 
 vi.mock("next/link", () => ({
@@ -11,11 +11,12 @@ vi.mock("next/link", () => ({
   ),
 }));
 
-// Never resolves, so the component stays in the state the server renders it in:
-// platform unknown on the first pass, release manifest not yet fetched.
+// Never resolves by default, so the component stays in the state the server
+// renders it in: platform unknown on the first pass, release manifest not yet
+// fetched. The manifest tests below swap in the real fetch.
 vi.mock("@/lib/download", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/download")>();
-  return { ...actual, fetchLatestRelease: () => new Promise<never>(() => {}) };
+  return { ...actual, fetchLatestRelease: vi.fn(() => new Promise<never>(() => {})) };
 });
 
 const MAC_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36";
@@ -62,5 +63,60 @@ describe("DownloadClient non-macOS branch", () => {
       "href",
       "/zh-HK/beta",
     );
+  });
+});
+
+// The shape scripts/release.sh publishes to public/latest.json: dmg_url is for
+// people, platforms.<arch>.url is the updater tarball.
+const manifest = {
+  version: "0.5.6",
+  notes: "更新內容",
+  notes_en: "What changed",
+  pub_date: "2026-10-25T13:23:40Z",
+  dmg_url: "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.6_aarch64.dmg",
+  platforms: {
+    "darwin-aarch64": {
+      signature: "sig",
+      url: "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.6_aarch64.app.tar.gz",
+    },
+  },
+};
+
+describe("DownloadClient with the release manifest", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  async function renderWithManifest(response: () => Promise<Response>) {
+    const actual = await vi.importActual<typeof import("@/lib/download")>("@/lib/download");
+    vi.mocked(fetchLatestRelease).mockImplementationOnce(actual.fetchLatestRelease);
+    vi.stubGlobal("fetch", vi.fn(response));
+    setUserAgent(MAC_UA);
+    render(<DownloadClient copy={en.download} locale="en" />);
+  }
+
+  it("links the DMG named in the manifest, never the updater tarball", async () => {
+    await renderWithManifest(async () => Response.json(manifest));
+
+    const link = await screen.findByRole("link", { name: `${en.download.primaryCta} (v0.5.6)` });
+    expect(link).toHaveAttribute("href", manifest.dmg_url);
+    expect(document.querySelector('a[href$=".tar.gz"]')).toBeNull();
+    expect(screen.getByText("What changed")).toBeInTheDocument();
+    expect(screen.queryByText(en.download.fetchError)).toBeNull();
+  });
+
+  it.each([
+    ["the request fails", () => Promise.reject(new TypeError("Failed to fetch"))],
+    ["the server answers with an error", async () => new Response(null, { status: 503 })],
+  ])("warns and keeps the stable DMG alias when %s", async (_, response) => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    await renderWithManifest(response);
+
+    expect(await screen.findByText(en.download.fetchError)).toBeInTheDocument();
+    const link = screen.getByRole("link", {
+      name: (name) => name.startsWith(en.download.primaryCta),
+    });
+    expect(link).toHaveAttribute("href", LATEST_DMG_URL);
+    warn.mockRestore();
   });
 });
