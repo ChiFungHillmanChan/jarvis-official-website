@@ -24,7 +24,7 @@ export const enHome = {
       {
         label: "Make it personal",
         title: "Your priorities.\nPart of the brief.",
-        body: "Give each group its own instructions. Ask GPT to consider those instructions and your confirmed memories, then follow its references back to the source emails.",
+        body: "Give each group its own instructions. Ask the AI you choose to consider those instructions and your confirmed memories, then follow its references back to the source emails.",
         prompt: "Focus on deadlines. Always include the source.",
         result: "An analysis you can check against the originals.",
         icon: "context",
@@ -43,7 +43,7 @@ export const enHome = {
     title: "Your familiar tools.\nA more connected day.",
     sub: "Beyond the email workspace, the general assistant connects to the tools you already use. Each connection has its own setup.",
     items: [
-      { name: "Gmail", description: "Find messages. Draft replies." },
+      { name: "Gmail", description: "Find messages. Draft emails." },
       { name: "Google Calendar", description: "Check and manage events." },
       { name: "Notion", description: "Search and create pages." },
       { name: "GitHub", description: "Catch up on issues and PRs." },
@@ -172,7 +172,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
       {
         label: "按你的方式處理",
         title: "你的重點，\n也是分析的重點。",
-        body: "為每個群組寫下專屬指示，讓 GPT 參考指示及你已確認的記憶進行分析，再跟隨引用核對來源原信。",
+        body: "為每個群組寫下專屬指示，讓你選擇的 AI 參考指示及你已確認的記憶進行分析，再跟隨引用核對來源原信。",
         prompt: "留意截止日期，每次附上來源。",
         result: "每份分析，都可以返回原信核對。",
         icon: "context",
@@ -191,7 +191,7 @@ export const zhHome: DeepWiden<typeof enHome> = {
     title: "熟悉的工具，\n更連貫的工作。",
     sub: "電郵工作區以外，一般助理亦可連接你常用的工具，每項連接均有獨立設定。",
     items: [
-      { name: "Gmail", description: "搜尋郵件，草擬回覆。" },
+      { name: "Gmail", description: "搜尋郵件，草擬電郵。" },
       { name: "Google Calendar", description: "查看及管理活動。" },
       { name: "Notion", description: "搜尋及建立頁面。" },
       { name: "GitHub", description: "掌握 Issue 和 PR。" },

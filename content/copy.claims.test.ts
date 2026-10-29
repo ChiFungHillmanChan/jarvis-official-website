@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
+import { readdirSync, readFileSync } from "node:fs";
+import { join, relative } from "node:path";
 import { copy as en } from "./copy.en";
 import { copy as zhHk } from "./copy.zh-hk";
 import { getRouteMetadata } from "./metadata";
+import { getSetupCopy } from "./setup";
 import type { LegalPageCopy } from "./legal";
 import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/waitlist/policy";
 import manifest from "@/app/manifest";
@@ -103,6 +106,7 @@ describe("privacy policy: actual processors and consent", () => {
     expect(text).toMatch(entry.backupCaveat);
     expect(text).toMatch(entry.explicitDeletion);
     expect(text).toMatch(entry.deleteAll);
+    expect(sectionBody(entry.copy.security, "deletion")).toMatch(entry.deleteAll);
   });
 
   it.each(locales)("links Google's Limited Use policy without claiming verification ($locale)", (entry) => {
@@ -171,6 +175,9 @@ describe("marketing body copy carries no unsupported claims", () => {
     { pattern: /雲端推理屬選用/, reason: "general chat has a default cloud route" },
     { pattern: /CloudWatch alarms notify/i, reason: "unverified ops claim removed 2026-08" },
     { pattern: /multi-factor authentication required/i, reason: "unverified ops claim removed 2026-08" },
+    { pattern: /\bGPT\b/, reason: "mail analysis uses the AI the user chose (desktop 0.5.0)" },
+    { pattern: /draft(s|ed|ing)? (a )?repl(y|ies)/i, reason: "Gmail drafts are new emails, not threaded replies" },
+    { pattern: /草擬回覆|回覆草稿/, reason: "Gmail drafts are new emails, not threaded replies" },
   ];
 
   it.each(banned)("no copy string matches $pattern ($reason)", ({ pattern }) => {
@@ -179,5 +186,51 @@ describe("marketing body copy carries no unsupported claims", () => {
         expect(s).not.toMatch(pattern);
       }
     }
+  });
+
+  // The 2026-10 review found "GPT" and "Draft replies" in product-demo.ts,
+  // workspace-preview.ts, home.ts and inline page copy, none of which the
+  // tree walk reads. Scan the source of every page, component and content
+  // module as well.
+  function sourceFiles(dir: string, out: string[] = []): string[] {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) sourceFiles(path, out);
+      else if (/\.tsx?$/.test(entry.name) && !/\.test\.tsx?$/.test(entry.name)) out.push(path);
+    }
+    return out;
+  }
+  const sources = ["app", "components", "content", "lib"]
+    .flatMap((dir) => sourceFiles(join(process.cwd(), dir)))
+    .map((path) => ({ path: relative(process.cwd(), path), text: readFileSync(path, "utf8") }));
+
+  it("scans the pages and modules that carry product claims", () => {
+    expect(sources.map((s) => s.path)).toEqual(expect.arrayContaining([
+      "app/[locale]/product/page.tsx",
+      "components/sections/home/HomeOverview.tsx",
+      "content/home.ts",
+      "content/metadata.ts",
+      "content/product-demo.ts",
+      "content/setup.ts",
+      "content/workspace-preview.ts",
+    ]));
+  });
+
+  it.each(banned)("no page, component or content source matches $pattern ($reason)", ({ pattern }) => {
+    expect(sources.filter((s) => pattern.test(s.text)).map((s) => s.path)).toEqual([]);
+  });
+});
+
+describe("voice setup copy matches the on-Mac speech model", () => {
+  // Whisper base, used when Gemini is not the chosen AI, has no Cantonese
+  // language slot: in 0.5.6 the 廣東話 setting turned Cantonese speech into
+  // English nonsense, while Auto-detect gave usable written Chinese.
+  it.each([
+    ["en", /Auto-detect/],
+    ["zh-HK", /「自動偵測」/],
+  ] as const)("tells users without Gemini to use Auto-detect for Cantonese (%s)", (locale, autoDetect) => {
+    const step = getSetupCopy(locale).steps.find((s) => /Cantonese|廣東話/.test(s.body));
+    expect(step).toBeDefined();
+    expect(`${step?.body} ${step?.note ?? ""}`).toMatch(autoDetect);
   });
 });

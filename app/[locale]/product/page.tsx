@@ -12,12 +12,12 @@ export async function generateMetadata({params}: {params: Promise<{locale:string
 export default async function ProductPage({params}: {params: Promise<{locale:string}>}) {
   const {locale} = await params; setRequestLocale(locale); const zh = locale === "zh-HK";
   const items = zh ? [
-    ["電郵與來源背景", "在同一個工作區同步多個 Gmail。你選擇相關郵件並建立群組，讓 GPT 根據指示分析內容，再返回來源核對。", "群組分析屬唯讀，不會替你寄信或更改行事曆。"],
+    ["電郵與來源背景", "在同一個工作區同步多個 Gmail。你選擇相關郵件並建立群組，讓你選擇的 AI 根據指示分析內容，再返回來源核對。", "群組分析屬唯讀，不會替你寄信或更改行事曆。"],
     ["行事曆與日常待辦", "一般助理可以查看及管理已連接的 Google Calendar 活動，亦可協助建立和管理待辦事項。", "需要獨立連接及授權。並非每項一般助理操作都有額外確認步驟。"],
     ["電郵草稿", "請一般助理為客戶更新、後續跟進或會議安排準備 Gmail 草稿，再由你檢閱、修改及寄出。", "助理準備草稿，寄出前由你作最後決定。"],
     ["文字、語音與個人指示", "用文字或語音提出要求。在電郵群組加入個人指示，並保留由你確認、附有來源的事實和偏好。", "介面支援英文及繁體中文，另有廣東話語音支援。語音和 AI 服務有獨立資料流程。"],
   ] : [
-    ["Email and source context", "Sync multiple Gmail accounts in one workspace. Choose related emails, create a group and ask GPT to analyse it with your instructions. Return to the sources to check the details.", "Group analysis is read-only. It does not send email or change calendar events."],
+    ["Email and source context", "Sync multiple Gmail accounts in one workspace. Choose related emails, create a group and ask the AI you choose to analyse it with your instructions. Return to the sources to check the details.", "Group analysis is read-only. It does not send email or change calendar events."],
     ["Calendar and everyday tasks", "The general assistant can check and manage events in a connected Google Calendar, and help you create and manage tasks.", "Separate setup and permissions are required. Not every general-assistant action has an additional confirmation step."],
     ["Email drafts", "Ask the general assistant to prepare Gmail drafts for client updates, follow-ups or meeting arrangements. Review, edit and send them yourself.", "The assistant prepares a draft. You make the final decision to send."],
     ["Text, voice and personal instructions", "Ask by text or voice. Add instructions to an email group and keep useful facts and preferences as memories you confirm, with their sources.", "English and Traditional Chinese interface, with Cantonese voice support. Voice and AI services have separate data flows."],

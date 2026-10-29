@@ -169,7 +169,7 @@ export const enLegal: LegalCopy = {
   },
   security: {
     heading: "Security and Data Controls",
-    lastUpdated: "Last updated: 26 September 2026",
+    lastUpdated: "Last updated: 29 October 2026",
     summary: "The controls available today, their limits and how to report a security concern.",
     sections: [
       {
@@ -191,7 +191,7 @@ export const enLegal: LegalCopy = {
       {
         id: "deletion",
         title: "4. Disconnecting and deleting",
-        body: "Disconnecting a mailbox stops its local connection and keeps downloaded copies. Explicitly deleting the mailbox account removes that account’s local mail and source-linked memories without deleting Gmail originals. Groups and memories have their own deletion controls. Revoking Google access does not erase existing local copies.\n\nFor website application deletion or help clearing local data and credentials, contact us. We may need to verify your identity for server-side records; we cannot remotely erase your Mac.",
+        body: "Disconnecting a mailbox stops its local connection and keeps downloaded copies. Explicitly deleting the mailbox account removes that account’s local mail and source-linked memories without deleting Gmail originals. Groups and memories have their own deletion controls. Revoking Google access does not erase existing local copies. From version 0.5.6, Settings > Storage > Delete all JARVIS data on this Mac revokes JARVIS’s Google access, deletes its local database, the models JARVIS downloaded, backups and Keychain entries, and then restarts JARVIS as a fresh install; Ollama and its models are not touched. Use it before uninstalling.\n\nFor website application deletion, or help with local data the control above does not cover, contact us. We may need to verify your identity for server-side records; we cannot remotely erase your Mac.",
         links: [contactLink],
       },
       {
@@ -358,7 +358,7 @@ export const zhLegal: LegalCopy = {
   },
   security: {
     heading: "安全及資料控制",
-    lastUpdated: "最後更新：2026 年 9 月 26 日",
+    lastUpdated: "最後更新：2026 年 10 月 29 日",
     summary: "目前提供的保護措施、實際限制，以及安全問題的通報方式。",
     sections: [
       {
@@ -380,7 +380,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "deletion",
         title: "4. 斷開連接與刪除資料",
-        body: "斷開信箱會停止其本機連接，並保留已下載副本。明確刪除信箱帳戶會移除該帳戶的本機郵件及來源記憶，不會刪除 Gmail 原信。群組及記憶有獨立的刪除控制。撤銷 Google 授權不會清除現有本機副本。\n\n如要刪除網站申請，或需要清除本機資料及憑證的協助，請聯絡我們。處理伺服器端紀錄時，我們可能需要核實身份；我們無法遙距清除你的 Mac。",
+        body: "斷開信箱會停止其本機連接，並保留已下載副本。明確刪除信箱帳戶會移除該帳戶的本機郵件及來源記憶，不會刪除 Gmail 原信。群組及記憶有獨立的刪除控制。撤銷 Google 授權不會清除現有本機副本。由 0.5.6 版起，「設定 > 儲存空間 > 刪除此 Mac 上的所有 JARVIS 資料」會撤銷 JARVIS 的 Google 存取權限，刪除其本機資料庫、JARVIS 下載的模型、備份及鑰匙圈項目，然後以全新安裝狀態重新啟動 JARVIS；Ollama 及其中的模型不受影響。解除安裝前可先使用此功能。\n\n如要刪除網站申請，或需要上述功能未涵蓋的本機資料協助，請聯絡我們。處理伺服器端紀錄時，我們可能需要核實身份；我們無法遙距清除你的 Mac。",
         links: [contactLink],
       },
       {

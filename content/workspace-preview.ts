@@ -13,7 +13,7 @@ const en = {
   instructionsLabel: "Your instructions",
   instructions: "Show confirmed deadlines and what needs my reply.",
   analysisLabel: "Here’s what needs your attention.",
-  modelLabel: "GPT analysis",
+  modelLabel: "Analysed by your AI",
   actions: [
     { text: "Send the revised proposal by 24 September.", sourceId: 12 },
     { text: "Reply to Maya with your preferred review time.", sourceId: 18 },
@@ -57,12 +57,12 @@ const zhHk: WorkspacePreviewCopy = {
   groupDetail: "2 個信箱，共 2 封郵件",
   localLabel: "儲存在你的 Mac",
   instructionsLabel: "你的指示",
-  instructions: "列出已確認限期，同埋需要我回覆嘅事項。",
+  instructions: "列出已確認限期，以及需要我回覆的事項。",
   analysisLabel: "有兩件事需要你跟進。",
-  modelLabel: "GPT 分析",
+  modelLabel: "由你的 AI 分析",
   actions: [
     { text: "9 月 24 日前，交回修訂提案。", sourceId: 12 },
-    { text: "回覆 Maya，確認你方便嘅審閱時間。", sourceId: 18 },
+    { text: "回覆 Maya，確認你方便的審閱時間。", sourceId: 18 },
   ],
   sourceLabel: "郵件",
   memoryLabel: "你確認過的記憶",
@@ -85,7 +85,7 @@ const zhHk: WorkspacePreviewCopy = {
       subject: "安排提案審閱時間",
       from: "Maya Wong",
       account: "個人 Gmail",
-      body: "我喺 9 月 25 日上午 10 時或者下午 3 時都可以審閱提案。請回覆你方便嘅時間。我仲未發出日曆邀請。",
+      body: "我可以在 9 月 25 日上午 10 時或下午 3 時審閱提案。請回覆你方便的時間。我尚未發出日曆邀請。",
     },
   ],
 };

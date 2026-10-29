@@ -27,7 +27,7 @@ describe("email workspace example", () => {
       firstInbox: "工作 Gmail",
       secondInbox: "個人 Gmail",
       firstFact: /9 月 24 日前交回修訂版本/,
-      secondFact: /9 月 25 日上午 10 時或者下午 3 時/,
+      secondFact: /9 月 25 日上午 10 時或下午 3 時/,
       back: "返回分析",
     },
   ])("opens the email that each $locale citation actually refers to", (example) => {
