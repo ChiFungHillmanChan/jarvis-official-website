@@ -8,6 +8,30 @@ import { isEmail } from "@/lib/utils/isEmail";
 type Status = "idle" | "submitting" | "success" | "error";
 type SubmissionResult = "success" | "invalid" | "error" | "ignored";
 
+// The rest of this form's copy arrives as props from the page, but the
+// messages built here are not among them. <html lang> is written by
+// app/[locale]/layout, it needs no intl provider, and this runs inside the
+// submit handler, so it never affects render or the server pass.
+function pageUi() {
+  const lang = typeof document === "undefined" ? "" : document.documentElement.lang;
+  return getUiFor(lang.toLowerCase().startsWith("zh") ? "zh-HK" : "en");
+}
+
+/**
+ * Reads the error code /api/waitlist sends with a 400. A body that is missing
+ * or not JSON yields null, which the caller treats as a generic failure.
+ */
+async function errorCodeFrom(res: Response): Promise<string | null> {
+  try {
+    const body: unknown = await res.json();
+    if (typeof body !== "object" || body === null) return null;
+    const code = (body as Record<string, unknown>).error;
+    return typeof code === "string" ? code : null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Turns the wait /api/waitlist reports on a 429 into something a visitor can
  * act on. A throttle is not a broken form: telling someone "something went
@@ -19,13 +43,7 @@ type SubmissionResult = "success" | "invalid" | "error" | "ignored";
 function rateLimitMessage(retryAfterSeconds: number): string | null {
   if (!Number.isFinite(retryAfterSeconds) || retryAfterSeconds <= 0) return null;
 
-  // The rest of this form's copy arrives as props from the page, but this
-  // message is not one of them. <html lang> is written by app/[locale]/layout,
-  // it needs no intl provider, and this runs inside the submit handler, so it
-  // never affects render or the server pass.
-  const lang = typeof document === "undefined" ? "" : document.documentElement.lang;
-  const ui = getUiFor(lang.toLowerCase().startsWith("zh") ? "zh-HK" : "en");
-
+  const ui = pageUi();
   const minutes = Math.ceil(retryAfterSeconds / 60);
   if (minutes < 60) return ui.waitlist.rateLimitedMinutes.replace("{n}", String(minutes));
   return ui.waitlist.rateLimitedHours.replace("{n}", String(Math.ceil(minutes / 60)));
@@ -71,6 +89,20 @@ export function useWaitlistSubmit({
         setStatus("error");
         setError({ message: rateLimitMessage(Number(res.headers.get("Retry-After"))) ?? errorGeneric });
         return "error";
+      }
+      if (res.status === 400) {
+        // Neither of these is fixed by submitting the same page again.
+        const code = await errorCodeFrom(res);
+        if (code === "invalid_email") {
+          setStatus("error");
+          setError({ message: errorInvalid, field: "email" });
+          return "invalid";
+        }
+        if (code === "consent_required") {
+          setStatus("error");
+          setError({ message: pageUi().waitlist.consentOutdated });
+          return "error";
+        }
       }
       if (!res.ok) throw new Error("request_failed");
       setStatus("success");

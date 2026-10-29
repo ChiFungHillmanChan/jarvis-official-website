@@ -1,5 +1,4 @@
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_EMAIL_LENGTH = 254;
+import { EMAIL_PATTERN, MAX_EMAIL_LENGTH } from "@/lib/validation/email";
 
 export function isEmail(value: string): boolean {
   const trimmed = value.trim();
