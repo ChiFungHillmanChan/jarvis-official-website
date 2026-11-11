@@ -4,7 +4,7 @@ import { waitlistSchema } from "./waitlistSchema";
 const consent = {
   privacyAccepted: true,
   termsAccepted: true,
-  privacyVersion: "2026-10-25",
+  privacyVersion: "2026-11-11",
   termsVersion: "2026-09-24",
 };
 

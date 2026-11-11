@@ -23,7 +23,7 @@ const workspacePolicy = "https://developers.google.com/workspace/workspace-api-u
 export const enLegal: LegalCopy = {
   privacy: {
     heading: "Privacy Policy",
-    lastUpdated: "Last updated: 25 October 2026 · Version 2026-10-25",
+    lastUpdated: "Last updated: 11 November 2026 · Version 2026-11-11",
     summary: "How we handle website applications, information on your Mac and content sent to connected services.",
     sections: [
       {
@@ -50,7 +50,7 @@ export const enLegal: LegalCopy = {
       {
         id: "desktop-storage",
         title: "4. Information stored on your Mac",
-        body: "Depending on the features you use, JARVIS stores conversations, tasks, connected-service context, email copies, groups, personal instructions, preferences and confirmed memories in a local SQLite database. API keys and connection credentials are stored using macOS Keychain. Local diagnostic logs may also contain operational details; from version 0.5.1 they no longer record transcribed text or tool content. These local records are not uploaded to a JARVIS cloud workspace, and the current email workspace does not provide cross-device sync.\n\nFrom version 0.5.1, the local database is encrypted with AES-256 (SQLCipher), its key is kept in macOS Keychain, and its folder can only be opened by your macOS account. Earlier versions stored it without separate application-level encryption; that data is converted the first time you open version 0.5.1. Anyone signed in to your macOS account can still use JARVIS, so your Mac’s account permissions, device security and disk encryption remain important. Data you send to AI or connected services leaves the device as described below. Data you voluntarily send to support is also received by us.",
+        body: "Depending on the features you use, JARVIS stores conversations, tasks, connected-service context, email copies, groups, personal instructions, preferences and confirmed memories in a local SQLite database. API keys and connection credentials are stored using macOS Keychain. Local diagnostic logs may also contain operational details; from version 0.5.1 they no longer record transcribed text or tool content. These local records are not uploaded to a JARVIS cloud workspace, and the current email workspace does not provide cross-device sync.\n\nFrom version 0.5.1, the local database is encrypted with AES-256 (SQLCipher), its key is kept in macOS Keychain, and its folder can only be opened by your macOS account. Earlier versions stored it without separate application-level encryption; that data is converted the first time you open version 0.5.1. Anyone signed in to your macOS account can still use JARVIS, so your Mac’s account permissions, device security and disk encryption remain important. Data you send to AI or connected services leaves the device as described below. Data you voluntarily send to support is also received by us.\n\nFrom version 0.5.9, JARVIS also keeps a recording of each voice request in this encrypted database, so that you can play it back from the conversation. This is on by default, including after an upgrade; you can turn it off in Settings > Speech, which also deletes the recordings already kept. A recording is deleted together with its message: when you clear the conversation, when the retention window in Settings > Storage removes it, or when you delete all JARVIS data. Recordings are not uploaded to us and are not included in what is sent to an AI provider, and none is kept if the database could not be encrypted. If the wake word is triggered by mistake and speech is then heard, that audio is kept with its text. Keeping a recording does not change how speech is transcribed, which section 6 describes; earlier versions keep only the transcribed text.",
       },
       {
         id: "google-access",
@@ -212,7 +212,7 @@ export const enLegal: LegalCopy = {
 export const zhLegal: LegalCopy = {
   privacy: {
     heading: "私隱政策",
-    lastUpdated: "最後更新：2026 年 10 月 25 日 · 版本 2026-10-25",
+    lastUpdated: "最後更新：2026 年 11 月 11 日 · 版本 2026-11-11",
     summary: "說明我們如何處理網站申請、Mac 上的資料，以及傳送至已連接服務的內容。",
     sections: [
       {
@@ -239,7 +239,7 @@ export const zhLegal: LegalCopy = {
       {
         id: "desktop-storage",
         title: "4. 儲存在 Mac 上的資料",
-        body: "視乎你使用的功能，JARVIS 會在本機 SQLite 資料庫儲存對話、任務、已連接服務的相關資料、郵件副本、群組、個人指示、偏好及已確認記憶。API key 及連接憑證使用 macOS 鑰匙圈儲存。本機診斷紀錄亦可能包含操作詳情；由 0.5.1 版起，紀錄不再包含語音轉錄文字或工具內容。這些本機紀錄不會上傳至 JARVIS 雲端工作區，目前的電郵工作區亦不提供跨裝置同步。\n\n由 0.5.1 版起，本機資料庫以 AES-256（SQLCipher）加密，金鑰存於 macOS 鑰匙圈，資料夾只限你的 macOS 帳戶開啟。較早版本儲存的資料庫沒有額外的應用程式層加密，會在你首次開啟 0.5.1 版時轉換。任何登入你 macOS 帳戶的人仍可使用 JARVIS，因此 Mac 的帳戶權限、裝置安全及磁碟加密仍然重要。傳送至 AI 或已連接服務的資料會按下文所述離開裝置。你自願交予支援的資料亦會由我們接收。",
+        body: "視乎你使用的功能，JARVIS 會在本機 SQLite 資料庫儲存對話、任務、已連接服務的相關資料、郵件副本、群組、個人指示、偏好及已確認記憶。API key 及連接憑證使用 macOS 鑰匙圈儲存。本機診斷紀錄亦可能包含操作詳情；由 0.5.1 版起，紀錄不再包含語音轉錄文字或工具內容。這些本機紀錄不會上傳至 JARVIS 雲端工作區，目前的電郵工作區亦不提供跨裝置同步。\n\n由 0.5.1 版起，本機資料庫以 AES-256（SQLCipher）加密，金鑰存於 macOS 鑰匙圈，資料夾只限你的 macOS 帳戶開啟。較早版本儲存的資料庫沒有額外的應用程式層加密，會在你首次開啟 0.5.1 版時轉換。任何登入你 macOS 帳戶的人仍可使用 JARVIS，因此 Mac 的帳戶權限、裝置安全及磁碟加密仍然重要。傳送至 AI 或已連接服務的資料會按下文所述離開裝置。你自願交予支援的資料亦會由我們接收。\n\n由 0.5.9 版起，JARVIS 亦會把每次語音請求的錄音保存在這個加密資料庫，讓你可在對話中重播。此功能預設開啟，升級後亦然；你可在「設定 > 語音」關閉，關閉時已保存的錄音會一併刪除。錄音會隨所屬訊息刪除：包括你清除對話、「設定 > 儲存空間」的保留期限清理該訊息，或你刪除所有 JARVIS 資料時。錄音不會上傳給我們，亦不會包括在傳送至 AI 供應商的內容之內；如資料庫未能加密，則不會保存錄音。如喚醒詞被誤觸發而其後聽到說話，該段聲音會連同文字一併保存。保存錄音不會改變語音轉錄的方式，詳見第 6 節；較早的版本只保存轉錄文字。",
       },
       {
         id: "google-access",

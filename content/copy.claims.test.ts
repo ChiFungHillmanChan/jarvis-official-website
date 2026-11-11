@@ -221,6 +221,32 @@ describe("marketing body copy carries no unsupported claims", () => {
   });
 });
 
+describe("privacy policy: kept voice recordings (desktop 0.5.9)", () => {
+  // 0.5.9 keeps the audio of each voice request, on by default. Before it,
+  // only the transcribed text was stored.
+  it.each([
+    {
+      locale: "en", page: en.privacy,
+      kept: /From version 0\.5\.9[^.]*keeps a recording of each voice request/,
+      onByDefault: /on by default, including after an upgrade/,
+      off: /turn it off in Settings > Speech[^.]*deletes the recordings already kept/,
+      stays: /not uploaded to us[^.]*not included in what is sent to an AI provider/,
+      wakeWord: /wake word is triggered by mistake/,
+    },
+    {
+      locale: "zh-HK", page: zhHk.privacy,
+      kept: /由 0\.5\.9 版起[^。]*語音請求的錄音保存/,
+      onByDefault: /預設開啟，升級後亦然/,
+      off: /「設定 > 語音」關閉[^。]*已保存的錄音會一併刪除/,
+      stays: /不會上傳給我們[^。]*不會包括在傳送至 AI 供應商的內容/,
+      wakeWord: /喚醒詞被誤觸發/,
+    },
+  ])("says what is kept, that it is on by default and how to stop it ($locale)", ({ page, kept, onByDefault, off, stays, wakeWord }) => {
+    const body = sectionBody(page, "desktop-storage");
+    for (const claim of [kept, onByDefault, off, stays, wakeWord]) expect(body).toMatch(claim);
+  });
+});
+
 describe("voice setup copy matches the on-Mac speech model", () => {
   // Whisper base, used when Gemini is not the chosen AI, has no Cantonese
   // language slot: in 0.5.6 the 廣東話 setting turned Cantonese speech into
