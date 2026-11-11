@@ -34,12 +34,15 @@ describe("payment return pages", () => {
     expect(markup).not.toMatch(/not charged|no charge|沒有扣款|未有扣款|不會扣款|已退款/);
   });
 
-  it.each(["en", "zh-HK"])("both %s return routes link to the local homepage and download page without a deep link", async (locale) => {
+  it.each(["en", "zh-HK"])("both %s return routes offer to open the app, plus the homepage and download page", async (locale) => {
     for (const Page of [SuccessPage, CancelPage]) {
       const markup = renderToStaticMarkup(await Page({ params: Promise.resolve({ locale }) }));
+      // The link only brings JARVIS forward; it carries no payment result.
+      expect(markup).toContain('href="jarvis://billing/return"');
+      expect(markup).toContain(locale === "en" ? "Open JARVIS" : "打開 JARVIS");
       expect(markup).toContain(`href="/${locale}"`);
       expect(markup).toContain(`href="/${locale}/download"`);
-      expect(markup).not.toMatch(/href="jarvis:|checkout\.stripe\.com|session_id=/);
+      expect(markup).not.toMatch(/jarvis:\/\/[^"]*[?&](result|paid|session)|checkout\.stripe\.com|session_id=/);
     }
   });
 
