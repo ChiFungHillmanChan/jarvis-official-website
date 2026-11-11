@@ -10,6 +10,8 @@ export function getPaymentReturnCopy(locale: string, state: PaymentReturnState) 
     ? {
         eyebrow: "JARVIS 帳戶",
         nextHeading: "返回 App 核對方案",
+        opening: "JARVIS 應會自動打開。如瀏覽器詢問是否打開 JARVIS，請選擇允許；如沒有反應，請按「打開 JARVIS」。",
+        openApp: "打開 JARVIS",
         next: "請返回已開啟的 JARVIS App，以伺服器確認方案。若狀態尚未更新，請稍候，然後在「設定 → 帳戶」選擇「重新整理」。",
         caution: "請先核對方案狀態及 Stripe 的付款紀錄，不要重複付款。",
         home: "返回首頁",
@@ -18,6 +20,8 @@ export function getPaymentReturnCopy(locale: string, state: PaymentReturnState) 
     : {
         eyebrow: "JARVIS account",
         nextHeading: "Return to the app to check your plan",
+        opening: "JARVIS should open now. If your browser asks to open JARVIS, allow it; if nothing happens, choose Open JARVIS.",
+        openApp: "Open JARVIS",
         next: "Return to the JARVIS app already open on your Mac to confirm your plan with the server. If the status has not updated, wait a moment, then choose Refresh in Settings → Account.",
         caution: "First check your plan status and your Stripe payment records. Do not pay again while the status is being confirmed.",
         home: "Back to homepage",
