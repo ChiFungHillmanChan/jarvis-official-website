@@ -1,13 +1,13 @@
 {
-  "version": "0.5.10",
-  "notes": "JARVIS v0.5.10\n\n本次更新修正日曆活動被改到錯誤時間的問題。\n\n修正\n- Mac 的時區與 Google 日曆的時區不同時（例如人在英國、日曆用香港時間），要求 JARVIS 更改活動時間，活動會被移到錯誤的時間。JARVIS 現在會先把活動時間換算成 Mac 的時區，才讀取、回答或更改。\n- JARVIS 回答行程時所說的時間，與 App 日曆頁一致，都以 Mac 的時區顯示。\n",
-  "notes_en": "JARVIS v0.5.10\n\nThis update fixes calendar events being moved to the wrong time.\n\nFixed\n- When your Mac and your Google Calendar were set to different time zones (for example, you are in the UK and your calendar is on Hong Kong time), asking JARVIS to change an event's time could move it to the wrong time. JARVIS now converts event times to your Mac's time zone before it reads, answers about or changes them.\n- When JARVIS tells you about your schedule, it gives the same times as the app's Calendar page, in your Mac's time zone.",
-  "pub_date": "2026-11-12T10:54:53Z",
-  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.10_aarch64.dmg",
+  "version": "0.5.11",
+  "notes": "JARVIS v0.5.11\n\n本次更新改善 JARVIS 回答問題、建立待辦及搜尋對話的方式。\n\n修正\n- 要求「下午 3 時提醒我」時，JARVIS 不再承諾在指定時間提醒。待辦只有日期，JARVIS 會在當天提醒你；需要準時提醒，請在手機設定鬧鐘。\n- 問題需要查看多個地方時，JARVIS 會根據已找到的資料作答，不再只回覆一句英文「I've completed the actions.」。\n- 建立待辦或活動時，狀態卡與動作一併處理，通常少一次 AI 往返，回覆更快。\n- 在對話中說「search for ...」時，JARVIS 會搜尋較早的對話，不再只找到你剛輸入的那句。\n- 今日有多個會議時，JARVIS 會知道全部會議，不再只知道第一個；待辦及未讀郵件寄件人亦一併提供。\n- 夾雜英文的廣東話（例如「有冇email」「睇下inbox」）也會讓 JARVIS 參考你今日的資料。\n- 使用 OpenAI 時，遇到暫時性錯誤（例如限速）會自動重試一次。\n- 選擇廣東話回覆時，JARVIS 的廣東話更自然，待辦標題仍以書面語記錄。\n",
+  "notes_en": "JARVIS v0.5.11\n\nThis update improves how JARVIS answers questions, creates tasks and searches your conversations.\n\nFixed\n- When you ask \"remind me at 3pm\", JARVIS no longer promises a reminder at that time. Tasks have a date only, and JARVIS reminds you on that day; for an alarm at an exact time, use your phone.\n- When a question needs JARVIS to look in several places, it now answers from what it found, instead of replying only \"I've completed the actions.\"\n- Creating a task or an event usually takes one fewer AI round trip, so replies come back faster.\n- Saying \"search for ...\" in chat now searches your earlier conversation instead of matching only what you just typed.\n- When you have several meetings today, JARVIS knows about all of them, not only the first, along with your tasks and unread senders.\n- Cantonese mixed with English (for example \"有冇email\") now also brings in today's information.\n- With OpenAI, a temporary error such as a rate limit is retried once automatically.\n- With Cantonese replies chosen, JARVIS's Cantonese sounds more natural, while task titles stay in written Chinese.",
+  "pub_date": "2026-11-12T19:47:03Z",
+  "dmg_url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.11_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlpPTHlncElJYU43Tk4yNEdIdi9PdFNRRVZRMjVYTWNxNnkzSFFISC91cmFFdElaWllTMmNiL1pqelZxWUFJUU43d09hbUlSdnIxK0FreEd3YnMvOEFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzk0NDgwMjk4CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKRGN0Z052UlhicU9ZN2RiajRTRU8vbjQzVGtqRnhTUFk1YUhBWCtPU2VnZERkRHBZcmY2ZWJKTnlhdWtZTEpUb3Z3M3gvTWxPQWNmR1FsZElzN2lDREE9PQo=",
-      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.10_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRVEZOLzZwbEJIdlpCYStoKzc0eXpleStLeFNqcW4vSi8vNEVETjB2MFVtUitkalRNaVpjekNxZ3ZpWXpHbmNNaEpMcVM0eFZWOSsrdXd0WVZUVmVYUE00WGJLWFZkbVFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzk0NTAzNzM1CWZpbGU6SkFSVklTLmFwcC50YXIuZ3oKb3RIM1d3ME55cW10RnpoVFY3STlPQmtkQTVTeFlkNUpFOFB3TzR3Z3gycVdlZVpZT2NIME81dnhkcXVKeHVwL245b2JDSWRTN3U5d0l1U1RMeTFhQXc9PQo=",
+      "url": "https://jarvis-releases.s3.ap-east-1.amazonaws.com/JARVIS_0.5.11_aarch64.app.tar.gz"
     }
   }
 }
