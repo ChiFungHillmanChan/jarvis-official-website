@@ -178,6 +178,8 @@ describe("marketing body copy carries no unsupported claims", () => {
     { pattern: /\bGPT\b/, reason: "mail analysis uses the AI the user chose (desktop 0.5.0)" },
     { pattern: /draft(s|ed|ing)? (a )?repl(y|ies)/i, reason: "Gmail drafts are new emails, not threaded replies" },
     { pattern: /草擬回覆|回覆草稿/, reason: "Gmail drafts are new emails, not threaded replies" },
+    { pattern: /24\/7|around the clock|round[- ]the[- ]clock|\balways[- ]on\b|while you sleep|24 hours a day|never sleeps|while you(?:'|’)re asleep|even when your Mac is (?:asleep|closed|off)/i, reason: "JARVIS runs only while the Mac is awake and JARVIS is open (desktop 0.5.12). A true negation matches too; reword it, or change this pattern on purpose together with the sleep FAQ" },
+    { pattern: /全天候|全年無休|不分晝夜|24 ?小時(運作|執行|待命)|日以繼夜|通宵|二十四小時(運作|執行|待命)|在你(?:睡覺|休息|入睡)(?:時|期間)/, reason: "JARVIS runs only while the Mac is awake and JARVIS is open (desktop 0.5.12). A true negation matches too; reword it, or change this pattern on purpose together with the sleep FAQ" },
   ];
 
   it.each(banned)("no copy string matches $pattern ($reason)", ({ pattern }) => {
@@ -258,5 +260,49 @@ describe("voice setup copy matches the on-Mac speech model", () => {
     const step = getSetupCopy(locale).steps.find((s) => /Cantonese|廣東話/.test(s.body));
     expect(step).toBeDefined();
     expect(`${step?.body} ${step?.note ?? ""}`).toMatch(autoDetect);
+  });
+});
+
+describe("FAQ: what runs while the Mac is asleep (desktop 0.5.12)", () => {
+  // From 0.5.12 automations run only while the Mac is awake and JARVIS is
+  // open; after a wake or relaunch each one catches up only its latest missed
+  // run, and JARVIS opens at login once setup is finished and it is in the
+  // Applications folder. Nothing runs off the Mac, so the answer must not
+  // offer reminders from anywhere else. The checks below are the key facts,
+  // not the exact wording, so an honest rewording still passes.
+  it.each([
+    {
+      locale: "en", home: en.home, question: /asleep/,
+      facts: [
+        /^No\./,
+        /only while the Mac is awake and JARVIS is open/,
+        /After the Mac wakes or JARVIS reopens/,
+        /catch(es)? up|runs once/,
+        /same day/,
+        /set(ting)? up JARVIS/,
+        /Applications folder/,
+        /opens automatically when you log in/,
+        /Settings > Background/,
+      ],
+    },
+    {
+      locale: "zh-HK", home: zhHk.home, question: /睡眠/,
+      facts: [
+        /^不會。/,
+        /JARVIS 開啟/,
+        /Mac 未進入睡眠/,
+        /補跑/,
+        /同日/,
+        /設定導引/,
+        /「應用程式」資料夾/,
+        /登入 Mac 時自動開啟/,
+        /「設定」>「背景運作」/,
+      ],
+    },
+  ])("says nothing runs during sleep, how JARVIS catches up and when it opens at login ($locale)", ({ home, question, facts }) => {
+    const item = home.faq.items.find((item) => question.test(item.question));
+    expect(item).toBeDefined();
+    for (const fact of facts) expect(item?.answer).toMatch(fact);
+    expect(item?.answer).not.toMatch(/cloud|server|by email|messaging app|雲端|伺服器|電郵提醒|訊息/i);
   });
 });
