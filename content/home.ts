@@ -126,6 +126,11 @@ export const enHome = {
           "Synced emails, group instructions and confirmed memories are stored on your Mac in an encrypted database. Analysis sends the relevant context to the AI you choose; a local Ollama model keeps it on your Mac. Group analysis results are shown in the app and are not automatically saved as memories. Voice services and connected apps have separate data flows.",
       },
       {
+        question: "Does JARVIS work when my Mac is asleep?",
+        answer:
+          "No. JARVIS is an app on your Mac, so automations and reminders run only while the Mac is awake and JARVIS is open. After the Mac wakes or JARVIS reopens, mail and calendar catch up once the network is back, and each automation catches up only its latest missed run; a missed daily briefing is shown only if it is still the same day. Once you have finished setting up JARVIS and it is in your Applications folder, it opens automatically when you log in; you can turn this off in Settings > Background.",
+      },
+      {
         question: "Can JARVIS send emails or change my calendar?",
         answer:
           "The email workspace is read-only: group analysis cannot send emails or change your calendar. The separate general assistant can create Gmail drafts for you to review and send, and can create or change calendar events when requested. It asks you to allow each memory it saves, email it archives, event it deletes and follow-up it changes.",
@@ -269,6 +274,11 @@ export const zhHome: DeepWiden<typeof enHome> = {
         question: "所有資料都會留在我的 Mac 嗎？",
         answer:
           "已同步郵件、群組指示及已確認記憶以加密資料庫儲存在 Mac。分析會將相關背景傳送至你選擇的 AI；使用本機 Ollama 模型時則留在 Mac。群組分析結果在 App 顯示，不會自動儲存為記憶。語音服務及連接的應用程式另有資料流程。",
+      },
+      {
+        question: "Mac 睡眠期間，JARVIS 仍會運作嗎？",
+        answer:
+          "不會。JARVIS 是你 Mac 上的 App，因此自動排程及提醒只會在 JARVIS 開啟而且 Mac 未進入睡眠時執行。Mac 喚醒或 JARVIS 重新開啟後，郵件及日曆會在網絡恢復時重新同步，每項自動排程只會補跑最近錯過的一次；錯過的每日簡報只會在同日內顯示。完成設定導引，並將 JARVIS 放在「應用程式」資料夾後，JARVIS 會在你登入 Mac 時自動開啟；你可在「設定」>「背景運作」關閉此功能。",
       },
       {
         question: "JARVIS 可以傳送電郵或更改行事曆嗎？",
